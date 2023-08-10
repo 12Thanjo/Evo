@@ -305,12 +305,12 @@ namespace evo{
 			// not implemented yet: substr
 			// not implemented yet: copy
 
-			template<typename std::enable_if<std::is_same_v<size_t, size_type>> = false>
 			constexpr auto resize(size_type new_size) noexcept -> void {
 				EVO_DEBUG_ASSERT(new_size <= CAPACITY); // New string size is larger than the capacity
 				this->_remaining_capacity = CAPACITY - new_size;
 			};
 
+			template<typename std::enable_if<std::is_same_v<size_t, size_type>> = false>
 			constexpr auto resize(size_t new_size) noexcept -> void {				
 				this->resize(static_cast<size_type>(new_size));
 			};
