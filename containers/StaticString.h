@@ -311,7 +311,7 @@ namespace evo{
 			};
 
 			template<typename std::enable_if<std::is_same_v<size_t, size_type>> = false>
-			constexpr auto resize(size_t new_size) noexcept -> void {				
+			constexpr auto resize(size_t new_size) noexcept -> void {
 				this->resize(static_cast<size_type>(new_size));
 			};
 
@@ -349,4 +349,28 @@ namespace evo{
 
 
 };
+
+
+template<size_t CAPACITY>
+struct std::hash<evo::StaticString<CAPACITY>>{
+	auto operator()(const evo::StaticString<CAPACITY>& string) const noexcept -> size_t {
+		return std::hash<string_view>{}( std::string_view{string.begin(), string.end()} );
+	};
+};
+
+
+
+template<size_t CAPACITY>
+struct std::formatter<evo::StaticString<CAPACITY>>{
+    constexpr auto parse(std::format_parse_context& ctx) const -> auto {
+        return ctx.begin();
+    }
+
+    auto format(const evo::StaticString<CAPACITY>& string, std::format_context& ctx) const -> auto {
+        return std::format_to(ctx.out(), "{}", std::string_view{string.begin(), string.end()});
+    }
+};
+
+
+
 

@@ -187,3 +187,58 @@ namespace evo{
 
 	};
 };
+
+
+
+//////////////////////////////////////////////////////////////////////
+// hashing for time types
+
+template<>
+struct std::hash<evo::time::Nanoseconds>{
+	auto operator()(const evo::time::Nanoseconds& time) const noexcept -> size_t {
+		return std::hash<int64_t>{}(static_cast<evo::i64>(time));
+	};
+};
+
+template<>
+struct std::hash<evo::time::Milliseconds>{
+	auto operator()(const evo::time::Milliseconds& time) const noexcept -> size_t {
+		return std::hash<int64_t>{}(static_cast<evo::i64>(time));
+	};
+};
+
+
+template<>
+struct std::hash<evo::time::Seconds>{
+	auto operator()(const evo::time::Seconds& time) const noexcept -> size_t {
+		return std::hash<int64_t>{}(static_cast<evo::i64>(time));
+	};
+};
+
+
+
+//////////////////////////////////////////////////////////////////////
+// string formatting for time types
+
+
+template<>
+struct std::formatter<evo::time::Nanoseconds> : std::formatter<int64_t> {
+    auto format(const evo::time::Nanoseconds& time, std::format_context& ctx) {
+        return std::formatter<int64_t>::format(static_cast<evo::i64>(time), ctx);
+    }
+};
+
+template<>
+struct std::formatter<evo::time::Milliseconds> : std::formatter<int64_t> {
+    auto format(const evo::time::Milliseconds& time, std::format_context& ctx) {
+        return std::formatter<int64_t>::format(static_cast<evo::i64>(time), ctx);
+    }
+};
+
+template<>
+struct std::formatter<evo::time::Seconds> : std::formatter<int64_t> {
+    auto format(const evo::time::Seconds& time, std::format_context& ctx) {
+        return std::formatter<int64_t>::format(static_cast<evo::i64>(time), ctx);
+    }
+};
+
