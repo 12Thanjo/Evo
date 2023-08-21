@@ -38,6 +38,7 @@ namespace evo{
 
 
 	using byte = ui8;
+	using uint = unsigned int;
 
 
 #ifndef EVO_GLOBAL_NUMERIC_TYPES
