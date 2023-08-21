@@ -39,18 +39,18 @@ namespace evo{
 
 
 				// basic type conversion
-				constexpr explicit operator i8() const noexcept  { return static_cast<i8>(this->value);  };
-				constexpr explicit operator i16() const noexcept { return static_cast<i16>(this->value); };
-				constexpr explicit operator i32() const noexcept { return static_cast<i32>(this->value); };
+				constexpr explicit operator i8() const noexcept  { return i8(this->value);  };
+				constexpr explicit operator i16() const noexcept { return i16(this->value); };
+				constexpr explicit operator i32() const noexcept { return i32(this->value); };
 				constexpr explicit operator i64() const noexcept { return this->value; };
 
-				constexpr explicit operator ui8() const noexcept  { return static_cast<ui8>(this->value);  };
-				constexpr explicit operator ui16() const noexcept { return static_cast<ui16>(this->value); };
-				constexpr explicit operator ui32() const noexcept { return static_cast<ui32>(this->value); };
-				constexpr explicit operator ui64() const noexcept { return static_cast<ui64>(this->value); };
+				constexpr explicit operator ui8() const noexcept  { return ui8(this->value);  };
+				constexpr explicit operator ui16() const noexcept { return ui16(this->value); };
+				constexpr explicit operator ui32() const noexcept { return ui32(this->value); };
+				constexpr explicit operator ui64() const noexcept { return ui64(this->value); };
 
-				constexpr explicit operator f32() const noexcept { return static_cast<f32>(this->value); };
-				constexpr explicit operator f64() const noexcept { return static_cast<f64>(this->value); };
+				constexpr explicit operator f32() const noexcept { return f32(this->value); };
+				constexpr explicit operator f64() const noexcept { return f64(this->value); };
 
 
 			private:
@@ -85,18 +85,18 @@ namespace evo{
 
 
 				// basic type conversion
-				constexpr explicit operator i8() const noexcept  { return static_cast<i8>(this->value);  };
-				constexpr explicit operator i16() const noexcept { return static_cast<i16>(this->value); };
-				constexpr explicit operator i32() const noexcept { return static_cast<i32>(this->value); };
+				constexpr explicit operator i8() const noexcept  { return i8(this->value);  };
+				constexpr explicit operator i16() const noexcept { return i16(this->value); };
+				constexpr explicit operator i32() const noexcept { return i32(this->value); };
 				constexpr explicit operator i64() const noexcept { return this->value; };
 
-				constexpr explicit operator ui8() const noexcept  { return static_cast<ui8>(this->value);  };
-				constexpr explicit operator ui16() const noexcept { return static_cast<ui16>(this->value); };
-				constexpr explicit operator ui32() const noexcept { return static_cast<ui32>(this->value); };
-				constexpr explicit operator ui64() const noexcept { return static_cast<ui64>(this->value); };
+				constexpr explicit operator ui8() const noexcept  { return ui8(this->value);  };
+				constexpr explicit operator ui16() const noexcept { return ui16(this->value); };
+				constexpr explicit operator ui32() const noexcept { return ui32(this->value); };
+				constexpr explicit operator ui64() const noexcept { return ui64(this->value); };
 
-				constexpr explicit operator f32() const noexcept { return static_cast<f32>(this->value); };
-				constexpr explicit operator f64() const noexcept { return static_cast<f64>(this->value); };
+				constexpr explicit operator f32() const noexcept { return f32(this->value); };
+				constexpr explicit operator f64() const noexcept { return f64(this->value); };
 
 
 			private:
@@ -130,18 +130,18 @@ namespace evo{
 
 
 				// basic type conversion
-				constexpr explicit operator i8() const noexcept  { return static_cast<i8>(this->value);  };
-				constexpr explicit operator i16() const noexcept { return static_cast<i16>(this->value); };
-				constexpr explicit operator i32() const noexcept { return static_cast<i32>(this->value); };
+				constexpr explicit operator i8() const noexcept  { return i8(this->value);  };
+				constexpr explicit operator i16() const noexcept { return i16(this->value); };
+				constexpr explicit operator i32() const noexcept { return i32(this->value); };
 				constexpr explicit operator i64() const noexcept { return this->value; };
 
-				constexpr explicit operator ui8() const noexcept  { return static_cast<ui8>(this->value);  };
-				constexpr explicit operator ui16() const noexcept { return static_cast<ui16>(this->value); };
-				constexpr explicit operator ui32() const noexcept { return static_cast<ui32>(this->value); };
-				constexpr explicit operator ui64() const noexcept { return static_cast<ui64>(this->value); };
+				constexpr explicit operator ui8() const noexcept  { return ui8(this->value);  };
+				constexpr explicit operator ui16() const noexcept { return ui16(this->value); };
+				constexpr explicit operator ui32() const noexcept { return ui32(this->value); };
+				constexpr explicit operator ui64() const noexcept { return ui64(this->value); };
 
-				constexpr explicit operator f32() const noexcept { return static_cast<f32>(this->value); };
-				constexpr explicit operator f64() const noexcept { return static_cast<f64>(this->value); };
+				constexpr explicit operator f32() const noexcept { return f32(this->value); };
+				constexpr explicit operator f64() const noexcept { return f64(this->value); };
 
 
 			private:
@@ -155,14 +155,14 @@ namespace evo{
 		//////////////////////////////////////////////////////////////////////
 		// time value type conversion operator implementations
 
-		constexpr Nanoseconds::operator Milliseconds() const noexcept { return Milliseconds{ static_cast<i64>(this->value / 1e6) }; };
-		constexpr Nanoseconds::operator Seconds() const noexcept { return Seconds{ static_cast<i64>(this->value / 1e9) }; };
+		constexpr Nanoseconds::operator Milliseconds() const noexcept { return Milliseconds{ i64(this->value / 1e6) }; };
+		constexpr Nanoseconds::operator Seconds() const noexcept { return Seconds{ i64(this->value / 1e9) }; };
 
-		constexpr Milliseconds::operator Nanoseconds() const noexcept { return Nanoseconds{ static_cast<i64>(this->value * 1e6) }; };
-		constexpr Milliseconds::operator Seconds() const noexcept { return Seconds{ static_cast<i64>(this->value / 1e3) }; };
+		constexpr Milliseconds::operator Nanoseconds() const noexcept { return Nanoseconds{ i64(this->value * 1e6) }; };
+		constexpr Milliseconds::operator Seconds() const noexcept { return Seconds{ i64(this->value / 1e3) }; };
 
-		constexpr Seconds::operator Nanoseconds() const noexcept { return Nanoseconds{ static_cast<i64>(this->value * 1e9) }; };
-		constexpr Seconds::operator Milliseconds() const noexcept { return Milliseconds{ static_cast<i64>(this->value * 1e6) }; };
+		constexpr Seconds::operator Nanoseconds() const noexcept { return Nanoseconds{ i64(this->value * 1e9) }; };
+		constexpr Seconds::operator Milliseconds() const noexcept { return Milliseconds{ i64(this->value * 1e6) }; };
 
 
 
@@ -196,14 +196,14 @@ namespace evo{
 template<>
 struct std::hash<evo::time::Nanoseconds>{
 	auto operator()(const evo::time::Nanoseconds& time) const noexcept -> size_t {
-		return std::hash<int64_t>{}(static_cast<evo::i64>(time));
+		return std::hash<int64_t>{}(evo::i64(time));
 	};
 };
 
 template<>
 struct std::hash<evo::time::Milliseconds>{
 	auto operator()(const evo::time::Milliseconds& time) const noexcept -> size_t {
-		return std::hash<int64_t>{}(static_cast<evo::i64>(time));
+		return std::hash<int64_t>{}(evo::i64(time));
 	};
 };
 
@@ -211,7 +211,7 @@ struct std::hash<evo::time::Milliseconds>{
 template<>
 struct std::hash<evo::time::Seconds>{
 	auto operator()(const evo::time::Seconds& time) const noexcept -> size_t {
-		return std::hash<int64_t>{}(static_cast<evo::i64>(time));
+		return std::hash<int64_t>{}(evo::i64(time));
 	};
 };
 
@@ -224,21 +224,21 @@ struct std::hash<evo::time::Seconds>{
 template<>
 struct std::formatter<evo::time::Nanoseconds> : std::formatter<int64_t> {
     auto format(const evo::time::Nanoseconds& time, std::format_context& ctx) {
-        return std::formatter<int64_t>::format(static_cast<evo::i64>(time), ctx);
+        return std::formatter<int64_t>::format(evo::i64(time), ctx);
     }
 };
 
 template<>
 struct std::formatter<evo::time::Milliseconds> : std::formatter<int64_t> {
     auto format(const evo::time::Milliseconds& time, std::format_context& ctx) {
-        return std::formatter<int64_t>::format(static_cast<evo::i64>(time), ctx);
+        return std::formatter<int64_t>::format(evo::i64(time), ctx);
     }
 };
 
 template<>
 struct std::formatter<evo::time::Seconds> : std::formatter<int64_t> {
     auto format(const evo::time::Seconds& time, std::format_context& ctx) {
-        return std::formatter<int64_t>::format(static_cast<evo::i64>(time), ctx);
+        return std::formatter<int64_t>::format(evo::i64(time), ctx);
     }
 };
 

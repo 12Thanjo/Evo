@@ -13,7 +13,7 @@ namespace evo{
 				std::chrono::high_resolution_clock::now()
 			).time_since_epoch().count();
 
-			return Nanoseconds{static_cast<i64>(time_now)};
+			return Nanoseconds{i64(time_now)};
 		};
 
 
@@ -27,13 +27,13 @@ namespace evo{
 			localtime_s(&local_time, &current_time);
 
 			return CurrentTime{
-				.year    = static_cast<uint16_t>( local_time.tm_year + 1900 ),
-				.month   = static_cast<uint8_t>( local_time.tm_mon  ),
-				.day     = static_cast<uint8_t>( local_time.tm_mday ),
+				.year    = uint16_t( local_time.tm_year + 1900 ),
+				.month   = uint8_t( local_time.tm_mon  ),
+				.day     = uint8_t( local_time.tm_mday ),
 
-				.hours   = static_cast<uint8_t>( local_time.tm_hour ),
-				.minutes = static_cast<uint8_t>( local_time.tm_min  ),
-				.seconds = static_cast<uint8_t>( local_time.tm_sec  ),
+				.hours   = uint8_t( local_time.tm_hour ),
+				.minutes = uint8_t( local_time.tm_min  ),
+				.seconds = uint8_t( local_time.tm_sec  ),
 			};
 		};
 		

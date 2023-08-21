@@ -151,11 +151,11 @@ namespace evo{
 
 			EVO_NODISCARD constexpr auto empty() const noexcept -> bool { return this->_size == 0; };
 
-			EVO_NODISCARD constexpr auto size() const noexcept -> size_t { return static_cast<size_t>(this->_size); };
+			EVO_NODISCARD constexpr auto size() const noexcept -> size_t { return size_t(this->_size); };
 
-			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t { return static_cast<size_t>(this->_size); };
+			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t { return size_t(this->_size); };
 
-			EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t { return static_cast<size_t>(CAPACITY); };
+			EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t { return size_t(CAPACITY); };
 
 
 

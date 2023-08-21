@@ -184,17 +184,17 @@ namespace evo{
 
 
 			EVO_NODISCARD constexpr auto size() const noexcept -> size_t {
-				return static_cast<size_t>(CAPACITY - this->_remaining_capacity);
+				return size_t(CAPACITY - this->_remaining_capacity);
 			};
 
 
 			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t {
-				return static_cast<size_t>(CAPACITY);
+				return size_t(CAPACITY);
 			};
 
 
 			EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t {
-				return static_cast<size_t>(CAPACITY);
+				return size_t(CAPACITY);
 			};	
 
 
