@@ -9,6 +9,7 @@ This is very much a work in progress.
 
 ## Utils
 - [assert.h](#assert)
+- [misc.h](#misc)
 - [numeric_types.h](#numeric_types)
 - [platform_detection.h](#platform_detection)
 - [select_size_type.h](#select_size_type)
@@ -38,6 +39,13 @@ Creates the following macros:
 | *EVO_DEBUG_ASSERT* (`conditional`)  | Runs a breakpoint if condition is not met (only in [debug mode](#debug-mode)) |
 | *EVO_STATIC_ASSERT* (`conditional`) | At compile time, errors if condition is not met                               |
 | *EVO_BREAK* ()                      | Creates a debug breakpoint                                                    |
+
+
+<a name="misc"></a>
+### misc.h
+###### TODO
+Misc. functions
+
 
 
 <a name="numeric_types"></a>

@@ -17,6 +17,7 @@
 
 #include "./utils/platform_detection.h"
 #include "./utils/asserts.h"
+#include "./utils/misc.h"
 #include "./utils/numeric_types.h"
 #include "./utils/select_size_type.h"
 #include "./utils/strings.h"
