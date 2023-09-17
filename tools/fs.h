@@ -1,5 +1,6 @@
 #pragma once
 
+#include "defines.h"
 
 
 namespace evo{
@@ -14,7 +15,7 @@ namespace evo{
 			Read,
 			Write,
 
-			__max__,
+			_max,
 		};
 
 		
@@ -46,7 +47,7 @@ namespace evo{
 				EVO_NODISCARD constexpr auto isValid() const noexcept -> bool { return this->valid; };
 
 			protected:
-				struct ::FILE* handle = nullptr;
+				::FILE* handle = nullptr;
 				bool valid = false;
 		};
 

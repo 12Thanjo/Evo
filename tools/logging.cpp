@@ -1,14 +1,22 @@
-#include "logging.h"
+#include "Evo.h"
 
-#include "utils/platform_detection.h"
-#include "utils/strings.h"
+#include "logging.h"
 
 
 
 #if defined(EVO_PLATFORM_WINDOWS)
-	#define WIN32_LEAN_AND_MEAN
-	#define NOCOMM
-	#define NOMINMAX
+	#if !defined(NOMINMAX)
+		#define WIN32_LEAN_AND_MEAN
+	#endif
+
+	#if !defined(NOMINMAX)
+		#define NOCOMM
+	#endif
+
+	#if !defined(NOMINMAX)
+		#define NOMINMAX
+	#endif
+
 	#include <windows.h>
 
 #else
@@ -22,52 +30,43 @@ namespace evo{
 
 	#if defined(EVO_PLATFORM_WINDOWS)
 
-		auto log(const std::string& message) noexcept -> void {
-			log(message.c_str());
+		auto log(CStrProxy message) noexcept -> void {
+			OutputDebugStringA(message.data());
+			WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message.data(), static_cast<DWORD>(stringSize(message.data(), 1024)), nullptr, nullptr);
 		};
-
-		inline auto log(const char* message) noexcept -> void {
-			OutputDebugStringA(message);
-			WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message, static_cast<DWORD>(stringSize(message, 1024)), nullptr, nullptr);
-		};
-
 
 
 		auto styleConsoleFatal() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 71);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | BACKGROUND_RED);
 		};
 
 		auto styleConsoleError() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
 		};
 
 		auto styleConsoleWarning() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
 		};
 
 		auto styleConsoleInfo() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_GREEN);
 		};
 
 		auto styleConsoleDebug() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE);
 		};
 
 		auto styleConsoleTrace() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 		};
 
 		auto styleConsoleReset() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 		};
 
 	#else
-		auto log(const std::string& message) noexcept -> void {
-			std::cout << message;
-		};
-
-		auto log(const char* message) noexcept -> void {
-			std::cout << message;
+		auto log(CStrProxy message) noexcept -> void {
+			std::cout << message.data();
 		};
 
 

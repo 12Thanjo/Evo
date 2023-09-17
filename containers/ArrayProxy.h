@@ -39,7 +39,7 @@ namespace evo{
 		public:
 			using value_type = T;
 			using size_type = size_t;
-			using difference_type = std::ptrdiff_t; // not 100% sure this is correct
+			using difference_type = std::ptrdiff_t;
 			using reference = T&;
 			using const_reference = const T&;
 			using pointer = T*;
@@ -280,7 +280,7 @@ namespace evo{
 	template<typename T>
 	class ArrayProxyIterator{
 		public:
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				ArrayProxyIterator(T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
 				ArrayProxyIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(const_cast<T*>(ptr)), parent(parent_ptr) {};
 
@@ -346,7 +346,7 @@ namespace evo{
 		private:
 			T* iter;
 
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				const ArrayProxy<T>* parent;
 			#endif
 	};
@@ -357,7 +357,7 @@ namespace evo{
 	template<typename T>
 	class ArrayProxyConstIterator{
 		public:
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				ArrayProxyConstIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
 			#else
 				ArrayProxyConstIterator(const T* ptr) noexcept : iter(ptr) {};
@@ -420,7 +420,7 @@ namespace evo{
 		private:
 			const T* iter;
 
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				const ArrayProxy<T>* parent;
 			#endif
 	};
@@ -434,7 +434,7 @@ namespace evo{
 	template<typename T>
 	class ArrayProxyReverseIterator{
 		public:
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				ArrayProxyReverseIterator(T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
 				ArrayProxyReverseIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(const_cast<T*>(ptr)), parent(parent_ptr) {};
 
@@ -500,7 +500,7 @@ namespace evo{
 		private:
 			T* iter;
 
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				const ArrayProxy<T>* parent;
 			#endif
 	};
@@ -511,7 +511,7 @@ namespace evo{
 	template<typename T>
 	class ArrayProxyConstReverseIterator{
 		public:
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				ArrayProxyConstReverseIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
 			#else
 				ArrayProxyConstReverseIterator(const T* ptr) noexcept : iter(ptr) {};
@@ -576,7 +576,7 @@ namespace evo{
 		private:
 			const T* iter;
 
-			#if defined(PH_CONFIG_DEBUG)
+			#if defined(EVO_CONFIG_DEBUG)
 				const ArrayProxy<T>* parent;
 			#endif
 	};

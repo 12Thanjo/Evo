@@ -3,11 +3,12 @@
 #include <string>
 #include <format>
 
+#include "defines.h"
+
+
 namespace evo{
 
-	auto log(const std::string& message) noexcept -> void;
-	auto log(const char* message) noexcept -> void;
-
+	auto log(CStrProxy message) noexcept -> void;
 
 
 	auto styleConsoleFatal() noexcept -> void;
@@ -20,107 +21,78 @@ namespace evo{
 
 
 
-	///////////////////////////////////
-	// fatal
 
-	inline auto logFatal(const std::string& message) noexcept -> void {
+	inline auto logFatal(CStrProxy message) noexcept -> void {
 		styleConsoleFatal();
-		log(message + '\n');
+		log( std::format("{}\n", message.data()) );
 		styleConsoleReset();
 	};
 
-	inline auto logFatal(const char* message) noexcept -> void {
-		styleConsoleFatal();
-		log( std::format("{}\n", message) );
-		styleConsoleReset();
-	};
-
-
-	///////////////////////////////////
-	// error
-
-	inline auto logError(const std::string& message) noexcept -> void {
+	inline auto logError(CStrProxy message) noexcept -> void {
 		styleConsoleError();
-		log(message + '\n');
+		log( std::format("{}\n", message.data()) );
 		styleConsoleReset();
 	};
 
-	inline auto logError(const char* message) noexcept -> void {
-		styleConsoleError();
-		log( std::format("{}\n", message) );
-		styleConsoleReset();
-	};
-
-
-	///////////////////////////////////
-	// warning
-
-	inline auto logWarning(const std::string& message) noexcept -> void {
+	inline auto logWarning(CStrProxy message) noexcept -> void {
 		styleConsoleWarning();
-		log(message + '\n');
+		log( std::format("{}\n", message.data()) );
 		styleConsoleReset();
 	};
 
-	inline auto logWarning(const char* message) noexcept -> void {
-		styleConsoleWarning();
-		log( std::format("{}\n", message) );
-		styleConsoleReset();
-	};
-
-
-	///////////////////////////////////
-	// info
-
-	inline auto logInfo(const std::string& message) noexcept -> void {
+	inline auto logInfo(CStrProxy message) noexcept -> void {
 		styleConsoleInfo();
-		log(message + '\n');
+		log( std::format("{}\n", message.data()) );
 		styleConsoleReset();
 	};
 
-	inline auto logInfo(const char* message) noexcept -> void {
-		styleConsoleInfo();
-		log( std::format("{}\n", message) );
-		styleConsoleReset();
-	};
-
-
-	///////////////////////////////////
-	// debug
-
-	inline auto logDebug(const std::string& message) noexcept -> void {
+	inline auto logDebug(CStrProxy message) noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
 			styleConsoleDebug();
-			log(message + '\n');
+			log( std::format("{}\n", message.data()) );
 			styleConsoleReset();
 		#endif
 	};
 
-	inline auto logDebug(const char* message) noexcept -> void {
-		#if defined(EVO_CONFIG_DEBUG)
-			styleConsoleDebug();
-			log( std::format("{}\n", message) );
-			styleConsoleReset();
-		#endif
-	};
-
-
-
-	inline auto logTrace(const std::string& message) noexcept -> void {
+	inline auto logTrace(CStrProxy message) noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
 			styleConsoleTrace();
-			log(message + '\n');
-			styleConsoleReset();
-		#endif
-	};
-
-	inline auto logTrace(const char* message) noexcept -> void {
-		#if defined(EVO_CONFIG_DEBUG)
-			styleConsoleTrace();
-			log( std::format("{}\n", message) );
+			log( std::format("{}\n", message.data()) );
 			styleConsoleReset();
 		#endif
 	};
 
 
-	
+
+	//////////////////////////////////////////////////////////////////////
+	// asserts, etc.
+
+	inline auto assert(bool conditional, CStrProxy message) noexcept -> void {
+		if(conditional == false){
+			logFatal(message);
+			breakpoint();
+		}
+	};
+
+
+
+	inline auto debugAssert(bool conditional, CStrProxy message) noexcept -> void {
+		#if defined(PH_CONFIG_DEBUG)
+			evo::assert(conditional, message);
+		#endif
+	};
+
+
+	// #if defined(EVO_CONFIG_DEBUG)
+		#if defined(EVO_COMPILER_MSVC)
+			#define EVO_FATAL_BREAK(msg) evo::logFatal(msg); evo::breakpoint(); __assume(false);
+		#else
+			#define EVO_FATAL_BREAK(msg) evo::logFatal(msg); evo::breakpoint(); __builtin_unreachable();
+		#endif
+
+	// #else
+	// 	#define EVO_FATAL_BREAK(msg) evo::logFatal(msg); std::exit(EXIT_FAILURE);
+
+	// #endif
+
 };

@@ -8,7 +8,7 @@
 	#define EVO_COMPILER_MSVC
 #elif __clang__
 	#define EVO_COMPILER_CLANG
-#elif __gcc__
+#elif __GNUG__
 	#define EVO_COMPILER_GCC
 #else
 	#error Unknown or unsupported compiler

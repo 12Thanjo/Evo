@@ -1,6 +1,7 @@
 #pragma once
 
 #include <limits>
+#include <cstdint>
 #include <cstring>
 #include <string.h>
 #include <initializer_list>
@@ -23,10 +24,12 @@
 #include "./utils/strings.h"
 
 
+#include "./containers/iterators.h"
 #include "./containers/ArrayProxy.h"
 #include "./containers/Flags.h"
 #include "./containers/StaticVector.h"
 #include "./containers/StaticString.h"
+#include "./containers/CStrProxy.h"
 
 
 #include "./tools/logging.h"

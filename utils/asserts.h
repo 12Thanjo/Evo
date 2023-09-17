@@ -31,3 +31,49 @@
 	#define EVO_DEBUG_ASSERT(conditional)
 		
 #endif
+
+
+
+
+namespace evo{
+
+	//////////////////////////////////////////////////////////////////////
+	// breakpoints
+
+	inline auto breakpoint() noexcept -> void {
+		#if defined(EVO_CONFIG_DEBUG)
+			#if defined(EVO_COMPILER_MSVC)
+				__debugbreak();
+			#else
+				__builtin_trap();
+			#endif
+		#else
+			std::exit(EXIT_FAILURE);
+		#endif
+	};
+
+
+
+
+	//////////////////////////////////////////////////////////////////////
+	// asserts
+
+
+	inline auto assert(bool conditional) noexcept -> void {
+		if(conditional == false){
+			breakpoint();
+		}
+	};
+
+
+
+	inline auto debugAssert(bool conditional) noexcept -> void {
+		#if defined(PH_CONFIG_DEBUG)
+			evo::assert(conditional);
+		#endif
+	};
+
+
+};
+
+

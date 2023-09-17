@@ -28,7 +28,7 @@ namespace evo{
 			constexpr StaticString(const char* chars) noexcept { this->operator=(chars); };
 
 			constexpr StaticString(const std::string& str) noexcept { this->operator=(str); };
-			constexpr StaticString(std::string&& str) noexcept { this->operator=(str); };
+			constexpr StaticString(std::string&& str) noexcept { this->operator=(std::move(str)); };
 
 			template<size_t StrSize>
 			constexpr StaticString(const StaticString<StrSize>& str) noexcept { this->operator=(str); };

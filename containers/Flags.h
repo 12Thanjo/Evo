@@ -31,13 +31,13 @@ namespace evo{
 			Blue,
 			Purple,
 
-			__max__,
+			_max,
 		};
 
 
 		Notes;
 			do not have a "None",
-			must end with "__max__"
+			must end with "_max"
 			
 	*/
 
@@ -46,7 +46,7 @@ namespace evo{
 	template<typename Enum, typename UnderlyingT = ui8>
 	class Flags{
 		static_assert(
-			((sizeof(UnderlyingT) * 8) - 1) >= static_cast<UnderlyingT>(Enum::__max__),
+			((sizeof(UnderlyingT) * 8) - 1) >= static_cast<UnderlyingT>(Enum::_max),
 			"Flags must have a larger underlying type"
 		);
 
@@ -71,7 +71,7 @@ namespace evo{
 
 			// set
 			constexpr auto set(Enum flag_value) noexcept -> void {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				this->internal_data |= bit_flag( static_cast<UnderlyingT>(flag_value) );
 			};
@@ -81,10 +81,9 @@ namespace evo{
 			};
 
 
-
 			// unset
 			constexpr auto unset(Enum flag_value) noexcept -> void {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				this->internal_data &= ~( bit_flag(static_cast<UnderlyingT>(flag_value)) );
 			};
@@ -102,7 +101,7 @@ namespace evo{
 
 			// toggle
 			constexpr auto toggle(Enum flag_value) noexcept -> void {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				this->internal_data ^= bit_flag( static_cast<UnderlyingT>(flag_value) );
 			};
@@ -122,7 +121,7 @@ namespace evo{
 
 			
 			EVO_NODISCARD constexpr auto has(Enum flag_value) const noexcept -> bool {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				return (this->internal_data & bit_flag(static_cast<UnderlyingT>(flag_value))) != 0;
 			};
@@ -146,7 +145,7 @@ namespace evo{
 
 			
 			EVO_NODISCARD constexpr auto operator | (Enum flag_value) const noexcept -> Flags<Enum> {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				auto output = Flags<Enum>{};
 				output.internal_data = this->internal_data | bit_flag(static_cast<UnderlyingT>(flag_value));
@@ -155,7 +154,7 @@ namespace evo{
 
 			
 			EVO_NODISCARD constexpr auto operator & (Enum flag_value) const noexcept -> Flags<Enum> {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				auto output = Flags<Enum>{};
 				output.internal_data = this->internal_data & bit_flag(static_cast<UnderlyingT>(flag_value));
@@ -164,16 +163,16 @@ namespace evo{
 
 
 			
-			EVO_NODISCARD constexpr auto operator |= (Enum flag_value) noexcept -> void {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+			constexpr auto operator |= (Enum flag_value) noexcept -> void {
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				// this->internal_data |= static_cast<UnderlyingT>(flag_value);
 				this->set(flag_value);
 			}
 
 			
-			EVO_NODISCARD constexpr auto operator &= (Enum flag_value) noexcept -> void {
-				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::__max__) > static_cast<UnderlyingT>(flag_value) );
+			constexpr auto operator &= (Enum flag_value) noexcept -> void {
+				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				this->internal_data &= bit_flag(static_cast<UnderlyingT>(flag_value));
 			}

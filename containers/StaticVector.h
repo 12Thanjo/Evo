@@ -9,46 +9,109 @@ namespace evo{
 	// I attempted to make this somewhat like a what std implementation might be
 
 
+	//////////////////////////////////////////////////////////////////////
+	// static vector
+
 	template<typename T, size_t CAPACITY>
 	class StaticVector{
 		public:
-			using value_type = T;
-			using size_type = CapacityType<CAPACITY>::type;
-			using difference_type = std::ptrdiff_t; // not 100% sure this is correct
-			using reference = T&;
-			using const_reference = const T&;
-			using pointer = T*;
-			using const_pointer = const T*;
-			using iterator = std::array<T, CAPACITY>::iterator;
-			using const_iterator = std::array<T, CAPACITY>::const_iterator;
-			using reverse_iterator = std::array<T, CAPACITY>::reverse_iterator;
-			using const_reverse_iterator = std::array<T, CAPACITY>::const_reverse_iterator;
+			using value_type             = T;
+			using size_type              = CapacityType<CAPACITY>::type;
+			using difference_type        = std::ptrdiff_t; // not 100% sure this is correct
+			using reference              = T&;
+			using const_reference        = const T&;
+			using pointer                = T*;
+			using const_pointer          = const T*;
+			using iterator               = Iterator<T>;
+			using const_iterator         = ConstIterator<T>;
+			using reverse_iterator       = ReverseIterator<T>;
+			using const_reverse_iterator = ConstReverseIterator<T>;
 
 
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
+
 			EVO_NODISCARD constexpr StaticVector() noexcept = default;
+			constexpr ~StaticVector() noexcept { this->resize(0); };
 
-			// EVO_NODISCARD constexpr StaticVector(std::array<T, CAPACITY>        in_arr) noexcept : data_block(std::move( in_arr) ) {};
-			EVO_NODISCARD constexpr StaticVector(const std::array<T, CAPACITY>& in_arr) noexcept : data_block(in_arr)			    {};
-			EVO_NODISCARD constexpr StaticVector(std::array<T, CAPACITY>&&      in_arr) noexcept : data_block(std::move( in_arr) ) {};
-			EVO_NODISCARD constexpr StaticVector(std::initializer_list<T>    init_list) noexcept : data_block(init_list)		    {};
 
-			// EVO_NODISCARD constexpr ~StaticVector() noexcept = default;
+			///////////////////////////////////
+			// copy
 
-			EVO_NODISCARD constexpr auto operator =(const std::array<T, CAPACITY>& in_arr) noexcept -> void { this->data_block = in_arr;            };
-			EVO_NODISCARD constexpr auto operator =(std::array<T, CAPACITY>&&      in_arr) noexcept -> void { this->data_block = std::move(in_arr); };
-			EVO_NODISCARD constexpr auto operator =(std::initializer_list<T>    init_list) noexcept -> void { this->data_block = init_list;         };
-
-			EVO_NODISCARD constexpr auto operator =(const StaticVector<T, CAPACITY>& in_arr) noexcept -> void {
-				this->data_block = in_arr.data_block;
-				this->_size = in_arr._size;
+			EVO_NODISCARD constexpr StaticVector(const StaticVector<T, CAPACITY>& rhs) noexcept : current_size(rhs.size()) {
+				for(int i = 0; i < this->size(); i+=1){
+					this->data_block[i] = rhs[i];
+				}
 			};
-			// EVO_NODISCARD constexpr auto operator =(StaticVector<T, CAPACITY>&&      in_arr) noexcept -> void {
-			// 	this->data_block = std::move(in_arr.data_block);
-			// 	this->_size = in_arr._size;
-			// };
+
+
+			EVO_NODISCARD constexpr auto operator=(const StaticVector<T, CAPACITY>& rhs) noexcept -> StaticVector<T, CAPACITY>& {
+				this->current_size = rhs.size();
+
+				for(int i = 0; i < this->size(); i+=1){
+					this->data_block[i] = rhs[i];
+				}
+
+				return *this;
+			};
+
+
+			///////////////////////////////////
+			// move
+
+			EVO_NODISCARD constexpr StaticVector(StaticVector<T, CAPACITY>&& rhs) noexcept : current_size(std::exchange(rhs.current_size, 0)) {
+				for(int i = 0; i < this->size(); i+=1){
+					this->data_block[i] = std::move(rhs[i]);
+				}
+			};
+
+
+			EVO_NODISCARD constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVector<T, CAPACITY>& {
+				this->current_size = std::exchange(rhs.current_size, 0);
+
+				for(int i = 0; i < this->size(); i+=1){
+					this->data_block[i] = std::move(rhs[i]);
+				}
+
+				return *this;
+			};
+
+
+			///////////////////////////////////
+			// deleted special member functions
+
+			constexpr StaticVector(const StaticVector<T, CAPACITY>&&) = delete;
+			constexpr StaticVector<T, CAPACITY>& operator=(const StaticVector<T, CAPACITY>&&) = delete;
+
+
+			///////////////////////////////////
+			// construct from initializer list
+
+			EVO_NODISCARD constexpr StaticVector(std::initializer_list<T> init_list) noexcept : current_size(init_list.size()) {
+				EVO_DEBUG_ASSERT(init_list.size() < CAPACITY);
+
+				for(int i = 0; i < init_list.size(); i+=1){
+					this->data_block[i] = std::move(init_list[i]);
+				}
+			};
+
+			EVO_NODISCARD constexpr auto operator=(std::initializer_list<T> init_list) noexcept -> StaticVector<T, CAPACITY> {
+				EVO_DEBUG_ASSERT(init_list.size() < CAPACITY);
+				
+				this->resize(0);
+
+				for(int i = 0; i < init_list.size(); i+=1){
+					this->data_block[i] = std::move(init_list[i]);
+				}
+
+				this->current_size = init_list.size();
+			};
+
+
+
+
+
 
 
 			EVO_NODISCARD constexpr operator std::span<T, CAPACITY>() noexcept {
@@ -62,178 +125,304 @@ namespace evo{
 			///////////////////////////////////
 			// at
 
-			EVO_NODISCARD constexpr auto at(size_type index) noexcept -> T& {
-				EVO_DEBUG_ASSERT(index < this->_size);
+			EVO_NODISCARD constexpr auto at(size_t index) noexcept -> T& {
+				EVO_DEBUG_ASSERT(index < current_size);
 
 				return this->data_block[index];
 			};
 
-			EVO_NODISCARD constexpr auto at(size_type index) const noexcept -> const T& {
-				EVO_DEBUG_ASSERT(index < this->_size);
+			EVO_NODISCARD constexpr auto at(size_t index) const noexcept -> const T& {
+				EVO_DEBUG_ASSERT(index < current_size);
 
 				return this->data_block[index];
 			};
+
+
+			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
+			EVO_NODISCARD constexpr auto at(size_type index) noexcept -> T& { return this->at(size_t(index)); };
+
+			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
+			EVO_NODISCARD constexpr auto at(size_type index) const noexcept -> const T& { return this->at(size_t(index)); };
 
 
 
 			///////////////////////////////////
 			// operator[]
 
-			EVO_NODISCARD constexpr auto operator[](size_type index) noexcept -> T& {
-				return this->at(index);
-			};
+			EVO_NODISCARD constexpr auto operator[](size_type index)       noexcept ->       T& { return this->at(index); };
+			EVO_NODISCARD constexpr auto operator[](size_type index) const noexcept -> const T& { return this->at(index); };
 
-			EVO_NODISCARD constexpr auto operator[](size_type index) const noexcept -> const T& {
-				return this->at(index);
-			};
+			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
+			EVO_NODISCARD constexpr auto operator[](size_t index)       noexcept ->       T& { return this->at(index); };
 
+			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
+			EVO_NODISCARD constexpr auto operator[](size_t index) const noexcept -> const T& { return this->at(index); };
 
 
 			///////////////////////////////////
 			// front
 
 			EVO_NODISCARD constexpr auto front() noexcept -> T& {
-				return this->data_block.front();
+				return *this->data_block;
 			};
 
 			EVO_NODISCARD constexpr auto front() const noexcept -> const T& {
-				return this->data_block.front();
+				return *this->data_block;
 			};
-
 
 
 			///////////////////////////////////
-			// back
+			// front
 
 			EVO_NODISCARD constexpr auto back() noexcept -> T& {
-				return this->data_block.back();
+				return this->data_block[this->current_size];
 			};
 
 			EVO_NODISCARD constexpr auto back() const noexcept -> const T& {
-				return this->data_block.back();
+				return this->data_block[this->current_size];
 			};
-
 
 
 			///////////////////////////////////
 			// data
-			EVO_NODISCARD constexpr auto data() noexcept -> T* { return this->data_block.data(); };
 
-			EVO_NODISCARD constexpr auto data() const noexcept -> const T* { return this->data_block.data(); };
+			EVO_NODISCARD constexpr auto data() noexcept -> T* {
+				return this->data_block;
+			};
 
+			EVO_NODISCARD constexpr auto data() const noexcept -> const T* {
+				return this->data_block;
+			};
 
 
 			//////////////////////////////////////////////////////////////////////
 			// iterators
 
+			EVO_NODISCARD constexpr auto begin()        noexcept -> iterator       { return iterator{this->data()};       };
+			EVO_NODISCARD constexpr auto begin()  const noexcept -> const_iterator { return const_iterator{this->data()}; };
+			EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator { return const_iterator{this->data()}; };
 
-			EVO_NODISCARD constexpr auto begin()        noexcept -> iterator       { return iterator{this->data(), 0};       };
-			EVO_NODISCARD constexpr auto begin()  const noexcept -> const_iterator { return const_iterator{this->data(), 0}; };
-			EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator { return const_iterator{this->data(), 0}; };
-
-			EVO_NODISCARD constexpr auto end()        noexcept -> iterator       { return iterator{this->data(), this->_size};       };
-			EVO_NODISCARD constexpr auto end()  const noexcept -> const_iterator { return const_iterator{this->data(), this->_size}; };
-			EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator { return const_iterator{this->data(), this->_size}; };
+			EVO_NODISCARD constexpr auto end()        noexcept -> iterator       { return iterator{&this->data()[this->size()]};       };
+			EVO_NODISCARD constexpr auto end()  const noexcept -> const_iterator { return const_iterator{&this->data()[this->size()]}; };
+			EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator { return const_iterator{&this->data()[this->size()]}; };
 
 
-			EVO_NODISCARD constexpr auto rbegin()        noexcept -> reverse_iterator       { return reverse_iterator{this->data(), this->_size};       };
-			EVO_NODISCARD constexpr auto rbegin()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), this->_size}; };
-			EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), this->_size}; };
+			EVO_NODISCARD constexpr auto rbegin()        noexcept -> reverse_iterator       {return reverse_iterator{&this->data()[this->size()-1]};      };
+			EVO_NODISCARD constexpr auto rbegin()  const noexcept -> const_reverse_iterator {return const_reverse_iterator{&this->data()[this->size()-1]};};
+			EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_reverse_iterator {return const_reverse_iterator{&this->data()[this->size()-1]};};
 
-			EVO_NODISCARD constexpr auto rend()        noexcept -> reverse_iterator       { return reverse_iterator{this->data(), 0};       };
-			EVO_NODISCARD constexpr auto rend()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), 0}; };
-			EVO_NODISCARD constexpr auto crend() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), 0}; };
+			EVO_NODISCARD constexpr auto rend()        noexcept -> reverse_iterator       { return reverse_iterator{this->data()[-1]};       };
+			EVO_NODISCARD constexpr auto rend()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data()[-1]}; };
+			EVO_NODISCARD constexpr auto crend() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data()[-1]}; };
 
 
 
 			//////////////////////////////////////////////////////////////////////
 			// capacity
 
-			EVO_NODISCARD constexpr auto empty() const noexcept -> bool { return this->_size == 0; };
+			EVO_NODISCARD constexpr auto empty() const noexcept -> bool { return this->current_size == 0; };
 
-			EVO_NODISCARD constexpr auto size() const noexcept -> size_t { return size_t(this->_size); };
+			EVO_NODISCARD constexpr auto size() const noexcept -> size_t { return size_t(this->current_size); };
 
-			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t { return size_t(this->_size); };
+			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t { return size_t(this->current_size); };
 
 			EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t { return size_t(CAPACITY); };
-
 
 
 			//////////////////////////////////////////////////////////////////////
 			// modify
 
-			constexpr auto clear() noexcept -> void { this->_size = 0; };
+			///////////////////////////////////
+			// clear
+
+			constexpr auto clear() noexcept -> void {
+				for(size_t i = 0; i < this->current_size; i+=1){
+					std::destroy_at(*this->data_block[i]);
+				}
+
+				this->current_size = 0;
+			};
 
 
-			// not implemented yet: insert
+			///////////////////////////////////
+			// insert
+
+			constexpr auto insert(const_iterator pos, const T& value) noexcept -> iterator {
+				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
+
+				this->back() = value;
+
+				this->current_size += 1;
+
+				const auto begin = this->rbegin();
+				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
+
+
+				for(reverse_iterator i = begin; i != end; ++i){
+					std::swap(*i, *std::next(i));
+				}
+
+				return iterator{const_cast<T*>(&*pos)};
+			};
+
+
+			constexpr auto insert(const_iterator pos, T&& value) noexcept -> iterator {
+				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
+
+				this->back() = std::move(value);
+
+				this->current_size += 1;
+
+				const auto begin = this->rbegin();
+				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
+
+
+				for(reverse_iterator i = begin; i != end; ++i){
+					std::swap(*i, *std::next(i));
+				}
+
+				return iterator{const_cast<T*>(&*pos)};
+			};
+
+
+			// not implemented yet: constexpr auto insert(const_iterator pos, size_type count, const T& value) noexcept -> iterator
+			// not implemented yet: template<class InputIt> constexpr auto insert(const_iterator pos, InputIt first, InputIt last) noexcept -> iterator
+			// not implemented yet: constexpr auto insert(const_iterator pos, std::initializer_list<T> ilist) noexcept -> void;
+
+
 			// not implemented yet: insert_range
-			// not implemented yet: emplace
-			// not implemented yet: erase
+
+
+			///////////////////////////////////
+			// emplace
+
+			template<class... Args>
+			constexpr auto emplace(const_iterator pos, Args&&... args) noexcept -> iterator {
+				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
+
+				std::construct_at(&*this->end(), std::forward<Args>(args)...);
+
+				this->current_size += 1;
+
+				const auto begin = this->rbegin();
+				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
+
+
+				for(reverse_iterator i = begin; i != end; ++i){
+					std::swap(*i, *std::next(i));
+				}
+
+				return iterator{const_cast<T*>(&*pos)};
+			};
+
+
+			///////////////////////////////////
+			// erase
+
+			constexpr auto erase(const_iterator pos) noexcept -> iterator {
+				std::destroy_at(&*pos);
+
+				iterator output = [&](){
+					if(pos == this->end()){
+						return --this->end();
+					}else{
+						return iterator{const_cast<T*>(&*pos)};
+					}
+				}();
+
+				for(const_iterator i = output; i != this->end(); ++i){
+					*std::prev(i) = std::move(*i);
+				}
+
+				return output;
+			};
+
+			// not implemented yet: constexpr auto erase(const_iterator first, const_iterator last) noexcept -> iterator
 
 
 			///////////////////////////////////
 			// push_back
 
 			constexpr auto push_back(const T& value) noexcept -> void {
-				EVO_DEBUG_ASSERT(this->_size < CAPACITY);
+				EVO_DEBUG_ASSERT(this->size() < CAPACITY);
 
-				this->data_block[this->_size] = value;
-				this->_size += 1;
+				this->data_block[this->size()] = value;
+				this->current_size += 1;
 			};
 
 			constexpr auto push_back(T&& value) noexcept -> void {
-				EVO_DEBUG_ASSERT(this->_size < CAPACITY);
+				EVO_DEBUG_ASSERT(this->size() < CAPACITY);
 
-				this->data_block[this->_size] = std::move(value);
-				this->_size += 1;
+				this->data_block[this->size()] = std::move(value);
+				this->current_size += 1;
 			};
+
+
+			///////////////////////////////////
+			// emplace_back
 
 			template<class... Args>
 			constexpr auto emplace_back(Args&&... args) noexcept -> T& {
-				EVO_DEBUG_ASSERT(this->_size < CAPACITY);
+				EVO_DEBUG_ASSERT(this->size() < CAPACITY);
 
-				T* new_object = &this->data_block[this->_size];
-				// new_object = new(new_object) T(std::forward<Args>(args)...);
-				std::construct_at(new_object, std::forward<Args>(args)...);
-				this->_size += 1;
-				return *new_object;
+				T& new_object = this->data_block[this->size()];
+				std::construct_at(*new_object, std::forward<Args>(args)...);
+
+				this->current_size += 1;
+				return new_object;
 			};
 
-			// not implemented yet: append
+
 			// not implemented yet: append_range
 
-			constexpr auto pop_back() noexcept -> T& {
-				EVO_DEBUG_ASSERT(this->_size > 0);
+			///////////////////////////////////
+			// pop_back
 
-				this->_size -= 1;
-				return std::move(this->data_block[this->_size]);
+			constexpr auto pop_back() noexcept -> T& {
+				EVO_DEBUG_ASSERT(this->size() > 0);
+
+				this->current_size -= 1;
+				return std::move(this->data_block[this->size()]);
 			};
 
+
+			///////////////////////////////////
+			// resize
+
+			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
 			constexpr auto resize(size_type new_size) noexcept -> void {
+				this->resize(size_t(new_size));
+			};
+
+			constexpr auto resize(size_t new_size) noexcept -> void {
 				EVO_DEBUG_ASSERT(new_size < CAPACITY);
 
-				if(this->_size > new_size){
-					for(ui32 i = new_size; i < this->_size; i++){
-						// this->data_block.~T();
+				if(new_size < this->size()){
+					for(size_type i = new_size; i < this->size(); i++){
 						std::destroy_at(*this->data_block[i]);
 					}
 				}else{
-					for(ui32 i = new_size; i < this->_size; i++){
+					for(size_type i = new_size; i < this->size(); i++){
 						std::construct_at(*this->data_block[i]);
 					}
 				}
 
-				this->_size = new_size;
+				this->current_size = new_size;
 			};
+
 
 			// not implemented yet: swap
 
 	
 		private:
-			std::array<T, CAPACITY> data_block{};
-			size_type _size = 0;
+			T data_block[CAPACITY];
+			size_type current_size = 0;
 			
 	};
+
+
+
+
 
 };
 
