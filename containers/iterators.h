@@ -208,124 +208,129 @@ namespace evo{
 ///////////////////////////////////
 // iterator
 
-template<typename T>
-constexpr auto std::advance(evo::Iterator<T>& it, std::ptrdiff_t n) noexcept -> void {
-	while(n > 0){
-		++it;
-		--n; 
-	};
+namespace std{
+    
 
-	while(n < 0){
-		--it;
-		++n; 
-	};
+
+    template<typename T>
+    constexpr auto advance(evo::Iterator<T>& it, std::ptrdiff_t n) noexcept -> void {
+    	while(n > 0){
+    		++it;
+    		--n; 
+    	};
+
+    	while(n < 0){
+    		--it;
+    		++n; 
+    	};
+    };
+
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto next(evo::Iterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::Iterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto prev(evo::Iterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::Iterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+
+
+
+    ///////////////////////////////////
+    // const iterator
+
+    template<typename T>
+    constexpr auto advance(evo::ConstIterator<T>& it, std::ptrdiff_t n) noexcept -> void {
+    	while(n > 0){
+    		++it;
+    		--n; 
+    	};
+
+    	while(n < 0){
+    		--it;
+    		++n; 
+    	};
+    };
+
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto next(evo::ConstIterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::ConstIterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto prev(evo::ConstIterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::ConstIterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+
+
+    ///////////////////////////////////
+    // reverse iterator
+
+    template<typename T>
+    constexpr auto advance(evo::ReverseIterator<T>& it, std::ptrdiff_t n) noexcept -> void {
+    	while(n > 0){
+    		++it;
+    		--n; 
+    	};
+
+    	while(n < 0){
+    		--it;
+    		++n; 
+    	};
+    };
+
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto next(evo::ReverseIterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::ReverseIterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto prev(evo::ReverseIterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::ReverseIterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+
+
+    ///////////////////////////////////
+    // const reverse iterator
+
+    template<typename T>
+    constexpr auto advance(evo::ConstReverseIterator<T>& it, std::ptrdiff_t n) noexcept -> void {
+    	while(n > 0){
+    		++it;
+    		--n; 
+    	};
+
+    	while(n < 0){
+    		--it;
+    		++n; 
+    	};
+    };
+
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto next(evo::ConstReverseIterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::ConstReverseIterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+    template<typename T>
+    EVO_NODISCARD constexpr auto prev(evo::ConstReverseIterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::ConstReverseIterator<T> {
+    	std::advance(it, n);
+    	return it;
+    };
+
+
 };
-
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::next(evo::Iterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::Iterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::prev(evo::Iterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::Iterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-
-
-
-///////////////////////////////////
-// const iterator
-
-template<typename T>
-constexpr auto std::advance(evo::ConstIterator<T>& it, std::ptrdiff_t n) noexcept -> void {
-	while(n > 0){
-		++it;
-		--n; 
-	};
-
-	while(n < 0){
-		--it;
-		++n; 
-	};
-};
-
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::next(evo::ConstIterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::ConstIterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::prev(evo::ConstIterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::ConstIterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-
-
-///////////////////////////////////
-// reverse iterator
-
-template<typename T>
-constexpr auto std::advance(evo::ReverseIterator<T>& it, std::ptrdiff_t n) noexcept -> void {
-	while(n > 0){
-		++it;
-		--n; 
-	};
-
-	while(n < 0){
-		--it;
-		++n; 
-	};
-};
-
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::next(evo::ReverseIterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::ReverseIterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::prev(evo::ReverseIterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::ReverseIterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-
-
-///////////////////////////////////
-// const reverse iterator
-
-template<typename T>
-constexpr auto std::advance(evo::ConstReverseIterator<T>& it, std::ptrdiff_t n) noexcept -> void {
-	while(n > 0){
-		++it;
-		--n; 
-	};
-
-	while(n < 0){
-		--it;
-		++n; 
-	};
-};
-
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::next(evo::ConstReverseIterator<T> it, std::ptrdiff_t n = 1) noexcept -> evo::ConstReverseIterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-template<typename T>
-EVO_NODISCARD constexpr auto std::prev(evo::ConstReverseIterator<T> it, std::ptrdiff_t n = -1) noexcept -> evo::ConstReverseIterator<T> {
-	std::advance(it, n);
-	return it;
-};
-
-

@@ -59,7 +59,7 @@ namespace evo{
 	// asserts
 
 
-	inline auto assert(bool conditional) noexcept -> void {
+	inline auto Assert(bool conditional) noexcept -> void {
 		if(conditional == false){
 			breakpoint();
 		}
@@ -67,9 +67,9 @@ namespace evo{
 
 
 
-	inline auto debugAssert(bool conditional) noexcept -> void {
-		#if defined(PH_CONFIG_DEBUG)
-			evo::assert(conditional);
+	inline auto debugAssert([[maybe_unused]] bool conditional) noexcept -> void {
+		#if defined(EVO_CONFIG_DEBUG)
+			evo::Assert(conditional);
 		#endif
 	};
 

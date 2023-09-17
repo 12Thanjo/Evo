@@ -1,5 +1,9 @@
 # Evo Change Log
 
+### v1.0.3
+- fixed `evo::debugAssert(bool)`
+- renamed `evo::assert` to `evo::Assert` to avoid clashing with the c `assert` macro
+- fixed specializations of `std::advance`, `std::next`, and `std::prev` to work on MSVC
 
 ### v1.0.2
 - Added missing headers
