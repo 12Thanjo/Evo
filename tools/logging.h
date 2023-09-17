@@ -76,7 +76,7 @@ namespace evo{
 
 
 
-	inline auto debugAssert(bool conditional, CStrProxy message) noexcept -> void {
+	inline auto debugAssert([[maybe_unused]] bool conditional, [[maybe_unused]] CStrProxy message) noexcept -> void {
 		#if defined(PH_CONFIG_DEBUG)
 			evo::Assert(conditional, message);
 		#endif

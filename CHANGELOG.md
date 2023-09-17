@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.4
+- added `[[maybe_unused]]` to `evo::debugAssert(bool, evo::CStrProxy)`
+
 ### v1.0.3
 - fixed `evo::debugAssert(bool)`
 - renamed `evo::assert` to `evo::Assert` to avoid clashing with the c `assert` macro
