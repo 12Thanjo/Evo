@@ -1,5 +1,10 @@
 # Evo Change Log
 
+
+### v1.0.2
+- Added missing headers
+- Fixed ptr dereferencing in `StaticVector::resize(size_t)`
+
 ### v1.0.1
 - Changed i32 / ui32 from `int` to `long` (for better compatability)
 

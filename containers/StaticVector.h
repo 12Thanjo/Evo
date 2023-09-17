@@ -399,11 +399,11 @@ namespace evo{
 
 				if(new_size < this->size()){
 					for(size_type i = new_size; i < this->size(); i++){
-						std::destroy_at(*this->data_block[i]);
+						std::destroy_at(&this->data_block[i]);
 					}
 				}else{
 					for(size_type i = new_size; i < this->size(); i++){
-						std::construct_at(*this->data_block[i]);
+						std::construct_at(&this->data_block[i]);
 					}
 				}
 
