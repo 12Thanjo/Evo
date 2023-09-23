@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.5
+- added character intrinsics
+
 ### v1.0.4
 - added `[[maybe_unused]]` to `evo::debugAssert(bool, evo::CStrProxy)`
 
