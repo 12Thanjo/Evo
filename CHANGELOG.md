@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.6
+- fixed character intrinsics `evo::isWhitespace(char)` returning void instead of bool
+
 ### v1.0.5
 - added character intrinsics
 

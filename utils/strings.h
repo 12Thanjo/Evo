@@ -112,7 +112,7 @@ namespace evo{
 	};
 
 
-	EVO_NODISCARD constexpr auto isWhitespace(char character) noexcept -> void {
+	EVO_NODISCARD constexpr auto isWhitespace(char character) noexcept -> bool {
 		switch(character){
 			case ' ':
 			case '\n':
