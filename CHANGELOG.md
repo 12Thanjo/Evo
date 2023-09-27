@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.7
+- Added `evo::unreachable()`
+
 ### v1.0.6
 - fixed character intrinsics `evo::isWhitespace(char)` returning void instead of bool
 

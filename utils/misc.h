@@ -21,5 +21,15 @@ namespace evo{
 		vec.shrink_to_fit();
 	};
 
+
+	[[noreturn]]
+	inline auto unreachable() noexcept -> void {
+		#if defined(EVO_COMPILER_MSVC)
+			__assume(false);
+		#else
+			__builtin_unreachable();
+		#endif
+	};
+
 	
 };

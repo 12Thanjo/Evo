@@ -124,6 +124,12 @@ auto main() noexcept -> int {
 	// tests::TestingType meow{};
 	// meow = std::move(bar);
 
+
+	if(false){
+		evo::unreachable();
+	}
+
+
 	evo::log('\n');
 
 	if(num_failed == 0){
