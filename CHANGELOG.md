@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.8
+- Made `evo::unreachable()` constexpr
+
 ### v1.0.7
 - Added `evo::unreachable()`
 
