@@ -125,8 +125,8 @@ namespace evo{
 			auto output = std::string{};
 			output.resize(size);
 
-			auto bytes_read = std::fread(output.data(), 1, size, this->handle);
-			if(bytes_read != size){
+			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
+			if(bytes_read == 0){
 				return std::nullopt;
 			}
 
@@ -139,8 +139,8 @@ namespace evo{
 			auto output = std::string{};
 			output.resize(data_size);
 
-			auto bytes_read = fread(output.data(), 1, data_size, this->handle);
-			if(bytes_read != data_size){
+			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
+			if(bytes_read == 0){
 				return std::nullopt;
 			}
 
@@ -151,7 +151,7 @@ namespace evo{
 		auto File::write(const std::string& data) noexcept -> bool {
 			EVO_DEBUG_ASSERT(this->valid);
 
-			auto bytes_written = std::fwrite(data.data(), 1, data.size(), this->handle);
+			auto bytes_written = std::fwrite(data.data(), sizeof(evo::byte), data.size(), this->handle);
 			if(bytes_written != data.size()){
 				return false;
 			}
@@ -220,8 +220,8 @@ namespace evo{
 			auto output = std::vector<byte>{};
 			output.resize(size);
 
-			auto bytes_read = std::fread(output.data(), 1, size, this->handle);
-			if(bytes_read != size){
+			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
+			if(bytes_read == 0){
 				return std::nullopt;
 			}
 
@@ -234,8 +234,8 @@ namespace evo{
 			auto output = std::vector<byte>{};
 			output.resize(data_size);
 
-			auto bytes_read = fread(output.data(), 1, data_size, this->handle);
-			if(bytes_read != data_size){
+			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
+			if(bytes_read == 0){
 				return std::nullopt;
 			}
 
@@ -246,7 +246,7 @@ namespace evo{
 		auto BinaryFile::write(const std::vector<byte>& data) noexcept -> bool {
 			EVO_DEBUG_ASSERT(this->valid);
 
-			auto bytes_written = std::fwrite(data.data(), 1, data.size(), this->handle);
+			auto bytes_written = std::fwrite(data.data(), sizeof(evo::byte), data.size(), this->handle);
 			if(bytes_written != data.size()){
 				return false;
 			}

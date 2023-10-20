@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.9
+- fixed bug where reading large files failed
+
 ### v1.0.8
 - Made `evo::unreachable()` constexpr
 
