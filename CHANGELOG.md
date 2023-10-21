@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.11
+- Fixed printing to console of longer strings on Windows (only printed out max of 1024 characters)
+
 ### v1.0.10
 - fixed the strings from read files being larger than the actual data
 

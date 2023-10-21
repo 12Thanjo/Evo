@@ -32,7 +32,7 @@ namespace evo{
 
 		auto log(CStrProxy message) noexcept -> void {
 			OutputDebugStringA(message.data());
-			WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message.data(), static_cast<DWORD>(stringSize(message.data(), 1024)), nullptr, nullptr);
+			WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message.data(), static_cast<DWORD>(stringSize(message.data(), UINT_MAX)), nullptr, nullptr);
 		};
 
 
