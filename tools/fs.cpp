@@ -120,15 +120,17 @@ namespace evo{
 		auto File::read() const noexcept -> std::optional<std::string> {
 			EVO_DEBUG_ASSERT(this->valid);
 
-			auto size = this->size();
+			size_t size = this->size();
 
 			auto output = std::string{};
 			output.resize(size);
 
-			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
+			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
 			if(bytes_read == 0){
 				return std::nullopt;
 			}
+
+			output.resize(bytes_read);
 
 			return output;
 		};
@@ -139,10 +141,12 @@ namespace evo{
 			auto output = std::string{};
 			output.resize(data_size);
 
-			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
+			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
 			if(bytes_read == 0){
 				return std::nullopt;
 			}
+
+			output.resize(bytes_read);
 
 			return output;
 		};
@@ -220,10 +224,13 @@ namespace evo{
 			auto output = std::vector<byte>{};
 			output.resize(size);
 
-			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
+			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
 			if(bytes_read == 0){
 				return std::nullopt;
 			}
+
+			output.resize(bytes_read);
+
 
 			return output;
 		};
@@ -234,10 +241,12 @@ namespace evo{
 			auto output = std::vector<byte>{};
 			output.resize(data_size);
 
-			auto bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
+			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
 			if(bytes_read == 0){
 				return std::nullopt;
 			}
+
+			output.resize(bytes_read);
 
 			return output;
 		};

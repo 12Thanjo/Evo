@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.10
+- fixed the strings from read files being larger than the actual data
+
 ### v1.0.9
 - fixed bug where reading large files failed
 
