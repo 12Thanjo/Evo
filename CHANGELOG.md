@@ -1,5 +1,9 @@
 # Evo Change Log
 
+### v1.0.12
+- Fixed finding location of defines.h in some compilers
+- Added include for cmath
+
 ### v1.0.11
 - Fixed printing to console of longer strings on Windows (only printed out max of 1024 characters)
 

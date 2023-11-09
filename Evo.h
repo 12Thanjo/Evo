@@ -12,6 +12,7 @@
 #include <optional>
 #include <format>
 #include <utility>
+#include <cmath>
 
 
 #include "./defines.h"
