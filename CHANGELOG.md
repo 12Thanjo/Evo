@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.13
+- Added LICENSE
+
 ### v1.0.12
 - Fixed finding location of defines.h in some compilers
 - Added include for cmath
