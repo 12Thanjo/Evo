@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.14
+- Added `printCharName(char)`
+
 ### v1.0.13
 - Added LICENSE
 
