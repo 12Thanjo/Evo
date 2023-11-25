@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.15
+- fixed `debugAssert(bool, CStrProxy)`
+
 ### v1.0.14
 - Added `printCharName(char)`
 
