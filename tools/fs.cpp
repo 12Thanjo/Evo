@@ -125,8 +125,8 @@ namespace evo{
 			auto output = std::string{};
 			output.resize(size);
 
-			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
-			if(bytes_read == 0){
+			size_t bytes_read = std::fread(output.data(), sizeof(char), size, this->handle);
+			if(bytes_read == 0 && std::ferror(this->handle) != 0){
 				return std::nullopt;
 			}
 
@@ -141,8 +141,8 @@ namespace evo{
 			auto output = std::string{};
 			output.resize(data_size);
 
-			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
-			if(bytes_read == 0){
+			size_t bytes_read = std::fread(output.data(), sizeof(char), data_size, this->handle);
+			if(bytes_read == 0 && std::ferror(this->handle) != 0){
 				return std::nullopt;
 			}
 
@@ -155,7 +155,7 @@ namespace evo{
 		auto File::write(const std::string& data) noexcept -> bool {
 			EVO_DEBUG_ASSERT(this->valid);
 
-			auto bytes_written = std::fwrite(data.data(), sizeof(evo::byte), data.size(), this->handle);
+			auto bytes_written = std::fwrite(data.data(), sizeof(char), data.size(), this->handle);
 			if(bytes_written != data.size()){
 				return false;
 			}
@@ -225,7 +225,7 @@ namespace evo{
 			output.resize(size);
 
 			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
-			if(bytes_read == 0){
+			if(bytes_read == 0 && std::ferror(this->handle) != 0){
 				return std::nullopt;
 			}
 
@@ -242,7 +242,7 @@ namespace evo{
 			output.resize(data_size);
 
 			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
-			if(bytes_read == 0){
+			if(bytes_read == 0 && std::ferror(this->handle) != 0){
 				return std::nullopt;
 			}
 

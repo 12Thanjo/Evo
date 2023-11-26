@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.16
+- fixed `fs::File::read()` (and similar functions) returning std::nullopt when a file was empty
+
 ### v1.0.15
 - fixed `debugAssert(bool, CStrProxy)`
 
