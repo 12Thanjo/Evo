@@ -17,7 +17,7 @@ namespace evo{
 		public:
 			using value_type             = T;
 			using size_type              = CapacityType<CAPACITY>::type;
-			using difference_type        = std::ptrdiff_t; // not 100% sure this is correct
+			using difference_type        = std::ptrdiff_t;
 			using reference              = T&;
 			using const_reference        = const T&;
 			using pointer                = T*;

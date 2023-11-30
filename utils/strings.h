@@ -107,7 +107,7 @@ namespace evo{
 	};
 
 
-	EVO_NODISCARD constexpr auto isAlphaNumberic(char character) noexcept -> bool {
+	EVO_NODISCARD constexpr auto isAlphaNumeric(char character) noexcept -> bool {
 		return isLetter(character) || isNumber(character);
 	};
 
