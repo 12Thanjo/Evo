@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.18
+- Added 'isHexNumber(char)'
+
 ### v1.0.17
 - fixed name of `isAlphaNumeric()`
 
