@@ -1,5 +1,12 @@
 # Evo Change Log
 
+### v1.0.20
+- updated numeric types
+	- added `f128`
+	- added some of the upcomming float types (`float32_t`, `float64_t`, `float128_t`)
+	- `EVO_GLOBAL_NUMERIC_TYPES` no longer removes the nuemric types from the `evo` namespace
+	- Fixed the error messages in the static asserts to make sure the number types are the correct size
+
 ### v1.0.19
 - Added 'isOctalNumber(char)'
 
