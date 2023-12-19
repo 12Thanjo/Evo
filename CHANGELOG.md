@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.19
+- Added 'isOctalNumber(char)'
+
 ### v1.0.18
 - Added 'isHexNumber(char)'
 
