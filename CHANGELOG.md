@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.0.21
+- added `boolStr(bool) -> const char*` to utils/strings.h
+
 ### v1.0.20
 - updated numeric types
 	- added `f128`

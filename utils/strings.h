@@ -444,5 +444,15 @@ namespace evo{
 
 
 
+	EVO_NODISCARD constexpr auto boolStr(bool boolean) noexcept -> const char* {
+		if(boolean){
+			return "true";
+		}else{
+			return "false";
+		}
+	};
+
+
+
 	
 };
