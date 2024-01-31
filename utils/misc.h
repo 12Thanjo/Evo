@@ -31,5 +31,13 @@ namespace evo{
 		#endif
 	};
 
+
+
+	// version of C++23's std::to_underlying
+	template<class Enum>
+	constexpr auto to_underlying(Enum e) noexcept -> std::underlying_type_t<Enum> {
+		return static_cast<std::underlying_type_t<Enum>>(e);
+	};
+
 	
 };
