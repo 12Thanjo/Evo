@@ -1,5 +1,8 @@
 # Evo Change Log
 
+### v1.1.0
+- Added Expected and Unexpected (versions of C++23's `expected` and `unexpected`)
+
 ### v1.0.22
 - Added a version of C++23's `std::to_underlying`
 
