@@ -6,6 +6,56 @@
 
 namespace evo{
 
+
+
+    template<typename T>
+    class ConstIterator{
+        public:
+            using difference_type   = std::ptrdiff_t;
+            using value_type        = T;
+            using pointer           = const T*;
+            using reference         = const T&;
+
+
+            ConstIterator(const T* ptr) noexcept : iter(ptr) {};
+            ~ConstIterator() = default;
+
+
+            constexpr auto operator++() noexcept -> ConstIterator<T>& {
+                this->iter++;
+                return *this;
+            };
+
+            constexpr auto operator++(int) noexcept -> ConstIterator<T> {
+                ConstIterator<T> iterator = *this;
+                ++(*this);
+                return iterator;
+            };
+
+
+            constexpr auto operator--() noexcept -> ConstIterator<T>& {
+                this->iter--;
+                return *this;
+            };
+
+            constexpr auto operator--(int) noexcept -> ConstIterator<T> {
+                ConstIterator<T> iterator = *this;
+                --(*this);
+                return iterator;
+            };
+
+
+            EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
+            EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
+            EVO_NODISCARD constexpr auto operator==(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
+            EVO_NODISCARD constexpr auto operator!=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+    
+        private:
+            const T* iter;
+    };
+
+
+
     template<typename T>
     class Iterator{
     	public:
@@ -15,7 +65,6 @@ namespace evo{
     		using reference         = T&;
 
 			Iterator(T* ptr) noexcept : iter(ptr) {};
-			// Iterator(const T* ptr) noexcept : iter(const_cast<T*>(ptr)) {};
     		~Iterator() = default;
 
 
@@ -24,7 +73,7 @@ namespace evo{
     			return *this;
     		};
 
-    		constexpr auto operator++(int) const noexcept -> Iterator<T> {
+    		constexpr auto operator++(int) noexcept -> Iterator<T> {
     			Iterator<T> iterator = *this;
     			++(*this);
     			return iterator;
@@ -36,7 +85,7 @@ namespace evo{
     			return *this;
     		};
 
-    		constexpr auto operator--(int) const noexcept -> Iterator<T> {
+    		constexpr auto operator--(int) noexcept -> Iterator<T> {
     			Iterator<T> iterator = *this;
     			--(*this);
     			return iterator;
@@ -47,6 +96,11 @@ namespace evo{
     		EVO_NODISCARD constexpr auto operator->() const noexcept -> T* { return this->iter; };
     		EVO_NODISCARD constexpr auto operator==(const Iterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
     		EVO_NODISCARD constexpr auto operator!=(const Iterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+
+
+            EVO_NODISCARD operator ConstIterator<T>() noexcept {
+                return ConstIterator<T>(static_cast<const T*>(this->iter));
+            };
     
     	private:
     		T* iter;
@@ -54,52 +108,55 @@ namespace evo{
 
 
 
+
+
+
+
     template<typename T>
-    class ConstIterator{
-    	public:
-    		using difference_type   = std::ptrdiff_t;
-    		using value_type        = T;
-    		using pointer           = const T*;
-    		using reference         = const T&;
+    class ConstReverseIterator{
+        public:
+            using difference_type   = std::ptrdiff_t;
+            using value_type        = T;
+            using pointer           = const T*;
+            using reference         = const T&;
 
 
-			ConstIterator(const T* ptr) noexcept : iter(ptr) {};
-    		~ConstIterator() = default;
+            ConstReverseIterator(const T* ptr) noexcept : iter(ptr) {};
+            ~ConstReverseIterator() = default;
 
 
-    		constexpr auto operator++() noexcept -> ConstIterator<T>& {
-    			this->iter++;
-    			return *this;
-    		};
+            constexpr auto operator++() noexcept -> ConstReverseIterator<T>& {
+                this->iter--;
+                return *this;
+            };
 
-    		constexpr auto operator++(int) const noexcept -> ConstIterator<T> {
-    			ConstIterator<T> iterator = *this;
-    			++(*this);
-    			return iterator;
-    		};
-
-
-    		constexpr auto operator--() noexcept -> ConstIterator<T>& {
-    			this->iter--;
-    			return *this;
-    		};
-
-    		constexpr auto operator--(int) const noexcept -> ConstIterator<T> {
-    			ConstIterator<T> iterator = *this;
-    			--(*this);
-    			return iterator;
-    		};
+            constexpr auto operator++(int) noexcept -> ConstReverseIterator<T> {
+                ConstReverseIterator<T> iterator = *this;
+                --(*this);
+                return iterator;
+            };
 
 
-    		EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
-    		EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
-    		EVO_NODISCARD constexpr auto operator==(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
-    		EVO_NODISCARD constexpr auto operator!=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+            constexpr auto operator--() noexcept -> ConstReverseIterator<T>& {
+                this->iter++;
+                return *this;
+            };
+
+            constexpr auto operator--(int) noexcept -> ConstReverseIterator<T> {
+                ConstReverseIterator<T> iterator = *this;
+                ++(*this);
+                return iterator;
+            };
+
+
+            EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
+            EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
+            EVO_NODISCARD constexpr auto operator==(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
+            EVO_NODISCARD constexpr auto operator!=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
     
-    	private:
-    		const T* iter;
+        private:
+            const T* iter;
     };
-
 
 
 
@@ -112,7 +169,6 @@ namespace evo{
     		using reference         = T&;
 
 			ReverseIterator(T* ptr) noexcept : iter(ptr) {};
-			// ReverseIterator(const T* ptr) noexcept : iter(const_cast<T*>(ptr)) {};
     		~ReverseIterator() = default;
 
 
@@ -121,7 +177,7 @@ namespace evo{
     			return *this;
     		};
 
-    		constexpr auto operator++(int) const noexcept -> ReverseIterator<T> {
+    		constexpr auto operator++(int) noexcept -> ReverseIterator<T> {
     			ReverseIterator<T> iterator = *this;
     			--(*this);
     			return iterator;
@@ -133,7 +189,7 @@ namespace evo{
     			return *this;
     		};
 
-    		constexpr auto operator--(int) const noexcept -> ReverseIterator<T> {
+    		constexpr auto operator--(int) noexcept -> ReverseIterator<T> {
     			ReverseIterator<T> iterator = *this;
     			++(*this);
     			return iterator;
@@ -144,57 +200,14 @@ namespace evo{
     		EVO_NODISCARD constexpr auto operator->() const noexcept -> T* { return this->iter; };
     		EVO_NODISCARD constexpr auto operator==(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
     		EVO_NODISCARD constexpr auto operator!=(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+
+
+            EVO_NODISCARD operator ConstReverseIterator<T>() noexcept {
+                return ConstReverseIterator<T>(static_cast<const T*>(this->iter));
+            };
     
     	private:
     		T* iter;
-    };
-
-
-
-    template<typename T>
-    class ConstReverseIterator{
-    	public:
-    		using difference_type   = std::ptrdiff_t;
-    		using value_type        = T;
-    		using pointer           = const T*;
-    		using reference         = const T&;
-
-
-			ConstReverseIterator(const T* ptr) noexcept : iter(ptr) {};
-    		~ConstReverseIterator() = default;
-
-
-    		constexpr auto operator++() noexcept -> ConstReverseIterator<T>& {
-    			this->iter--;
-    			return *this;
-    		};
-
-    		constexpr auto operator++(int) const noexcept -> ConstReverseIterator<T> {
-    			ConstReverseIterator<T> iterator = *this;
-    			--(*this);
-    			return iterator;
-    		};
-
-
-    		constexpr auto operator--() noexcept -> ConstReverseIterator<T>& {
-    			this->iter++;
-    			return *this;
-    		};
-
-    		constexpr auto operator--(int) const noexcept -> ConstReverseIterator<T> {
-    			ConstReverseIterator<T> iterator = *this;
-    			++(*this);
-    			return iterator;
-    		};
-
-
-    		EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
-    		EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
-    		EVO_NODISCARD constexpr auto operator==(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
-    		EVO_NODISCARD constexpr auto operator!=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
-    
-    	private:
-    		const T* iter;
     };
 	
 };

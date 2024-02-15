@@ -2,6 +2,17 @@
 #include "../Evo.h"
 
 
+//////////////////////////////////////////////////////////////////////
+// 																	//
+//  NOTE: this file - while it does do some testing, does not fully //
+//		  nor rigorously test the evo library						//
+// 																	//
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+
 namespace tests{
 
 	class TestingType{
@@ -64,23 +75,146 @@ namespace tests{
 		auto static_vector = evo::StaticVector<int, 6>{};
 
 		static_vector.insert(static_vector.cbegin(), 2);
-		static_vector.insert(std::next(static_vector.cbegin()), 3);
+		static_vector.insert(std::next(static_vector.begin()), 3);
 		static_vector.emplace(static_vector.cbegin(), 1);
 
+
 		if(static_vector[0] != 1 || static_vector.at(1) != 2 || static_vector[2] != 3){
-			evo::logError("evo::StaticVector::insert test failed");
+			evo::logError("evo::StaticVector::insert / evo::StaticVector::emplace test failed");
 			return false;
 		}
+
+
+		static_vector = std::initializer_list{0, 1, 2, 3};
+
+		for(size_t i = 0; i < static_vector.size(); i+=1){
+			if(static_vector[i] != int(i)){
+				evo::logError("evo::StaticVector::operator=(std::initializer_list) test failed");
+				return false;
+			}
+		}
+
 
 		evo::logInfo("StaticVector tests passed");
 		return true;
 	};
 
 
+
+
+	EVO_NODISCARD auto c_str_proxy_test() noexcept -> bool {		
+		auto str = std::string{"hello"};
+
+		auto str_proxy = evo::CStrProxy(str);
+
+		if(str_proxy.data() != str.data()){
+			evo::logError("evo::CStrProxy test failed");
+			return false;
+		}
+
+
+		return true;
+	};
+
+
+
+
+	EVO_NODISCARD auto bimap_test() noexcept -> bool {
+		auto bimap = evo::Bimap<std::string, int>();
+
+		auto data_vec = std::vector<std::pair<std::string, int>>();
+
+		constexpr int num_elems = 50'000;
+
+		// check inserting
+		for(int i = 0; i < num_elems; i+=1){
+			const std::string str = std::format("{:x}", i);
+
+			data_vec.emplace_back(str, i);
+			bimap.emplace(str, i);
+		}
+
+		// check iteration
+		{
+			int total = 0;
+			for(auto& pair : bimap){
+				total += pair.second;
+			}
+
+			for(int i = 0; i < num_elems; i+=1){
+				total -= i;
+			}
+
+			if(total != 0){
+				return false;
+			}
+		}
+
+		// find all values
+		for(const std::pair<std::string, int>& pair : data_vec){
+			if(const auto& get = bimap.at_left(pair.first); get.first != pair.first || get.second != pair.second){ return false; }
+			if(const auto& get = bimap.at_right(pair.second); get.first != pair.first || get.second != pair.second){ return false; }
+
+			if(bimap.get_left(pair.second) != pair.first){ return false; }
+			if(bimap.get_right(pair.first) != pair.second){ return false; }
+
+
+			if(bimap.find_left(pair.first) == bimap.end()){ return false; }
+			if(bimap.find_right(pair.second) == bimap.end()){ return false; }
+
+			if(bimap.contains_left(pair.first) == false){ return false; }
+			if(bimap.contains_right(pair.second) == false){ return false; }			
+		}
+
+		// doesn't find incorrect values
+		if(bimap.find_left("asdf") != bimap.end()){ return false; }
+		if(bimap.find_right(num_elems + 10) != bimap.end()){ return false; }
+
+		if(bimap.contains_left("asdf")){ return false; }
+		if(bimap.contains_right(num_elems + 10)){ return false; }
+
+
+		// erase values
+		bool should_erase = false;
+		auto iter = data_vec.begin();
+
+		while(iter != data_vec.end()){
+			if(should_erase){
+				bimap.erase_left(iter->first);
+				data_vec.erase(iter);
+			}else{
+				iter++;
+			}
+		};
+
+		if(bimap.size() != data_vec.size()){ return false; }
+
+		// check what's left
+		{
+			int total = 0;
+			for(auto& pair : bimap){
+				total += pair.second;
+			}
+
+			for(int i = 0; i < num_elems; i+=1){
+				total -= i;
+			}
+
+			if(total != 0){
+				return false;
+			}
+		}
+
+
+
+
+		evo::logInfo("Bimap tests passed");
+		return true;
+	};
+
+
 	
 };
-
-
 
 
 
@@ -103,6 +237,7 @@ auto main() noexcept -> int {
 	int num_failed = 0;
 
 
+
 	// evo::logTrace("logging test (Trace)");
 	// evo::logDebug("logging test (Debug)");
 	// evo::logInfo("logging test (Info)");
@@ -111,9 +246,11 @@ auto main() noexcept -> int {
 	// evo::logFatal("logging test (Fatal)");
 
 
-	// auto flags         = evo::Flags<FlagsTest>();
+	auto flags         = evo::Flags<FlagsTest>();
 	// auto static_string = evo::StaticString<5>{"hello"};
 	if(tests::static_vector_test() == false){ num_failed += 1; }
+	if(tests::c_str_proxy_test() == false){ num_failed += 1; }
+	if(tests::bimap_test() == false){ num_failed += 1; }
 	// auto static_vector = evo::StaticVector<int, 6>{};
 	// auto array_proxy   = evo::ArrayProxy<int>{static_vector};
 
@@ -123,6 +260,13 @@ auto main() noexcept -> int {
 	// tests::TestingType bar{std::move(foo)};
 	// tests::TestingType meow{};
 	// meow = std::move(bar);
+
+
+	// for(char i = std::numeric_limits<char>::min(); i < std::numeric_limits<char>::max(); i+=1){
+	// 	evo::logInfo(std::format("break; case {}: return \"{}\";", int(i), std::string{i}));
+	// }
+
+
 
 
 	if(false){

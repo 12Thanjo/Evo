@@ -50,9 +50,9 @@ namespace evo{
 			///////////////////////////////////
 			// copy
 
-			EVO_NODISCARD constexpr Expected(const Expected& rhs) = default;
+			EVO_NODISCARD constexpr Expected(const Expected& rhs) noexcept = default;
 
-			EVO_NODISCARD constexpr auto operator=(const Expected& rhs) noexcept -> Expected {
+			constexpr auto operator=(const Expected& rhs) noexcept -> Expected {
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = rhs.expected_val;
@@ -67,7 +67,7 @@ namespace evo{
 			///////////////////////////////////
 			// move
 
-			EVO_NODISCARD constexpr Expected(Expected&& rhs){
+			EVO_NODISCARD constexpr Expected(Expected&& rhs) noexcept {
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = std::move(rhs.expected_val);
@@ -76,7 +76,7 @@ namespace evo{
 				}
 			};
 
-			EVO_NODISCARD constexpr auto operator=(Expected&& rhs) noexcept -> Expected{
+			constexpr auto operator=(Expected&& rhs) noexcept -> Expected {
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = std::move(rhs.expected_val);

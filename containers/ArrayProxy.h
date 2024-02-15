@@ -12,15 +12,15 @@ namespace evo{
 
 
 
-	template<typename T>
-	class ArrayProxyIterator;
+	// template<typename T>
+	// class ArrayProxyIterator;
 
 	template<typename T>
 	class ArrayProxyConstIterator;
 
 
-	template<typename T>
-	class ArrayProxyReverseIterator;
+	// template<typename T>
+	// class ArrayProxyReverseIterator;
 
 	template<typename T>
 	class ArrayProxyConstReverseIterator;
@@ -44,9 +44,9 @@ namespace evo{
 			using const_reference = const T&;
 			using pointer = T*;
 			using const_pointer = const T*;
-			using iterator = ArrayProxyIterator<T>;
+			// using iterator = ArrayProxyIterator<T>;
 			using const_iterator = ArrayProxyConstIterator<T>;
-			using reverse_iterator = ArrayProxyReverseIterator<T>;
+			// using reverse_iterator = ArrayProxyReverseIterator<T>;
 			using const_reverse_iterator = ArrayProxyConstReverseIterator<T>;
 
 			//////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ namespace evo{
 
 
 			template<size_t COUNT>
-			EVO_NODISCARD constexpr ArrayProxy(const evo::StaticVector<T, COUNT> static_vector) noexcept
+			EVO_NODISCARD constexpr ArrayProxy(const evo::StaticVector<T, COUNT>& static_vector) noexcept
 				: count(static_vector.size()), data_ptr(static_vector.data()) {};
 
 			//////////////////////////////////////////////////////////////////////
@@ -88,9 +88,9 @@ namespace evo{
 			#if defined(EVO_CONFIG_DEBUG)
 				// iterators are bounds checked in debug mode
 
-				EVO_NODISCARD constexpr auto begin() noexcept -> iterator {
-					return iterator(this->data_ptr, this);
-				};
+				// EVO_NODISCARD constexpr auto begin() noexcept -> iterator {
+				// 	return iterator(this->data_ptr, this);
+				// };
 
 				EVO_NODISCARD constexpr auto begin() const noexcept -> const_iterator {
 					return const_iterator(this->data_ptr, this);
@@ -102,9 +102,9 @@ namespace evo{
 
 
 
-				EVO_NODISCARD constexpr auto end() noexcept -> iterator {
-					return iterator(&this->data_ptr[this->count], this);
-				};
+				// EVO_NODISCARD constexpr auto end() noexcept -> iterator {
+				// 	return iterator(&this->data_ptr[this->count], this);
+				// };
 
 				EVO_NODISCARD constexpr auto end() const noexcept -> const_iterator {
 					return const_iterator(&this->data_ptr[this->count], this);
@@ -116,9 +116,9 @@ namespace evo{
 
 
 
-				EVO_NODISCARD constexpr auto rbegin() noexcept -> reverse_iterator {
-					return reverse_iterator(&this->data_ptr[this->count], this);
-				};
+				// EVO_NODISCARD constexpr auto rbegin() noexcept -> reverse_iterator {
+				// 	return reverse_iterator(&this->data_ptr[this->count], this);
+				// };
 
 				EVO_NODISCARD constexpr auto rbegin() const noexcept -> const_reverse_iterator {
 					return const_reverse_iterator(&this->data_ptr[this->count], this);
@@ -130,9 +130,9 @@ namespace evo{
 
 
 
-				EVO_NODISCARD constexpr auto rend() noexcept -> reverse_iterator {
-					return reverse_iterator(this->data_ptr, this);
-				};
+				// EVO_NODISCARD constexpr auto rend() noexcept -> reverse_iterator {
+				// 	return reverse_iterator(this->data_ptr, this);
+				// };
 
 				EVO_NODISCARD constexpr auto rend() const noexcept -> const_reverse_iterator {
 					return const_reverse_iterator(this->data_ptr, this);
@@ -145,9 +145,9 @@ namespace evo{
 
 
 			#else
-				EVO_NODISCARD constexpr auto begin() noexcept -> iterator {
-					return iterator(this->data_ptr);
-				};
+				// EVO_NODISCARD constexpr auto begin() noexcept -> iterator {
+				// 	return iterator(this->data_ptr);
+				// };
 
 				EVO_NODISCARD constexpr auto begin() const noexcept -> const_iterator {
 					return const_iterator(this->data_ptr);
@@ -159,9 +159,9 @@ namespace evo{
 
 
 
-				EVO_NODISCARD constexpr auto end() noexcept -> iterator {
-					return iterator(&this->data_ptr[this->count]);
-				};
+				// EVO_NODISCARD constexpr auto end() noexcept -> iterator {
+				// 	return iterator(&this->data_ptr[this->count]);
+				// };
 
 				EVO_NODISCARD constexpr auto end() const noexcept -> const_iterator {
 					return const_iterator(&this->data_ptr[this->count]);
@@ -174,9 +174,9 @@ namespace evo{
 
 
 
-				EVO_NODISCARD constexpr auto rbegin() noexcept -> reverse_iterator {
-					return reverse_iterator(&this->data_ptr[this->count]);
-				};
+				// EVO_NODISCARD constexpr auto rbegin() noexcept -> reverse_iterator {
+				// 	return reverse_iterator(&this->data_ptr[this->count]);
+				// };
 
 				EVO_NODISCARD constexpr auto rbegin() const noexcept -> const_reverse_iterator {
 					return const_reverse_iterator(&this->data_ptr[this->count]);
@@ -188,9 +188,9 @@ namespace evo{
 
 
 
-				EVO_NODISCARD constexpr auto rend() noexcept -> reverse_iterator {
-					return reverse_iterator(this->data_ptr);
-				};
+				// EVO_NODISCARD constexpr auto rend() noexcept -> reverse_iterator {
+				// 	return reverse_iterator(this->data_ptr);
+				// };
 
 				EVO_NODISCARD constexpr auto rend() const noexcept -> const_reverse_iterator {
 					return const_reverse_iterator(this->data_ptr);
@@ -277,79 +277,79 @@ namespace evo{
 	//////////////////////////////////////////////////////////////////////
 	// iterators
 
-	template<typename T>
-	class ArrayProxyIterator{
-		public:
-			#if defined(EVO_CONFIG_DEBUG)
-				ArrayProxyIterator(T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
-				ArrayProxyIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(const_cast<T*>(ptr)), parent(parent_ptr) {};
+	// template<typename T>
+	// class ArrayProxyIterator{
+	// 	public:
+	// 		#if defined(EVO_CONFIG_DEBUG)
+	// 			ArrayProxyIterator(T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
+	// 			ArrayProxyIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(const_cast<T*>(ptr)), parent(parent_ptr) {};
 
-			#else
-				ArrayProxyIterator(T* ptr) noexcept : iter(ptr) {};
-				ArrayProxyIterator(const T* ptr) noexcept : iter(const_cast<T*>(ptr)) {};
+	// 		#else
+	// 			ArrayProxyIterator(T* ptr) noexcept : iter(ptr) {};
+	// 			ArrayProxyIterator(const T* ptr) noexcept : iter(const_cast<T*>(ptr)) {};
 
-			#endif
+	// 		#endif
 
-			~ArrayProxyIterator() = default;
-
-
-			constexpr auto operator++() noexcept -> ArrayProxyIterator<T>& {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
-
-				this->iter++;
-				return *this;
-			};
-
-			constexpr auto operator++(int) const noexcept -> ArrayProxyIterator<T> {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
-
-				ArrayProxyIterator iterator = *this;
-				++(*this);
-				return iterator;
-			};
+	// 		~ArrayProxyIterator() = default;
 
 
-			constexpr auto operator--() noexcept -> ArrayProxyIterator<T>& {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
+	// 		constexpr auto operator++() noexcept -> ArrayProxyIterator<T>& {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
 
-				this->iter--;
-				return *this;
-			};
+	// 			this->iter++;
+	// 			return *this;
+	// 		};
 
-			constexpr auto operator--(int) const noexcept -> ArrayProxyIterator<T> {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
+	// 		constexpr auto operator++(int) const noexcept -> ArrayProxyIterator<T> {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
 
-				ArrayProxyIterator iterator = *this;
-				--(*this);
-				return iterator;
-			};
+	// 			ArrayProxyIterator iterator = *this;
+	// 			++(*this);
+	// 			return iterator;
+	// 		};
+
+
+	// 		constexpr auto operator--() noexcept -> ArrayProxyIterator<T>& {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
+
+	// 			this->iter--;
+	// 			return *this;
+	// 		};
+
+	// 		constexpr auto operator--(int) const noexcept -> ArrayProxyIterator<T> {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
+
+	// 			ArrayProxyIterator iterator = *this;
+	// 			--(*this);
+	// 			return iterator;
+	// 		};
 
 
 
-			EVO_NODISCARD constexpr auto operator*() const noexcept -> T& {
-				return *this->iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator*() const noexcept -> T& {
+	// 			return *this->iter;
+	// 		};
 
-			EVO_NODISCARD constexpr auto operator->() const noexcept -> T* {
-				return this->iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator->() const noexcept -> T* {
+	// 			return this->iter;
+	// 		};
 
-			EVO_NODISCARD constexpr auto operator==(const ArrayProxyIterator<T>& rhs) const noexcept -> bool {
-				return this->iter == rhs.iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator==(const ArrayProxyIterator<T>& rhs) const noexcept -> bool {
+	// 			return this->iter == rhs.iter;
+	// 		};
 
-			EVO_NODISCARD constexpr auto operator!=(const ArrayProxyIterator<T>& rhs) const noexcept -> bool {
-				return this->iter != rhs.iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator!=(const ArrayProxyIterator<T>& rhs) const noexcept -> bool {
+	// 			return this->iter != rhs.iter;
+	// 		};
 
 	
-		private:
-			T* iter;
+	// 	private:
+	// 		T* iter;
 
-			#if defined(EVO_CONFIG_DEBUG)
-				const ArrayProxy<T>* parent;
-			#endif
-	};
+	// 		#if defined(EVO_CONFIG_DEBUG)
+	// 			const ArrayProxy<T>* parent;
+	// 		#endif
+	// };
 
 
 
@@ -431,79 +431,79 @@ namespace evo{
 
 
 
-	template<typename T>
-	class ArrayProxyReverseIterator{
-		public:
-			#if defined(EVO_CONFIG_DEBUG)
-				ArrayProxyReverseIterator(T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
-				ArrayProxyReverseIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(const_cast<T*>(ptr)), parent(parent_ptr) {};
+	// template<typename T>
+	// class ArrayProxyReverseIterator{
+	// 	public:
+	// 		#if defined(EVO_CONFIG_DEBUG)
+	// 			ArrayProxyReverseIterator(T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(ptr), parent(parent_ptr) {};
+	// 			ArrayProxyReverseIterator(const T* ptr, const ArrayProxy<T>* parent_ptr) noexcept : iter(const_cast<T*>(ptr)), parent(parent_ptr) {};
 
-			#else
-				ArrayProxyReverseIterator(T* ptr) noexcept : iter(ptr) {};
-				ArrayProxyReverseIterator(const T* ptr) noexcept : iter(const_cast<T*>(ptr)) {};
+	// 		#else
+	// 			ArrayProxyReverseIterator(T* ptr) noexcept : iter(ptr) {};
+	// 			ArrayProxyReverseIterator(const T* ptr) noexcept : iter(const_cast<T*>(ptr)) {};
 
-			#endif
+	// 		#endif
 
-			~ArrayProxyReverseIterator() = default;
-
-
-			constexpr auto operator++() noexcept -> ArrayProxyReverseIterator<T>& {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
-
-				this->iter--;
-				return *this;
-			};
-
-			constexpr auto operator++(int) const noexcept -> ArrayProxyReverseIterator<T> {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
-
-				ArrayProxyReverseIterator iterator = *this;
-				--(*this);
-				return iterator;
-			};
+	// 		~ArrayProxyReverseIterator() = default;
 
 
-			constexpr auto operator--() noexcept -> ArrayProxyReverseIterator<T>& {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
+	// 		constexpr auto operator++() noexcept -> ArrayProxyReverseIterator<T>& {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
 
-				this->iter++;
-				return *this;
-			};
+	// 			this->iter--;
+	// 			return *this;
+	// 		};
 
-			constexpr auto operator--(int) const noexcept -> ArrayProxyReverseIterator<T> {
-				EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
+	// 		constexpr auto operator++(int) const noexcept -> ArrayProxyReverseIterator<T> {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->front()); // already at beginning
 
-				ArrayProxyReverseIterator iterator = *this;
-				++(*this);
-				return iterator;
-			};
+	// 			ArrayProxyReverseIterator iterator = *this;
+	// 			--(*this);
+	// 			return iterator;
+	// 		};
+
+
+	// 		constexpr auto operator--() noexcept -> ArrayProxyReverseIterator<T>& {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
+
+	// 			this->iter++;
+	// 			return *this;
+	// 		};
+
+	// 		constexpr auto operator--(int) const noexcept -> ArrayProxyReverseIterator<T> {
+	// 			EVO_DEBUG_ASSERT(this->iter < this->parent->back()); // already at end
+
+	// 			ArrayProxyReverseIterator iterator = *this;
+	// 			++(*this);
+	// 			return iterator;
+	// 		};
 
 
 
-			EVO_NODISCARD constexpr auto operator*() const noexcept -> T& {
-				return *this->iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator*() const noexcept -> T& {
+	// 			return *this->iter;
+	// 		};
 
-			EVO_NODISCARD constexpr auto operator->() const noexcept -> T* {
-				return this->iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator->() const noexcept -> T* {
+	// 			return this->iter;
+	// 		};
 
-			EVO_NODISCARD constexpr auto operator==(const ArrayProxyReverseIterator<T>& rhs) const noexcept -> bool {
-				return this->iter == rhs.iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator==(const ArrayProxyReverseIterator<T>& rhs) const noexcept -> bool {
+	// 			return this->iter == rhs.iter;
+	// 		};
 
-			EVO_NODISCARD constexpr auto operator!=(const ArrayProxyReverseIterator<T>& rhs) const noexcept -> bool {
-				return this->iter != rhs.iter;
-			};
+	// 		EVO_NODISCARD constexpr auto operator!=(const ArrayProxyReverseIterator<T>& rhs) const noexcept -> bool {
+	// 			return this->iter != rhs.iter;
+	// 		};
 
 	
-		private:
-			T* iter;
+	// 	private:
+	// 		T* iter;
 
-			#if defined(EVO_CONFIG_DEBUG)
-				const ArrayProxy<T>* parent;
-			#endif
-	};
+	// 		#if defined(EVO_CONFIG_DEBUG)
+	// 			const ArrayProxy<T>* parent;
+	// 		#endif
+	// };
 
 
 

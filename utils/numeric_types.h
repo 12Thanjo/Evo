@@ -1,18 +1,18 @@
 #pragma once
 
-
+#include <stdint.h>
 
 namespace evo{
 
-	using i8 = signed char;
-	using i16 = signed short;
-	using i32 = signed long;
-	using i64 = signed long long;
+	using i8 = int8_t;
+	using i16 = int16_t;
+	using i32 = int32_t;
+	using i64 = int64_t;
 
-	using ui8  = unsigned char;
-	using ui16 = unsigned short;
-	using ui32 = unsigned long;
-	using ui64 = unsigned long long;
+	using ui8  = uint8_t;
+	using ui16 = uint16_t;
+	using ui32 = uint32_t;
+	using ui64 = uint64_t;
 
 
 	using f32 = float;
@@ -20,19 +20,20 @@ namespace evo{
 	using f128 = long double;
 
 
-	static_assert(sizeof(i8) == 1, "Expected i8 (signed char) to be 1 byte - " __FILE__);
-	static_assert(sizeof(i16) == 2, "Expected i16 (signed short) to be 2 bytes - " __FILE__);
-	static_assert(sizeof(i32) == 4, "Expected i32 (signed long) to be 4 bytes - " __FILE__);
-	static_assert(sizeof(i64) == 8, "Expected i64 (signed long long) to be 8 bytes - " __FILE__);
+	static_assert(sizeof(i8) == 1, "Expected i8 to be 1 byte - " __FILE__);
+	static_assert(sizeof(i16) == 2, "Expected i16 to be 2 bytes - " __FILE__);
+	static_assert(sizeof(i32) == 4, "Expected i32 to be 4 bytes - " __FILE__);
+	static_assert(sizeof(i64) == 8, "Expected i64 to be 8 bytes - " __FILE__);
 
-	static_assert(sizeof(ui8) == 1, "Expected ui8 (unsigned char) to be 1 byte - " __FILE__);
-	static_assert(sizeof(ui16) == 2, "Expected ui16 (unsigned short) to be 2 bytes - " __FILE__);
-	static_assert(sizeof(ui32) == 4, "Expected ui32 (unsigned long) to be 4 bytes - " __FILE__);
-	static_assert(sizeof(ui64) == 8, "Expected ui64 (unsigned long long) to be 8 bytes - " __FILE__);
+	static_assert(sizeof(ui8) == 1, "Expected ui8 to be 1 byte - " __FILE__);
+	static_assert(sizeof(ui16) == 2, "Expected ui16 to be 2 bytes - " __FILE__);
+	static_assert(sizeof(ui32) == 4, "Expected ui32 to be 4 bytes - " __FILE__);
+	static_assert(sizeof(ui64) == 8, "Expected ui64 to be 8 bytes - " __FILE__);
 
 
-	static_assert(sizeof(f32) == 4, "Expected f32 (float) to be 4 bytes - " __FILE__);
-	static_assert(sizeof(f64) == 8, "Expected f64 (float) to be 8 bytes - " __FILE__);	
+	static_assert(sizeof(f32) == 4, "Expected f32 to be 4 bytes - " __FILE__);
+	static_assert(sizeof(f64) == 8, "Expected f64 to be 8 bytes - " __FILE__);	
+	static_assert(sizeof(f128) == 16, "Expected f64 to be 16 bytes - " __FILE__);
 
 
 	using byte = ui8;
@@ -64,6 +65,14 @@ namespace evo{
 	using float128_t = evo::f128;
 };
 
-using evo::float32_t;
-using evo::float64_t;
-using evo::float128_t;
+
+#if ((defined(_MSVC_LANG) && _MSVC_LANG >= 202101L) || __cplusplus >= 202101L)
+	using evo::float32_t;
+	using evo::float64_t;
+	using evo::float128_t;
+#else
+	#include <stdfloat>
+#endif
+
+
+

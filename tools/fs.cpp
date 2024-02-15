@@ -32,9 +32,7 @@ namespace evo{
 			#if defined(EVO_CONFIG_DEBUG)
 
 				if(this->valid){
-					styleConsoleWarning();
-					log("Didn't explicitly call evo::fs::File::close() - was done automatically (in debug build)");
-					styleConsoleReset();
+					logWarning("Didn't explicitly call evo::fs::File::close() - was done automatically (only because in debug build)");
 
 					this->close();
 				}
@@ -94,7 +92,7 @@ namespace evo{
 			buffer.resize(32000);
 
 			if(std::fgets(buffer.data(), 32000, this->handle) != 0){
-				ui64 length = ::strlen(buffer.data());
+				size_t length = ::strlen(buffer.data());
 				buffer.resize(length);
 
 				return buffer;
@@ -116,7 +114,7 @@ namespace evo{
 		};
 
 
-
+		// TODO: simplify this by calling `read(this->size)`
 		auto File::read() const noexcept -> std::optional<std::string> {
 			EVO_DEBUG_ASSERT(this->valid);
 
@@ -135,7 +133,7 @@ namespace evo{
 			return output;
 		};
 
-		auto File::read(ui64 data_size) const noexcept -> std::optional<std::string> {
+		auto File::read(size_t data_size) const noexcept -> std::optional<std::string> {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			auto output = std::string{};
@@ -165,11 +163,11 @@ namespace evo{
 		};
 
 
-		auto File::size() const noexcept -> ui64 {
+		auto File::size() const noexcept -> size_t {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			std::fseek(this->handle, 0, SEEK_END);
-			ui64 size = std::ftell(this->handle);
+			size_t size = std::ftell(this->handle);
 			std::rewind(this->handle);
 
 			return size;
@@ -218,7 +216,7 @@ namespace evo{
 
 			// file size
 			std::fseek(this->handle, 0, SEEK_END);
-			ui64 size = std::ftell(this->handle);
+			size_t size = std::ftell(this->handle);
 			std::rewind(this->handle);
 
 			auto output = std::vector<byte>{};
@@ -235,7 +233,7 @@ namespace evo{
 			return output;
 		};
 
-		auto BinaryFile::read(ui64 data_size) const noexcept -> std::optional< std::vector<byte> > {
+		auto BinaryFile::read(size_t data_size) const noexcept -> std::optional< std::vector<byte> > {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			auto output = std::vector<byte>{};

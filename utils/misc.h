@@ -22,8 +22,8 @@ namespace evo{
 	};
 
 
-	[[noreturn]]
-	constexpr auto unreachable() noexcept -> void {
+	
+	EVO_NORETURN constexpr auto unreachable() noexcept -> void {
 		#if defined(EVO_COMPILER_MSVC)
 			__assume(false);
 		#else
@@ -35,7 +35,7 @@ namespace evo{
 
 	// version of C++23's std::to_underlying
 	template<class Enum>
-	constexpr auto to_underlying(Enum e) noexcept -> std::underlying_type_t<Enum> {
+	EVO_NODISCARD constexpr auto to_underlying(Enum e) noexcept -> std::underlying_type_t<Enum> {
 		return static_cast<std::underlying_type_t<Enum>>(e);
 	};
 

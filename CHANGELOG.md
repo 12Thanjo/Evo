@@ -1,5 +1,46 @@
 # Evo Change Log
 
+# v1.2.0
+- Fixed warnings for `printCharName(char)`
+	- now returns `[[Extended-ASCII]]` if it recieves a negative char code
+- Improved breakpoints in compilers other than MSVC
+- Added `gdb` and `test` to build system
+	- `gdb` compiles and opens gdb
+	- `test` compiles and runs
+- Added conversion operator from `Iterator<T>` to `ConstIterator<T>`
+	- Also from `ReverseIterator<T>` to `ConstReverseIterator<T>`
+- Added `Bimap` (bi-directional map)
+- Updated README and greatly improved documentation
+- Changed numeric types
+	- Fixed numeric integer types to work on unix-type platforms
+	- Fixed explicitly sized floating point types to check for C++23 or greater before putting into global namespace
+- Changed `ArrayProxy`
+	- Removed non-const iterators
+	- Fixed the constructor that takes a `StaticVector` to take it by const reference
+- Changed `StaticVector`
+	- Fixed warnings for `StaticVector`
+	- Fixed `StaticVector::pop_back()` to function like C++ standard
+	- Fixed compile error in `StaticVector::emplace_back(Args&&...)`
+	- Fixed compile error in `StaticVector::clear()`
+	- Fixed compile error in `StaticVector::erase(const_iterator)`
+	- Fixed the constructor that takes a `std::initializer_list`
+	- Fixed `operator=` to no longer be `EVO_NODISCARD`
+	- Fixed `back()` returning the element after it should
+- Changed `Flags`
+	- Changed default underlying type to `BitsSize<to_underlying(Enum::_max) - 1>::type`
+	- Made `Flags` Constructors `EVO_NODISCARD`
+	- Added `enum_t` member type
+- Fixed `operator++(int)` of all iterators
+- Changed `StaticString`
+	- constructors are now `EVO_NODISCARD`
+	- `operator=` now return `*this`
+	- Fixed `back()` assuming the string is always at max capacity
+- Changed FS 
+	- Changed all use of `ui64` to `size_t`
+	- Made `File::File()` `EVO_NODISCARD`
+	- Added `File::getHandle()`
+
+
 ### v1.1.0
 - Added Expected and Unexpected (versions of C++23's `expected` and `unexpected`)
 
@@ -85,4 +126,4 @@
 
 
 ## Older
-Older updates were not tracked by this file. Commit messages will describe the update
+Older updates were not tracked by this file. Commit messages will describe the respective update

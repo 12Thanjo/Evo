@@ -12,17 +12,21 @@ ifeq ($(config),debug)
   init_config = debug
   testing_config = debug
   run_config = debug
+  test_config = debug
+  gdb_config = debug
 
 else ifeq ($(config),release)
   init_config = release
   testing_config = release
   run_config = release
+  test_config = release
+  gdb_config = release
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := init testing run
+PROJECTS := init testing run test gdb
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -46,10 +50,24 @@ ifneq (,$(run_config))
 	@${MAKE} --no-print-directory -C . -f run.make config=$(run_config)
 endif
 
+test: init testing run
+ifneq (,$(test_config))
+	@echo "==== Building test ($(test_config)) ===="
+	@${MAKE} --no-print-directory -C . -f test.make config=$(test_config)
+endif
+
+gdb: init testing
+ifneq (,$(gdb_config))
+	@echo "==== Building gdb ($(gdb_config)) ===="
+	@${MAKE} --no-print-directory -C . -f gdb.make config=$(gdb_config)
+endif
+
 clean:
 	@${MAKE} --no-print-directory -C . -f init.make clean
 	@${MAKE} --no-print-directory -C . -f testing.make clean
 	@${MAKE} --no-print-directory -C . -f run.make clean
+	@${MAKE} --no-print-directory -C . -f test.make clean
+	@${MAKE} --no-print-directory -C . -f gdb.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -64,5 +82,7 @@ help:
 	@echo "   init"
 	@echo "   testing"
 	@echo "   run"
+	@echo "   test"
+	@echo "   gdb"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

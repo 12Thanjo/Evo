@@ -97,8 +97,6 @@ project "testing"
 		"../",
 	}
 	
-
-
 project "*"
 
 
@@ -108,6 +106,36 @@ project "run"
 
 	buildcommands {
 		( " \"./bin/%{cfg.buildcfg}/testing\" " ),
+	}
+
+project "*"
+
+
+project "test"
+	kind "Makefile"
+
+	links{
+		"init",
+		"testing",
+		"run",
+	}
+
+project "*"
+
+
+
+
+project "gdb"
+	kind "Makefile"
+
+
+	links{
+		"init",
+		"testing",
+	}
+
+	buildcommands {
+		( " gdb \"./bin/%{cfg.buildcfg}/testing\" " ),
 	}
 
 project "*"

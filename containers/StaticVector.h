@@ -33,23 +33,23 @@ namespace evo{
 
 
 			EVO_NODISCARD constexpr StaticVector() noexcept = default;
-			constexpr ~StaticVector() noexcept { this->resize(0); };
+			constexpr ~StaticVector() noexcept { this->clear(); };
 
 
 			///////////////////////////////////
 			// copy
 
 			EVO_NODISCARD constexpr StaticVector(const StaticVector<T, CAPACITY>& rhs) noexcept : current_size(rhs.size()) {
-				for(int i = 0; i < this->size(); i+=1){
+				for(size_t i = 0; i < this->size(); i+=1){
 					this->data_block[i] = rhs[i];
 				}
 			};
 
 
-			EVO_NODISCARD constexpr auto operator=(const StaticVector<T, CAPACITY>& rhs) noexcept -> StaticVector<T, CAPACITY>& {
+			constexpr auto operator=(const StaticVector<T, CAPACITY>& rhs) noexcept -> StaticVector<T, CAPACITY>& {
 				this->current_size = rhs.size();
 
-				for(int i = 0; i < this->size(); i+=1){
+				for(size_t i = 0; i < this->size(); i+=1){
 					this->data_block[i] = rhs[i];
 				}
 
@@ -61,16 +61,16 @@ namespace evo{
 			// move
 
 			EVO_NODISCARD constexpr StaticVector(StaticVector<T, CAPACITY>&& rhs) noexcept : current_size(std::exchange(rhs.current_size, 0)) {
-				for(int i = 0; i < this->size(); i+=1){
+				for(size_t i = 0; i < this->size(); i+=1){
 					this->data_block[i] = std::move(rhs[i]);
 				}
 			};
 
 
-			EVO_NODISCARD constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVector<T, CAPACITY>& {
+			constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVector<T, CAPACITY>& {
 				this->current_size = std::exchange(rhs.current_size, 0);
 
-				for(int i = 0; i < this->size(); i+=1){
+				for(size_t i = 0; i < this->size(); i+=1){
 					this->data_block[i] = std::move(rhs[i]);
 				}
 
@@ -91,21 +91,23 @@ namespace evo{
 			EVO_NODISCARD constexpr StaticVector(std::initializer_list<T> init_list) noexcept : current_size(init_list.size()) {
 				EVO_DEBUG_ASSERT(init_list.size() < CAPACITY);
 
-				for(int i = 0; i < init_list.size(); i+=1){
-					this->data_block[i] = std::move(init_list[i]);
+				for(size_t i = 0; i < init_list.size(); i+=1){
+					this->data_block[i] = std::move(*(init_list.begin() + i));
 				}
 			};
 
-			EVO_NODISCARD constexpr auto operator=(std::initializer_list<T> init_list) noexcept -> StaticVector<T, CAPACITY> {
+			constexpr auto operator=(std::initializer_list<T> init_list) noexcept -> StaticVector<T, CAPACITY>& {
 				EVO_DEBUG_ASSERT(init_list.size() < CAPACITY);
 				
 				this->resize(0);
 
-				for(int i = 0; i < init_list.size(); i+=1){
-					this->data_block[i] = std::move(init_list[i]);
+				for(size_t i = 0; i < init_list.size(); i+=1){
+					this->data_block[i] = std::move(*(init_list.begin() + i));
 				}
 
 				this->current_size = init_list.size();
+
+				return *this;
 			};
 
 
@@ -126,13 +128,13 @@ namespace evo{
 			// at
 
 			EVO_NODISCARD constexpr auto at(size_t index) noexcept -> T& {
-				EVO_DEBUG_ASSERT(index < current_size);
+				EVO_DEBUG_ASSERT(index < this->current_size);
 
 				return this->data_block[index];
 			};
 
 			EVO_NODISCARD constexpr auto at(size_t index) const noexcept -> const T& {
-				EVO_DEBUG_ASSERT(index < current_size);
+				EVO_DEBUG_ASSERT(index < this->current_size);
 
 				return this->data_block[index];
 			};
@@ -175,11 +177,11 @@ namespace evo{
 			// front
 
 			EVO_NODISCARD constexpr auto back() noexcept -> T& {
-				return this->data_block[this->current_size];
+				return this->data_block[this->size() - 1];
 			};
 
 			EVO_NODISCARD constexpr auto back() const noexcept -> const T& {
-				return this->data_block[this->current_size];
+				return this->data_block[this->size() - 1];
 			};
 
 
@@ -237,7 +239,7 @@ namespace evo{
 
 			constexpr auto clear() noexcept -> void {
 				for(size_t i = 0; i < this->current_size; i+=1){
-					std::destroy_at(*this->data_block[i]);
+					std::destroy_at(&this->data_block[i]);
 				}
 
 				this->current_size = 0;
@@ -250,7 +252,7 @@ namespace evo{
 			constexpr auto insert(const_iterator pos, const T& value) noexcept -> iterator {
 				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
 
-				this->back() = value;
+				*this->end() = value;
 
 				this->current_size += 1;
 
@@ -269,7 +271,7 @@ namespace evo{
 			constexpr auto insert(const_iterator pos, T&& value) noexcept -> iterator {
 				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
 
-				this->back() = std::move(value);
+				*this->end() = std::move(value);
 
 				this->current_size += 1;
 
@@ -330,7 +332,7 @@ namespace evo{
 					}
 				}();
 
-				for(const_iterator i = output; i != this->end(); ++i){
+				for(iterator i = output; i != this->end(); ++i){
 					*std::prev(i) = std::move(*i);
 				}
 
@@ -366,7 +368,7 @@ namespace evo{
 				EVO_DEBUG_ASSERT(this->size() < CAPACITY);
 
 				T& new_object = this->data_block[this->size()];
-				std::construct_at(*new_object, std::forward<Args>(args)...);
+				std::construct_at(&new_object, std::forward<Args>(args)...);
 
 				this->current_size += 1;
 				return new_object;
@@ -378,11 +380,11 @@ namespace evo{
 			///////////////////////////////////
 			// pop_back
 
-			constexpr auto pop_back() noexcept -> T& {
+			constexpr auto pop_back() noexcept -> void {
 				EVO_DEBUG_ASSERT(this->size() > 0);
 
 				this->current_size -= 1;
-				return std::move(this->data_block[this->size()]);
+				std::destroy_at(&this->back());
 			};
 
 

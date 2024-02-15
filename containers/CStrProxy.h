@@ -9,8 +9,8 @@ namespace evo{
 	
 	class CStrProxy{
 		public:
-			CStrProxy() = default;
-			~CStrProxy() = default;
+			// constexpr CStrProxy() noexcept = default;
+			// constexpr ~CStrProxy() noexcept = default;
 
 			EVO_NODISCARD constexpr CStrProxy(const std::string& str) noexcept : using_ptr(true) { this->str_data.ptr = str.c_str();         };
 			EVO_NODISCARD constexpr CStrProxy(const char* str) noexcept : using_ptr(true)        { this->str_data.ptr = str;                 };

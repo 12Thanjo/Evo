@@ -33,6 +33,7 @@
 #include "./containers/StaticVector.h"
 #include "./containers/StaticString.h"
 #include "./containers/CStrProxy.h"
+#include "./containers/Bimap.h"
 
 
 #include "./tools/logging.h"

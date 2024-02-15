@@ -9,7 +9,7 @@ namespace evo{
 		public:
 			using value_type = char;
 			using size_type = CapacityType<CAPACITY>::type;
-			using difference_type = std::ptrdiff_t; // not 100% sure this is correct
+			using difference_type = std::ptrdiff_t;
 			using reference = char&;
 			using const_reference = const char&;
 			using pointer = char*;
@@ -23,53 +23,61 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
-			constexpr StaticString() noexcept = default;
+			EVO_NODISCARD constexpr StaticString() noexcept = default;
 
-			constexpr StaticString(const char* chars) noexcept { this->operator=(chars); };
+			EVO_NODISCARD constexpr StaticString(const char* chars) noexcept { this->operator=(chars); };
 
-			constexpr StaticString(const std::string& str) noexcept { this->operator=(str); };
-			constexpr StaticString(std::string&& str) noexcept { this->operator=(std::move(str)); };
+			EVO_NODISCARD constexpr StaticString(const std::string& str) noexcept { this->operator=(str); };
+			EVO_NODISCARD constexpr StaticString(std::string&& str) noexcept { this->operator=(std::move(str)); };
 
 			template<size_t StrSize>
-			constexpr StaticString(const StaticString<StrSize>& str) noexcept { this->operator=(str); };
+			EVO_NODISCARD constexpr StaticString(const StaticString<StrSize>& str) noexcept { this->operator=(str); };
 
 			// constexpr ~StaticString() noexcept = default;
 
 
-			constexpr auto operator =(const char* chars) noexcept -> void {
+			constexpr auto operator =(const char* chars) noexcept -> StaticString<CAPACITY>& {
 				for(size_type i = 0; i < CAPACITY; i+=1){
 					this->data_block[i] = chars[i];
 					
 					if(chars[i] == '\0'){
 						this->resize(i);
-						return;
+						return *this;
 					}
 				}
 
 				this->resize(CAPACITY);
+
+				return *this;
 			};
 
-			constexpr auto operator =(const std::string& str) noexcept -> void {
+			constexpr auto operator =(const std::string& str) noexcept -> StaticString<CAPACITY>& {
 				EVO_DEBUG_ASSERT(str.size() <= this->capacity()); // const std::string& parameter passed in is larger than the static string capacity
 
 				::memcpy(this->data(), str.data(), str.size());
 				this->resize(static_cast<size_type>(str.size()));
+
+				return *this;
 			};
 
-			constexpr auto operator =(std::string&& str) noexcept -> void {
+			constexpr auto operator =(std::string&& str) noexcept -> StaticString<CAPACITY>& {
 				EVO_DEBUG_ASSERT(str.size() <= this->capacity()); // std::string&& parameter passed in is larger than the static string capacity
 
 				::memcpy(this->data(), str.data(), str.size());
 				this->resize(static_cast<size_type>(str.size()));
+
+				return *this;
 			};
 
 
 			template<size_t StrSize>
-			constexpr auto operator =(const StaticString<StrSize>& str) noexcept -> void {
+			constexpr auto operator =(const StaticString<StrSize>& str) noexcept -> StaticString<CAPACITY>& {
 				EVO_DEBUG_ASSERT(str.size() <= this->capacity()); // attempted to copy static string larger than capacity
 
 				this->data_block = str.data_block;
 				this->_remaining_capacity = str._remaining_capacity;
+
+				return *this;
 			};
 
 
@@ -108,10 +116,14 @@ namespace evo{
 			// front
 
 			EVO_NODISCARD constexpr auto front() noexcept -> char& {
+				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
+
 				return this->data_block.front();
 			};
 
 			EVO_NODISCARD constexpr auto front() const noexcept -> const char& {
+				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
+
 				return this->data_block.front();
 			};
 
@@ -121,17 +133,22 @@ namespace evo{
 			// back
 
 			EVO_NODISCARD constexpr auto back() noexcept -> char& {
-				return this->data_block.back();
+				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
+
+				return this->at(this->size() - 1);
 			};
 
 			EVO_NODISCARD constexpr auto back() const noexcept -> const char& {
-				return this->data_block.back();
+				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
+
+				return this->at(this->size() - 1);
 			};
 
 
 
 			///////////////////////////////////
 			// data
+
 			EVO_NODISCARD constexpr auto data() noexcept -> char* { return this->data_block.data(); };
 
 			EVO_NODISCARD constexpr auto data() const noexcept -> const char* { return this->data_block.data(); };
@@ -198,6 +215,9 @@ namespace evo{
 			};	
 
 
+
+			//////////////////////////////////////////////////////////////////////
+			// modifiers
 
 			constexpr auto clear() noexcept -> void { this->_remaining_capacity = CAPACITY; };
 
@@ -266,7 +286,7 @@ namespace evo{
 			};
 
 
-			//////////////////////////////////////////////////////////////////////
+			///////////////////////////////////
 			// operator ==
 
 			EVO_NODISCARD constexpr auto operator ==(const char* chars) const -> bool {

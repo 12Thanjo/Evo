@@ -8,7 +8,10 @@
 	#include <intrin.h>
 	#define EVO_BREAK() __debugbreak()
 #else
-	#define EVO_BREAK() __builtin_trap()
+	#define EVO_BREAK() { \
+		printf("\nBreakpoint hit:\n\tfile: \"%s\"\n\tline: %d\n\n", __FILE__, __LINE__); \
+		__builtin_trap(); \
+	}
 #endif
 
 
@@ -42,9 +45,10 @@ namespace evo{
 
 	inline auto breakpoint() noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
-			#if defined(EVO_COMPILER_MSVC)
-				__debugbreak();
+			#ifdef EVO_COMPILER_MSVC
+				__debugbreak()
 			#else
+				printf("\nCalled Breakpoint\n\n");
 				__builtin_trap();
 			#endif
 		#else
