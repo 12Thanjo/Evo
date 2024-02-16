@@ -46,7 +46,7 @@ namespace evo{
 	inline auto breakpoint() noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
 			#ifdef EVO_COMPILER_MSVC
-				__debugbreak()
+				__debugbreak();
 			#else
 				printf("\nCalled Breakpoint\n\n");
 				__builtin_trap();

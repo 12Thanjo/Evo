@@ -304,9 +304,9 @@ namespace evo{
 			break; case 125: return "}"; // ( curly brackets or braces, closing curly brackets )
 			break; case 126: return "~"; // ( Tilde ; swung dash )
 		};
+		
 
-
-		return "[[EXTENDED ASCII]]";
+		return "{{??}}";
 	};
 
 

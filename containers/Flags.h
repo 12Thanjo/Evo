@@ -42,7 +42,7 @@ namespace evo{
 	*/
 
 
-	template<typename Enum, typename UnderlyingT = BitsSize<to_underlying(Enum::_max) - 1>::type>
+	template<typename Enum, typename UnderlyingT = BitsSize_t<to_underlying(Enum::_max) - 1>>
 	class Flags{
 		static_assert(
 			((sizeof(UnderlyingT) * 8) - 1) >= static_cast<UnderlyingT>(Enum::_max),

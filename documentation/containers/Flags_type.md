@@ -2,7 +2,7 @@
 #### containers/Flags.h
 
 ```C++
-template<typename Enum, typename UnderlyingT = BitsSize<to_underlying(Enum::_max) - 1>::type>
+template<typename Enum, typename UnderlyingT = BitsSize_t<to_underlying(Enum::_max) - 1>>
 class Flags;
 ```
 

@@ -1,6 +1,17 @@
-# Evo Change Log
+# Evo Changelog
 
-# v1.2.0
+### v1.2.1
+- Fixed Changelog
+- Fixed broken links in documentation
+- `printCharName(char)` now returns `{{??}}` if it recieves a negative char code
+- Fixed missing `;` in asserts.h
+- Fixed static_assert message in numeric_types.h (f128)
+- Fixed including stdfloat before C++23 
+- Temporarily removed `f128` as MSVC does not support it yet
+- Added `CapacityType_t` and `BitsSize_t`
+- Fixed `Flags` not compiling on MSVC
+
+### v1.2.0
 - Fixed warnings for `printCharName(char)`
 	- now returns `[[Extended-ASCII]]` if it recieves a negative char code
 - Improved breakpoints in compilers other than MSVC

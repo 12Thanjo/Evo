@@ -33,9 +33,9 @@ I using premake5 as my build system, but I had it generate make files in case yo
 - [StaticVector](documentation/containers/static_vector.md)
 
 ## Tools
-- [FS (File System)](documentation/fs.md)
-- [Logging](documentation/logging.md)
-- [Time](documentation/time.md)
+- [FS (File System)](documentation/tools/fs.md)
+- [Logging](documentation/tools/logging.md)
+- [Time](documentation/tools/time.md)
 
 
 

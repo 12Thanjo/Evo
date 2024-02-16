@@ -17,7 +17,7 @@ namespace evo{
 
 	using f32 = float;
 	using f64 = double;
-	using f128 = long double;
+	// using f128 = long double;
 
 
 	static_assert(sizeof(i8) == 1, "Expected i8 to be 1 byte - " __FILE__);
@@ -33,7 +33,7 @@ namespace evo{
 
 	static_assert(sizeof(f32) == 4, "Expected f32 to be 4 bytes - " __FILE__);
 	static_assert(sizeof(f64) == 8, "Expected f64 to be 8 bytes - " __FILE__);	
-	static_assert(sizeof(f128) == 16, "Expected f64 to be 16 bytes - " __FILE__);
+	// static_assert(sizeof(f128) == 16, "Expected f128 to be 16 bytes - " __FILE__);
 
 
 	using byte = ui8;
@@ -62,16 +62,16 @@ namespace evo{
 namespace evo{
 	using float32_t = evo::f32;
 	using float64_t = evo::f64;
-	using float128_t = evo::f128;
+	// using float128_t = evo::f128;
 };
 
 
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 202101L) || __cplusplus >= 202101L)
+	#include <stdfloat>
+#else
 	using evo::float32_t;
 	using evo::float64_t;
-	using evo::float128_t;
-#else
-	#include <stdfloat>
+	// using evo::float128_t;
 #endif
 
 

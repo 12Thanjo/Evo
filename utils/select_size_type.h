@@ -49,7 +49,15 @@ namespace evo{
 	template<size_t CAPACITY>
 	struct CapacityType : SelectType<CapacityRequiredSize<CAPACITY>::bits> {};
 
+	template<size_t CAPACITY>
+	using CapacityType_t = CapacityType<CAPACITY>::type;
+
+
+
 	template<size_t BITS>
 	struct BitsSize : SelectType<BitsRequiredSize<BITS>::bits> {};
+
+	template<size_t BITS>
+	using BitsSize_t = BitsSize<BITS>::type;
 
 };

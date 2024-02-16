@@ -27,7 +27,7 @@ Defining the macro `EVO_GLOBAL_NUMERIC_TYPES` will also put all of these in the 
 |:------:|---------------|---------------------|
 | `f32`  | 32-bit float  | float               |
 | `f64`  | 64-bit float  | double              |
-| `f128` | 128-bit float | long double         |
+<!-- | `f128` | 128-bit float | long double         | -->
 
 
 
@@ -38,7 +38,7 @@ These are implementations of some of C++23's explicitly sized floating point typ
 |:------------:|---------------|---------------------|
 | `float32_t`  | 32-bit float  | float               |
 | `float64_t`  | 64-bit float  | double              |
-| `float128_t` | 128-bit float | long double         |
+<!-- | `float128_t` | 128-bit float | long double         | -->
 
 
 
