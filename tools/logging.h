@@ -15,6 +15,7 @@ namespace evo{
 	auto styleConsoleError() noexcept -> void;
 	auto styleConsoleWarning() noexcept -> void;
 	auto styleConsoleInfo() noexcept -> void;
+	auto styleConsoleSuccess() noexcept -> void;
 	auto styleConsoleDebug() noexcept -> void;
 	auto styleConsoleTrace() noexcept -> void;
 	auto styleConsoleReset() noexcept -> void;
@@ -42,6 +43,12 @@ namespace evo{
 
 	inline auto logInfo(CStrProxy message) noexcept -> void {
 		styleConsoleInfo();
+		log( std::format("{}\n", message.data()) );
+		styleConsoleReset();
+	};
+
+	inline auto logSuccess(CStrProxy message) noexcept -> void {
+		styleConsoleSuccess();
 		log( std::format("{}\n", message.data()) );
 		styleConsoleReset();
 	};

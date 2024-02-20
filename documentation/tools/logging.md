@@ -2,7 +2,7 @@
 ### tools/Logging.h
 
 
-<!-- TODO: organize this better -->
+###### TODO: organize this better
 
 
 ## Functions
@@ -44,6 +44,11 @@ auto styleConsoleInfo() noexcept -> void;
 ```
 The the style of logging to the console to be "Info" (Cyan).
 
+### styleConsoleSuccess
+```C++
+auto styleConsoleSuccess() noexcept -> void;
+```
+The the style of logging to the console to be "Success" (Purple).
 
 ### styleConsoleDebug
 ```C++
@@ -97,18 +102,25 @@ inline auto logInfo(CStrProxy message) noexcept -> void;
 Log to the console with the "Info" style, and automatically adds a newline.
 
 
+### logSuccess
+```C++
+inline auto logSuccess(CStrProxy message) noexcept -> void;
+```
+Log to the console with the "Success" style, and automatically adds a newline.
+
+
 ### logDebug
 ```C++
 inline auto logDebug(CStrProxy message) noexcept -> void;
 ```
-Log to the console with the "Debug" style, and automatically adds a newline.
+Log to the console with the "Debug" style, and automatically adds a newline. In release mode, these functions are no-op.
 
 
 ### logTrace
 ```C++
 inline auto logTrace(CStrProxy message) noexcept -> void;
 ```
-Log to the console with the "Trace" style, and automatically adds a newline.
+Log to the console with the "Trace" style, and automatically adds a newline. In release mode, these functions are no-op.
 
 
 

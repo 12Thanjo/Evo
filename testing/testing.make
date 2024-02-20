@@ -66,10 +66,12 @@ OBJECTS :=
 GENERATED += $(OBJDIR)/fs.o
 GENERATED += $(OBJDIR)/logging.o
 GENERATED += $(OBJDIR)/main.o
+GENERATED += $(OBJDIR)/random.o
 GENERATED += $(OBJDIR)/time.o
 OBJECTS += $(OBJDIR)/fs.o
 OBJECTS += $(OBJDIR)/logging.o
 OBJECTS += $(OBJDIR)/main.o
+OBJECTS += $(OBJDIR)/random.o
 OBJECTS += $(OBJDIR)/time.o
 
 # Rules
@@ -138,6 +140,9 @@ $(OBJDIR)/fs.o: ../tools/fs.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/logging.o: ../tools/logging.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/random.o: ../tools/random.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/time.o: ../tools/time.cpp

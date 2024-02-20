@@ -39,3 +39,4 @@
 #include "./tools/logging.h"
 #include "./tools/fs.h"
 #include "./tools/time.h"
+#include "./tools/random.h"

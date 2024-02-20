@@ -1,12 +1,17 @@
 # Evo Changelog
 
+### v1.2.2
+- Fixed `Flags` not compiling in certain conditions
+- Added `styleConsoleSuccess()` and `logSuccess`
+- Added random to tools
+
 ### v1.2.1
 - Fixed Changelog
 - Fixed broken links in documentation
 - `printCharName(char)` now returns `{{??}}` if it recieves a negative char code
 - Fixed missing `;` in asserts.h
 - Fixed static_assert message in numeric_types.h (f128)
-- Fixed including stdfloat before C++23 
+- Fixed including stdfloat before C++23
 - Temporarily removed `f128` as MSVC does not support it yet
 - Added `CapacityType_t` and `BitsSize_t`
 - Fixed `Flags` not compiling on MSVC
@@ -50,7 +55,6 @@
 	- Changed all use of `ui64` to `size_t`
 	- Made `File::File()` `EVO_NODISCARD`
 	- Added `File::getHandle()`
-
 
 ### v1.1.0
 - Added Expected and Unexpected (versions of C++23's `expected` and `unexpected`)

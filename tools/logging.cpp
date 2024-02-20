@@ -52,6 +52,10 @@ namespace evo{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_GREEN);
 		};
 
+		auto styleConsoleSuccess() noexcept -> void {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+		};
+
 		auto styleConsoleDebug() noexcept -> void {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE);
 		};
@@ -84,6 +88,10 @@ namespace evo{
 
 		auto styleConsoleInfo() noexcept -> void {
 			std::cout << "\033[36m";
+		};
+
+		auto styleConsoleSuccess() noexcept -> void {
+			std::cout << "\033[32m";
 		};
 
 		auto styleConsoleDebug() noexcept -> void {

@@ -213,6 +213,24 @@ namespace tests{
 	};
 
 
+
+
+	auto random_test() noexcept -> bool {
+
+		for(uint64_t i = 0; i < 1000; i+=1){
+			const uint64_t random_num = evo::random(10, 15);
+
+			if(random_num > 15 || random_num < 10){
+				return false;
+			}
+		}
+
+
+		evo::logInfo("Random tests passed");
+		return true;
+	};
+
+
 	
 };
 
@@ -240,31 +258,21 @@ auto main() noexcept -> int {
 
 	// evo::logTrace("logging test (Trace)");
 	// evo::logDebug("logging test (Debug)");
+	// evo::logSuccess("logging test (Success)");
 	// evo::logInfo("logging test (Info)");
 	// evo::logWarning("logging test (Warning)");
 	// evo::logError("logging test (Error)");
 	// evo::logFatal("logging test (Fatal)");
 
 
-	auto flags         = evo::Flags<FlagsTest>();
-	// auto static_string = evo::StaticString<5>{"hello"};
+	auto flags = evo::Flags<FlagsTest>();
+	auto static_string = evo::StaticString<5>{"hello"};
+
+
 	if(tests::static_vector_test() == false){ num_failed += 1; }
 	if(tests::c_str_proxy_test() == false){ num_failed += 1; }
 	if(tests::bimap_test() == false){ num_failed += 1; }
-	// auto static_vector = evo::StaticVector<int, 6>{};
-	// auto array_proxy   = evo::ArrayProxy<int>{static_vector};
-
-
-
-	// tests::TestingType foo = {};
-	// tests::TestingType bar{std::move(foo)};
-	// tests::TestingType meow{};
-	// meow = std::move(bar);
-
-
-	// for(char i = std::numeric_limits<char>::min(); i < std::numeric_limits<char>::max(); i+=1){
-	// 	evo::logInfo(std::format("break; case {}: return \"{}\";", int(i), std::string{i}));
-	// }
+	if(tests::random_test() == false){ num_failed += 1; }
 
 
 

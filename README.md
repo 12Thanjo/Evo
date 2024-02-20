@@ -7,6 +7,7 @@ This is very much a work in progress.
 ### Running the tests:
 The test suite is not fully implemented, but if you would like to run it it is in the testing directory.
 I using premake5 as my build system, but I had it generate make files in case you don't have and/or don't want to use premake5.
+The test build system makefiles are also only setup for windows.
 
 ##### TODO: how to use testing suite
 
@@ -35,6 +36,7 @@ I using premake5 as my build system, but I had it generate make files in case yo
 ## Tools
 - [FS (File System)](documentation/tools/fs.md)
 - [Logging](documentation/tools/logging.md)
+- [Random](documentation/tools/random.md)
 - [Time](documentation/tools/time.md)
 
 

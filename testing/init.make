@@ -24,7 +24,7 @@ TARGET = $(TARGETDIR)/init
 	@echo Running clean commands
 	rm -rf ./obj/
 	rm -rf ./bin/
-	@echo "Clean testing will have an error - don't worry, its fine (it seems to be a bug in the genation from premake5)"
+	@echo "Clean testing may have an error - don't worry, its fine (it seems to be a bug in the genation from premake5)"
 	@echo
   endef
 
@@ -42,7 +42,7 @@ TARGET = $(TARGETDIR)/init
 	@echo Running clean commands
 	rm -rf ./obj/
 	rm -rf ./bin/
-	@echo "Clean testing will have an error - don't worry, its fine (it seems to be a bug in the genation from premake5)"
+	@echo "Clean testing may have an error - don't worry, its fine (it seems to be a bug in the genation from premake5)"
 	@echo
   endef
 
