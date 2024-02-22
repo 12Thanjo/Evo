@@ -151,14 +151,14 @@ namespace evo{
 			///////////////////////////////////
 			// operator[]
 
-			EVO_NODISCARD constexpr auto operator[](size_type index)       noexcept ->       T& { return this->at(index); };
-			EVO_NODISCARD constexpr auto operator[](size_type index) const noexcept -> const T& { return this->at(index); };
-
-			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
 			EVO_NODISCARD constexpr auto operator[](size_t index)       noexcept ->       T& { return this->at(index); };
+			EVO_NODISCARD constexpr auto operator[](size_t index) const noexcept -> const T& { return this->at(index); };
 
 			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
-			EVO_NODISCARD constexpr auto operator[](size_t index) const noexcept -> const T& { return this->at(index); };
+			EVO_NODISCARD constexpr auto operator[](size_type index)       noexcept ->       T& { return this->at(index); };
+
+			template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
+			EVO_NODISCARD constexpr auto operator[](size_type index) const noexcept -> const T& { return this->at(index); };
 
 
 			///////////////////////////////////

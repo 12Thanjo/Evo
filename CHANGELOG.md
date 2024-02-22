@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.2.3
+- Fixed index types of `StaticVector::operator[]` to be intended
+	- was causing improper overloading in MSVC
+
 ### v1.2.2
 - Fixed `Flags` not compiling in certain conditions
 - Added `styleConsoleSuccess()` and `logSuccess`
