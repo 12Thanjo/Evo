@@ -265,7 +265,7 @@ auto main() noexcept -> int {
 	// evo::logFatal("logging test (Fatal)");
 
 
-	auto flags = evo::Flags<FlagsTest>();
+	auto flags = evo::Flags<FlagsTest>{FlagsTest::A, FlagsTest::C};
 	auto static_string = evo::StaticString<5>{"hello"};
 
 

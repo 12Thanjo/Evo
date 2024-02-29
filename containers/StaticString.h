@@ -135,13 +135,13 @@ namespace evo{
 			EVO_NODISCARD constexpr auto back() noexcept -> char& {
 				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
 
-				return this->at(this->size() - 1);
+				return this->at( size_type(this->size() - 1) );
 			};
 
 			EVO_NODISCARD constexpr auto back() const noexcept -> const char& {
 				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
 
-				return this->at(this->size() - 1);
+				return this->at( size_type(this->size() - 1) );
 			};
 
 
@@ -246,42 +246,42 @@ namespace evo{
 
 			// not implemented yet: append_range
 
-			constexpr auto append(const char* chars) const -> void {
-				auto chars_length = strnlen_s(chars, this->_remaining_capacity + 1);
+			constexpr auto append(const char* chars) noexcept -> void {
+				size_type chars_length = size_type( strnlen_s(chars, this->_remaining_capacity + 1) );
 				EVO_DEBUG_ASSERT(chars_length <= this->_remaining_capacity); // Attempted to add string that is longer than current capacity
 
-				::memcpy(this->data_block[this->size()], chars, chars_length);
-				this->_remaining_capacity += chars_length;
+				::memcpy((void*)&this->data_block[this->size()], chars, chars_length);
+				this->_remaining_capacity -= chars_length;
 			};
 
-			constexpr auto append(const std::string& str) const -> void {
-				EVO_DEBUG_ASSERT(str.size() <= this->_remaining_capacity); // Attempted to add string that is longer than current capacity
+			constexpr auto append(const std::string& str) noexcept -> void {
+				EVO_DEBUG_ASSERT(size_type(str.size()) <= this->_remaining_capacity); // Attempted to add string that is longer than current capacity
 
-				::memcpy(this->data_block[this->size()], str.data(), str.size());
-				this->_remaining_capacity += str.size();
+				::memcpy((void*)&this->data_block[this->size()], str.data(), str.size());
+				this->_remaining_capacity -= size_type(str.size());
 			};
 
 			template<size_t StrSize>
-			constexpr auto append(const StaticString<StrSize>& str) const -> void {
-				EVO_DEBUG_ASSERT(str.size() <= this->_remaining_capacity); // Attempted to add string that is longer than current capacity
+			constexpr auto append(const StaticString<StrSize>& str) noexcept -> void {
+				EVO_DEBUG_ASSERT(size_type(str.size()) <= this->_remaining_capacity); // Attempted to add string that is longer than current capacity
 
-				::memcpy(this->data_block[this->size()], str.data(), str.size());
-				this->_remaining_capacity += str.size();
+				::memcpy((void*)&this->data_block[this->size()], str.data(), str.size());
+				this->_remaining_capacity -= size_type(str.size());
 			};
 
 
 
 
-			constexpr auto operator +=(const char* chars) const -> void {
+			constexpr auto operator +=(const char* chars) const noexcept -> void {
 				this->append(chars);
 			};
 
-			constexpr auto operator +=(const std::string& str) const -> void {
+			constexpr auto operator +=(const std::string& str) const noexcept -> void {
 				this->append(str);
 			};
 
 			template<size_t StrSize>
-			constexpr auto operator +=(const StaticString<StrSize>& str) const -> void {
+			constexpr auto operator +=(const StaticString<StrSize>& str) const noexcept -> void {
 				this->append(str);
 			};
 

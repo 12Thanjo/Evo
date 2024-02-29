@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.2.4
+- Fixed compile errors in `StaticString::append`
+- Fixed various warnings throughout `StaticString`
+
 ### v1.2.3
 - Fixed index types of `StaticVector::operator[]` to be intended
 	- was causing improper overloading in MSVC
