@@ -44,8 +44,11 @@ namespace evo{
 
 		auto File::open(const std::string& path, Flags<FileMode> mode) noexcept -> bool {
 			EVO_DEBUG_ASSERT(this->valid == false);
-			EVO_DEBUG_ASSERT(fs::exists(path));
+
+			// if reading to the file, it must exist
+			EVO_DEBUG_ASSERT((mode.has(FileMode::Read) == false) || fs::exists(path));
 			
+
 
 			const char* mode_str;
 
@@ -180,7 +183,10 @@ namespace evo{
 
 		auto BinaryFile::open(const std::string& path, Flags<FileMode> mode) noexcept -> bool {
 			EVO_DEBUG_ASSERT(this->valid == false);
-			EVO_DEBUG_ASSERT(fs::exists(path));
+
+			// if reading to the file, it must exist
+			EVO_DEBUG_ASSERT((mode.has(FileMode::Read) == false) || fs::exists(path));
+
 
 			const char* mode_str;
 

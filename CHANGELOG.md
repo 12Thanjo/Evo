@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.2.5
+- Fixed `fs::File::open()` and `fs::BinaryFile::open()` to not assert when just writing (not reading) to file that doesn't exist
+
 ### v1.2.4
 - Fixed compile errors in `StaticString::append`
 - Fixed various warnings throughout `StaticString`
