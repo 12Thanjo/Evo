@@ -26,6 +26,7 @@
 #include "./utils/strings.h"
 
 
+#include "./containers/Result.h"
 #include "./containers/Expected.h"
 #include "./containers/iterators.h"
 #include "./containers/ArrayProxy.h"
