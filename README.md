@@ -24,14 +24,15 @@ The test build system makefiles are also only setup for windows.
 - [strings.h](documentation/utils/strings.md)
 
 ## Containers
-- [ArrayProxy](documentation/containers/array_proxy.md)
+- [ArrayProxy](documentation/containers/ArrayProxy.md)
 - [Bimap](documentation/containers/Bimap.md)
 - [CStrProxy](documentation/containers/CStrProxy.md)
 - [Expected](documentation/containers/Expected.md)
 - [Flags](documentation/containers/flags.md)
 - [iterators](documentation/containers/iterators.md)
-- [StaticString](documentation/containers/static_string.md)
-- [StaticVector](documentation/containers/static_vector.md)
+- [Result](documentation/containers/Result.md)
+- [StaticString](documentation/containers/StaticString.md)
+- [StaticVector](documentation/containers/StaticVector.md)
 
 ## Tools
 - [FS (File System)](documentation/tools/fs.md)

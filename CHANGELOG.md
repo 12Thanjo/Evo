@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.3.1
+- Fixed documentation links
+
 ### v1.3.0
 - Added the `Result` container
 
