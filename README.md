@@ -1,16 +1,7 @@
 # Evo
-My own custom standard library.
+My own custom standard library. It's worked on as I want/need things, so it's by no means perfect, complete, or fully tested; I don't really expect others to be using it.
 
-This is very much a work in progress.
-
-
-### Running the tests:
-The test suite is not fully implemented, but if you would like to run it it is in the testing directory.
-I using premake5 as my build system, but I had it generate make files in case you don't have and/or don't want to use premake5.
-The test build system makefiles are also only setup for windows.
-
-##### TODO: how to use testing suite
-
+Requires at least C++20.
 
 ## API Docs:
 [List of compiler flags / defines](#compiler-flags)
@@ -42,7 +33,6 @@ The test build system makefiles are also only setup for windows.
 
 
 
-
 <a name="compiler-flags"></a>
 ### Compiler Flags / defines
 (By `true` or `false` I mean defined or undefined respectively)
@@ -58,3 +48,16 @@ These are defined becasue they mess up Sublime's syntax highlighting otherwise
 |-----------------|-----------------|
 | `EVO_NODISCARD` | `[[nodiscard]]` |
 | `EVO_NORETURN`  | `[[noreturn]]`  |
+
+
+
+### Important note if using older versions:
+`v1.4.0` contains breaking changes 
+
+
+### Running the tests:
+The test suite is not fully implemented, but if you would like to run it it is in the testing directory.
+I using premake5 as my build system, but I had it generate make files in case you don't have and/or don't want to use premake5.
+The test build system makefiles are also only setup for windows.
+
+##### TODO: how to use testing suite

@@ -88,7 +88,7 @@ namespace evo{
 		};
 
 
-		auto File::readLine() const noexcept -> std::optional<std::string> {
+		auto File::readLine() const noexcept -> evo::Result<std::string> {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			auto buffer = std::string{};
@@ -101,7 +101,7 @@ namespace evo{
 				return buffer;
 			}
 
-			return std::nullopt;
+			return evo::resultError;
 		};
 
 		auto File::writeLine(const std::string& text) noexcept -> bool {
@@ -118,7 +118,7 @@ namespace evo{
 
 
 		// TODO: simplify this by calling `read(this->size)`
-		auto File::read() const noexcept -> std::optional<std::string> {
+		auto File::read() const noexcept -> evo::Result<std::string> {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			size_t size = this->size();
@@ -128,7 +128,7 @@ namespace evo{
 
 			size_t bytes_read = std::fread(output.data(), sizeof(char), size, this->handle);
 			if(bytes_read == 0 && std::ferror(this->handle) != 0){
-				return std::nullopt;
+				return evo::resultError;
 			}
 
 			output.resize(bytes_read);
@@ -136,7 +136,7 @@ namespace evo{
 			return output;
 		};
 
-		auto File::read(size_t data_size) const noexcept -> std::optional<std::string> {
+		auto File::read(size_t data_size) const noexcept -> evo::Result<std::string> {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			auto output = std::string{};
@@ -144,7 +144,7 @@ namespace evo{
 
 			size_t bytes_read = std::fread(output.data(), sizeof(char), data_size, this->handle);
 			if(bytes_read == 0 && std::ferror(this->handle) != 0){
-				return std::nullopt;
+				return evo::resultError;
 			}
 
 			output.resize(bytes_read);
@@ -217,7 +217,7 @@ namespace evo{
 
 
 
-		auto BinaryFile::read() const noexcept -> std::optional< std::vector<byte> > {
+		auto BinaryFile::read() const noexcept -> evo::Result< std::vector<byte> > {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			// file size
@@ -230,7 +230,7 @@ namespace evo{
 
 			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), size, this->handle);
 			if(bytes_read == 0 && std::ferror(this->handle) != 0){
-				return std::nullopt;
+				return evo::resultError;
 			}
 
 			output.resize(bytes_read);
@@ -239,7 +239,7 @@ namespace evo{
 			return output;
 		};
 
-		auto BinaryFile::read(size_t data_size) const noexcept -> std::optional< std::vector<byte> > {
+		auto BinaryFile::read(size_t data_size) const noexcept -> evo::Result< std::vector<byte> > {
 			EVO_DEBUG_ASSERT(this->valid);
 
 			auto output = std::vector<byte>{};
@@ -247,7 +247,7 @@ namespace evo{
 
 			size_t bytes_read = std::fread(output.data(), sizeof(evo::byte), data_size, this->handle);
 			if(bytes_read == 0 && std::ferror(this->handle) != 0){
-				return std::nullopt;
+				return evo::resultError;
 			}
 
 			output.resize(bytes_read);

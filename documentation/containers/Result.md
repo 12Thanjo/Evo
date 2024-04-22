@@ -15,7 +15,7 @@ auto some_func() noexcept -> evo::Result<int> {
 	if(errored){
 		return 12;
 	}else{
-		return evo::ResultError;
+		return evo::resultError;
 	}
 };
 ```
@@ -37,7 +37,7 @@ auto some_func() noexcept -> evo::Result<int> {
 // Success
 EVO_NODISCARD constexpr Result(const T& value) noexcept;
 EVO_NODISCARD constexpr Result(T&& value) noexcept;
-EVO_NODISCARD constexpr Result(ResultError) noexcept;
+EVO_NODISCARD constexpr Result(ResultError_t) noexcept;
 
 // Error
 EVO_NODISCARD static constexpr auto error() noexcept -> Result;

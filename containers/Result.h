@@ -8,7 +8,7 @@
 namespace evo{
 
 	struct ResultError_t{};
-	inline constexpr ResultError_t ResultError{};
+	inline constexpr ResultError_t resultError{};
 
 	template<class T>
 	class Result{

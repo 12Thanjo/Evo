@@ -12,9 +12,9 @@ Returns the length of a null-terminated char array (`str`) up to a maximum lengt
 
 ## stringsEqual
 ```C++
-EVO_NODISCARD constexpr auto stringsEqual(const char* str1, const char* str2, size_t max_length = 100) noexcept -> std::optional<bool>;
+EVO_NODISCARD constexpr auto stringsEqual(const char* str1, const char* str2, size_t max_length = 100) noexcept -> evo::Result<bool>;
 ```
-Compares two null-terminated char arrays (`str1` and `str2`) up to a maximum length (`max_length`). The funciton returns `std::nullopt` if both strings are larger than the maximum length
+Compares two null-terminated char arrays (`str1` and `str2`) up to a maximum length (`max_length`). The function returns an error if both strings are larger than the maximum length
 
 
 ## isLowerLetter

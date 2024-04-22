@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../defines.h"
-#include <optional>
+#include "../containers/Result.h"
 
 
 namespace evo{
@@ -18,8 +18,7 @@ namespace evo{
 
 
 
-	// optional is nullopt if exceeds the max string length
-	EVO_NODISCARD constexpr auto stringsEqual(const char* str1, const char* str2, size_t max_length = 100) noexcept -> std::optional<bool> {
+	EVO_NODISCARD constexpr auto stringsEqual(const char* str1, const char* str2, size_t max_length = 100) noexcept -> evo::Result<bool> {
 		for(size_t i = 0; i < max_length + 1; i+=1){
 			if(str1[i] == str2[i]){
 				if(str1[i] == '\0'){
@@ -32,9 +31,8 @@ namespace evo{
 			return false;
 		}
 
-		return std::nullopt;
+		return evo::resultError;
 	};
-
 
 
 
