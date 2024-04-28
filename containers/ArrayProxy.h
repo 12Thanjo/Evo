@@ -404,7 +404,7 @@ namespace evo{
 				return *this->iter;
 			};
 
-			EVO_NODISCARD constexpr auto operator->() const noexcept -> T* {
+			EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* {
 				return this->iter;
 			};
 
@@ -556,11 +556,11 @@ namespace evo{
 
 
 
-			EVO_NODISCARD constexpr auto operator*() const noexcept -> T& {
+			EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& {
 				return *this->iter;
 			};
 
-			EVO_NODISCARD constexpr auto operator->() const noexcept -> T* {
+			EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* {
 				return this->iter;
 			};
 

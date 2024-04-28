@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.4.1
+- Fixed ArrayProxy iterator dereferencing not being the correct const-ness
+
 ### v1.4.0
 - Changed methods in `fs::File` and `fs::BinaryFile` that returned `std::optional` to now return `evo::Result`
 - Changed `evo::stringsEqual()` to now return `evo::Result<bool>`
