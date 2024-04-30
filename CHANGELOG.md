@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.4.2
+- Made `StaticVector` with non-default-constructable types
+- Removed `StaticVector::operator std::span`
+
 ### v1.4.1
 - Fixed ArrayProxy iterator dereferencing not being the correct const-ness
 

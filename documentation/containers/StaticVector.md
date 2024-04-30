@@ -51,12 +51,6 @@ constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVect
 constexpr auto operator=(std::initializer_list<T> init_list) noexcept -> StaticVector<T, CAPACITY>&;
 ```
 
-### operator std::span
-```C++
-EVO_NODISCARD constexpr operator std::span<T, CAPACITY>() noexcept;
-```
-
-
 
 
 ### Element Access

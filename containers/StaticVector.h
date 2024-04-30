@@ -114,13 +114,6 @@ namespace evo{
 
 
 
-
-
-			EVO_NODISCARD constexpr operator std::span<T, CAPACITY>() noexcept {
-				return this->data;
-			};
-
-
 			//////////////////////////////////////////////////////////////////////
 			// element access
 
@@ -417,7 +410,10 @@ namespace evo{
 
 	
 		private:
-			T data_block[CAPACITY];
+			union{
+				byte data_block_dummy = 0;
+				T data_block[CAPACITY];
+			};
 			size_type current_size = 0;
 			
 	};
