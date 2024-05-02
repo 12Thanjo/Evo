@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.4.3
+- Added `random01()`
+- Added `randomBool()`
+
 ### v1.4.2
 - Made `StaticVector` with non-default-constructable types
 - Removed `StaticVector::operator std::span`
