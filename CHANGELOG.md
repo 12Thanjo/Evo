@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.5.1
+- Fixed style codes showing up in the Windows debug console
+- Added `printStdout()`, `printlnStdout()`, `printStderr()`, and `printlnStderr()`
+
 ### v1.5.0
 - Major update to logging
 - Removed the extraneous parameter in `StaticString::pop_back()`

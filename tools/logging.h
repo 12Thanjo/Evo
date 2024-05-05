@@ -20,12 +20,17 @@
 
 namespace evo{
 
+	///////////////////////////////////
+	// print
+
 	auto print(std::string_view message) noexcept -> void;
 
 	template<class... Args>
 	inline auto print(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		print(std::format(fmt, args...));
 	};
+
+
 
 	inline auto println(std::string_view message) noexcept -> void {
 		print("{}\n", message);
@@ -56,34 +61,122 @@ namespace evo{
 		print(new_line_str);
 	};
 
+	
+
+	///////////////////////////////////
+	// stdout
+
+	auto printStdout(std::string_view message) noexcept -> void;
+
+	template<class... Args>
+	inline auto printStdout(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		printStdout(std::format(fmt, args...));
+	};
+
+	inline auto printlnStdout(std::string_view message) noexcept -> void {
+		printStdout("{}\n", message);
+	};
+
+	template<class... Args>
+	inline auto printlnStdout(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		printStdout(std::format(fmt, args...) + '\n');
+	};
+
+
+	inline auto printlnStdout() noexcept -> void {
+		printStdout("\n");
+	};
+
+	inline auto printlnStdout(size_t num_newlines) noexcept -> void {
+		switch(num_newlines){
+			case 0: return;
+			case 1: printStdout("\n"); return;
+			case 2: printStdout("\n\n"); return;
+			case 3: printStdout("\n\n\n"); return;
+			case 4: printStdout("\n\n\n\n"); return;
+			case 5: printStdout("\n\n\n\n\n"); return;
+			case 6: printStdout("\n\n\n\n\n\n"); return;
+			case 7: printStdout("\n\n\n\n\n\n\n"); return;
+		};
+
+		const auto new_line_str = std::string(num_newlines, '\n');
+		printStdout(new_line_str);
+	};
+
+
+
+	///////////////////////////////////
+	// stderr
+
+	auto printStderr(std::string_view message) noexcept -> void;
+
+	template<class... Args>
+	inline auto printStderr(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		printStderr(std::format(fmt, args...));
+	};
+
+	inline auto printlnStderr(std::string_view message) noexcept -> void {
+		printStderr("{}\n", message);
+	};
+
+	template<class... Args>
+	inline auto printlnStderr(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		printStderr(std::format(fmt, args...) + '\n');
+	};
+
+	inline auto printlnStderr() noexcept -> void {
+		printStderr("\n");
+	};
+
+	inline auto printlnStderr(size_t num_newlines) noexcept -> void {
+		switch(num_newlines){
+			case 0: return;
+			case 1: printStderr("\n"); return;
+			case 2: printStderr("\n\n"); return;
+			case 3: printStderr("\n\n\n"); return;
+			case 4: printStderr("\n\n\n\n"); return;
+			case 5: printStderr("\n\n\n\n\n"); return;
+			case 6: printStderr("\n\n\n\n\n\n"); return;
+			case 7: printStderr("\n\n\n\n\n\n\n"); return;
+		};
+
+		const auto new_line_str = std::string(num_newlines, '\n');
+		printStderr(new_line_str);
+	};
+
+
+
+
+	//////////////////////////////////////////////////////////////////////
+	// style console
 
 	namespace styleConsole{
-		inline auto reset() noexcept -> void { print("\033[0m"); };
+		inline auto reset() noexcept -> void { printStdout("\033[0m"); };
 
 		namespace text{
-			inline auto white()   noexcept -> void { print("\033[37m"); };
-			inline auto gray()    noexcept -> void { print("\033[90m"); };
-			inline auto black()   noexcept -> void { print("\033[30m"); };
+			inline auto white()   noexcept -> void { printStdout("\033[37m"); };
+			inline auto gray()    noexcept -> void { printStdout("\033[90m"); };
+			inline auto black()   noexcept -> void { printStdout("\033[30m"); };
 
-			inline auto red()     noexcept -> void { print("\033[31m"); };
-			inline auto yellow()  noexcept -> void { print("\033[33m"); };
-			inline auto green()   noexcept -> void { print("\033[32m"); };
-			inline auto cyan()    noexcept -> void { print("\033[36m"); };
-			inline auto blue()    noexcept -> void { print("\033[34m"); };
-			inline auto magenta() noexcept -> void { print("\033[35m"); };
+			inline auto red()     noexcept -> void { printStdout("\033[31m"); };
+			inline auto yellow()  noexcept -> void { printStdout("\033[33m"); };
+			inline auto green()   noexcept -> void { printStdout("\033[32m"); };
+			inline auto cyan()    noexcept -> void { printStdout("\033[36m"); };
+			inline auto blue()    noexcept -> void { printStdout("\033[34m"); };
+			inline auto magenta() noexcept -> void { printStdout("\033[35m"); };
 		};
 
 		namespace background{
-			inline auto white()   noexcept -> void { print("\033[47m"); };
-			inline auto gray()    noexcept -> void { print("\033[100m"); };
-			inline auto black()   noexcept -> void { print("\033[40m"); };
+			inline auto white()   noexcept -> void { printStdout("\033[47m"); };
+			inline auto gray()    noexcept -> void { printStdout("\033[100m"); };
+			inline auto black()   noexcept -> void { printStdout("\033[40m"); };
 
-			inline auto red()     noexcept -> void { print("\033[41m"); };
-			inline auto yellow()  noexcept -> void { print("\033[43m"); };
-			inline auto green()   noexcept -> void { print("\033[42m"); };
-			inline auto cyan()    noexcept -> void { print("\033[46m"); };
-			inline auto blue()    noexcept -> void { print("\033[44m"); };
-			inline auto magenta() noexcept -> void { print("\033[45m"); };
+			inline auto red()     noexcept -> void { printStdout("\033[41m"); };
+			inline auto yellow()  noexcept -> void { printStdout("\033[43m"); };
+			inline auto green()   noexcept -> void { printStdout("\033[42m"); };
+			inline auto cyan()    noexcept -> void { printStdout("\033[46m"); };
+			inline auto blue()    noexcept -> void { printStdout("\033[44m"); };
+			inline auto magenta() noexcept -> void { printStdout("\033[45m"); };
 		};
 
 
@@ -123,6 +216,9 @@ namespace evo{
 		};
 	};
 
+
+	//////////////////////////////////////////////////////////////////////
+	// print colors
 
 
 	inline auto printWhite(std::string_view msg) noexcept -> void {
@@ -401,7 +497,8 @@ namespace evo{
 
 
 
-
+	//////////////////////////////////////////////////////////////////////
+	// logging
 
 	namespace log{
 

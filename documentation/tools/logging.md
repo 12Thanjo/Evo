@@ -20,6 +20,108 @@ inline auto print(std::format_string<Args...> fmt, Args&&... args) noexcept -> v
 ```
 Prints a message to the console. On Windows in debug mode, will also print to the debug console. Overload `2` is equivalent to calling `print(std::format(fmt, args...)`.
 
+
+### println
+```C++
+// 1
+auto println(std::string_view message) noexcept -> void;
+
+// 2
+template<class... Args>
+inline auto println(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
+
+// 3
+inline auto println() noexcept -> void;
+
+// 4
+inline auto println(size_t num_newlines) noexcept -> void;
+```
+Print a message to the console and append a newline. On windows in debug mode, will also print to the debug console.
+
+- overload 2: equivalent to `println(std::format(fmt, args)`
+- overload 3: just prints a single `\n` character
+- overload 4: prints a number of `\n` characters. Optimizes 0-7.
+
+
+
+
+
+
+### printStdout
+```C++
+// 1
+auto printStdout(std::string_view message) noexcept -> void;
+
+// 2
+template<class... Args>
+inline auto printStdout(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
+```
+Prints a message to standard out. Overload `2` is equivalent to calling `printStdout(std::format(fmt, args...)`.
+
+
+### printlnStdout
+```C++
+// 1
+auto printlnStdout(std::string_view message) noexcept -> void;
+
+// 2
+template<class... Args>
+inline auto printlnStdout(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
+
+// 3
+inline auto printlnStdout() noexcept -> void;
+
+// 4
+inline auto printlnStdout(size_t num_newlines) noexcept -> void;
+```
+Print a message to standard out and append a newline. 
+
+- overload 2: equivalent to `printlnStdout(std::format(fmt, args)`
+- overload 3: just prints a single `\n` character
+- overload 4: prints a number of `\n` characters. Optimizes 0-7.
+
+
+
+
+
+### printStderr
+```C++
+// 1
+auto printStderr(std::string_view message) noexcept -> void;
+
+// 2
+template<class... Args>
+inline auto printStderr(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
+```
+Prints a message to standard err. Overload `2` is equivalent to calling `printStderr(std::format(fmt, args...)`.
+
+
+### printlnStderr
+```C++
+// 1
+auto printlnStderr(std::string_view message) noexcept -> void;
+
+// 2
+template<class... Args>
+inline auto printlnStderr(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
+
+// 3
+inline auto printlnStderr() noexcept -> void;
+
+// 4
+inline auto printlnStderr(size_t num_newlines) noexcept -> void;
+```
+Print a message to standard err and append a newline. 
+
+- overload 2: equivalent to `printlnStdout(std::format(fmt, args)`
+- overload 3: just prints a single `\n` character
+- overload 4: prints a number of `\n` characters. Optimizes 0-7.
+
+
+
+
+
+
 ### print colors
 ```C++
 auto printWhite(std::string_view message) noexcept -> void;
@@ -78,29 +180,6 @@ inline auto printMagenta(std::format_string<Args...> fmt, Args&&... args) noexce
 Equivalent to calling `print`, but with a given color. Automatically calls `evo::styleConsole::reset()` at the end.
 
 
-
-
-
-### println
-```C++
-// 1
-auto println(std::string_view message) noexcept -> void;
-
-// 2
-template<class... Args>
-inline auto println(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
-
-// 3
-inline auto println() noexcept -> void;
-
-// 4
-inline auto println(size_t num_newlines) noexcept -> void;
-```
-Print a message to the console and append a newline. On windows in debug mode, will also print to the debug console.
-
-- overload 2: equivalent to `println(std::format(fmt, args)`
-- overload 3: just prints a single `\n` character
-- overload 4: prints a number of `\n` characters. Optimizes 0-7.
 
 
 ### println colors
