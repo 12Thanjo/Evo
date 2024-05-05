@@ -31,6 +31,17 @@ namespace evo{
 			};
 
 
+			EVO_NODISCARD constexpr auto c_str() const noexcept -> const char* {
+				return this->data();
+			};
+
+
+
+			EVO_NODISCARD constexpr operator std::string_view() const noexcept {
+				return std::string_view(this->data());
+			};
+
+
 		private:
 			bool using_ptr;
 

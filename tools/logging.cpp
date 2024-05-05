@@ -25,87 +25,98 @@
 
 
 
-
 namespace evo{
+
 
 	#if defined(EVO_PLATFORM_WINDOWS)
 
-		auto log(CStrProxy message) noexcept -> void {
-			OutputDebugStringA(message.data());
-			WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message.data(), static_cast<DWORD>(stringSize(message.data(), UINT_MAX)), nullptr, nullptr);
-		};
+		auto print(std::string_view message) noexcept -> void {
+			#if defined(EVO_CONFIG_DEBUG)
+				auto message_str = std::string(message);
+				OutputDebugStringA(message_str.c_str());
+			#endif
 
-
-		auto styleConsoleFatal() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | BACKGROUND_RED);
-		};
-
-		auto styleConsoleError() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
-		};
-
-		auto styleConsoleWarning() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
-		};
-
-		auto styleConsoleInfo() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_GREEN);
-		};
-
-		auto styleConsoleSuccess() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
-		};
-
-		auto styleConsoleDebug() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE);
-		};
-
-		auto styleConsoleTrace() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
-		};
-
-		auto styleConsoleReset() noexcept -> void {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+			WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message.data(), static_cast<DWORD>(message.size()), nullptr, nullptr);
 		};
 
 	#else
-		auto log(CStrProxy message) noexcept -> void {
-			std::cout << message.data();
+
+		auto print(std::string_view message) noexcept -> void {
+			std::cout << message;
 		};
 
-
-		auto styleConsoleFatal() noexcept -> void {
-			std::cout << "\033[41m";
-		};
-
-		auto styleConsoleError() noexcept -> void {
-			std::cout << "\033[31m";
-		};
-
-		auto styleConsoleWarning() noexcept -> void {
-			std::cout << "\033[33m";
-		};
-
-		auto styleConsoleInfo() noexcept -> void {
-			std::cout << "\033[36m";
-		};
-
-		auto styleConsoleSuccess() noexcept -> void {
-			std::cout << "\033[32m";
-		};
-
-		auto styleConsoleDebug() noexcept -> void {
-			std::cout << "\033[35m";
-		};
-
-		auto styleConsoleTrace() noexcept -> void {
-			std::cout << "\033[30m";
-		};
-
-		auto styleConsoleReset() noexcept -> void {
-			std::cout << "\033[0m";
-		};
 
 	#endif
+
+
+
+	namespace log{
+
+		static auto default_callback(const Message& message) noexcept -> void {
+			const char* message_type_str = nullptr;
+
+			switch(message.type){
+				case Type::Fatal: {
+					message_type_str = "<Fatal>  ";
+					styleConsole::fatal();
+				} break;
+
+				case Type::Error: {
+					message_type_str = "<Error>  ";
+					styleConsole::error();
+				} break;
+
+				case Type::Warning: {
+					message_type_str = "<Warning>";
+					styleConsole::warning();
+				} break;
+
+				case Type::Success: {
+					message_type_str = "<Success>";
+					styleConsole::success();
+				} break;
+
+				case Type::Info: {
+					message_type_str = "<Info>   ";
+					styleConsole::info();
+				} break;
+
+				case Type::Debug: {
+					message_type_str = "<Debug>  ";
+					styleConsole::debug();
+				} break;
+
+				case Type::Trace: {
+					message_type_str = "<Trace>  ";
+					styleConsole::trace();
+				} break;
+
+			};
+
+			println("{} {}", message_type_str, message.str);
+
+			styleConsole::reset();
+		};
+
+
+
+		static auto callback = std::function<void(const Message&)>(default_callback);
+
+
+		auto setCallback(const std::function<void(const Message&)>& log_callback) noexcept -> void {
+			callback = log_callback;
+		};
+
+
+		auto callCallback(const Message& msg) noexcept -> void {
+			callback(msg);
+		};
+
+
+		auto setDefaultCallback() noexcept -> void {
+			callback = default_callback;
+		};
+
+	};
 	
 };

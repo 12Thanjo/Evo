@@ -82,6 +82,11 @@ namespace evo{
 
 
 
+			EVO_NODISCARD constexpr operator std::string_view() const noexcept {
+				return std::string_view(this->data(), this->size());
+			};
+
+
 			//////////////////////////////////////////////////////////////////////
 			// element access
 
@@ -232,7 +237,7 @@ namespace evo{
 				this->_remaining_capacity -= 1;
 			};
 
-			constexpr auto pop_back(char value) noexcept -> void {
+			constexpr auto pop_back() noexcept -> void {
 				EVO_DEBUG_ASSERT(this->_remaining_capacity < CAPACITY); // string is already empty
 
 				this->_remaining_capacity += 1;

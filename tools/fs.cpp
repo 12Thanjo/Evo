@@ -32,7 +32,7 @@ namespace evo{
 			#if defined(EVO_CONFIG_DEBUG)
 
 				if(this->valid){
-					logWarning("Didn't explicitly call evo::fs::File::close() - was done automatically (only because in debug build)");
+					log::warning("Didn't explicitly call evo::fs::File::close() - was done automatically (only because in debug build)");
 
 					this->close();
 				}

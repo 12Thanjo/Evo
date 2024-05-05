@@ -80,7 +80,7 @@ namespace tests{
 
 
 		if(static_vector[0] != 1 || static_vector.at(1) != 2 || static_vector[2] != 3){
-			evo::logError("evo::StaticVector::insert / evo::StaticVector::emplace test failed");
+			evo::printlnRed("evo::StaticVector::insert / evo::StaticVector::emplace test failed");
 			return false;
 		}
 
@@ -89,13 +89,13 @@ namespace tests{
 
 		for(size_t i = 0; i < static_vector.size(); i+=1){
 			if(static_vector[i] != int(i)){
-				evo::logError("evo::StaticVector::operator=(std::initializer_list) test failed");
+				evo::printlnRed("evo::StaticVector::operator=(std::initializer_list) test failed");
 				return false;
 			}
 		}
 
 
-		evo::logInfo("StaticVector tests passed");
+		evo::printlnGreen("StaticVector tests passed");
 		return true;
 	};
 
@@ -108,7 +108,7 @@ namespace tests{
 		auto str_proxy = evo::CStrProxy(str);
 
 		if(str_proxy.data() != str.data()){
-			evo::logError("evo::CStrProxy test failed");
+			evo::printlnRed("evo::CStrProxy test failed");
 			return false;
 		}
 
@@ -208,7 +208,7 @@ namespace tests{
 
 
 
-		evo::logInfo("Bimap tests passed");
+		evo::printlnGreen("Bimap tests passed");
 		return true;
 	};
 
@@ -226,14 +226,15 @@ namespace tests{
 		}
 
 
-		evo::logInfo("Random tests passed");
+		evo::printlnGreen("Random tests passed");
 		return true;
 	};
 
 
+
+
 	
 };
-
 
 
 
@@ -251,18 +252,29 @@ enum class FlagsTest{
 	_max,
 };
 
+
 auto main() noexcept -> int {
 	int num_failed = 0;
 
+	// evo::log::setDefaultCallback();
+	// evo::printlnWhite("hello from evo (white)");
+	// evo::printlnGray("hello from evo (gray)");
+	// evo::printlnBlack("hello from evo (black)");
+	// evo::printlnRed("hello from evo (red)");
+	// evo::printlnYellow("hello from evo (yellow)");
+	// evo::printlnGreen("hello from evo (green)");
+	// evo::printlnCyan("hello from evo (cyan)");
+	// evo::printlnBlue("hello from evo (blue)");
+	// evo::printlnMagenta("hello from evo (magenta)");
 
 
-	// evo::logTrace("logging test (Trace)");
-	// evo::logDebug("logging test (Debug)");
-	// evo::logSuccess("logging test (Success)");
-	// evo::logInfo("logging test (Info)");
-	// evo::logWarning("logging test (Warning)");
-	// evo::logError("logging test (Error)");
-	// evo::logFatal("logging test (Fatal)");
+	evo::log::trace("logging test (Trace)");
+	evo::log::debug("logging test (Debug)");
+	evo::log::success("logging test (Success)");
+	evo::log::info("logging test (Info)");
+	evo::log::warning("logging test (Warning)");
+	evo::log::error("logging test (Error)");
+	evo::log::fatal("logging test (Fatal)");
 
 
 	auto flags = evo::Flags<FlagsTest>{FlagsTest::A, FlagsTest::C};
@@ -276,18 +288,18 @@ auto main() noexcept -> int {
 
 
 
-
 	if(false){
 		evo::unreachable();
 	}
 
 
-	evo::log('\n');
+	evo::println();
+
 
 	if(num_failed == 0){
-		evo::logInfo("All tests passed!");
+		evo::printlnGreen("All tests passed!");
 	}else{
-		evo::logError(std::format("Tests failed: {}", num_failed));
+		evo::printlnRed(std::format("Tests failed: {}", num_failed));
 	}
 
 	return 0;

@@ -71,6 +71,12 @@ constexpr auto operator =(const StaticString<StrSize>& str) noexcept -> StaticSt
 ```
 
 
+### Type conversion
+```C++
+EVO_NODISCARD constexpr operator std::string_view() const noexcept;
+```
+
+
 ### Element Access
 
 
@@ -210,7 +216,7 @@ Adds a character to the end of the string
 
 #### pop_back
 ```C++
-constexpr auto pop_back(char value) noexcept -> void
+constexpr auto pop_back() noexcept -> void
 ```
 Removes a character to the end of the string
 

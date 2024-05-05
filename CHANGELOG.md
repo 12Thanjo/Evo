@@ -1,5 +1,12 @@
 # Evo Changelog
 
+### v1.5.0
+- Major update to logging
+- Removed the extraneous parameter in `StaticString::pop_back()`
+- Added `CStrProxy::operator std::string_view`
+- Added `CStrProxy::c_str()`
+- Added `StaticString::operator std::string_view`
+
 ### v1.4.3
 - Added `random01()`
 - Added `randomBool()`

@@ -35,12 +35,13 @@ Requires at least C++20.
 
 <a name="compiler-flags"></a>
 ### Compiler Flags / defines
-(By `true` or `false` I mean defined or undefined respectively)
 
-| Flag                       | Default | Description                                                                                                     |
-|----------------------------|:-------:|-----------------------------------------------------------------------------------------------------------------|
-| `EVO_GLOBAL_NUMERIC_TYPES` | `false` | `true` means that numeric types are put into the global namespace, whereas `false` puts them in `Evo` namespace |
-| `EVO_CONFIG_DEBUG`         | `false` | Sets whether to run in debug mode `true` or release mode `false`                                                |
+| Flag                       | Default | Description                                                                                                       |
+|----------------------------|:-------:|-------------------------------------------------------------------------------------------------------------------|
+| `EVO_GLOBAL_NUMERIC_TYPES` | `undef` | `define` means that numeric types are put into the global namespace, whereas `undef` puts them in `Evo` namespace |
+| `EVO_CONFIG_DEBUG`         | `undef` | Sets whether to run in debug mode `define` or release mode `undef`                                                |
+| `EVO_NO_LOG_FILTER`        | `undef` | Don't filter out logging in debug mode ([find out more here](documentation/tools/logging/md))					   |
+| `EVO_NO_LOG_TRACE`         | `undef` | Filter out trace logs even in debug mode ([find out more here](documentation/tools/logging/md))				   |
 
 
 These are defined becasue they mess up Sublime's syntax highlighting otherwise
@@ -52,7 +53,7 @@ These are defined becasue they mess up Sublime's syntax highlighting otherwise
 
 
 ### Important note if using older versions:
-`v1.4.0` contains breaking changes 
+Versions `v1.4.0` and `v1.5.0` contains breaking changes.
 
 
 ### Running the tests:
