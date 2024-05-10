@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.5.2
+- Fixed `Assert()`  and `debugAssert()` not adding a newline to the message
+
 ### v1.5.1
 - Fixed style codes showing up in the Windows debug console
 - Added `printStdout()`, `printlnStdout()`, `printStderr()`, and `printlnStderr()`

@@ -623,7 +623,7 @@ namespace evo{
 	inline auto Assert(bool conditional, std::string_view message) noexcept -> void {
 		if(conditional == false){
 			styleConsole::fatal();
-			print(message);
+			println(message);
 			styleConsole::reset();
 			breakpoint();
 		}
