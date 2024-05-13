@@ -62,3 +62,6 @@ I using premake5 as my build system, but I had it generate make files in case yo
 The test build system makefiles are also only setup for windows.
 
 ##### TODO: how to use testing suite
+
+## Updates
+List of changes for each version can be found [here](CHANGELOG.md).

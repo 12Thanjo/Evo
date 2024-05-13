@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.5.3
+- Added proper forwarding of arguments in formatting printing / logging
+- Added link to CHANGELOG in README
+
 ### v1.5.2
 - Fixed `Assert()`  and `debugAssert()` not adding a newline to the message
 

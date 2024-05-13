@@ -27,7 +27,7 @@ namespace evo{
 
 	template<class... Args>
 	inline auto print(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-		print(std::format(fmt, args...));
+		print(std::format(fmt, std::forward<decltype(args)>(args)...));
 	};
 
 
@@ -38,7 +38,7 @@ namespace evo{
 
 	template<class... Args>
 	inline auto println(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-		print(std::format(fmt, args...) + '\n');
+		print(std::format(fmt, std::forward<decltype(args)>(args)...) + '\n');
 	};
 
 	inline auto println() noexcept -> void {
@@ -70,7 +70,7 @@ namespace evo{
 
 	template<class... Args>
 	inline auto printStdout(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-		printStdout(std::format(fmt, args...));
+		printStdout(std::format(fmt, std::forward<decltype(args)>(args)...));
 	};
 
 	inline auto printlnStdout(std::string_view message) noexcept -> void {
@@ -79,7 +79,7 @@ namespace evo{
 
 	template<class... Args>
 	inline auto printlnStdout(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-		printStdout(std::format(fmt, args...) + '\n');
+		printStdout(std::format(fmt, std::forward<decltype(args)>(args)...) + '\n');
 	};
 
 
@@ -112,7 +112,7 @@ namespace evo{
 
 	template<class... Args>
 	inline auto printStderr(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-		printStderr(std::format(fmt, args...));
+		printStderr(std::format(fmt, std::forward<decltype(args)>(args)...));
 	};
 
 	inline auto printlnStderr(std::string_view message) noexcept -> void {
@@ -121,7 +121,7 @@ namespace evo{
 
 	template<class... Args>
 	inline auto printlnStderr(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-		printStderr(std::format(fmt, args...) + '\n');
+		printStderr(std::format(fmt, std::forward<decltype(args)>(args)...) + '\n');
 	};
 
 	inline auto printlnStderr() noexcept -> void {
@@ -230,7 +230,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printWhite(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::white();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -245,7 +245,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printGray(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::gray();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -260,7 +260,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printBlack(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::black();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -276,7 +276,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printRed(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::red();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -291,7 +291,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printYellow(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::yellow();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -306,7 +306,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printGreen(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::green();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -321,7 +321,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printCyan(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::cyan();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -336,7 +336,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printBlue(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::blue();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -351,7 +351,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printMagenta(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::magenta();
-		print(fmt, args...);
+		print(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -369,7 +369,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnWhite(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::white();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -384,7 +384,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnGray(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::gray();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -399,7 +399,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnBlack(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::black();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -415,7 +415,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnRed(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::red();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -430,7 +430,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnYellow(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::yellow();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -445,7 +445,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnGreen(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::green();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -460,7 +460,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnCyan(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::cyan();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -475,7 +475,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnBlue(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::blue();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -490,7 +490,7 @@ namespace evo{
 	template<class... Args>
 	inline auto printlnMagenta(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		styleConsole::text::magenta();
-		println(fmt, args...);
+		println(fmt, std::forward<decltype(args)>(args)...);
 		styleConsole::reset();
 	};
 
@@ -532,7 +532,7 @@ namespace evo{
 
 		template<class... Args>
 		inline auto fatal(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-			const std::string message = std::format(fmt, args...);
+			const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 			fatal(message);
 		};
 
@@ -543,7 +543,7 @@ namespace evo{
 
 		template<class... Args>
 		inline auto error(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-			const std::string message = std::format(fmt, args...);
+			const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 			error(message);
 		};
 
@@ -554,7 +554,7 @@ namespace evo{
 
 		template<class... Args>
 		inline auto warning(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-			const std::string message = std::format(fmt, args...);
+			const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 			warning(message);
 		};
 
@@ -565,7 +565,7 @@ namespace evo{
 
 		template<class... Args>
 		inline auto success(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-			const std::string message = std::format(fmt, args...);
+			const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 			success(message);
 		};
 
@@ -576,7 +576,7 @@ namespace evo{
 
 		template<class... Args>
 		inline auto info(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
-			const std::string message = std::format(fmt, args...);
+			const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 			info(message);
 		};
 
@@ -590,7 +590,7 @@ namespace evo{
 		template<class... Args>
 		inline auto debug(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 			#if defined(EVO_CONFIG_DEBUG) || defined(EVO_NO_LOG_FILTER)
-				const std::string message = std::format(fmt, args...);
+				const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 				debug(message);
 			#endif
 		};
@@ -608,7 +608,7 @@ namespace evo{
 		inline auto trace(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 			#if defined(EVO_CONFIG_DEBUG) || defined(EVO_NO_LOG_FILTER)
 				#if !defined(EVO_NO_LOG_TRACE)
-					const std::string message = std::format(fmt, args...);
+					const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 					trace(message);
 				#endif
 			#endif
