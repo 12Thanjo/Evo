@@ -620,6 +620,7 @@ namespace evo{
 	//////////////////////////////////////////////////////////////////////
 	// asserts, etc.
 
+
 	inline auto Assert(bool conditional, std::string_view message) noexcept -> void {
 		if(conditional == false){
 			styleConsole::fatal();
@@ -629,11 +630,24 @@ namespace evo{
 		}
 	};
 
+	template<class... Args>
+	inline auto Assert(bool conditional, std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		Assert(conditional, std::format(fmt, std::forward<decltype(args)>(args)...));
+	};
+
 
 
 	inline auto debugAssert([[maybe_unused]] bool conditional, [[maybe_unused]] std::string_view message) noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
 			evo::Assert(conditional, message);
+		#endif
+	};
+
+	template<class... Args>
+	inline auto debugAssert([[maybe_unused]] bool conditional, [[maybe_unused]] std::format_string<Args...> fmt, [[maybe_unused]] Args&&... args) noexcept
+	-> void {
+		#if defined(EVO_CONFIG_DEBUG)
+			evo::Assert(conditional, fmt, std::forward<decltype(args)>(args)...);
 		#endif
 	};
 
@@ -656,6 +670,13 @@ namespace evo{
 		#endif
 	};
 
+	template<class... Args>
+	EVO_NORETURN inline auto fatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		fatalBreak(std::format(fmt, std::forward<decltype(args)>(args)...));
+	};
+
+
+
 
 	EVO_NORETURN inline auto debugFatalBreak([[maybe_unused]] std::string_view msg) noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
@@ -667,6 +688,11 @@ namespace evo{
 		#endif
 
 		unreachable();
+	};
+
+	template<class... Args>
+	EVO_NORETURN inline auto debugFatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		debugFatalBreak(std::format(fmt, std::forward<decltype(args)>(args)...));
 	};
 
 };

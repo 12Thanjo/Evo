@@ -243,6 +243,9 @@ Equivalent to calling `println`, but with a given color. Automatically calls `ev
 ### Assert
 ```C++
 inline auto Assert(bool conditional, CStrProxy message) noexcept -> void;
+
+template<class... Args>
+inline auto Assert(bool conditional, std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
 ```
 If `conditional` is false, print out the message in the "Fatal" style, and calls a breakpoint.
 
@@ -250,6 +253,9 @@ If `conditional` is false, print out the message in the "Fatal" style, and calls
 ### debugAssert
 ```C++
 inline auto debugAssert([[maybe_unused]] bool conditional, [[maybe_unused]] CStrProxy message) noexcept -> void;
+
+template<class... Args>
+inline auto debugAssert([[maybe_unused]] bool conditional, [[maybe_unused]] std::format_string<Args...> fmt, [[maybe_unused]] Args&&... args) noexcept -> void;
 ```
 Calls `Assert(conditional, message)` in debug mode, otherwise is a no-op.
 
@@ -258,12 +264,18 @@ Calls `Assert(conditional, message)` in debug mode, otherwise is a no-op.
 ### fatalBreak
 ```C++
 EVO_NORETURN inline auto fatalBreak(CStrProxy msg) noexcept -> void;
+
+template<class... Args>
+EVO_NORETURN inline auto fatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
 ```
 Prints the message to the console in the fatal style. Calls a breakpoint and marks unreachable in debug mode, otherwise calls `std::exit(1)`.
 
 ### debugFatalBreak
 ```C++
 EVO_NORETURN inline auto debugFatalBreak(CStrProxy msg) noexcept -> void;
+
+template<class... Args>
+EVO_NORETURN inline auto debugFatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
 ```
 In debug mode, will print a message to the console in the fatal style, and calls a breakpoint. Both debug mode and release mode call unreachable.
 

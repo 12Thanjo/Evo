@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.5.4
+- Added formatting versions of `Assert()`, `debugAssert()`, `fatalBreak()`, and `debugFatalBreak()`
+
 ### v1.5.3
 - Added proper forwarding of arguments in formatting printing / logging
 - Added link to CHANGELOG in README
