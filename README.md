@@ -18,6 +18,7 @@ Requires at least C++20.
 - [ArrayProxy](documentation/containers/ArrayProxy.md)
 - [Bimap](documentation/containers/Bimap.md)
 - [CStrProxy](documentation/containers/CStrProxy.md)
+- [Defer](documentation/containers/Defer.md)
 - [Expected](documentation/containers/Expected.md)
 - [Flags](documentation/containers/flags.md)
 - [iterators](documentation/containers/iterators.md)

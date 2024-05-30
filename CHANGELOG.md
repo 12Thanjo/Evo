@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.6.0
+- Added new container `Defer`
+
 ### v1.5.4
 - Added formatting versions of `Assert()`, `debugAssert()`, `fatalBreak()`, and `debugFatalBreak()`
 

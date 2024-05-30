@@ -280,6 +280,10 @@ auto main() noexcept -> int {
 	auto flags = evo::Flags<FlagsTest>{FlagsTest::A, FlagsTest::C};
 	auto static_string = evo::StaticString<5>{"hello"};
 
+	EVO_DEFER([](){
+		evo::printlnBlue("Defer");
+	});
+
 
 	if(tests::static_vector_test() == false){ num_failed += 1; }
 	if(tests::c_str_proxy_test() == false){ num_failed += 1; }
