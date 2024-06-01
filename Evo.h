@@ -32,6 +32,7 @@
 #include "./containers/ArrayProxy.h"
 #include "./containers/Flags.h"
 #include "./containers/StaticVector.h"
+#include "./containers/SmallVector.h"
 #include "./containers/StaticString.h"
 #include "./containers/CStrProxy.h"
 #include "./containers/Bimap.h"

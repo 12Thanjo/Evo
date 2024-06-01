@@ -227,7 +227,7 @@ namespace evo{
 
 				// remove from data
 				using DataVecIterator = std::vector<value_type, DataAllocator>::iterator;
-				this->data_vec.erase(DataVecIterator(this->data_vec.data() + index));
+				this->data_vec.erase(DataVecIterator(this->data_vec.begin() + index));
 
 				this->rehash(this->bucket_count());
 				return 1;
@@ -260,7 +260,7 @@ namespace evo{
 
 				// remove from data
 				using DataVecIterator = std::vector<value_type, DataAllocator>::iterator;
-				this->data_vec.erase(DataVecIterator(this->data_vec.data() + index));
+				this->data_vec.erase(DataVecIterator(this->data_vec.begin() + index));
 
 				this->rehash(this->bucket_count());
 				return 1;
@@ -286,7 +286,8 @@ namespace evo{
 				}
 
 				// attempted to get value that doesn't exist
-				EVO_BREAK();
+				breakpoint();
+				unreachable();
 			};
 
 			EVO_NODISCARD constexpr auto at_left(const LeftT& left) const noexcept -> const value_type& {
@@ -301,7 +302,8 @@ namespace evo{
 				}
 
 				// attempted to get value that doesn't exist
-				EVO_BREAK();
+				breakpoint();
+				unreachable();
 			};
 
 
@@ -318,7 +320,8 @@ namespace evo{
 				}
 
 				// attempted to get value that doesn't exist
-				EVO_BREAK();
+				breakpoint();
+				unreachable();
 			};
 
 			EVO_NODISCARD constexpr auto at_right(const RightT& right) const noexcept -> const value_type& {
@@ -333,7 +336,8 @@ namespace evo{
 				}
 
 				// attempted to get value that doesn't exist
-				EVO_BREAK();
+				breakpoint();
+				unreachable();
 			};
 
 

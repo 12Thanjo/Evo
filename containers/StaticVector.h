@@ -62,7 +62,7 @@ namespace evo{
 
 			EVO_NODISCARD constexpr StaticVector(StaticVector<T, CAPACITY>&& rhs) noexcept : current_size(std::exchange(rhs.current_size, 0)) {
 				for(size_t i = 0; i < this->size(); i+=1){
-					this->data_block[i] = std::move(rhs[i]);
+					this->data_block[i] = std::move(rhs.data_block[i]);
 				}
 			};
 
@@ -71,7 +71,7 @@ namespace evo{
 				this->current_size = std::exchange(rhs.current_size, 0);
 
 				for(size_t i = 0; i < this->size(); i+=1){
-					this->data_block[i] = std::move(rhs[i]);
+					this->data_block[i] = std::move(rhs.data_block[i]);
 				}
 
 				return *this;

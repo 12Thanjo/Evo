@@ -85,7 +85,7 @@ namespace tests{
 		}
 
 
-		static_vector = std::initializer_list{0, 1, 2, 3};
+		static_vector = std::initializer_list<int>{0, 1, 2, 3};
 
 		for(size_t i = 0; i < static_vector.size(); i+=1){
 			if(static_vector[i] != int(i)){
@@ -215,7 +215,7 @@ namespace tests{
 
 
 
-	auto random_test() noexcept -> bool {
+	EVO_NODISCARD auto random_test() noexcept -> bool {
 
 		for(uint64_t i = 0; i < 1000; i+=1){
 			const uint64_t random_num = evo::random(10, 15);
@@ -232,6 +232,27 @@ namespace tests{
 
 
 
+	EVO_NODISCARD auto small_vector_test() noexcept -> bool {
+		auto small_vec = evo::SmallVector<int, 8>{1, 2, 3};
+		auto small_vec2 = evo::SmallVector<int, 8>{4, 5, 6};
+
+		small_vec = small_vec2;
+		small_vec = std::move(small_vec2);
+
+		if(small_vec[0] != 4 || small_vec[1] != 5 || small_vec[2] != 6){
+			return false;
+		}
+
+		small_vec.clear();
+
+		for(int integer : small_vec){
+			
+		}
+
+
+		evo::printlnGreen("SmallVector tests passed");
+		return true;
+	};
 
 	
 };
@@ -289,6 +310,7 @@ auto main() noexcept -> int {
 	if(tests::c_str_proxy_test() == false){ num_failed += 1; }
 	if(tests::bimap_test() == false){ num_failed += 1; }
 	if(tests::random_test() == false){ num_failed += 1; }
+	if(tests::small_vector_test() == false){ num_failed += 1; }
 
 
 

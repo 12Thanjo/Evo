@@ -23,6 +23,7 @@ Requires at least C++20.
 - [Flags](documentation/containers/flags.md)
 - [iterators](documentation/containers/iterators.md)
 - [Result](documentation/containers/Result.md)
+- [SmallVector](documentation/containers/SmallVector.md)
 - [StaticString](documentation/containers/StaticString.md)
 - [StaticVector](documentation/containers/StaticVector.md)
 

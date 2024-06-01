@@ -1,5 +1,11 @@
 # Evo Changelog
 
+### v1.7.0
+- Made the constructors/destructors of iterators `constexpr`
+- Made `Bimap::get_left()` and `Bimap::get_right()` properly end with an unreachable
+- Fixed `StaticVector` move constructors
+- Added `SmallVector` container
+
 ### v1.6.0
 - Added new container `Defer`
 

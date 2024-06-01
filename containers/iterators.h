@@ -17,8 +17,8 @@ namespace evo{
             using reference         = const T&;
 
 
-            ConstIterator(const T* ptr) noexcept : iter(ptr) {};
-            ~ConstIterator() = default;
+            constexpr ConstIterator(const T* ptr) noexcept : iter(ptr) {};
+            constexpr ~ConstIterator() = default;
 
 
             constexpr auto operator++() noexcept -> ConstIterator<T>& {
@@ -64,8 +64,8 @@ namespace evo{
     		using pointer           = T*;
     		using reference         = T&;
 
-			Iterator(T* ptr) noexcept : iter(ptr) {};
-    		~Iterator() = default;
+			constexpr Iterator(T* ptr) noexcept : iter(ptr) {};
+    		constexpr ~Iterator() = default;
 
 
     		constexpr auto operator++() noexcept -> Iterator<T>& {
@@ -121,8 +121,8 @@ namespace evo{
             using reference         = const T&;
 
 
-            ConstReverseIterator(const T* ptr) noexcept : iter(ptr) {};
-            ~ConstReverseIterator() = default;
+            constexpr ConstReverseIterator(const T* ptr) noexcept : iter(ptr) {};
+            constexpr ~ConstReverseIterator() = default;
 
 
             constexpr auto operator++() noexcept -> ConstReverseIterator<T>& {
@@ -168,8 +168,8 @@ namespace evo{
     		using pointer           = T*;
     		using reference         = T&;
 
-			ReverseIterator(T* ptr) noexcept : iter(ptr) {};
-    		~ReverseIterator() = default;
+			constexpr ReverseIterator(T* ptr) noexcept : iter(ptr) {};
+    		constexpr ~ReverseIterator() = default;
 
 
     		constexpr auto operator++() noexcept -> ReverseIterator<T>& {
