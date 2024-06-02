@@ -82,7 +82,6 @@
 #elif defined(__ARM_ARCH)          || defined(_M_ARM)            || \
       defined(__TARGET_ARCH_THUMB) || defined(__TARGET_ARCH_ARM) || \
       defined(__arm__)             || defined(__arm64)           || defined(__thumb__)     || \
-      defined(_M_ARM64)            || defined(__aarch64__)       || defined(__AARCH64EL__) || \
       defined(__ARM_ARCH_4T__)     || defined(__ARM_ARCH_4__)    || \
       defined(__ARM_ARCH_5TE__)    || defined(__ARM_ARCH_5TEJ__) || \
       defined(__ARM_ARCH_6KZ__)    || defined(__ARM_ARCH_6T2__)  || \
@@ -91,6 +90,11 @@
       defined(__ARM_ARCH_7__)      || defined(__ARM_ARCH_7A__)
 
     #define EVO_ARCH_ARM
+
+#elif defined(_M_ARM64) || defined(__aarch64__) || defined(__AARCH64EL__)
+
+    #define EVO_ARCH_ARM64
+
 
 #elif defined(__riscv)
     #define EVO_ARCH_RISCV

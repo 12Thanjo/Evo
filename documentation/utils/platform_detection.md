@@ -33,6 +33,7 @@ Will error if it can't decect the compiler.
 |----------------------|--------------|
 | `EVO_ARCH_X86_32`    | x86-32       |
 | `EVO_ARCH_X86_64`    | x86-64       |
-| `EVO_ARCH_ARM`       | Arm          |
+| `EVO_ARCH_ARM`       | ARM          |
+| `EVO_ARCH_ARM64`     | ARM64        |
 | `EVO_ARCH_RISCV`     | RISC-V       |
 

@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.8.1
+- Added detection of the ARM64 architecture
+
 ### v1.8.0
 - Added architecture detection to plaform_detection.h
 
