@@ -12,6 +12,7 @@ Will error if it can't decect the compiler.
 | `EVO_COMPILER_CLANG` | Clang    |
 | `EVO_COMPILER_GCC`   | GCC      |
 
+
 ## OS/Platform
 Will error if it can't decect the OS/Platform.
 | Define                       | Platform      | Note                                                                        |
@@ -25,4 +26,13 @@ Will error if it can't decect the OS/Platform.
 | `EVO_PLATFORM_IOS_SIMULATOR` | IOS Simulator | Will be set along with `EVO_PLATFORM_APPLE` and `EVO_PLATFORM_IOS`          |
 | `EVO_PLATFORM_MAC`           | MAC           | Will be set along with `EVO_PLATFORM_APPLE`                                 |
 
+
+## Architecture
+Will error if it can't decect the compiler.
+| Define               | Architecture |
+|----------------------|--------------|
+| `EVO_ARCH_X86_32`    | x86-32       |
+| `EVO_ARCH_X86_64`    | x86-64       |
+| `EVO_ARCH_ARM`       | Arm          |
+| `EVO_ARCH_RISCV`     | RISC-V       |
 

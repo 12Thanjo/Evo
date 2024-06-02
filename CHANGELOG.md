@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.8.0
+- Added architecture detection to plaform_detection.h
+
 ### v1.7.0
 - Made the constructors/destructors of iterators `constexpr`
 - Made `Bimap::get_left()` and `Bimap::get_right()` properly end with an unreachable
