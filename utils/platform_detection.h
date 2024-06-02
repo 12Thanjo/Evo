@@ -11,7 +11,7 @@
 #elif __GNUG__
 	#define EVO_COMPILER_GCC
 #else
-	#error Unknown compiler
+	#define EVO_COMPILER_UNKNOWN
 #endif
 
 
@@ -51,14 +51,11 @@
 
 	#elif TARGET_OS_MAC
 		#define EVO_PLATFORM_MAC
-	
-	#else
-		#error "Unknown Apple platform"
+
 	#endif
 
 #else
-	#error "Unknown platform"
-
+	#define EVO_PLATFORM_UNKNOWN
 #endif
 
 
@@ -100,7 +97,7 @@
     #define EVO_ARCH_RISCV
 
 #else
-    #error "Unknown Architecture"
+	#define EVO_ARCH_UNKNOWN
 #endif
 
 

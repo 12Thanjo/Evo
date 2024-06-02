@@ -6,11 +6,12 @@ Automatic definition of macros to help detect the current platform
 
 ## Compiler
 Will error if it can't decect the compiler.
-| Define               | Compiler |
-|----------------------|----------|
-| `EVO_COMPILER_MSVC`  | MSVC     |
-| `EVO_COMPILER_CLANG` | Clang    |
-| `EVO_COMPILER_GCC`   | GCC      |
+| Define                 | Compiler |
+|------------------------|----------|
+| `EVO_COMPILER_MSVC`    | MSVC     |
+| `EVO_COMPILER_CLANG`   | Clang    |
+| `EVO_COMPILER_GCC`     | GCC      |
+| `EVO_COMPILER_UNKNOWN` | Unknown  |
 
 
 ## OS/Platform
@@ -25,6 +26,7 @@ Will error if it can't decect the OS/Platform.
 | `EVO_PLATFORM_IOS`           | IOS           | Will be set along with `EVO_PLATFORM_APPLE`								 |
 | `EVO_PLATFORM_IOS_SIMULATOR` | IOS Simulator | Will be set along with `EVO_PLATFORM_APPLE` and `EVO_PLATFORM_IOS`          |
 | `EVO_PLATFORM_MAC`           | MAC           | Will be set along with `EVO_PLATFORM_APPLE`                                 |
+| `EVO_PLATFORM_UNKNOWN`       | Unknown       |                                                                             |
 
 
 ## Architecture
@@ -36,4 +38,5 @@ Will error if it can't decect the compiler.
 | `EVO_ARCH_ARM`       | ARM          |
 | `EVO_ARCH_ARM64`     | ARM64        |
 | `EVO_ARCH_RISCV`     | RISC-V       |
+| `EVO_ARCH_UNKNOWN`   | Unknown      |
 

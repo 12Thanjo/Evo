@@ -1,5 +1,10 @@
 # Evo Changelog
 
+### v1.8.2
+- Added unknown options for detection of compiler, platform, and architecture
+- Fixed `SmallVector` properly resizing
+- Removed invalid asserts from `SmallVector`
+
 ### v1.8.1
 - Added detection of the ARM64 architecture
 

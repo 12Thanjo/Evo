@@ -240,13 +240,21 @@ namespace tests{
 		small_vec = std::move(small_vec2);
 
 		if(small_vec[0] != 4 || small_vec[1] != 5 || small_vec[2] != 6){
+			evo::printlnRed("SmallVector test 1 failed");
 			return false;
 		}
 
 		small_vec.clear();
 
-		for(int integer : small_vec){
-			
+		for(size_t i = 0; i < 12; i+=1){
+			small_vec.emplace_back(i);
+
+			for(size_t j = 0; j < i; j+=1){
+				if(small_vec[j] != int(j)){
+					evo::printlnRed("SmallVector test 2 failed");
+					return false;
+				}
+			}
 		}
 
 
@@ -277,18 +285,6 @@ enum class FlagsTest{
 auto main() noexcept -> int {
 	int num_failed = 0;
 
-	// evo::log::setDefaultCallback();
-	// evo::printlnWhite("hello from evo (white)");
-	// evo::printlnGray("hello from evo (gray)");
-	// evo::printlnBlack("hello from evo (black)");
-	// evo::printlnRed("hello from evo (red)");
-	// evo::printlnYellow("hello from evo (yellow)");
-	// evo::printlnGreen("hello from evo (green)");
-	// evo::printlnCyan("hello from evo (cyan)");
-	// evo::printlnBlue("hello from evo (blue)");
-	// evo::printlnMagenta("hello from evo (magenta)");
-
-
 	evo::log::trace("logging test (Trace)");
 	evo::log::debug("logging test (Debug)");
 	evo::log::success("logging test (Success)");
@@ -311,7 +307,6 @@ auto main() noexcept -> int {
 	if(tests::bimap_test() == false){ num_failed += 1; }
 	if(tests::random_test() == false){ num_failed += 1; }
 	if(tests::small_vector_test() == false){ num_failed += 1; }
-
 
 
 	if(false){
