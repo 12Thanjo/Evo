@@ -26,6 +26,7 @@ Requires at least C++20.
 - [SmallVector](documentation/containers/SmallVector.md)
 - [StaticString](documentation/containers/StaticString.md)
 - [StaticVector](documentation/containers/StaticVector.md)
+- [Variant](documentation/containers/Variant.md)
 
 ## Tools
 - [FS (File System)](documentation/tools/fs.md)

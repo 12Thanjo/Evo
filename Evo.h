@@ -25,6 +25,10 @@
 #include "./utils/select_size_type.h"
 #include "./utils/strings.h"
 
+
+#include "./tools/logging.h"
+
+
 #include "./containers/Defer.h"
 #include "./containers/Result.h"
 #include "./containers/Expected.h"
@@ -36,9 +40,9 @@
 #include "./containers/StaticString.h"
 #include "./containers/CStrProxy.h"
 #include "./containers/Bimap.h"
+#include "./containers/Variant.h"
 
 
-#include "./tools/logging.h"
 #include "./tools/fs.h"
 #include "./tools/time.h"
 #include "./tools/random.h"

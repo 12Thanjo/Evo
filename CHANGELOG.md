@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.9.0
+- Added `Variant`
+
 ### v1.8.2
 - Added unknown options for detection of compiler, platform, and architecture
 - Fixed `SmallVector` properly resizing

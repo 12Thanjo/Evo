@@ -262,7 +262,25 @@ namespace tests{
 		return true;
 	};
 
-	
+
+	EVO_NODISCARD auto variant_test() noexcept -> bool {
+		auto variant = evo::Variant<int, double, std::array<evo::byte, 11>>();
+
+		variant.emplace<double>(12.4);
+
+		if(variant.is<double>() == false){
+			evo::printlnRed("Variant test 1 failed");
+			return false;
+		}
+
+		if(variant.as<double>() != 12.4){
+			evo::printlnRed("Variant test 2 failed");
+			return false;	
+		}
+
+		evo::printlnGreen("Variant tests passed");
+		return true;
+	};
 };
 
 
@@ -294,8 +312,8 @@ auto main() noexcept -> int {
 	evo::log::fatal("logging test (Fatal)");
 
 
-	auto flags = evo::Flags<FlagsTest>{FlagsTest::A, FlagsTest::C};
-	auto static_string = evo::StaticString<5>{"hello"};
+	[[maybe_unused]] auto flags = evo::Flags<FlagsTest>{FlagsTest::A, FlagsTest::C};
+	[[maybe_unused]] auto static_string = evo::StaticString<5>{"hello"};
 
 	EVO_DEFER([](){
 		evo::printlnBlue("Defer");
@@ -307,6 +325,7 @@ auto main() noexcept -> int {
 	if(tests::bimap_test() == false){ num_failed += 1; }
 	if(tests::random_test() == false){ num_failed += 1; }
 	if(tests::small_vector_test() == false){ num_failed += 1; }
+	if(tests::variant_test() == false){ num_failed += 1; }
 
 
 	if(false){
