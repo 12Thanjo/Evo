@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.9.1
+- Fixed some warnings for `StaticVector`
+
 ### v1.9.0
 - Added `Variant`
 

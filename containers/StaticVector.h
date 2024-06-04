@@ -39,7 +39,7 @@ namespace evo{
 			///////////////////////////////////
 			// copy
 
-			EVO_NODISCARD constexpr StaticVector(const StaticVector<T, CAPACITY>& rhs) noexcept : current_size(rhs.size()) {
+			EVO_NODISCARD constexpr StaticVector(const StaticVector<T, CAPACITY>& rhs) noexcept : current_size(size_type(rhs.size())) {
 				for(size_t i = 0; i < this->size(); i+=1){
 					this->data_block[i] = rhs[i];
 				}
@@ -47,7 +47,7 @@ namespace evo{
 
 
 			constexpr auto operator=(const StaticVector<T, CAPACITY>& rhs) noexcept -> StaticVector<T, CAPACITY>& {
-				this->current_size = rhs.size();
+				this->current_size = size_type(rhs.size());
 
 				for(size_t i = 0; i < this->size(); i+=1){
 					this->data_block[i] = rhs[i];
