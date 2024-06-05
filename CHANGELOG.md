@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.9.2
+- Changed the `SmallVector` too small error to be a warning
+
 ### v1.9.1
 - Fixed some warnings for `StaticVector`
 

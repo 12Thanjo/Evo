@@ -22,16 +22,16 @@ namespace evo{
 			using const_reverse_iterator = ConstReverseIterator<T>;
 
 
-			static_assert(
-				sizeof(StaticVector<T, SMALL_CAPACITY>) >= sizeof(std::vector<T>),
-				"evo::SmallVector received a SMALL_CAPACITY value that is smaller than optimal"
-			);
 
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
+			EVO_NODISCARD inline SmallVector() noexcept {};
 
-			EVO_NODISCARD inline SmallVector() noexcept = default;
+			[[deprecated("evo::SmallVector received a SMALL_CAPACITY value that is smaller than optimal")]]
+			EVO_NODISCARD inline SmallVector() noexcept requires(sizeof(StaticVector<T, SMALL_CAPACITY>) >= sizeof(std::vector<T>)) {};
+
+
 			inline ~SmallVector() noexcept = default;
 
 
