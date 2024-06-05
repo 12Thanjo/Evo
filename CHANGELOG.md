@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.9.3
+- Fixed reverse iteration for `StaticVector` and `SmallVector`
+
 ### v1.9.2
 - Changed the `SmallVector` too small error to be a warning
 

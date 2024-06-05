@@ -221,13 +221,13 @@ namespace evo{
 			EVO_NODISCARD inline auto cend() const noexcept -> const_iterator { return const_iterator{&this->data()[this->size()]}; };
 
 
-			EVO_NODISCARD inline auto rbegin()        noexcept -> reverse_iterator       {return reverse_iterator{&this->data()[this->size()-1]};      };
-			EVO_NODISCARD inline auto rbegin()  const noexcept -> const_reverse_iterator {return const_reverse_iterator{&this->data()[this->size()-1]};};
-			EVO_NODISCARD inline auto crbegin() const noexcept -> const_reverse_iterator {return const_reverse_iterator{&this->data()[this->size()-1]};};
+			EVO_NODISCARD inline auto rbegin()        noexcept -> reverse_iterator       { return reverse_iterator{&this->data()[this->size()-1]};      };
+			EVO_NODISCARD inline auto rbegin()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{&this->data()[this->size()-1]};};
+			EVO_NODISCARD inline auto crbegin() const noexcept -> const_reverse_iterator { return const_reverse_iterator{&this->data()[this->size()-1]};};
 
-			EVO_NODISCARD inline auto rend()        noexcept -> reverse_iterator       { return reverse_iterator{this->data()[-1]};       };
-			EVO_NODISCARD inline auto rend()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data()[-1]}; };
-			EVO_NODISCARD inline auto crend() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data()[-1]}; };
+			EVO_NODISCARD inline auto rend()        noexcept -> reverse_iterator       { return reverse_iterator{this->data()-1};       };
+			EVO_NODISCARD inline auto rend()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data()-1}; };
+			EVO_NODISCARD inline auto crend() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data()-1}; };
 
 
 

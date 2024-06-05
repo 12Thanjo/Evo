@@ -94,6 +94,22 @@ namespace tests{
 			}
 		}
 
+		{
+			int counter = 3;
+			for(auto i = static_vector.rbegin(); i != static_vector.rend(); ++i){
+				if(*i != counter){
+					evo::printlnRed("evo::StaticVector reverse iteration test failed");
+					return false;
+				}
+				counter -= 1;
+			}
+
+			if(counter != -1){
+				evo::printlnRed("evo::StaticVector reverse iteration test failed (didn't go far enough)");
+				return false;
+			}
+		}
+
 
 		evo::printlnGreen("StaticVector tests passed");
 		return true;
@@ -303,13 +319,13 @@ enum class FlagsTest{
 auto main() noexcept -> int {
 	int num_failed = 0;
 
-	evo::log::trace("logging test (Trace)");
-	evo::log::debug("logging test (Debug)");
-	evo::log::success("logging test (Success)");
-	evo::log::info("logging test (Info)");
-	evo::log::warning("logging test (Warning)");
-	evo::log::error("logging test (Error)");
-	evo::log::fatal("logging test (Fatal)");
+	// evo::log::trace("logging test (Trace)");
+	// evo::log::debug("logging test (Debug)");
+	// evo::log::success("logging test (Success)");
+	// evo::log::info("logging test (Info)");
+	// evo::log::warning("logging test (Warning)");
+	// evo::log::error("logging test (Error)");
+	// evo::log::fatal("logging test (Fatal)");
 
 
 	[[maybe_unused]] auto flags = evo::Flags<FlagsTest>{FlagsTest::A, FlagsTest::C};
