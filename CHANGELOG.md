@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.9.4
+- Fixed `SmallVector::insert`
+
 ### v1.9.3
 - Fixed reverse iteration for `StaticVector` and `SmallVector`
 

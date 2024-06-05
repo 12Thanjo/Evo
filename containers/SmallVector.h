@@ -282,9 +282,7 @@ namespace evo{
 					this->copy_to_big();
 				}
 
-				*this->end() = value;
-
-				this->current_size += 1;
+				this->emplace_back(value);
 
 				const auto begin = this->rbegin();
 				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
@@ -303,9 +301,7 @@ namespace evo{
 					this->copy_to_big();
 				}
 
-				*this->end() = std::move(value);
-
-				this->current_size += 1;
+				this->emplace_back(std::move(value));
 
 				const auto begin = this->rbegin();
 				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
