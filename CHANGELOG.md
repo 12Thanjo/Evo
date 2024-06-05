@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.9.5
+- Fixed `SmallVector` incorrectly warning about size
+- Fixed `SmallVector` inserting / emplacing when switching from internal buffer to heap
+
 ### v1.9.4
 - Fixed `SmallVector::insert`
 

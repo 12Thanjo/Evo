@@ -278,40 +278,12 @@ namespace evo{
 			// insert
 
 			inline auto insert(const_iterator pos, const T& value) noexcept -> iterator {
-				if(this->is_small() && this->size() == SMALL_CAPACITY){
-					this->copy_to_big();
-				}
-
-				this->emplace_back(value);
-
-				const auto begin = this->rbegin();
-				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
-
-
-				for(reverse_iterator i = begin; i != end; ++i){
-					std::swap(*i, *std::next(i));
-				}
-
-				return iterator{const_cast<T*>(&*pos)};
+				return this->emplace(pos, value);
 			};
 
 
 			inline auto insert(const_iterator pos, T&& value) noexcept -> iterator {
-				if(this->is_small() && this->size() == SMALL_CAPACITY){
-					this->copy_to_big();
-				}
-
-				this->emplace_back(std::move(value));
-
-				const auto begin = this->rbegin();
-				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
-
-
-				for(reverse_iterator i = begin; i != end; ++i){
-					std::swap(*i, *std::next(i));
-				}
-
-				return iterator{const_cast<T*>(&*pos)};
+				return this->emplace(pos, std::move(value));
 			};
 
 
@@ -326,15 +298,15 @@ namespace evo{
 			///////////////////////////////////
 			// emplace
 
-			template<class... Args>
-			inline auto emplace(const_iterator pos, Args&&... args) noexcept -> iterator {
+			inline auto emplace(const_iterator pos, auto&&... args) noexcept -> iterator {
+				size_t index = (size_t(&*pos) - size_t(this->data())) / sizeof(T);
+
 				if(this->is_small() && this->size() == SMALL_CAPACITY){
 					this->copy_to_big();
 				}
+				this->emplace_back(std::forward<decltype(args)>(args)...);
 
-				std::construct_at(&*this->end(), std::forward<Args>(args)...);
-
-				this->current_size += 1;
+				pos = const_iterator(this->data() + index);
 
 				const auto begin = this->rbegin();
 				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
