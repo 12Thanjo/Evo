@@ -39,6 +39,15 @@ namespace evo{
 				debugAssert(this->is<T>(), "Variant is not of this type");
 				return std::get<T>(this->getNative());
 			};
+
+
+			constexpr auto visit(auto callable) noexcept {
+				return std::visit(callable, this->getNative());
+			};
+
+			constexpr auto visit(auto callable) const noexcept {
+				return std::visit(callable, this->getNative());
+			};
 	
 	};
 

@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.9.6
+- Added `Variant::visit()`
+
 ### v1.9.5
 - Fixed `SmallVector` incorrectly warning about size
 - Fixed `SmallVector` inserting / emplacing when switching from internal buffer to heap

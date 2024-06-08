@@ -40,3 +40,13 @@ EVO_NODISCARD constexpr auto as() const noexcept -> const T&;
 Get the currently held value.
 
 
+
+### visit
+```C++
+EVO_NODISCARD constexpr auto visit(auto callable) noexcept;
+EVO_NODISCARD constexpr auto visit(auto callable) const noexcept;
+```
+Make a call to `std::visit` on the native variant
+
+
+
