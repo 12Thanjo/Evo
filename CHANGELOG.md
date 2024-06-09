@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.10.0
+- Added `EVO_CONCAT` macro
+
 ### v1.9.6
 - Added `Variant::visit()`
 

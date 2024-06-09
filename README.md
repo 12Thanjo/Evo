@@ -47,12 +47,17 @@ Requires at least C++20.
 | `EVO_NO_LOG_TRACE`         | `undef` | Filter out trace logs even in debug mode ([find out more here](documentation/tools/logging/md))				   |
 
 
-These are defined becasue they mess up Sublime's syntax highlighting otherwise
+These are defined because they mess up Sublime's syntax highlighting otherwise
 | Define          | Value           |
 |-----------------|-----------------|
 | `EVO_NODISCARD` | `[[nodiscard]]` |
 | `EVO_NORETURN`  | `[[noreturn]]`  |
 
+
+### Misc. Macros 
+| Define             | Description            |
+|--------------------|------------------------|
+| `EVO_CONCAT(a, b)` | Concatenate two values |
 
 
 ### Important note if using older versions:
