@@ -98,6 +98,18 @@ namespace evo{
 			};
 
 
+			///////////////////////////////////
+			// construct from iterators
+
+			template<class InputIt>
+			EVO_NODISCARD constexpr SmallVector(InputIt first, InputIt last) noexcept {
+				this->reserve(std::distance(first, last));
+				for(auto i = first; i != last; ++i){
+					this->emplace_back(*i);
+				}
+			};
+
+
 
 
 
@@ -272,6 +284,20 @@ namespace evo{
 			inline auto clear() noexcept -> void {
 				this->emplace_data<StaticVector<T, SMALL_CAPACITY>>();
 			};
+
+			///////////////////////////////////
+			// reserve
+
+			inline auto reserve(size_t new_cap) noexcept -> void {
+				if(this->is_big()){
+					this->get_big().reserve(new_cap);
+
+				}else if(new_cap > SMALL_CAPACITY){
+					this->copy_to_big();
+					this->get_big().reserve(new_cap);
+				}
+			};
+
 
 
 			///////////////////////////////////

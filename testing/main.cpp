@@ -78,6 +78,7 @@ namespace tests{
 		static_vector.insert(std::next(static_vector.begin()), 3);
 		static_vector.emplace(static_vector.cbegin(), 1);
 
+		const auto static_vector_copy = evo::StaticVector<int, 3>(static_vector.begin(), static_vector.end());
 
 		if(static_vector[0] != 1 || static_vector.at(1) != 2 || static_vector[2] != 3){
 			evo::printlnRed("evo::StaticVector::insert / evo::StaticVector::emplace test failed");
@@ -254,6 +255,9 @@ namespace tests{
 
 		small_vec = small_vec2;
 		small_vec = std::move(small_vec2);
+
+		const auto small_vec_copy = evo::SmallVector<int, 3>(small_vec.begin(), small_vec.end());
+
 
 		if(small_vec[0] != 4 || small_vec[1] != 5 || small_vec[2] != 6){
 			evo::printlnRed("SmallVector test 1 failed");

@@ -41,6 +41,9 @@ EVO_NODISCARD SmallVector() noexcept;
 EVO_NODISCARD SmallVector(const SmallVector<T, SMALL_CAPACITY>& rhs) noexcept;
 EVO_NODISCARD SmallVector(SmallVector<T, SMALL_CAPACITY>&& rhs) noexcept;
 EVO_NODISCARD SmallVector(std::initializer_list<T> init_list) noexcept;
+
+template<class InputIt>
+EVO_NODISCARD constexpr StaticVector(InputIt first, InputIt last) noexcept;
 ```
 
 
@@ -188,6 +191,13 @@ Returns the total capacity of the vector.
 auto clear() noexcept -> void;
 ```
 Clears all data in the vector (calls the destructor of each existing element).
+
+
+#### reserve
+```C++
+auto reserve(size_t new_cap) noexcept -> void;
+```
+Make sure at least the given ammount is allocated. If `new_cap` is smaller than the current ammount allocated, do nothing.
 
 
 #### insert

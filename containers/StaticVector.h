@@ -99,7 +99,7 @@ namespace evo{
 			constexpr auto operator=(std::initializer_list<T> init_list) noexcept -> StaticVector<T, CAPACITY>& {
 				EVO_DEBUG_ASSERT(init_list.size() < CAPACITY);
 				
-				this->resize(0);
+				this->clear();
 
 				for(size_t i = 0; i < init_list.size(); i+=1){
 					this->data_block[i] = std::move(*(init_list.begin() + i));
@@ -111,7 +111,15 @@ namespace evo{
 			};
 
 
+			///////////////////////////////////
+			// construct from iterators
 
+			template<class InputIt>
+			EVO_NODISCARD constexpr StaticVector(InputIt first, InputIt last) noexcept : current_size(0) {
+				for(auto i = first; i != last; ++i){
+					this->emplace_back(*i);
+				}
+			};
 
 
 			//////////////////////////////////////////////////////////////////////

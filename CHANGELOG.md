@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.11.0
+- Added constructors for `StaticVector` and `SmallVector` from iterators
+- Added `SmallVector::reserve()`
+
 ### v1.10.0
 - Added `EVO_CONCAT` macro
 

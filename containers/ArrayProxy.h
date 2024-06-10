@@ -82,6 +82,11 @@ namespace evo{
 			EVO_NODISCARD constexpr ArrayProxy(const evo::StaticVector<T, COUNT>& static_vector) noexcept
 				: count(static_vector.size()), data_ptr(static_vector.data()) {};
 
+
+			template<size_t COUNT>
+			EVO_NODISCARD constexpr ArrayProxy(const evo::SmallVector<T, COUNT>& small_vector) noexcept
+				: count(small_vector.size()), data_ptr(small_vector.data()) {};
+
 			//////////////////////////////////////////////////////////////////////
 			// iterators
 

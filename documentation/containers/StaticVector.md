@@ -41,6 +41,9 @@ EVO_NODISCARD constexpr StaticVector() noexcept;
 EVO_NODISCARD constexpr StaticVector(const StaticVector<T, CAPACITY>& rhs) noexcept;
 EVO_NODISCARD constexpr StaticVector(StaticVector<T, CAPACITY>&& rhs) noexcept;
 EVO_NODISCARD constexpr StaticVector(std::initializer_list<T> init_list) noexcept;
+
+template<class InputIt>
+EVO_NODISCARD constexpr StaticVector(InputIt first, InputIt last) noexcept;
 ```
 
 
