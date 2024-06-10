@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.12.0
+- Fixed `std::prev` for evo iterators
+- Changed ArrayProxy to use evo iterators
+
 ### v1.11.0
 - Added constructors for `StaticVector` and `SmallVector` from iterators
 - Added `SmallVector::reserve()`
