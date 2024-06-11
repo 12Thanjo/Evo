@@ -301,6 +301,30 @@ namespace tests{
 		evo::printlnGreen("Variant tests passed");
 		return true;
 	};
+
+	EVO_NODISCARD auto defer_test() noexcept -> bool {
+		int value = 1;
+
+		{
+			EVO_DEFER([&]() noexcept -> void {
+				value += 1;
+			});
+
+			EVO_DEFER([&]() noexcept -> void {
+				value *= 2;
+			});
+
+			value += 3;
+		}
+
+
+		if(value != 9){
+			evo::printlnRed("Defer tests failed");
+		}
+
+		evo::printlnGreen("Defer tests passed");
+		return true;
+	};
 };
 
 
@@ -335,10 +359,6 @@ auto main() noexcept -> int {
 	[[maybe_unused]] auto flags = evo::Flags<FlagsTest>{FlagsTest::A, FlagsTest::C};
 	[[maybe_unused]] auto static_string = evo::StaticString<5>{"hello"};
 
-	EVO_DEFER([](){
-		evo::printlnBlue("Defer");
-	});
-
 
 	if(tests::static_vector_test() == false){ num_failed += 1; }
 	if(tests::c_str_proxy_test() == false){ num_failed += 1; }
@@ -346,6 +366,7 @@ auto main() noexcept -> int {
 	if(tests::random_test() == false){ num_failed += 1; }
 	if(tests::small_vector_test() == false){ num_failed += 1; }
 	if(tests::variant_test() == false){ num_failed += 1; }
+	if(tests::defer_test() == false){ num_failed += 1; }
 
 
 	if(false){

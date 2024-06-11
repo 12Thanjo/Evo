@@ -25,3 +25,11 @@ template<class Enum>
 EVO_NODISCARD constexpr auto to_underlying(Enum e) noexcept -> std::underlying_type_t<Enum>;
 ```
 Converts an enum value to its underyling integer type. This is an implementation of C++23's `std::to_underlying`
+
+
+### hashCombine:
+```C++
+constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t;
+constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t;
+```
+Combine a number of hashes

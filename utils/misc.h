@@ -39,5 +39,29 @@ namespace evo{
 		return static_cast<std::underlying_type_t<Enum>>(e);
 	};
 
+
+
+
+	constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t {
+		return lhs ^ (rhs << 1);
+	};
+
+	constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t {
+		size_t output = *list.begin();
+
+		bool left = true;
+		for(size_t i = 1; i < list.size(); i+=1){
+			if(left){
+				output ^= list.begin()[i] << 1;
+			}else{
+				output ^= list.begin()[i] >> 1;
+			}
+
+			left = !left;
+		}
+
+		return output;
+	};
+
 	
 };

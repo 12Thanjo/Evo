@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.13.0
+- Added `hashCombine`
+
 ### v1.12.0
 - Fixed `std::prev` for evo iterators
 - Changed ArrayProxy to use evo iterators

@@ -2,7 +2,7 @@
 
 #include <functional>
 
-#define EVO_DEFER(callback) ::evo::Defer _evo_defer_num ## __COUNTER__ = ::evo::Defer(callback)
+#define EVO_DEFER(callback) ::evo::Defer EVO_CONCAT(_evo_defer_num, __COUNTER__) = ::evo::Defer(callback)
 
 namespace evo{
 
