@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.13.1
+- Added implementation of standard hash for `Variant`
+
 ### v1.13.0
 - Added `hashCombine`
 

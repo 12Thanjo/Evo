@@ -11,11 +11,11 @@ namespace evo{
 	class Variant : public std::variant<Ts...> {
 		public:
 			
-			EVO_NODISCARD auto getNative() noexcept -> std::variant<Ts...>& {
+			EVO_NODISCARD constexpr auto getNative() noexcept -> std::variant<Ts...>& {
 				return static_cast<std::variant<Ts...>&>(*this);
 			};
 
-			EVO_NODISCARD auto getNative() const noexcept -> const std::variant<Ts...>& {
+			EVO_NODISCARD constexpr auto getNative() const noexcept -> const std::variant<Ts...>& {
 				return static_cast<const std::variant<Ts...>&>(*this);
 			};
 
@@ -52,4 +52,12 @@ namespace evo{
 	};
 
 
+};
+
+
+template<class... Ts>
+struct std::hash<evo::Variant<Ts...>>{
+	auto operator()(const evo::Variant<Ts...>& variant) const noexcept -> size_t {
+		return std::hash<std::variant<Ts...>>{}(variant.getNative());
+	};
 };

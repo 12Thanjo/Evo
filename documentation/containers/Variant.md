@@ -6,7 +6,7 @@ template<class... Ts>
 class Variant : public std::variant<Ts...>;
 ```
 
-Container to add a nicer interface over std::variant.
+Container to add a nicer interface over `std::variant`. It inherits from `std::variant`.
 
 
 
@@ -20,6 +20,14 @@ Container to add a nicer interface over std::variant.
 
 
 ## Member Functions
+
+### getNative
+```C++
+EVO_NODISCARD constexpr auto getNative()       noexcept ->       std::variant<Ts...>&;
+EVO_NODISCARD constexpr auto getNative() const noexcept -> const std::variant<Ts...>&;
+```
+Get the native C++ standard library version of the variant.
+
 
 ### is
 ```C++
