@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.13.2
+- Fixed `SmallVector` incorrectly warning about size
+
 ### v1.13.1
 - Added implementation of standard hash for `Variant`
 

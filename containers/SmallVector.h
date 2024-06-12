@@ -29,7 +29,7 @@ namespace evo{
 			EVO_NODISCARD inline SmallVector() noexcept {};
 
 			[[deprecated("evo::SmallVector received a SMALL_CAPACITY value that is smaller than optimal")]]
-			EVO_NODISCARD inline SmallVector() noexcept requires(sizeof(StaticVector<T, SMALL_CAPACITY>) >= sizeof(std::vector<T>)) {};
+			EVO_NODISCARD inline SmallVector() noexcept requires(sizeof(StaticVector<T, SMALL_CAPACITY>) < sizeof(std::vector<T>)) {};
 
 
 			inline ~SmallVector() noexcept = default;
