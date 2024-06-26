@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.13.3
+- Fixed improperly setting of some `Windows.h` macros
+
 ### v1.13.2
 - Fixed `SmallVector` incorrectly warning about size
 
