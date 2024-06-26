@@ -7,6 +7,11 @@ workspace "testing"
 		"Release"
 	}
 
+	platforms{
+		"Windows",
+		"Linux",
+	}
+
 	flags{
 		"MultiProcessorCompile",
 		"NoPCH",
@@ -44,6 +49,23 @@ workspace "testing"
 
 
 
+
+
+config = {
+	location = ("%{wks.location}"),
+	platform = ("%{cfg.platform}"),
+	build    = ("%{cfg.buildcfg}"),
+	project  = ("%{prj.name}"),
+}
+
+
+target = {
+	bin = string.format("%s/build/%s/%s/bin/",   config.location, config.platform, config.build),
+	obj = string.format("%s/build/%s/%s/obj/%s", config.location, config.platform, config.build, config.project),
+}
+
+
+
 ----------------------------------------------
 -- projects
 
@@ -51,18 +73,14 @@ project "init"
 	kind "Makefile"
 
 	buildcommands {
-		( "mkdir -p ./obj/Debug" ),
-		( "mkdir -p ./obj/Release" ),
-
-		( "mkdir -p ./bin/Debug" ),
-		( "mkdir -p ./bin/Release" ),
+		string.format("mkdir -p %s", target.bin),
+		string.format("mkdir -p %s", target.obj),
 	}
 
 	cleancommands{
-		( "rm -rf ./obj/" ),
-		( "rm -rf ./bin/" ),
+		( "rm -rf ./build/" ),
 
-		("@echo \"Clean testing may have an error - don't worry, its fine (it seems to be a bug in the genation from premake5)\""),
+		("@echo \"\\\"Clean testing\\\" may have an error - don't worry, its fine (it seems to be a bug in the genation from premake5)\""),
 		("@echo"),
 	}
 
@@ -78,6 +96,9 @@ project "testing"
 	-- stl "libc++"
 	exceptionhandling "Off"
 	allmodulespublic "Off"
+
+	targetdir(target.bin)
+	objdir(target.obj)
 
 	files {
 		"./main.cpp",
@@ -105,7 +126,7 @@ project "run"
 	kind "Makefile"
 
 	buildcommands {
-		( " \"./bin/%{cfg.buildcfg}/testing\" " ),
+		(target.bin .. "testing.exe"),
 	}
 
 project "*"
@@ -135,7 +156,7 @@ project "gdb"
 	}
 
 	buildcommands {
-		( " gdb \"./bin/%{cfg.buildcfg}/testing\" " ),
+		string.format(" gdb \"%s/testing.exe\" ", target.bin),
 	}
 
 project "*"

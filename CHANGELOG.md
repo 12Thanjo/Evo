@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.14.0
+- Added Linux support for testing build system
+- Fixed compiling of `print()` on non-Windows platforms
+
 ### v1.13.3
 - Fixed improperly setting of some `Windows.h` macros
 

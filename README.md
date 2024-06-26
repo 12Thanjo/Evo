@@ -67,7 +67,7 @@ Versions `v1.4.0` and `v1.5.0` contains breaking changes.
 ### Running the tests:
 The test suite is not fully implemented, but if you would like to run it it is in the testing directory.
 I using premake5 as my build system, but I had it generate make files in case you don't have and/or don't want to use premake5.
-The test build system makefiles are also only setup for windows.
+The test build system makefiles are also only setup for Windows and Linux (although it's untested in Linux).
 
 ##### TODO: how to use testing suite
 

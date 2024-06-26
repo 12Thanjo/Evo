@@ -18,9 +18,11 @@
 	#endif
 
 	#include <windows.h>
+
+#else
+	#include <iostream>
 #endif
 
-#include <iostream>
 
 
 
@@ -29,8 +31,8 @@ namespace evo{
 
 	auto printStdout(std::string_view message) noexcept -> void {
 		#if defined(EVO_PLATFORM_WINDOWS)
-			static auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
-			WriteConsoleA(handle, message.data(), static_cast<DWORD>(message.size()), nullptr, nullptr);
+			static auto handle = ::GetStdHandle(STD_OUTPUT_HANDLE);
+			::WriteConsoleA(handle, message.data(), static_cast<DWORD>(message.size()), nullptr, nullptr);
 		#else
 			std::cout << message;
 		#endif
@@ -38,8 +40,8 @@ namespace evo{
 
 	auto printStderr(std::string_view message) noexcept -> void {
 		#if defined(EVO_PLATFORM_WINDOWS)
-			static auto handle = GetStdHandle(STD_ERROR_HANDLE);
-			WriteConsoleA(handle, message.data(), static_cast<DWORD>(message.size()), nullptr, nullptr);
+			static auto handle = ::GetStdHandle(STD_ERROR_HANDLE);
+			::WriteConsoleA(handle, message.data(), static_cast<DWORD>(message.size()), nullptr, nullptr);
 		#else
 			std::cerr << message;
 		#endif
@@ -49,9 +51,9 @@ namespace evo{
 
 
 	auto print(std::string_view message) noexcept -> void {
-		#if defined(EVO_CONFIG_DEBUG)
+		#if defined(EVO_CONFIG_DEBUG) && defined(EVO_PLATFORM_WINDOWS)
 			auto message_str = std::string(message);
-			OutputDebugStringA(message_str.c_str());
+			::OutputDebugStringA(message_str.c_str());
 		#endif
 
 		printStdout(message);
