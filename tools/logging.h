@@ -581,14 +581,14 @@ namespace evo{
 		};
 
 
-		inline auto debug(std::string_view message) noexcept -> void {
+		inline auto debug([[maybe_unused]] std::string_view message) noexcept -> void {
 			#if defined(EVO_CONFIG_DEBUG) || defined(EVO_NO_LOG_FILTER)
 				callCallback(Message(Type::Debug, message));
 			#endif
 		};
 
 		template<class... Args>
-		inline auto debug(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		inline auto debug([[maybe_unused]] std::format_string<Args...> fmt, [[maybe_unused]] Args&&... args) noexcept -> void {
 			#if defined(EVO_CONFIG_DEBUG) || defined(EVO_NO_LOG_FILTER)
 				const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);
 				debug(message);
@@ -596,7 +596,7 @@ namespace evo{
 		};
 
 
-		inline auto trace(std::string_view message) noexcept -> void {
+		inline auto trace([[maybe_unused]] std::string_view message) noexcept -> void {
 			#if defined(EVO_CONFIG_DEBUG) || defined(EVO_NO_LOG_FILTER)
 				#if !defined(EVO_NO_LOG_TRACE)
 					callCallback(Message(Type::Trace, message));
@@ -605,7 +605,7 @@ namespace evo{
 		};
 
 		template<class... Args>
-		inline auto trace(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+		inline auto trace([[maybe_unused]] std::format_string<Args...> fmt, [[maybe_unused]] Args&&... args) noexcept -> void {
 			#if defined(EVO_CONFIG_DEBUG) || defined(EVO_NO_LOG_FILTER)
 				#if !defined(EVO_NO_LOG_TRACE)
 					const std::string message = std::format(fmt, std::forward<decltype(args)>(args)...);

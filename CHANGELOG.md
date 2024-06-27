@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.1
+- Removed warnings from `debug()` and `trace()` when they are no-ops
+
 ### v1.14.0
 - Added Linux support for testing build system
 - Fixed compiling of `print()` on non-Windows platforms
