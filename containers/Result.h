@@ -27,19 +27,19 @@ namespace evo{
 			///////////////////////////////////
 			// checking
 
-			EVO_NODISCARD inline constexpr auto isSuccess() const noexcept -> bool { return this->val.has_value(); };
-			EVO_NODISCARD inline constexpr auto isError() const noexcept -> bool { return !this->isSuccess(); };
+			EVO_NODISCARD constexpr auto isSuccess() const noexcept -> bool { return this->val.has_value(); };
+			EVO_NODISCARD constexpr auto isError() const noexcept -> bool { return !this->isSuccess(); };
 
 
 			///////////////////////////////////
 			// getting value
 
-			EVO_NODISCARD inline constexpr auto value() const noexcept -> const T& {
+			EVO_NODISCARD constexpr auto value() const noexcept -> const T& {
 				EVO_DEBUG_ASSERT(this->isSuccess());
 				return *this->val;
 			};
 
-			EVO_NODISCARD inline constexpr auto value() noexcept -> const T& {
+			EVO_NODISCARD constexpr auto value() noexcept -> T& {
 				EVO_DEBUG_ASSERT(this->isSuccess());
 				return *this->val;
 			};

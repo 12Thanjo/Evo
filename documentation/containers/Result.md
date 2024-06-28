@@ -47,22 +47,22 @@ EVO_NODISCARD static constexpr auto error() noexcept -> Result;
 
 ### isSuccess
 ```C++
-EVO_NODISCARD inline constexpr auto isSuccess() const noexcept -> bool;
+EVO_NODISCARD constexpr auto isSuccess() const noexcept -> bool;
 ```
 Get if there no error occured in the function
 
 
 ### isError
 ```C++
-EVO_NODISCARD inline constexpr auto isError() const noexcept -> bool;
+EVO_NODISCARD constexpr auto isError() const noexcept -> bool;
 ```
 Get if there was an error that occured in the function
 
 
 ## value
 ```C++
-EVO_NODISCARD inline constexpr auto value() const noexcept -> const T&;
-EVO_NODISCARD inline constexpr auto value() noexcept -> T&;
+EVO_NODISCARD constexpr auto value() const noexcept -> const T&;
+EVO_NODISCARD constexpr auto value()       noexcept ->       T&;
 ```
 Get the return value (only present if `isSuccess() == true`)
 

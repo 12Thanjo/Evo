@@ -1,7 +1,10 @@
 # Evo Changelog
 
+### v1.14.3
+- Fixed the non-const version of `Result::value()` to actually return a non-const-reference
+
 ### v1.14.2
-- Added `log::setDefaultThreadSafeCallback()`
+- Added `log::setDefaultThreadSaferCallback()`
 
 ### v1.14.1
 - Removed warnings from `debug()` and `trace()` when they are no-ops
