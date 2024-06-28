@@ -105,7 +105,57 @@ namespace evo{
 
 			};
 
-			println("{} {}", message_type_str, message.str);
+			print("{} {}\n", message_type_str, message.str);
+
+			styleConsole::reset();
+		};
+
+
+		static std::mutex default_thread_safer_callback_lock{};
+		static auto default_thread_safer_callback(const Message& message) noexcept -> void {
+			const auto lock_guard = std::lock_guard(default_thread_safer_callback_lock);
+
+			const char* message_type_str = nullptr;
+
+			switch(message.type){
+				case Type::Fatal: {
+					message_type_str = "<Fatal>  ";
+					styleConsole::fatal();
+				} break;
+
+				case Type::Error: {
+					message_type_str = "<Error>  ";
+					styleConsole::error();
+				} break;
+
+				case Type::Warning: {
+					message_type_str = "<Warning>";
+					styleConsole::warning();
+				} break;
+
+				case Type::Success: {
+					message_type_str = "<Success>";
+					styleConsole::success();
+				} break;
+
+				case Type::Info: {
+					message_type_str = "<Info>   ";
+					styleConsole::info();
+				} break;
+
+				case Type::Debug: {
+					message_type_str = "<Debug>  ";
+					styleConsole::debug();
+				} break;
+
+				case Type::Trace: {
+					message_type_str = "<Trace>  ";
+					styleConsole::trace();
+				} break;
+
+			};
+
+			print("{} {}\n", message_type_str, message.str);
 
 			styleConsole::reset();
 		};
@@ -127,6 +177,10 @@ namespace evo{
 
 		auto setDefaultCallback() noexcept -> void {
 			callback = default_callback;
+		};
+
+		auto setDefaultThreadSaferCallback() noexcept -> void {
+			callback = default_thread_safer_callback;
 		};
 
 	};

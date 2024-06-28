@@ -10,7 +10,7 @@
 #include "./time.h"
 
 
-// I have no idea why this is needed, but for some reason std::format_string is defined
+// I have no idea why this is needed, but for some reason std::format_string is undefined
 #if defined(EVO_COMPILER_MSVC)
 	namespace std{
 		template <class... _Args>
@@ -520,6 +520,7 @@ namespace evo{
 
 		auto setCallback(const std::function<const Message&>& log_callback) noexcept -> void;
 		auto setDefaultCallback() noexcept -> void;
+		auto setDefaultThreadSaferCallback() noexcept -> void;
 
 		auto callCallback(const Message& msg) noexcept -> void;
 

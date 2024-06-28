@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.2
+- Added `log::setDefaultThreadSafeCallback()`
+
 ### v1.14.1
 - Removed warnings from `debug()` and `trace()` when they are no-ops
 

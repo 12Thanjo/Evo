@@ -381,6 +381,12 @@ auto setDefaultCallback() noexcept -> void;
 ```
 Set the callback to the default.
 
+### setDefaultThreadSafeCallback
+```C++
+auto setDefaultThreadSaferCallback() noexcept -> void;
+```
+Set the callback to the default (thread safer version). It is guaranteed to be safe if the only console manipulation done is through logging, but any outside manipulation may have negative effects.
+
 
 ### callCallback
 ```C++
