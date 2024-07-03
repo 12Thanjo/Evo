@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.14.4
+- Added `SmallVector` default SMALL_CAPACITY
+- Removed warning for `SmallVector` of below optimal SMALL_CAPACITY
+
 ### v1.14.3
 - Fixed the non-const version of `Result::value()` to actually return a non-const-reference
 

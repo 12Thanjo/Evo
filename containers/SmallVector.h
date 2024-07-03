@@ -5,8 +5,13 @@
 
 namespace evo{
 
+	template<typename T>
+	constexpr auto optimal_small_vector_size() noexcept -> size_t {
+		return std::max<size_t>(sizeof(std::vector<T>) / sizeof(T), 1);
+	};
 
-	template<typename T, size_t SMALL_CAPACITY>
+
+	template<typename T, size_t SMALL_CAPACITY = optimal_small_vector_size<T>()>
 	class SmallVector{
 		public:
 			using value_type             = T;
@@ -27,9 +32,6 @@ namespace evo{
 			// constructors / destructors
 
 			EVO_NODISCARD inline SmallVector() noexcept {};
-
-			[[deprecated("evo::SmallVector received a SMALL_CAPACITY value that is smaller than optimal")]]
-			EVO_NODISCARD inline SmallVector() noexcept requires(sizeof(StaticVector<T, SMALL_CAPACITY>) < sizeof(std::vector<T>)) {};
 
 
 			inline ~SmallVector() noexcept = default;
@@ -272,6 +274,11 @@ namespace evo{
 				}else{
 					return this->get_big().capactity();
 				}
+			};
+
+
+			EVO_NODISCARD constexpr static auto small_capacity() noexcept -> size_t {
+				return SMALL_CAPACITY;
 			};
 
 

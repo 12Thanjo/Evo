@@ -6,7 +6,7 @@ template<typename T, size_t SMALL_CAPACITY>
 class SmallVector;
 ```
 
-A vector that has small size optimization
+A vector that has small size optimization. SMALL_CAPACITY can be defaulted, and it will automatically pick the optimal size.
 
 
 ## Template Parameters
@@ -171,7 +171,7 @@ Returns the size of the currently held vector.
 
 #### max_size
 ```C++
-EVO_NODISCARD auto max_size() const noexcept -> size_t;
+EVO_NODISCARD constexpr static auto max_size() const noexcept -> size_t;
 ```
 Returns the maximum size of the vector.
 
@@ -181,6 +181,13 @@ Returns the maximum size of the vector.
 EVO_NODISCARD auto capacity() const noexcept -> size_t;
 ```
 Returns the total capacity of the vector.
+
+
+#### small_capacity
+```C++
+EVO_NODISCARD constexpr static auto small_capacity() const noexcept -> size_t;
+```
+Returns the total small capacity of the vector.
 
 
 
