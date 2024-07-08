@@ -88,7 +88,7 @@ namespace evo{
 			///////////////////////////////////
 			// construct from initializer list
 
-			EVO_NODISCARD constexpr StaticVector(std::initializer_list<T> init_list) noexcept : current_size(init_list.size()) {
+			EVO_NODISCARD constexpr StaticVector(std::initializer_list<T> init_list) noexcept : current_size(size_type(init_list.size())) {
 				EVO_DEBUG_ASSERT(init_list.size() < CAPACITY);
 
 				for(size_t i = 0; i < init_list.size(); i+=1){

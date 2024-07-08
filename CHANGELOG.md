@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.5
+- Fixed warnings when creating `StaticVector` with the `std::initializer_list` constructor
+
 ### v1.14.4
 - Added `SmallVector` default SMALL_CAPACITY
 - Removed warning for `SmallVector` of below optimal SMALL_CAPACITY
