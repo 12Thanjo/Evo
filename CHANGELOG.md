@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.6
+- Fixed `std::initializer_list` constructors of `StaticVector` incorrectly asserting when the size of the `std::initializer_list` is exactly the capacity of the `StaticVector`
+
 ### v1.14.5
 - Fixed warnings when creating `StaticVector` with the `std::initializer_list` constructor
 
