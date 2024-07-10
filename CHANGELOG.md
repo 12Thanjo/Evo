@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.7
+- Improved the performance of `isAlphaNumeric()` and `isLetter()`
+
 ### v1.14.6
 - Fixed `std::initializer_list` constructors of `StaticVector` incorrectly asserting when the size of the `std::initializer_list` is exactly the capacity of the `StaticVector`
 
