@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.8
+- Added copy and move constructors for `Result`
+
 ### v1.14.7
 - Improved the performance of `isAlphaNumeric()` and `isLetter()`
 

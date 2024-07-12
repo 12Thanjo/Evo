@@ -21,7 +21,14 @@ namespace evo{
 			EVO_NODISCARD constexpr Result(ResultError_t) noexcept : val(std::nullopt) {};
 			~Result() = default;
 
-			EVO_NODISCARD static constexpr auto error() noexcept -> Result { return Result(); };
+			EVO_NODISCARD constexpr Result(const Result<T>& rhs) noexcept : val(rhs.val) {};
+			EVO_NODISCARD constexpr auto operator=(const Result<T>& rhs) noexcept {
+				this->val = rhs.val;
+			};
+
+			EVO_NODISCARD constexpr Result(Result<T>&& rhs) noexcept : val(std::move(rhs.val)) {};
+
+
 
 
 			///////////////////////////////////
@@ -43,6 +50,8 @@ namespace evo{
 				EVO_DEBUG_ASSERT(this->isSuccess());
 				return *this->val;
 			};
+
+			EVO_NODISCARD static constexpr auto error() noexcept -> Result { return Result(); };
 
 	
 		private:
