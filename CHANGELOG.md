@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.10
+- Fixed compile errors caused by updates to MSVC
+
 ### v1.14.9
 - Added some optimizations to `StaticVector` and `SmallVector` based on type traits
 	- optimize moves and copies to `std::memcpy()` if possible

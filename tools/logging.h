@@ -10,14 +10,6 @@
 #include "./time.h"
 
 
-// I have no idea why this is needed, but for some reason std::format_string is undefined
-#if defined(EVO_COMPILER_MSVC)
-	namespace std{
-		template <class... _Args>
-		using format_string = _Fmt_string<_Args...>;
-	};
-#endif
-
 namespace evo{
 
 	///////////////////////////////////
