@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.11
+- Fixed compile errors caused by updates to MSVC (string formatting of time objects)
+
 ### v1.14.10
 - Fixed compile errors caused by updates to MSVC
 

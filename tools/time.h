@@ -224,21 +224,21 @@ struct std::hash<evo::time::Seconds>{
 
 template<>
 struct std::formatter<evo::time::Nanoseconds> : std::formatter<int64_t> {
-    auto format(const evo::time::Nanoseconds& time, std::format_context& ctx) {
+    auto format(const evo::time::Nanoseconds& time, std::format_context& ctx) const -> std::format_context::iterator {
         return std::formatter<int64_t>::format(evo::i64(time), ctx);
     };
 };
 
 template<>
 struct std::formatter<evo::time::Milliseconds> : std::formatter<int64_t> {
-    auto format(const evo::time::Milliseconds& time, std::format_context& ctx) {
+    auto format(const evo::time::Milliseconds& time, std::format_context& ctx) const -> std::format_context::iterator {
         return std::formatter<int64_t>::format(evo::i64(time), ctx);
     };
 };
 
 template<>
 struct std::formatter<evo::time::Seconds> : std::formatter<int64_t> {
-    auto format(const evo::time::Seconds& time, std::format_context& ctx) {
+    auto format(const evo::time::Seconds& time, std::format_context& ctx) const -> std::format_context::iterator {
         return std::formatter<int64_t>::format(evo::i64(time), ctx);
     };
 };
