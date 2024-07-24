@@ -32,7 +32,7 @@ namespace evo{
 			// constructors / destructors
 
 
-			EVO_NODISCARD constexpr StaticVector() noexcept = default;
+			EVO_NODISCARD constexpr StaticVector() noexcept : data_block_dummy() {};
 			constexpr ~StaticVector() noexcept { this->clear(); };
 
 
@@ -41,7 +41,7 @@ namespace evo{
 
 			EVO_NODISCARD constexpr StaticVector(const StaticVector<T, CAPACITY>& rhs) noexcept : current_size(size_type(rhs.size())) {
 				if constexpr(std::is_trivially_copyable_v<T>){
-					std::memcpy(this->data(), rhs.data(), rhs.size() * sizeof(T));
+					std::memcpy(this->data(), rhs.data(), (rhs.size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < this->size(); i+=1){
 						this->data_block[i] = rhs[i];
@@ -54,7 +54,7 @@ namespace evo{
 				this->current_size = size_type(rhs.size());
 
 				if constexpr(std::is_trivially_copyable_v<T>){
-					std::memcpy(this->data(), rhs.data(), rhs.size() * sizeof(T));
+					std::memcpy(this->data(), rhs.data(), (rhs.size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < this->size(); i+=1){
 						this->data_block[i] = rhs[i];
@@ -70,7 +70,7 @@ namespace evo{
 
 			EVO_NODISCARD constexpr StaticVector(StaticVector<T, CAPACITY>&& rhs) noexcept : current_size(std::exchange(rhs.current_size, 0)) {
 				if constexpr(std::is_trivially_move_constructible_v<T>){
-					std::memcpy(this->data(), rhs.data(), this->size() * sizeof(T));
+					std::memcpy(this->data(), rhs.data(), (this->size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < this->size(); i+=1){
 						this->data_block[i] = std::move(rhs.data_block[i]);
@@ -79,19 +79,19 @@ namespace evo{
 			};
 
 
-			constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVector<T, CAPACITY>& {
-				this->current_size = std::exchange(rhs.current_size, 0);
+			// constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVector<T, CAPACITY>& {
+			// 	this->current_size = std::exchange(rhs.current_size, 0);
 
-				if constexpr(std::is_trivially_move_constructible_v<T>){
-					std::memcpy(this->data(), rhs.data(), this->size() * sizeof(T));
-				}else{
-					for(size_t i = 0; i < this->size(); i+=1){
-						this->data_block[i] = std::move(rhs.data_block[i]);
-					}
-				}
+			// 	if constexpr(std::is_trivially_move_constructible_v<T>){
+			// 		std::memcpy(this->data(), rhs.data(), (this->size() + 1) * sizeof(T));
+			// 	}else{
+			// 		for(size_t i = 0; i < this->size(); i+=1){
+			// 			this->data_block[i] = std::move(rhs.data_block[i]);
+			// 		}
+			// 	}
 
-				return *this;
-			};
+			// 	return *this;
+			// };
 
 
 			///////////////////////////////////
@@ -108,7 +108,7 @@ namespace evo{
 				EVO_DEBUG_ASSERT(init_list.size() <= CAPACITY);
 
 				if constexpr(std::is_trivially_move_constructible_v<T>){
-					std::memcpy(this->data(), init_list.data(), this->size() * sizeof(T));
+					std::memcpy(this->data(), init_list.begin(), (this->size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < init_list.size(); i+=1){
 						this->data_block[i] = std::move(*(init_list.begin() + i));
@@ -120,16 +120,15 @@ namespace evo{
 				EVO_DEBUG_ASSERT(init_list.size() <= CAPACITY);
 				
 				this->clear();
+				this->current_size = init_list.size();
 
 				if constexpr(std::is_trivially_move_constructible_v<T>){
-					std::memcpy(this->data(), init_list.data(), this->size() * sizeof(T));
+					std::memcpy(this->data(), init_list.begin(), (this->size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < init_list.size(); i+=1){
 						this->data_block[i] = std::move(*(init_list.begin() + i));
 					}
 				}
-
-				this->current_size = init_list.size();
 
 				return *this;
 			};
@@ -445,7 +444,7 @@ namespace evo{
 	
 		private:
 			union{
-				byte data_block_dummy = 0;
+				byte data_block_dummy;
 				T data_block[CAPACITY];
 			};
 			size_type current_size = 0;

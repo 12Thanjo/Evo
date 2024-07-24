@@ -1,5 +1,10 @@
 # Evo Changelog
 
+### v1.14.12
+- Fixed compile errors on Clang and GCC
+- Fixed incorrect behavior with `StaticVector` constructors with trivially movable types
+- Fixed incorrect behavior with `SmallVector` constructors with types that are trivially constructable and moveable
+
 ### v1.14.11
 - Fixed compile errors caused by updates to MSVC (string formatting of time objects)
 

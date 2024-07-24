@@ -26,9 +26,9 @@ namespace tests{
 			///////////////////////////////////
 			// copy
 
-			constexpr TestingType(const TestingType& src) noexcept : initialized(true), is_copy(true) {};
+			constexpr TestingType(const TestingType& rhs) noexcept : initialized(true), is_copy(true) {};
 
-			constexpr TestingType& operator=(const TestingType& src) {
+			constexpr TestingType& operator=(const TestingType& rhs) {
 				this->is_copy = true;
 				return *this;
 			};
@@ -37,11 +37,11 @@ namespace tests{
 			///////////////////////////////////
 			// move
 
-			constexpr TestingType(TestingType&& src) noexcept : initialized(true) { this->operator=(std::move(src)); };
+			constexpr TestingType(TestingType&& rhs) noexcept : initialized(true) { this->operator=(std::move(rhs)); };
 
-			constexpr TestingType& operator=(TestingType&& src) {
-				src.initialized = false;
-				src.moved_from = true;
+			constexpr TestingType& operator=(TestingType&& rhs) {
+				rhs.initialized = false;
+				rhs.moved_from = true;
 				return *this;
 			};
 
@@ -70,7 +70,63 @@ namespace tests{
 
 
 
+	static size_t num_verbose_created = 0;
+	auto get_verbose_index() -> size_t {
+		EVO_DEFER([&](){num_verbose_created += 1;});
+		return num_verbose_created;
+	}
 
+	class Verbose{
+		public:
+			//////////////////////////////////////////////////////////////////////
+			// special member functions
+
+			EVO_NODISCARD Verbose() : generation(get_verbose_index()), life(0) {
+				evo::println("Verbose() => {}", this->print());
+			}
+			~Verbose(){ evo::println("~Verbose() => {}", this->print()); }
+
+			EVO_NODISCARD Verbose(const Verbose& rhs) : generation(rhs.generation), life(rhs.life + 1) {
+				evo::println("Verbose(const Verbose& {}) => {}", rhs.print(), this->print());
+			}
+
+			auto operator=(const Verbose& rhs){
+				evo::println("operator=(const Verbose& {}) => {} => {{{}.{}}}",  rhs.print(), this->print(), rhs.generation, rhs.life + 1);
+
+				this->generation = rhs.generation;
+				this->life = rhs.life + 1;
+			}
+
+			EVO_NODISCARD Verbose(Verbose&& rhs) : generation(rhs.generation), life(rhs.life + 1) {
+				evo::println("Verbose(Verbose&& {}) => {}", rhs.print(), this->print());
+			}
+
+
+			EVO_NODISCARD auto getGeneration() const -> size_t { return this->generation; }
+			EVO_NODISCARD auto getLife() const -> size_t { return this->life; }
+
+			EVO_NODISCARD auto print() const -> std::string {
+				return std::format("{{{}.{}}}", this->generation, this->life);
+			}
+
+		private:
+			size_t generation;
+			size_t life;
+	};
+
+}
+
+
+template<>
+struct std::formatter<tests::Verbose> : std::formatter<std::string> {
+    auto format(const tests::Verbose& verbose, std::format_context& ctx) const -> std::format_context::iterator {
+        return std::formatter<std::string>::format(verbose.print(), ctx);
+    };
+};
+
+
+namespace tests{
+	
 	EVO_NODISCARD auto static_vector_test() noexcept -> bool {
 		auto static_vector = evo::StaticVector<int, 6>{};
 
@@ -88,11 +144,13 @@ namespace tests{
 
 		static_vector = std::initializer_list<int>{0, 1, 2, 3};
 
-		for(size_t i = 0; i < static_vector.size(); i+=1){
-			if(static_vector[i] != int(i)){
+		for(int i = 0; int elem : static_vector){
+			if(elem != i){
 				evo::printlnRed("evo::StaticVector::operator=(std::initializer_list) test failed");
 				return false;
 			}
+		
+			i += 1;
 		}
 
 		{
