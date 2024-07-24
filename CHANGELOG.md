@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.13
+- Fixed crashes for `StaticVector` and `SmallVector` when copying with non-trivially copyable elements
+
 ### v1.14.12
 - Fixed compile errors on Clang and GCC
 - Fixed incorrect behavior with `StaticVector` constructors with trivially movable types

@@ -28,7 +28,6 @@
 
 #include "./tools/logging.h"
 
-
 #include "./containers/Defer.h"
 #include "./containers/Result.h"
 #include "./containers/Expected.h"

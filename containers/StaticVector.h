@@ -44,7 +44,7 @@ namespace evo{
 					std::memcpy(this->data(), rhs.data(), (rhs.size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < this->size(); i+=1){
-						this->data_block[i] = rhs[i];
+						std::construct_at(&this->data_block[i], rhs[i]);
 					}
 				}
 			};
@@ -57,7 +57,7 @@ namespace evo{
 					std::memcpy(this->data(), rhs.data(), (rhs.size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < this->size(); i+=1){
-						this->data_block[i] = rhs[i];
+						std::construct_at(&this->data_block[i], rhs[i]);
 					}
 				}
 
@@ -73,7 +73,7 @@ namespace evo{
 					std::memcpy(this->data(), rhs.data(), (this->size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < this->size(); i+=1){
-						this->data_block[i] = std::move(rhs.data_block[i]);
+						std::construct_at(&this->data_block[i], std::move(rhs[i]));
 					}
 				}
 			};
@@ -110,8 +110,10 @@ namespace evo{
 				if constexpr(std::is_trivially_move_constructible_v<T>){
 					std::memcpy(this->data(), init_list.begin(), (this->size() + 1) * sizeof(T));
 				}else{
-					for(size_t i = 0; i < init_list.size(); i+=1){
-						this->data_block[i] = std::move(*(init_list.begin() + i));
+					for(size_t i = 0; const T& elem : init_list){
+						std::construct_at(&this->data_block[i], elem);
+						
+						i += 1;
 					}
 				}
 			};
@@ -125,8 +127,10 @@ namespace evo{
 				if constexpr(std::is_trivially_move_constructible_v<T>){
 					std::memcpy(this->data(), init_list.begin(), (this->size() + 1) * sizeof(T));
 				}else{
-					for(size_t i = 0; i < init_list.size(); i+=1){
-						this->data_block[i] = std::move(*(init_list.begin() + i));
+					for(size_t i = 0; const T& elem : init_list){
+						std::construct_at(&this->data_block[i], elem);
+						
+						i += 1;
 					}
 				}
 
