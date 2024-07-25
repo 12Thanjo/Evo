@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.14
+- Added small optimization to `SmallVector` when going from small buffer to big
+
 ### v1.14.13
 - Fixed crashes for `StaticVector` and `SmallVector` when copying with non-trivially copyable elements
 

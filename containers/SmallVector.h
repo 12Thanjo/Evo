@@ -508,12 +508,12 @@ namespace evo{
 
 			auto copy_to_big() noexcept -> void {
 				auto temp_holder = std::vector<T>();
+				temp_holder.reserve(this->size() + 1);
 
 				if constexpr(std::is_trivially_move_constructible_v<T> && std::is_trivially_constructible_v<T>){
 					temp_holder.resize(this->size());
 					std::memcpy(temp_holder.data(), this->get_small().data(), (this->get_small().size() + 1) * sizeof(T));
 				}else{
-					temp_holder.reserve(this->size());
 					for(T& elem : this->get_small()){
 						temp_holder.emplace_back(std::move(elem));
 					}
