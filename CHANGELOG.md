@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.15
+- Added comparison operators to `time::Nanoseconds`, `time::Milliseconds`, and `time::Seconds`
+
 ### v1.14.14
 - Added small optimization to `SmallVector` when going from small buffer to big
 

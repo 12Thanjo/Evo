@@ -79,19 +79,19 @@ namespace evo{
 			};
 
 
-			// constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVector<T, CAPACITY>& {
-			// 	this->current_size = std::exchange(rhs.current_size, 0);
+			constexpr auto operator=(StaticVector<T, CAPACITY>&& rhs) noexcept -> StaticVector<T, CAPACITY>& {
+				this->current_size = std::exchange(rhs.current_size, 0);
 
-			// 	if constexpr(std::is_trivially_move_constructible_v<T>){
-			// 		std::memcpy(this->data(), rhs.data(), (this->size() + 1) * sizeof(T));
-			// 	}else{
-			// 		for(size_t i = 0; i < this->size(); i+=1){
-			// 			this->data_block[i] = std::move(rhs.data_block[i]);
-			// 		}
-			// 	}
+				if constexpr(std::is_trivially_move_constructible_v<T>){
+					std::memcpy(this->data(), rhs.data(), (this->size() + 1) * sizeof(T));
+				}else{
+					for(size_t i = 0; i < this->size(); i+=1){
+						this->data_block[i] = std::move(rhs.data_block[i]);
+					}
+				}
 
-			// 	return *this;
-			// };
+				return *this;
+			};
 
 
 			///////////////////////////////////

@@ -26,6 +26,13 @@ namespace evo{
 				constexpr explicit operator Milliseconds() const noexcept;
 				constexpr explicit operator Seconds() const noexcept;
 
+				// comparison operators
+				constexpr auto operator ==(const Nanoseconds& rhs) const noexcept -> bool { return this->value == rhs.value; }
+				constexpr auto operator !=(const Nanoseconds& rhs) const noexcept -> bool { return this->value != rhs.value; }
+				constexpr auto operator <(const Nanoseconds& rhs) const noexcept -> bool { return this->value < rhs.value; }
+				constexpr auto operator <=(const Nanoseconds& rhs) const noexcept -> bool { return this->value <= rhs.value; }
+				constexpr auto operator >(const Nanoseconds& rhs) const noexcept -> bool { return this->value > rhs.value; }
+				constexpr auto operator >=(const Nanoseconds& rhs) const noexcept -> bool { return this->value > rhs.value; }
 
 				// arithmentic operators
 				constexpr auto operator +(const Nanoseconds& rhs) const noexcept -> Nanoseconds { return Nanoseconds{this->value + rhs.value}; };
@@ -72,6 +79,13 @@ namespace evo{
 				constexpr explicit operator Nanoseconds() const noexcept;
 				constexpr explicit operator Seconds() const noexcept;
 
+				// comparison operators
+				constexpr auto operator ==(const Milliseconds& rhs) const noexcept -> bool { return this->value == rhs.value; }
+				constexpr auto operator !=(const Milliseconds& rhs) const noexcept -> bool { return this->value != rhs.value; }
+				constexpr auto operator <(const Milliseconds& rhs) const noexcept -> bool { return this->value < rhs.value; }
+				constexpr auto operator <=(const Milliseconds& rhs) const noexcept -> bool { return this->value <= rhs.value; }
+				constexpr auto operator >(const Milliseconds& rhs) const noexcept -> bool { return this->value > rhs.value; }
+				constexpr auto operator >=(const Milliseconds& rhs) const noexcept -> bool { return this->value > rhs.value; }
 
 				// arithmentic operators
 				constexpr auto operator +(const Milliseconds& rhs) const noexcept -> Milliseconds { return Milliseconds{this->value + rhs.value}; };
@@ -117,6 +131,13 @@ namespace evo{
 				constexpr explicit operator Nanoseconds() const noexcept;
 				constexpr explicit operator Milliseconds() const noexcept;
 
+				// comparison operators
+				constexpr auto operator ==(const Seconds& rhs) const noexcept -> bool { return this->value == rhs.value; }
+				constexpr auto operator !=(const Seconds& rhs) const noexcept -> bool { return this->value != rhs.value; }
+				constexpr auto operator <(const Seconds& rhs) const noexcept -> bool { return this->value < rhs.value; }
+				constexpr auto operator <=(const Seconds& rhs) const noexcept -> bool { return this->value <= rhs.value; }
+				constexpr auto operator >(const Seconds& rhs) const noexcept -> bool { return this->value > rhs.value; }
+				constexpr auto operator >=(const Seconds& rhs) const noexcept -> bool { return this->value > rhs.value; }
 
 				// arithmentic operators
 				constexpr auto operator +(const Seconds& rhs) const noexcept -> Seconds { return Seconds{this->value + rhs.value}; };
