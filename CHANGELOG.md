@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.14.17
+- Fixed incorrect behaviour with `StaticVector` constructors with trivially movable types
+	- Incorrect arithemtic was causing overwrites
+
 ### v1.14.16
 - Fixed fatal error when calling `StaticVector::operator=` with non-trivially-copyable types
 
