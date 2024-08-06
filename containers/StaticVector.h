@@ -86,7 +86,7 @@ namespace evo{
 					std::memcpy(this->data(), rhs.data(), (this->size() + 1) * sizeof(T));
 				}else{
 					for(size_t i = 0; i < this->size(); i+=1){
-						this->data_block[i] = std::move(rhs.data_block[i]);
+						std::construct_at(&this->data_block[i], std::move(rhs.data_block[i]));
 					}
 				}
 

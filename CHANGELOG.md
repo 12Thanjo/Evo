@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.16
+- Fixed fatal error when calling `StaticVector::operator=` with non-trivially-copyable types
+
 ### v1.14.15
 - Added comparison operators to `time::Nanoseconds`, `time::Milliseconds`, and `time::Seconds`
 
@@ -11,8 +14,8 @@
 
 ### v1.14.12
 - Fixed compile errors on Clang and GCC
-- Fixed incorrect behavior with `StaticVector` constructors with trivially movable types
-- Fixed incorrect behavior with `SmallVector` constructors with types that are trivially constructable and moveable
+- Fixed incorrect behaviour with `StaticVector` constructors with trivially movable types
+- Fixed incorrect behaviour with `SmallVector` constructors with types that are trivially constructable and moveable
 
 ### v1.14.11
 - Fixed compile errors caused by updates to MSVC (string formatting of time objects)
@@ -107,7 +110,7 @@
 - Added detection of the ARM64 architecture
 
 ### v1.8.0
-- Added architecture detection to plaform_detection.h
+- Added architecture detection to platform_detection.h
 
 ### v1.7.0
 - Made the constructors/destructors of iterators `constexpr`
@@ -180,10 +183,10 @@
 ### v1.2.1
 - Fixed Changelog
 - Fixed broken links in documentation
-- `printCharName(char)` now returns `{{??}}` if it recieves a negative char code
+- `printCharName(char)` now returns `{{??}}` if it receives a negative char code
 - Fixed missing `;` in asserts.h
 - Fixed static_assert message in numeric_types.h (f128)
-- Fixed including stdfloat before C++23
+- Fixed including `stdfloat` before C++23
 - Temporarily removed `f128` as MSVC does not support it yet
 - Added `CapacityType_t` and `BitsSize_t`
 - Fixed `Flags` not compiling on MSVC
@@ -241,7 +244,7 @@
 - updated numeric types
 	- Added `f128`
 	- Added a version of C++23's float types (`float32_t`, `float64_t`, `float128_t`)
-	- `EVO_GLOBAL_NUMERIC_TYPES` no longer removes the nuemric types from the `evo` namespace
+	- `EVO_GLOBAL_NUMERIC_TYPES` no longer removes the numeric types from the `evo` namespace
 	- Fixed the error messages in the static asserts to make sure the number types are the correct size
 
 ### v1.0.19
@@ -267,7 +270,7 @@
 
 ### v1.0.12
 - Fixed finding location of defines.h in some compilers
-- Added include for cmath
+- Added include for `cmath`
 
 ### v1.0.11
 - Fixed printing to console of longer strings on Windows (only printed out max of 1024 characters)
@@ -303,7 +306,7 @@
 - Fixed ptr dereferencing in `StaticVector::resize(size_t)`
 
 ### v1.0.1
-- Changed i32 / ui32 from `int` to `long` (for better compatability)
+- Changed i32 / ui32 from `int` to `long` (for better compatibility)
 
 ## v1.0.0
 - Added CStrProxy
