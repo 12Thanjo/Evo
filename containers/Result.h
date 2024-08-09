@@ -41,15 +41,29 @@ namespace evo{
 			///////////////////////////////////
 			// getting value
 
-			EVO_NODISCARD constexpr auto value() const noexcept -> const T& {
+			EVO_NODISCARD constexpr auto value() const& noexcept -> const T& {
 				EVO_DEBUG_ASSERT(this->isSuccess());
 				return *this->val;
 			};
 
-			EVO_NODISCARD constexpr auto value() noexcept -> T& {
+			EVO_NODISCARD constexpr auto value() & noexcept -> T& {
 				EVO_DEBUG_ASSERT(this->isSuccess());
 				return *this->val;
 			};
+
+
+			EVO_NODISCARD constexpr auto value() const&& noexcept -> const T& {
+				EVO_DEBUG_ASSERT(this->isSuccess());
+				return std::move(*this->val);
+			};
+
+			EVO_NODISCARD constexpr auto value() && noexcept -> T& {
+				EVO_DEBUG_ASSERT(this->isSuccess());
+				return std::move(*this->val);
+			};
+
+
+
 
 			EVO_NODISCARD static constexpr auto error() noexcept -> Result { return Result(); };
 

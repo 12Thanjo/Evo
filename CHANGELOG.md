@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.19
+- Added r-value-reference versions of `Result::value()`
+
 ### v1.14.18
 - Added `operator==` and `operator!=` to `Flags`, `SmallVector`, and `StaticVector`
 
