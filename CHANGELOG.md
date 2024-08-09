@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.18
+- Added `operator==` and `operator!=` to `Flags`, `SmallVector`, and `StaticVector`
+
 ### v1.14.17
 - Fixed incorrect behaviour with `StaticVector` constructors with trivially movable types
 	- Incorrect arithemtic was causing overwrites

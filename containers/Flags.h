@@ -178,6 +178,15 @@ namespace evo{
 			}
 
 
+			EVO_NODISCARD constexpr auto operator==(const Flags& rhs) const noexcept -> bool {
+				return this->internal_data == rhs.internal_data;
+			}
+
+			EVO_NODISCARD constexpr auto operator!=(const Flags& rhs) const noexcept -> bool {
+				return this->internal_data != rhs.internal_data;
+			}
+
+
 			//////////////////////////////////////////////////////////////////////
 			// underlying
 

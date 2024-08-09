@@ -445,6 +445,34 @@ namespace evo{
 
 			// not implemented yet: swap
 
+
+			//////////////////////////////////////////////////////////////////////
+			// comparison operators
+
+			EVO_NODISCARD auto operator==(const StaticVector& rhs) const noexcept -> bool {
+				if(this->size() != rhs.size()){ return false; }
+
+				for(size_t i = 0; const T& rhs_elem : rhs){
+					if(rhs_elem != this->at(i)){ return false; }
+				
+					i += 1;
+				}
+
+				return true;
+			}
+
+			EVO_NODISCARD auto operator!=(const StaticVector& rhs) const noexcept -> bool {
+				if(this->size() != rhs.size()){ return true; }
+
+				for(size_t i = 0; const T& rhs_elem : rhs){
+					if(rhs_elem != this->at(i)){ return true; }
+				
+					i += 1;
+				}
+
+				return false;
+			}
+
 	
 		private:
 			union{

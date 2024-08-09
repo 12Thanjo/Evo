@@ -466,6 +466,33 @@ namespace evo{
 
 
 
+			//////////////////////////////////////////////////////////////////////
+			// operators
+
+			EVO_NODISCARD auto operator==(const SmallVector& rhs) const noexcept -> bool {
+				if(this->is_small()){
+					if(rhs.is_big()){ return false; }
+					return this->get_small() == rhs.get_small();
+
+				}else{
+					if(rhs.is_small()){ return false; }
+					return this->get_big() == rhs.get_big();
+				}
+			}
+
+			EVO_NODISCARD auto operator!=(const SmallVector& rhs) const noexcept -> bool {
+				if(this->is_small()){
+					if(rhs.is_big()){ return true; }
+					return this->get_small() != rhs.get_small();
+
+				}else{
+					if(rhs.is_small()){ return true; }
+					return this->get_big() != rhs.get_big();
+				}
+			}
+
+
+
 		private:
 			EVO_NODISCARD auto is_small() const noexcept -> bool {
 				return std::holds_alternative<StaticVector<T,  SMALL_CAPACITY>>(this->data_block);
