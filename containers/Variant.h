@@ -10,6 +10,7 @@ namespace evo{
 	template<class... Ts>
 	class Variant : public std::variant<Ts...> {
 		public:
+			using std::variant<Ts...>::variant;
 			
 			EVO_NODISCARD constexpr auto getNative() noexcept -> std::variant<Ts...>& {
 				return static_cast<std::variant<Ts...>&>(*this);

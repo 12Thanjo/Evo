@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.14.20
+- Fixed `Variant` not always constructing properly
+
 ### v1.14.19
 - Added r-value-reference versions of `Result::value()`
 
