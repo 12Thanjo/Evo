@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.15.0
+- Added utils/dyn_lib.h
+
 ### v1.14.20
 - Fixed `Variant` not always constructing properly
 

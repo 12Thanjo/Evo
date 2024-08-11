@@ -8,6 +8,7 @@ Requires at least C++20.
 
 ## Utils
 - [assert.h](documentation/utils/asserts.md)
+- [dyn_lib.h](documentation/utils/dyn_lib.md)
 - [misc.h](documentation/utils/misc.md)
 - [numeric_types.h](documentation/utils/numeric_types.md)
 - [platform_detection.h](documentation/utils/platform_detection.md)

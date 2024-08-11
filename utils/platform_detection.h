@@ -99,10 +99,3 @@
 #else
 	#define EVO_ARCH_UNKNOWN
 #endif
-
-
-
-
-
-
-
