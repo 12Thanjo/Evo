@@ -106,16 +106,16 @@ Returns a const reference to the element at the given index
 
 #### front
 ```C++
-EVO_NODISCARD constexpr auto front() const noexcept -> const T*;
+EVO_NODISCARD constexpr auto front() const noexcept -> const T&;
 ```
-Returns a pointer to the first element
+Returns the first element
 
 
 #### back
 ```C++
-EVO_NODISCARD constexpr auto back() const noexcept -> const T*;
+EVO_NODISCARD constexpr auto back() const noexcept -> const T&;
 ```
-Returns a pointer to the last element
+Returns a the last element
 
 
 #### operator[] 

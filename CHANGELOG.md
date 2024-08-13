@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.15.1
+- Fixed `ArrayProxy::front()` and `ArrayProxy::back()` to return references, not pointers
+- Fixed there being two separate definitions of the dyn_lib macros
+
 ### v1.15.0
 - Added utils/dyn_lib.h
 

@@ -95,13 +95,13 @@ namespace evo{
 			};
 
 
-			EVO_NODISCARD constexpr auto front() const noexcept -> const T* {
-				return this->data_ptr;
+			EVO_NODISCARD constexpr auto front() const noexcept -> const T& {
+				return this->data_ptr[0];
 			};
 
 
-			EVO_NODISCARD constexpr auto back() const noexcept -> const T* {
-				return this->data_ptr + this->count;
+			EVO_NODISCARD constexpr auto back() const noexcept -> const T& {
+				return this->data_ptr[this->size() - 1];
 			};
 
 
