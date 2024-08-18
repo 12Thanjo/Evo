@@ -24,6 +24,42 @@ namespace evo{
 		};
 
 
+
+		auto readFile(const std::string& path) noexcept -> Result<std::string> {
+			auto file = File();
+			if(file.open(path, FileMode::Read) == false){ return resultError; }
+			const Result<std::string> result = file.read();
+			file.close();
+			return result;
+		};
+
+		auto readBinaryFile(const std::string& path) noexcept -> Result<std::vector<byte>> {
+			auto file = BinaryFile();
+			if(file.open(path, FileMode::Read) == false){ return resultError; }
+			const Result<std::vector<byte>> result = file.read();
+			file.close();
+			return result;
+		};
+
+
+		auto writeFile(const std::string& path, const std::string& data) noexcept -> bool {
+			auto file = File();
+			if(file.open(path, FileMode::Write) == false){ return false; }
+			const bool result = file.write(data);
+			file.close();
+			return result;
+		};
+
+		auto writeBinaryFile(const std::string& path, const std::vector<byte>& data) noexcept -> bool {
+			auto file = BinaryFile();
+			if(file.open(path, FileMode::Write) == false){ return false; }
+			const bool result = file.write(data);
+			file.close();
+			return result;
+		};
+
+
+
 		//////////////////////////////////////////////////////////////////////
 		// File
 

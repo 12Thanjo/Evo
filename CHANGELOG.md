@@ -1,5 +1,12 @@
 # Evo Changelog
 
+### v1.16.0
+- Added convenience functions to the `fs` namespace
+	- `readFile`
+	- `readBinaryFile`
+	- `writeFile`
+	- `writeBinaryFile`
+
 ### v1.15.1
 - Fixed `ArrayProxy::front()` and `ArrayProxy::back()` to return references, not pointers
 - Fixed there being two separate definitions of the dyn_lib macros
