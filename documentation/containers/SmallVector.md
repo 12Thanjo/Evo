@@ -37,7 +37,7 @@ A vector that has small size optimization. SMALL_CAPACITY can be defaulted, and 
 
 ### Constructors
 ```C++
-EVO_NODISCARD SmallVector() noexcept;
+EVO_NODISCARD constexpr SmallVector() noexcept;
 EVO_NODISCARD SmallVector(const SmallVector<T, SMALL_CAPACITY>& rhs) noexcept;
 EVO_NODISCARD SmallVector(SmallVector<T, SMALL_CAPACITY>&& rhs) noexcept;
 EVO_NODISCARD SmallVector(std::initializer_list<T> init_list) noexcept;

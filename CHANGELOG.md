@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.16.1
+- Made the default constructor of `SmallVector` constexpr
+
 ### v1.16.0
 - Added convenience functions to the `fs` namespace
 	- `readFile`

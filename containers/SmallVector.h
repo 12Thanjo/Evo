@@ -31,8 +31,7 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
-			EVO_NODISCARD SmallVector() noexcept {};
-
+			EVO_NODISCARD constexpr SmallVector() noexcept = default;
 
 			~SmallVector() noexcept = default;
 
