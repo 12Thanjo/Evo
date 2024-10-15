@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.16.2
+- Fixed r-value reference versions of `Result::value()`
+
 ### v1.16.1
 - Made the default constructor of `SmallVector` constexpr
 
