@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.17.0
+- Added support for `Result<void>`
+- Fixed `Result::error()`
+
 ### v1.16.2
 - Fixed r-value reference versions of `Result::value()`
 

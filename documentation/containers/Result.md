@@ -8,6 +8,9 @@ class Result;
 
 A type designed for returning values from functions with a clearer API than just using `std::optional`. For errors, instead of returning `std::nullopt`, you return `evo::ResultError` instead.
 
+Result also has a specialization for `Result<void>` where anything to do with the held value is removed.
+
+
 ```C++
 auto some_func() noexcept -> evo::Result<int> {
 	const bool errored = some_func_that_may_error();
@@ -61,8 +64,9 @@ Get if there was an error that occured in the function
 
 ## value
 ```C++
-EVO_NODISCARD constexpr auto value() const noexcept -> const T&;
-EVO_NODISCARD constexpr auto value()       noexcept ->       T&;
+EVO_NODISCARD constexpr auto value() const&  noexcept -> const T&;
+EVO_NODISCARD constexpr auto value()      &  noexcept ->       T&;
+EVO_NODISCARD constexpr auto value() const&& noexcept -> const T&&;
+EVO_NODISCARD constexpr auto value()      && noexcept ->       T&&;
 ```
-Get the return value (only present if `isSuccess() == true`)
-
+Get the return value (only present if `isSuccess() == true`). If `T` is `void`, this function does not exist.

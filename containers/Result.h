@@ -63,13 +63,50 @@ namespace evo{
 			};
 
 
+			EVO_NODISCARD static constexpr auto error() noexcept -> Result<T> { return Result<T>(resultError); };
 
 
-			EVO_NODISCARD static constexpr auto error() noexcept -> Result { return Result(); };
+		private:
+			std::optional<T> val;
+	};
+
+
+	template<>
+	class Result<void>{
+		public:
+			///////////////////////////////////
+			// constructors / destructors
+
+			EVO_NODISCARD constexpr Result() : is_error(false) {}
+
+			EVO_NODISCARD constexpr Result(ResultError_t) noexcept : is_error(true) {};
+			~Result() = default;
+
+			EVO_NODISCARD constexpr Result(const Result<void>& rhs) noexcept : is_error(rhs.is_error) {}
+			EVO_NODISCARD constexpr auto operator=(const Result<void>& rhs) noexcept {
+				this->is_error = rhs.is_error;
+			};
+
+			EVO_NODISCARD constexpr Result(Result<void>&& rhs) noexcept : is_error(std::move(rhs.is_error)) {};
+
+
+
+
+			///////////////////////////////////
+			// checking
+
+			EVO_NODISCARD constexpr auto isSuccess() const noexcept -> bool { return !this->is_error; };
+			EVO_NODISCARD constexpr auto isError() const noexcept -> bool { return this->is_error; };
+
+
+			///////////////////////////////////
+			// getting value
+
+			EVO_NODISCARD static constexpr auto error() noexcept -> Result<void> { return Result<void>(resultError); };
 
 	
 		private:
-			std::optional<T> val;
+			bool is_error;
 	};
 
 
