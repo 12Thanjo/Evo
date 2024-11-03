@@ -370,6 +370,8 @@ namespace evo{
 					*std::prev(i) = std::move(*i);
 				}
 
+				this->pop_back();
+
 				return output;
 			};
 

@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.17.1
+- Fixed `SmallVector::erase()`
+- Fixed `StaticVector::erase()`
+
 ### v1.17.0
 - Added support for `Result<void>`
 - Fixed `Result::error()`
