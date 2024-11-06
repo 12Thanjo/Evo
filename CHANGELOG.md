@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.18.1
+- Fixed some warnings on `MSVC` for `StaticVector::resize()`
+
 ### v1.18.0
 - Added `UnmovableVector`
 - Added `lldb` target to build system

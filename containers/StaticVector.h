@@ -431,16 +431,16 @@ namespace evo{
 				EVO_DEBUG_ASSERT(new_size < CAPACITY);
 
 				if(new_size < this->size()){
-					for(size_type i = new_size; i < this->size(); i++){
+					for(size_t i = new_size; i < this->size(); i++){
 						std::destroy_at(&this->data_block[i]);
 					}
 				}else{
-					for(size_type i = new_size; i < this->size(); i++){
+					for(size_t i = new_size; i < this->size(); i++){
 						std::construct_at(&this->data_block[i]);
 					}
 				}
 
-				this->current_size = new_size;
+				this->current_size = size_type(new_size);
 			};
 
 
