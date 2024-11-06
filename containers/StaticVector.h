@@ -1,6 +1,5 @@
 #pragma once
 
-#include <array>
 
 namespace evo{
 	
@@ -254,9 +253,9 @@ namespace evo{
 
 			EVO_NODISCARD constexpr auto size() const noexcept -> size_t { return size_t(this->current_size); };
 
-			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t { return size_t(this->current_size); };
+			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t { return CAPACITY; };
 
-			EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t { return size_t(CAPACITY); };
+			EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t { return CAPACITY; };
 
 
 			//////////////////////////////////////////////////////////////////////

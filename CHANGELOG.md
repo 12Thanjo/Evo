@@ -1,5 +1,10 @@
 # Evo Changelog
 
+### v1.18.0
+- Added `UnmovableVector`
+- Added `lldb` target to build system
+- Fixed `StaticVector::max_size()` not always giving the correct value
+
 ### v1.17.1
 - Fixed `SmallVector::erase()`
 - Fixed `StaticVector::erase()`

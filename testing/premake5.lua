@@ -162,5 +162,19 @@ project "gdb"
 project "*"
 
 
+project "lldb"
+	kind "Makefile"
+
+
+	links{
+		"init",
+		"testing",
+	}
+
+	buildcommands {
+		string.format(" lldb \"%s/testing.exe\" ", target.bin),
+	}
+
+project "*"
 
 

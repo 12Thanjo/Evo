@@ -55,14 +55,18 @@ namespace evo{
 
 
 			template<size_t COUNT>
-			EVO_NODISCARD constexpr ArrayProxy(const evo::StaticVector<T, COUNT>& static_vector) noexcept
+			EVO_NODISCARD constexpr ArrayProxy(const StaticVector<T, COUNT>& static_vector) noexcept
 				: count(static_vector.size()), data_ptr(static_vector.data()) {};
 
 
 			template<size_t COUNT>
-			EVO_NODISCARD constexpr ArrayProxy(const evo::SmallVector<T, COUNT>& small_vector) noexcept
+			EVO_NODISCARD constexpr ArrayProxy(const SmallVector<T, COUNT>& small_vector) noexcept
 				: count(small_vector.size()), data_ptr(small_vector.data()) {};
 
+
+			template<size_t COUNT>
+			EVO_NODISCARD constexpr ArrayProxy(const UnmovableVector<T>& unmovable_vector) noexcept
+				: count(unmovable_vector.size()), data_ptr(unmovable_vector.data()) {};
 
 
 			//////////////////////////////////////////////////////////////////////

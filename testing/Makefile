@@ -14,6 +14,7 @@ ifeq ($(config),debug_windows)
   run_config = debug_windows
   test_config = debug_windows
   gdb_config = debug_windows
+  lldb_config = debug_windows
 
 else ifeq ($(config),debug_linux)
   init_config = debug_linux
@@ -21,6 +22,7 @@ else ifeq ($(config),debug_linux)
   run_config = debug_linux
   test_config = debug_linux
   gdb_config = debug_linux
+  lldb_config = debug_linux
 
 else ifeq ($(config),release_windows)
   init_config = release_windows
@@ -28,6 +30,7 @@ else ifeq ($(config),release_windows)
   run_config = release_windows
   test_config = release_windows
   gdb_config = release_windows
+  lldb_config = release_windows
 
 else ifeq ($(config),release_linux)
   init_config = release_linux
@@ -35,12 +38,13 @@ else ifeq ($(config),release_linux)
   run_config = release_linux
   test_config = release_linux
   gdb_config = release_linux
+  lldb_config = release_linux
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := init testing run test gdb
+PROJECTS := init testing run test gdb lldb
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -76,12 +80,19 @@ ifneq (,$(gdb_config))
 	@${MAKE} --no-print-directory -C . -f gdb.make config=$(gdb_config)
 endif
 
+lldb: init testing
+ifneq (,$(lldb_config))
+	@echo "==== Building lldb ($(lldb_config)) ===="
+	@${MAKE} --no-print-directory -C . -f lldb.make config=$(lldb_config)
+endif
+
 clean:
 	@${MAKE} --no-print-directory -C . -f init.make clean
 	@${MAKE} --no-print-directory -C . -f testing.make clean
 	@${MAKE} --no-print-directory -C . -f run.make clean
 	@${MAKE} --no-print-directory -C . -f test.make clean
 	@${MAKE} --no-print-directory -C . -f gdb.make clean
+	@${MAKE} --no-print-directory -C . -f lldb.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -100,5 +111,6 @@ help:
 	@echo "   run"
 	@echo "   test"
 	@echo "   gdb"
+	@echo "   lldb"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

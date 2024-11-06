@@ -383,6 +383,74 @@ namespace tests{
 		evo::printlnGreen("Defer tests passed");
 		return true;
 	};
+
+
+	EVO_NODISCARD auto unmovable_vector_test() noexcept -> bool {
+		///////////////////////////////////
+		// small
+
+		static constexpr size_t SMALL_SIZE = 4;
+		auto small_vec = evo::UnmovableVector<uint16_t>(SMALL_SIZE);
+		if(small_vec.capacity() != SMALL_SIZE || small_vec.size() != 0){
+			evo::printlnRed("UnmovableVector test 1 failed");
+			return false;
+		}
+
+		for(size_t i = 0; i < SMALL_SIZE; i+=1){
+			small_vec.emplace_back(i);
+		}
+
+		if(small_vec.capacity() != SMALL_SIZE || small_vec.size() != SMALL_SIZE){
+			evo::printlnRed("UnmovableVector test 2 failed");
+			return false;
+		}
+
+		for(size_t i = 0; const uint16_t& num : small_vec){
+			if(num != i){
+				evo::printlnRed("UnmovableVector test 3 failed");
+				return false;	
+			}
+
+			i += 1;
+		}
+
+
+		///////////////////////////////////
+		// big
+
+		static constexpr size_t BIG_SIZE = 20;
+		auto big_vec = evo::UnmovableVector<uint32_t, false>(BIG_SIZE);
+
+		if(big_vec.capacity() != BIG_SIZE || big_vec.size() != 0){
+			evo::printlnRed("UnmovableVector test 4 failed");
+			return false;
+		}
+
+		for(size_t i = 0; i < BIG_SIZE; i+=1){
+			big_vec.emplace_back(i);
+		}
+
+		if(big_vec.capacity() != BIG_SIZE || big_vec.size() != BIG_SIZE){
+			evo::printlnRed("UnmovableVector test 5 failed");
+			return false;
+		}
+
+		for(size_t i = 0; const uint32_t& num : big_vec){
+			if(num != i){
+				evo::printlnRed("UnmovableVector test 6 failed");
+				return false;	
+			}
+
+			i += 1;
+		}
+
+
+		///////////////////////////////////
+		// done
+
+		evo::printlnGreen("UnmovableVector tests passed");
+		return true;
+	};
 };
 
 
@@ -425,6 +493,7 @@ auto main() noexcept -> int {
 	if(tests::small_vector_test() == false){ num_failed += 1; }
 	if(tests::variant_test() == false){ num_failed += 1; }
 	if(tests::defer_test() == false){ num_failed += 1; }
+	if(tests::unmovable_vector_test() == false){ num_failed += 1; }
 
 
 	if(false){
