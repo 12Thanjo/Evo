@@ -190,7 +190,7 @@ Returns the total capacity of the vector.
 ```C++
 constexpr auto clear() noexcept -> void;
 ```
-Clears all data in the vector (calls the destructor of each existing element).
+Clears all data in the vector (calls the destructor of each existing element). Unlike `std::vector::clear()`, this also de-allocates.
 
 
 #### insert

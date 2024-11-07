@@ -45,6 +45,11 @@ namespace evo{
             };
 
 
+            EVO_NODISCARD constexpr auto inBounds(const ConstIterator& begin, const ConstIterator& end) const -> bool {
+                return this->iter >= begin.iter && this->iter <= end.iter;
+            };
+
+
             EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
             EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
             EVO_NODISCARD constexpr auto operator==(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
@@ -89,6 +94,11 @@ namespace evo{
                 Iterator<T> iterator = *this;
                 --(*this);
                 return iterator;
+            };
+
+
+            EVO_NODISCARD constexpr auto inBounds(const Iterator& begin, const Iterator& end) const -> bool {
+                return this->iter >= begin.iter && this->iter <= end.iter;
             };
 
 
@@ -149,6 +159,11 @@ namespace evo{
             };
 
 
+            EVO_NODISCARD constexpr auto inBounds(const ConstReverseIterator& begin, const ConstReverseIterator& end) const -> bool {
+                return this->iter >= begin.iter && this->iter <= end.iter;
+            };
+
+
             EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
             EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
             EVO_NODISCARD constexpr auto operator==(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
@@ -196,6 +211,11 @@ namespace evo{
             };
 
 
+            EVO_NODISCARD constexpr auto inBounds(const ReverseIterator& begin, const ReverseIterator& end) const -> bool {
+                return this->iter >= begin.iter && this->iter <= end.iter;
+            };
+
+
             EVO_NODISCARD constexpr auto operator*() const noexcept -> T& { return *this->iter; };
             EVO_NODISCARD constexpr auto operator->() const noexcept -> T* { return this->iter; };
             EVO_NODISCARD constexpr auto operator==(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
@@ -209,6 +229,10 @@ namespace evo{
         private:
             T* iter;
     };
+
+
+
+
     
 };
 

@@ -280,6 +280,7 @@ namespace evo{
 
 			constexpr auto insert(const_iterator pos, const T& value) noexcept -> iterator {
 				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
+				EVO_DEBUG_ASSERT(pos.inBounds(this->begin(), this->end()));
 
 				*this->end() = value;
 
@@ -299,6 +300,8 @@ namespace evo{
 
 			constexpr auto insert(const_iterator pos, T&& value) noexcept -> iterator {
 				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
+				EVO_DEBUG_ASSERT(pos.inBounds(this->begin(), this->end()));
+				
 
 				*this->end() = std::move(value);
 
@@ -330,6 +333,7 @@ namespace evo{
 			template<class... Args>
 			constexpr auto emplace(const_iterator pos, Args&&... args) noexcept -> iterator {
 				EVO_DEBUG_ASSERT(this->current_size < this->capacity());
+				EVO_DEBUG_ASSERT(pos.inBounds(this->begin(), this->end()));
 
 				std::construct_at(&*this->end(), std::forward<Args>(args)...);
 
@@ -351,6 +355,8 @@ namespace evo{
 			// erase
 
 			constexpr auto erase(const_iterator pos) noexcept -> iterator {
+				EVO_DEBUG_ASSERT(pos.inBounds(this->begin(), this->end()));
+
 				std::destroy_at(&*pos);
 
 				iterator output = [&](){

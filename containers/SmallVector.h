@@ -291,6 +291,7 @@ namespace evo{
 				this->emplace_data<StaticVector<T, SMALL_CAPACITY>>();
 			};
 
+
 			///////////////////////////////////
 			// reserve
 
@@ -303,7 +304,6 @@ namespace evo{
 					this->get_big().reserve(new_cap);
 				}
 			};
-
 
 
 			///////////////////////////////////
@@ -331,6 +331,8 @@ namespace evo{
 			// emplace
 
 			auto emplace(const_iterator pos, auto&&... args) noexcept -> iterator {
+				EVO_DEBUG_ASSERT(pos.inBounds(this->begin(), this->end()));
+
 				size_t index = (size_t(&*pos) - size_t(this->data())) / sizeof(T);
 
 				if(this->is_small() && this->size() == SMALL_CAPACITY){
@@ -356,6 +358,8 @@ namespace evo{
 			// erase
 
 			auto erase(const_iterator pos) noexcept -> iterator {
+				EVO_DEBUG_ASSERT(pos.inBounds(this->begin(), this->end()));
+				
 				std::destroy_at(&*pos);
 
 				iterator output = [&](){

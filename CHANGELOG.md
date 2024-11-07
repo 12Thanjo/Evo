@@ -1,5 +1,10 @@
 # Evo Changelog
 
+### v1.18.2
+- Added `inBounds()` to all iterators
+- Added iterator debug in-bounds checking for `StaticVector` and `SmallVector`
+- Modified documentation of `StaticVector::clear()` to add the sentance "Unlike `std::vector::clear()`, this also de-allocates".
+
 ### v1.18.1
 - Fixed some warnings on `MSVC` for `StaticVector::resize()`
 
