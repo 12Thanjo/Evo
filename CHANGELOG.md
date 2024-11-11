@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.19.0
+- Added `bitCast()` and `unsafeBitCast()`
+- Made `hashCombine()` nodiscard
+
 ### v1.18.3
 - Made all iterators conform to the `std::bidirectional_iterator` concept
 

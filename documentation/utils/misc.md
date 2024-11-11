@@ -29,7 +29,30 @@ Converts an enum value to its underyling integer type. This is an implementation
 
 ### hashCombine:
 ```C++
-constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t;
-constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t;
+EVO_NODISCARD constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t;
+EVO_NODISCARD constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t;
 ```
 Combine a number of hashes
+
+
+
+### bitCast:
+```C++
+template<class TO, class FROM>
+EVO_NODISCARD constexpr auto bitCast(const FROM& from) -> const TO&;
+
+template<class TO, class FROM>
+EVO_NODISCARD constexpr auto bitCast(FROM& from) -> TO&;
+```
+Alternative to `std::bit_cast`. Requires that `FROM` and `TO` to have the same size and `FROM` to be trivially distructible.
+
+
+### unsafeBitCast:
+```C++
+template<class TO, class FROM>
+EVO_NODISCARD constexpr auto unsafeBitCast(const FROM& from) -> const TO&;
+
+template<class TO, class FROM>
+EVO_NODISCARD constexpr auto unsafeBitCast(FROM& from) -> TO&;
+```
+Alternative to `std::bit_cast`. Requires that `FROM` and `TO` to have the same size.

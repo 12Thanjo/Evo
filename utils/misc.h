@@ -42,11 +42,11 @@ namespace evo{
 
 
 
-	constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t {
+	EVO_NODISCARD constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t {
 		return lhs ^ (rhs << 1);
 	};
 
-	constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t {
+	EVO_NODISCARD constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t {
 		size_t output = *list.begin();
 
 		bool left = true;
@@ -63,5 +63,41 @@ namespace evo{
 		return output;
 	};
 
+
+	///////////////////////////////////
+	// bitCast
+
+	template<class TO, class FROM>
+	EVO_NODISCARD constexpr auto bitCast(const FROM& from) -> const TO& {
+		static_assert(sizeof(FROM) == sizeof(TO), "Cannot bitcast to type of different size");
+		static_assert(std::is_trivially_destructible<FROM>(), "Cannot bitcast from a non-trivially-destructible type");
+
+		return *(const TO*)&from;
+	}
+
+
+	template<class TO, class FROM>
+	EVO_NODISCARD constexpr auto bitCast(FROM& from) -> TO& {
+		static_assert(sizeof(FROM) == sizeof(TO), "Cannot bitcast to type of different size");
+		static_assert(std::is_trivially_destructible<FROM>(), "Cannot bitcast from a non-trivially-destructible type");
+
+		return *(TO*)&from;
+	}
+
+
+	template<class TO, class FROM>
+	EVO_NODISCARD constexpr auto unsafeBitCast(const FROM& from) -> const TO& {
+		static_assert(sizeof(FROM) == sizeof(TO), "Cannot unsafe-bitcast to type of different size");
+
+		return *(const TO*)&from;
+	}
+
+
+	template<class TO, class FROM>
+	EVO_NODISCARD constexpr auto unsafeBitCast(FROM& from) -> TO& {
+		static_assert(sizeof(FROM) == sizeof(TO), "Cannot unsafe-bitcast to type of different size");
+
+		return *(TO*)&from;
+	}
 	
 };
