@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.18.3
+- Made all iterators conform to the `std::bidirectional_iterator` concept
+
 ### v1.18.2
 - Added `inBounds()` to all iterators
 - Added iterator debug in-bounds checking for `StaticVector` and `SmallVector`
