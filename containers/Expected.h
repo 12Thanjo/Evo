@@ -46,6 +46,14 @@ namespace evo{
 
 			EVO_NODISCARD constexpr Expected() noexcept : expected_val(), has_expected_value(true) {};
 
+			EVO_NODISCARD constexpr ~Expected() noexcept {
+				if(this->has_value()){
+					std::destroy_at(&this->expected_val);
+				}else{
+					std::destroy_at(&this->error_val);
+				}
+			}
+
 
 			///////////////////////////////////
 			// copy

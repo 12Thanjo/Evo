@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.19.1
+- Added destructor for `Expected`
+
 ### v1.19.0
 - Added `bitCast()` and `unsafeBitCast()`
 - Made `hashCombine()` nodiscard

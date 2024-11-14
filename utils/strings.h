@@ -267,7 +267,7 @@ namespace evo{
 			break; case 24: return "CAN"; // ( Cancel )
 			break; case 25: return "EM"; // ( End of medium )
 			break; case 26: return "SUB"; // ( Substitute )
-			break; case 27: return "\\e"; // ( Escape )
+			break; case 27: return "ESC"; // ( Escape )
 			break; case 28: return "FS"; // ( File separator )
 			break; case 29: return "GS"; // ( Group separator )
 			break; case 30: return "RS"; // ( Record separator )
