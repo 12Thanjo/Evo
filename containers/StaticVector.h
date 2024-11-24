@@ -371,7 +371,7 @@ namespace evo{
 					*std::prev(i) = std::move(*i);
 				}
 
-				this->pop_back();
+				this->current_size -= 1;
 
 				return output;
 			};

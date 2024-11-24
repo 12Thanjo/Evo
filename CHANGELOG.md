@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.19.2
+- Fixed `StaticVector::erase()` and `SmallVector::erase()` calling a destructor incorrectly
+- Removed nodiscard attribute from `Expected::~Expected`
+
 ### v1.19.1
 - Added destructor for `Expected`
 

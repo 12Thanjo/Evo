@@ -358,25 +358,15 @@ namespace evo{
 			// erase
 
 			auto erase(const_iterator pos) noexcept -> iterator {
-				EVO_DEBUG_ASSERT(pos.inBounds(this->begin(), this->end()));
-				
-				std::destroy_at(&*pos);
+				if(this->is_small()){
+					return this->get_small().erase(pos);
+				}else{
+					std::vector<T>& big = this->get_big();
+					auto erase_pos = big.begin();
+					std::advance(erase_pos, std::distance(this->cbegin(), pos));
 
-				iterator output = [&](){
-					if(pos == this->end()){
-						return --this->end();
-					}else{
-						return iterator{const_cast<T*>(&*pos)};
-					}
-				}();
-
-				for(iterator i = output; i != this->end(); ++i){
-					*std::prev(i) = std::move(*i);
+					return iterator(&*big.erase(erase_pos));
 				}
-
-				this->pop_back();
-
-				return output;
 			};
 
 			// not implemented yet: auto erase(const_iterator first, const_iterator last) noexcept -> iterator
