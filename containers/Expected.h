@@ -136,13 +136,13 @@ namespace evo{
 			EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
-				return *this->expected_val;
+				return &this->expected_val;
 			};
 			
 			EVO_NODISCARD constexpr auto operator->() noexcept -> T* {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
-				return *this->expected_val;
+				return &this->expected_val;
 			};
 
 			EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& {
