@@ -362,10 +362,17 @@ namespace evo{
 					return this->get_small().erase(pos);
 				}else{
 					std::vector<T>& big = this->get_big();
-					auto erase_pos = big.begin();
-					std::advance(erase_pos, std::distance(this->cbegin(), pos));
 
-					return iterator(&*big.erase(erase_pos));
+					if(pos == iterator{&big.data()[big.size() - 1]}){
+						big.pop_back();
+						return iterator{&big.data()[big.size()]};
+
+					}else{	
+						auto erase_pos = big.begin();
+						std::advance(erase_pos, std::distance(this->cbegin(), pos));
+
+						return iterator(&*big.erase(erase_pos));
+					}
 				}
 			};
 

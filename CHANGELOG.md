@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.19.4
+- Fixed fatal error in `SmallVector::erase()` when is big and erasing the last element
+
 ### v1.19.3
 - Fixed `Expected::operator->()`
 
