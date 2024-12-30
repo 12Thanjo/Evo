@@ -201,6 +201,23 @@ namespace evo{
 
 
 			///////////////////////////////////
+			// resize
+
+			auto resize(size_t reserve_ammount) noexcept -> void {
+				static_assert(std::is_default_constructible<T>(), "T must be default constructible");
+
+				this->reserve(reserve_ammount);
+				this->set_size(reserve_ammount);
+
+				if constexpr(std::is_trivially_default_constructible<T>() == false){
+					for(T& elem : *this){
+						std::construct_at(&elem);
+					}
+				}
+			};
+
+
+			///////////////////////////////////
 			// clear
 
 			auto clear() noexcept -> void {

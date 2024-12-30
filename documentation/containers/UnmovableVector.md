@@ -165,6 +165,13 @@ constexpr auto reserve(size_t reserve_ammount) noexcept -> void;
 Reserve enough storage for `reserve_ammount` elements.
 
 
+#### resize
+```C++
+constexpr auto resize(size_t reserve_ammount) noexcept -> void;
+```
+Allocates enough storage for `reserve_ammount` elements, and default constructs all of them.
+
+
 #### clear
 ```C++
 constexpr auto clear() noexcept -> void;
