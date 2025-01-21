@@ -281,6 +281,15 @@ In debug mode, will print a message to the console in the fatal style, and calls
 
 
 
+### unimplemented
+```C++
+EVO_NORETURN inline auto unimplemented(const std::source_location location = std::source_location::current()) noexcept -> void;
+EVO_NORETURN inline auto unimplemented(std::string_view message, const std::source_location location = std::source_location::current()) noexcept -> void;
+```
+Formats an unimplemented message and passes it to `debugAssert()`
+
+
+
 ## styleConsole namespace
 
 ### reset

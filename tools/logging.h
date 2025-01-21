@@ -3,6 +3,7 @@
 #include <string>
 #include <format>
 #include <functional>
+#include <source_location>
 
 #include "../defines.h"
 #include "../utils/misc.h"
@@ -670,7 +671,6 @@ namespace evo{
 
 
 
-
 	EVO_NORETURN inline auto debugFatalBreak([[maybe_unused]] std::string_view msg) noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
 			styleConsole::fatal();
@@ -686,6 +686,35 @@ namespace evo{
 	template<class... Args>
 	EVO_NORETURN inline auto debugFatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		debugFatalBreak(std::format(fmt, std::forward<decltype(args)>(args)...));
+	};
+
+
+	
+
+
+	EVO_NORETURN inline auto unimplemented(
+		const std::source_location location = std::source_location::current()
+	) noexcept -> void {
+		fatalBreak(
+			"UNIMPLEMENTED | {}({}:{}) `{}`",
+			location.file_name(),
+			location.line(),
+			location.column(),
+			location.function_name()
+		);
+	};
+
+	EVO_NORETURN inline auto unimplemented(
+		std::string_view message, const std::source_location location = std::source_location::current()
+	) noexcept -> void {
+		fatalBreak(
+			"UNIMPLEMENTED | \"{}\" - {}({}:{}) `{}`",
+			message,
+			location.file_name(),
+			location.line(),
+			location.column(),
+			location.function_name()
+		);
 	};
 
 };
