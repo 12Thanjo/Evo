@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.21.0
+- Added `copy()`
+
 ### v1.20.0
 - Added `Unmovable::resize()`
 

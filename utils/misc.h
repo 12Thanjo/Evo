@@ -41,6 +41,13 @@ namespace evo{
 
 
 
+	template<class T>
+	EVO_NODISCARD constexpr auto copy(const T& value) -> T {
+		return value;
+	}
+
+
+
 
 	EVO_NODISCARD constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t {
 		return lhs ^ (rhs << 1);
