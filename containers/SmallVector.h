@@ -563,3 +563,21 @@ namespace evo{
 };
 
 
+
+namespace std{
+
+	template<typename T, size_t SMALL_CAPACITY>
+	struct hash<evo::SmallVector<T, SMALL_CAPACITY>>{
+		auto operator()(const evo::SmallVector<T, SMALL_CAPACITY>& small_vec) const noexcept -> size_t {
+			size_t hash_value = 0;
+			for(const T& value : small_vec){
+				hash_value = evo::hashCombine(hash_value, hash<T>{}(value));
+			}
+			return hash_value;
+		};
+	};
+	
+}
+
+
+

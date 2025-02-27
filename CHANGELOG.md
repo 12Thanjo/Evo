@@ -1,5 +1,10 @@
 # Evo Changelog
 
+### v1.23.0
+- Added hashing of `SmallVector`
+- Added hashing of `StaticVector`
+- Added hashing of `UnmovableVector`
+
 ### v1.22.0
 - Added `copy()`
 

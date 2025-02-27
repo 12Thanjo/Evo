@@ -463,10 +463,25 @@ namespace evo{
 
 	static_assert(sizeof(UnmovableVector<int>) == sizeof(size_t)*3, "evo::UnmovableVector is incorrect size");
 
-
-
-
-
 };
+
+
+
+
+
+namespace std{
+
+	template<typename T, bool ALLOW_SMALL_BUFFER_OPT>
+	struct hash<evo::UnmovableVector<T, ALLOW_SMALL_BUFFER_OPT>>{
+		auto operator()(const evo::UnmovableVector<T, ALLOW_SMALL_BUFFER_OPT>& unmovable_vec) const noexcept -> size_t {
+			size_t hash_value = 0;
+			for(const T& value : unmovable_vec){
+				hash_value = evo::hashCombine(hash_value, hash<T>{}(value));
+			}
+			return hash_value;
+		};
+	};
+	
+}
 
 

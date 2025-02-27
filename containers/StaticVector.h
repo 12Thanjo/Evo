@@ -493,7 +493,23 @@ namespace evo{
 
 
 
-
 };
+
+
+
+namespace std{
+
+	template<typename T, size_t CAPACITY>
+	struct hash<evo::StaticVector<T, CAPACITY>>{
+		auto operator()(const evo::StaticVector<T, CAPACITY>& static_vec) const noexcept -> size_t {
+			size_t hash_value = 0;
+			for(const T& value : static_vec){
+				hash_value = evo::hashCombine(hash_value, hash<T>{}(value));
+			}
+			return hash_value;
+		};
+	};
+	
+}
 
 
