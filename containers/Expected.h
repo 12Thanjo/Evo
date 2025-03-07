@@ -58,9 +58,18 @@ namespace evo{
 			///////////////////////////////////
 			// copy
 
-			EVO_NODISCARD constexpr Expected(const Expected& rhs) noexcept = default;
+			EVO_NODISCARD constexpr Expected(const Expected& rhs) noexcept {
+				std::destroy_at(this);
+				this->has_expected_value = rhs.has_expected_value;
+				if(rhs.has_expected_value){
+					this->expected_val = rhs.expected_val;
+				}else{
+					this->error_val = rhs.error_val;
+				}
+			}
 
-			constexpr auto operator=(const Expected& rhs) noexcept -> Expected {
+			constexpr auto operator=(const Expected& rhs) noexcept -> Expected& {
+				std::destroy_at(this);
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = rhs.expected_val;
@@ -69,13 +78,14 @@ namespace evo{
 				}
 
 				return *this;
-			};
+			}
 
 
 			///////////////////////////////////
 			// move
 
 			EVO_NODISCARD constexpr Expected(Expected&& rhs) noexcept {
+				std::destroy_at(this);
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = std::move(rhs.expected_val);
@@ -84,7 +94,8 @@ namespace evo{
 				}
 			};
 
-			constexpr auto operator=(Expected&& rhs) noexcept -> Expected {
+			constexpr auto operator=(Expected&& rhs) noexcept -> Expected& {
+				std::destroy_at(this);
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = std::move(rhs.expected_val);

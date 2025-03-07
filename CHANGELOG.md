@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.23.1
+- Fixed various issues with constructors of `Expected`
+
 ### v1.23.0
 - Added hashing of `SmallVector`
 - Added hashing of `StaticVector`
