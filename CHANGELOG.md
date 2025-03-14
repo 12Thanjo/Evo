@@ -1,5 +1,9 @@
 # Evo Changelog
 
+### v1.24.0
+- Overhaul of `SmallVector` implementation to improve the memory usage and performance
+- Fixed debug assert in `StaticVector::resize()`
+
 ### v1.23.1
 - Fixed various issues with constructors of `Expected`
 

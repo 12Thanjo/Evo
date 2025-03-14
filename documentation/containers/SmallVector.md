@@ -11,10 +11,10 @@ A vector that has small size optimization. SMALL_CAPACITY can be defaulted, and 
 
 ## Template Parameters
 
-| Template       | Description                                     |
-|:--------------:|-------------------------------------------------|
-| T              | Type of the elements of the vector              |
-| SMALL_CAPACITY | Maximum capacity of the small vector opmization |
+| Template       | Description                                                                                 |
+|:--------------:|---------------------------------------------------------------------------------------------|
+| T              | Type of the elements of the vector                                                          |
+| SMALL_CAPACITY | Maximum capacity of the small vector optimization (0 to turn off small vector optimization) |
 
 
 ## Member Types

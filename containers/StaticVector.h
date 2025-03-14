@@ -434,7 +434,7 @@ namespace evo{
 			};
 
 			constexpr auto resize(size_t new_size) noexcept -> void {
-				EVO_DEBUG_ASSERT(new_size < CAPACITY);
+				EVO_DEBUG_ASSERT(new_size <= CAPACITY);
 
 				if(new_size < this->size()){
 					for(size_t i = new_size; i < this->size(); i++){
