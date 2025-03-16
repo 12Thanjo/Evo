@@ -528,7 +528,9 @@ namespace evo{
 				EVO_DEBUG_ASSERT(this->size() <= new_capacity);
 
 				T* new_buffer = (T*)std::malloc(new_capacity * sizeof(T));
-				std::move(this->contents.big.data, &this->contents.big.data[this->contents.big.size], new_buffer);
+				for(size_t i = 0; i < this->contents.big.size; i+=1){
+					std::construct_at(&new_buffer[i], std::move(this->contents.big.data[i]));
+				}
 				std::free(this->contents.big.data);
 				this->contents.big.data = new_buffer;
 				this->contents.big.capacity = new_capacity;
@@ -540,8 +542,9 @@ namespace evo{
 				const size_t current_size = this->get_small_size();
 
 				T* new_buffer = (T*)std::malloc(new_capacity * sizeof(T));
-				std::move(this->get_small_data(), &this->get_small_data()[current_size], new_buffer);
-
+				for(size_t i = 0; i < current_size; i+=1){
+					std::construct_at(&new_buffer[i], std::move(this->get_small_data()[i]));
+				}
 				this->contents.big.size = current_size;
 				this->contents.big.capacity = new_capacity;
 				this->contents.big.data = new_buffer;

@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.24.1
+- Fixed `SmallVector` reallocation not properly moving values to new buffer
+
 ### v1.24.0
 - Overhaul of `SmallVector` implementation to improve the memory usage and performance
 - Fixed debug assert in `StaticVector::resize()`
