@@ -3,6 +3,15 @@
 
 namespace evo{
 
+	// https://devblogs.microsoft.com/oldnewthing/20190710-00/?p=102678
+	template<typename, typename = void>
+	constexpr bool is_type_complete_v = false;
+
+	template<typename T>
+	constexpr bool is_type_complete_v<T, std::void_t<decltype(sizeof(T))>> = true;
+
+
+
 	template<typename T>
 	EVO_NODISCARD constexpr auto optimal_small_vector_size() noexcept -> size_t {
 		struct BigData{
@@ -13,7 +22,9 @@ namespace evo{
 
 		const size_t max_optimal_small_buffer_size = sizeof(BigData) - 1;
 
-		if constexpr(sizeof(T) > max_optimal_small_buffer_size){
+		if constexpr(is_type_complete_v<T> == false){
+			return 0;
+		}else if constexpr(sizeof(T) > max_optimal_small_buffer_size){
 			return 0;
 		}else{
 			return max_optimal_small_buffer_size / sizeof(T);
@@ -556,7 +567,14 @@ namespace evo{
 		private:	
 			using SmallSizeType = CapacityType<SMALL_CAPACITY << 1>::type;
 
-			static constexpr size_t SMALL_BUFFER_SIZE = USES_SMALL_BUFFER ? SMALL_CAPACITY * sizeof(T) : 1;
+			// This being this complex is needed if the type is not complete
+ 			static constexpr size_t SMALL_BUFFER_SIZE = [](){
+				if constexpr(USES_SMALL_BUFFER){
+					return SMALL_CAPACITY * sizeof(T);
+				}else{
+					return 0;
+				}
+			}();
 
 			// data contains the size and buffer to get around C++ not having packed structs
 			struct SmallData{

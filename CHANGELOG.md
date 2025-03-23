@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.24.2
+- Added the ability for `SmallVector` to be compiled with the element type being incomplete
+
 ### v1.24.1
 - Fixed `SmallVector` reallocation not properly moving values to new buffer
 
