@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.24.3
+- Fixed `SmallVector()::erase()` not always erasing the correct element
+
 ### v1.24.2
 - Added the ability for `SmallVector` to be compiled with the element type being incomplete
 

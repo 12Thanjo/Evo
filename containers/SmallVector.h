@@ -368,8 +368,8 @@ namespace evo{
 				const auto end = reverse_iterator{const_cast<T*>(&*pos)};
 
 
-				for(reverse_iterator i = begin; i != end; ++i){
-					std::swap(*i, *std::next(i));
+				for(reverse_iterator iter = begin; iter != end; ++iter){
+					std::swap(*iter, *std::next(iter));
 				}
 
 				return iterator{const_cast<T*>(&*pos)};
@@ -392,9 +392,11 @@ namespace evo{
 					}
 				}();
 
-				for(iterator i = output; i != this->end(); ++i){
-					*std::prev(i) = std::move(*i);
+
+				for(auto iter = iterator{const_cast<T*>(&*pos)}; iter != --this->end(); ++iter){
+					std::swap(*iter, *std::next(iter));
 				}
+
 
 				if constexpr(USES_SMALL_BUFFER){
 					if(this->is_small()){
