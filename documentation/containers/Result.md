@@ -27,9 +27,9 @@ auto some_func() noexcept -> evo::Result<int> {
 
 ## Template Parameters
 
-| Template | Description                    |
-|:--------:|--------------------------------|
-| CAPACITY | Maximum capacity of the string |
+| Template | Description           | Default Value |
+|:--------:|-----------------------|---------------|
+| T        | Value held on success | `void`        |
 
 
 

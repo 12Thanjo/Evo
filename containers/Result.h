@@ -10,7 +10,7 @@ namespace evo{
 	struct ResultError_t{};
 	inline constexpr ResultError_t resultError{};
 
-	template<class T>
+	template<class T = void>
 	class Result{
 		public:
 			///////////////////////////////////
@@ -90,6 +90,9 @@ namespace evo{
 			EVO_NODISCARD constexpr Result(Result<void>&& rhs) noexcept : is_error(std::move(rhs.is_error)) {};
 
 
+			EVO_NODISCARD static constexpr auto fromBool(bool is_success) noexcept -> Result {
+				return Result(!is_success);
+			}
 
 
 			///////////////////////////////////
@@ -104,6 +107,9 @@ namespace evo{
 
 			EVO_NODISCARD static constexpr auto error() noexcept -> Result<void> { return Result<void>(resultError); };
 
+
+		private:
+			EVO_NODISCARD constexpr Result(bool _is_error) : is_error(_is_error) {}
 	
 		private:
 			bool is_error;

@@ -1,5 +1,10 @@
 # Evo Changelog
 
+### v1.25.0
+- Made the default held type of `Result` to be `void`
+- Added `Result<void>::fromBool(bool is_success)`
+- Fixed mistake in documentation for `Result`
+
 ### v1.24.3
 - Fixed `SmallVector()::erase()` not always erasing the correct element
 
