@@ -454,7 +454,7 @@ namespace evo{
 
 
 			//////////////////////////////////////////////////////////////////////
-			// comparison operators
+			// operators
 
 			EVO_NODISCARD auto operator==(const StaticVector& rhs) const noexcept -> bool {
 				if(this->size() != rhs.size()){ return false; }
@@ -479,6 +479,12 @@ namespace evo{
 
 				return false;
 			}
+
+
+
+			EVO_NODISCARD constexpr operator std::span<T>() noexcept {
+				return std::span<T>(this->data(), this->size());
+			};
 
 	
 		private:

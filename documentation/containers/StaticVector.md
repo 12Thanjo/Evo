@@ -248,3 +248,17 @@ template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
 constexpr auto resize(size_type new_size) noexcept -> void; // only if size_type is not size_t
 ```
 Resize the vector to given size `new_size`
+
+
+
+### Operators
+
+#### operator==
+```C++
+EVO_NODISCARD constexpr auto operator==(const StaticVector& rhs) const noexcept -> bool;
+```
+
+#### operator std::span<T>
+```C++
+EVO_NODISCARD constexpr operator std::span<T>() noexcept;
+```

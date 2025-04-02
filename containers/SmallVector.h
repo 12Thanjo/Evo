@@ -536,6 +536,12 @@ namespace evo{
 
 
 
+			EVO_NODISCARD constexpr operator std::span<T>() noexcept {
+				return std::span<T>(this->data(), this->size());
+			};
+
+
+
 		private:
 			constexpr auto realloc(size_t new_capacity) noexcept -> void {
 				EVO_DEBUG_ASSERT(this->size() <= new_capacity);

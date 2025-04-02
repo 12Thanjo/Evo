@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.26.0
+- Added conversion operators to `std::span` of `SmallVector`, `StaticVector`, and `UnmovableVector`
+
 ### v1.25.0
 - Made the default held type of `Result` to be `void`
 - Added `Result<void>::fromBool(bool is_success)`
