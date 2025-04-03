@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.27.0
+- Added specialization of `Expected<void, E>`
+
 ### v1.26.0
 - Added conversion operators to `std::span` of `SmallVector`, `StaticVector`, and `UnmovableVector`
 

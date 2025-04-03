@@ -6,7 +6,7 @@ template<class T, class E>
 class Expected;
 ```
 
-A tool to hold two types of values: expected and error. This is designed for returning from functions (return value / error value). This type does not dynamically allocate unless the default constructor is called and the expected type's default constructor dynamically allocates.
+A tool to hold two types of values: expected and error. This is designed for returning from functions (return value / error value). This type does not dynamically allocate unless the default constructor is called and the expected type's default constructor dynamically allocates. There is also a specialization for `T = void`.
 
 This is a simplified version of C++23's `std::expected`.
 

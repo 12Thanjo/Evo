@@ -3,8 +3,6 @@
 
 #include "../defines.h"
 
-#include <type_traits>
-
 
 namespace evo{
 
@@ -212,7 +210,98 @@ namespace evo{
 				T expected_val;
 				E error_val;
 			};
+	};
 
+
+
+
+
+
+	template<class E>
+	class Expected<void, E>{
+		public:
+			using value_type = void;
+			using error_type = E;
+			using unexpected_type = Unexpected<E>;
+
+			//////////////////////////////////////////////////////////////////////
+			// constructors / destructors
+
+			EVO_NODISCARD constexpr Expected() noexcept = default;
+
+			constexpr ~Expected() noexcept = default;
+
+
+			///////////////////////////////////
+			// copy
+
+			EVO_NODISCARD constexpr Expected(const Expected& rhs) noexcept {
+				this->error_val = rhs.error_val;
+			};
+
+			constexpr auto operator=(const Expected& rhs) noexcept -> Expected& {
+				std::construct_at(this, rhs);
+				return *this;
+			};
+
+
+			///////////////////////////////////
+			// move
+
+			EVO_NODISCARD constexpr Expected(Expected&& rhs) noexcept {
+				this->error_val = std::move(rhs.error_val);
+			};
+
+			constexpr auto operator=(Expected&& rhs) noexcept -> Expected& {
+				std::construct_at(this, std::move(rhs));
+				return *this;
+			};
+
+
+
+			///////////////////////////////////
+			// unexpected
+
+			EVO_NODISCARD constexpr Expected(const Unexpected<E>& val) noexcept : error_val(val.error()) {};
+			EVO_NODISCARD constexpr Expected(Unexpected<E>&& val) noexcept : error_val(std::move(val.error())) {};
+
+
+
+			///////////////////////////////////
+			// deleted special member functions
+
+			constexpr Expected(const Expected&&) = delete;
+			constexpr Expected& operator=(const Expected&&) = delete;
+
+
+			//////////////////////////////////////////////////////////////////////
+			// observers
+
+
+
+			///////////////////////////////////
+			// has value
+
+			EVO_NODISCARD constexpr auto has_value() const noexcept -> bool { return !this->error_val.has_value(); };
+
+
+			///////////////////////////////////
+			// error
+
+			EVO_NODISCARD constexpr auto error() const noexcept -> const E& {
+				EVO_DEBUG_ASSERT(this->has_value() == false); // attempted to get error value of evo::Expected that currently has expected value
+
+				return *this->error_val;
+			};
+			EVO_NODISCARD constexpr auto error() noexcept -> E& {
+				EVO_DEBUG_ASSERT(this->has_value() == false); // attempted to get error value of evo::Expected that currently has expected value
+
+				return *this->error_val;
+			};
+
+	
+		private:
+			std::optional<E> error_val{};
 	};
 
 
