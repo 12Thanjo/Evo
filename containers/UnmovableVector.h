@@ -438,10 +438,9 @@ namespace evo{
 
 
 			auto set_size(size_t new_size) -> void {
-				EVO_DEBUG_ASSERT(new_size <= std::numeric_limits<uint8_t>::max());
-
 				if constexpr(ALLOW_SMALL_BUFFER_OPT){
 					if(this->is_small()){
+						EVO_DEBUG_ASSERT(new_size <= std::numeric_limits<uint8_t>::max());
 						this->_data.small.size = uint8_t(new_size);
 					}else{
 						this->_data.big.size = new_size;

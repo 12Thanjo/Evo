@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.27.1
+- Fixed assert firing incorrectly in `UnmovableVector` when the allocation size was >= 2^8
+
 ### v1.27.0
 - Added specialization of `Expected<void, E>`
 
