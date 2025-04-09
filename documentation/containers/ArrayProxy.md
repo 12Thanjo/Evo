@@ -180,3 +180,9 @@ EVO_NODISCARD constexpr auto subarr(size_t start, size_t end) const noexcept -> 
 Get a sub-ArrayProxy containing the elements from `start` to `end`
 
 
+### Operators
+```C++
+EVO_NODISCARD constexpr auto operator==(const ArrayProxy<T>& rhs) const -> bool;
+```
+
+

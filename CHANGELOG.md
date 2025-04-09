@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.28.0
+- Added `ArrayProxy::operator==`
+
 ### v1.27.1
 - Fixed assert firing incorrectly in `UnmovableVector` when the allocation size was >= 2^8
 

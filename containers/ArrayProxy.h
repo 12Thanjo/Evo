@@ -150,6 +150,20 @@ namespace evo{
 
 
 
+			//////////////////////////////////////////////////////////////////////
+			// operators
+
+			EVO_NODISCARD constexpr auto operator==(const ArrayProxy<T>& rhs) const -> bool {
+				if(this->size() != rhs.size()){ return false; }
+
+				for(size_t i = 0; i < this->size(); i+=1){
+					if(this->at(i) != rhs[i]){ return false; }
+				}
+
+				return true;
+			}
+
+
 	
 		private:
 			const size_t count;
