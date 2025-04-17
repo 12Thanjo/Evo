@@ -98,6 +98,7 @@ namespace evo{
 					if(rhs.is_small()){
 						this->set_small_size(static_cast<SmallSizeType>(rhs.size()));
 						std::move(rhs.begin(), rhs.end(), this->get_small_data());
+						rhs.clear();
 
 					}else{
 						std::memcpy(this, &rhs, sizeof(SmallVector<T, SMALL_CAPACITY>));

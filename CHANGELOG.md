@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.28.1
+- Fixed `SmallVector` move constructor not clearing the from `SmallVector` when the from `SmallVector` is currently using small buffer
+
 ### v1.28.0
 - Added `ArrayProxy::operator==`
 
