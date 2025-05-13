@@ -1,5 +1,8 @@
 # Evo Changelog
 
+### v1.29.0
+- Upgraded iterators to meet the requirements of `std::random_access_iterator`
+
 ### v1.28.1
 - Fixed `SmallVector` move constructor not clearing the from `SmallVector` when the from `SmallVector` is currently using small buffer
 
