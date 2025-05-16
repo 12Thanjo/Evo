@@ -1,5 +1,10 @@
 # Evo Changelog
 
+### v1.30.0
+- Added `Variant::as() && noexcept -> T&&;`
+- Added `Variant::getNative() && noexcept -> std::variant<Ts...>&&;`
+- Removed `Result::value() const&& noexcept -> const T&&;`
+
 ### v1.29.0
 - Upgraded iterators to meet the requirements of `std::random_access_iterator`
 

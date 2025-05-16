@@ -23,8 +23,9 @@ Container to add a nicer interface over `std::variant`. It inherits from `std::v
 
 ### getNative
 ```C++
-EVO_NODISCARD constexpr auto getNative()       noexcept ->       std::variant<Ts...>&;
-EVO_NODISCARD constexpr auto getNative() const noexcept -> const std::variant<Ts...>&;
+EVO_NODISCARD constexpr auto getNative() const&  noexcept -> const std::variant<Ts...>&;
+EVO_NODISCARD constexpr auto getNative()      &  noexcept ->       std::variant<Ts...>&;
+EVO_NODISCARD constexpr auto getNative()      && noexcept ->       std::variant<Ts...>&&;
 ```
 Get the native C++ standard library version of the variant.
 
@@ -40,10 +41,13 @@ Check if the variant is holding a given type.
 ### as
 ```C++
 template<class T>
-EVO_NODISCARD constexpr auto as() noexcept -> T&;
+EVO_NODISCARD constexpr auto as() const& noexcept -> const T&;
 
 template<class T>
-EVO_NODISCARD constexpr auto as() const noexcept -> const T&;
+EVO_NODISCARD constexpr auto as() & noexcept -> T&;
+
+template<class T>
+EVO_NODISCARD constexpr auto as() && noexcept -> T&&;
 ```
 Get the currently held value.
 

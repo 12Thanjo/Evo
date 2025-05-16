@@ -66,7 +66,6 @@ Get if there was an error that occured in the function
 ```C++
 EVO_NODISCARD constexpr auto value() const&  noexcept -> const T&;
 EVO_NODISCARD constexpr auto value()      &  noexcept ->       T&;
-EVO_NODISCARD constexpr auto value() const&& noexcept -> const T&&;
 EVO_NODISCARD constexpr auto value()      && noexcept ->       T&&;
 ```
 Get the return value (only present if `isSuccess() == true`). If `T` is `void`, this function does not exist.
