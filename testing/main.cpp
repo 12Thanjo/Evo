@@ -308,32 +308,70 @@ namespace tests{
 
 
 	EVO_NODISCARD auto small_vector_test() noexcept -> bool {
-		auto small_vec = evo::SmallVector<int, 8>{1, 2, 3};
-		auto small_vec2 = evo::SmallVector<int, 8>{4, 5, 6};
+		{
+			auto small_vec = evo::SmallVector<int, 8>{1, 2, 3};
+			auto small_vec2 = evo::SmallVector<int, 8>{4, 5, 6};
 
-		small_vec = small_vec2;
-		small_vec = std::move(small_vec2);
+			small_vec = small_vec2;
+			small_vec = std::move(small_vec2);
 
-		const auto small_vec_copy = evo::SmallVector<int, 3>(small_vec.begin(), small_vec.end());
+			const auto small_vec_copy = evo::SmallVector<int, 3>(small_vec.begin(), small_vec.end());
 
 
-		if(small_vec[0] != 4 || small_vec[1] != 5 || small_vec[2] != 6){
-			evo::printlnRed("SmallVector test 1 failed");
-			return false;
+			if(small_vec[0] != 4 || small_vec[1] != 5 || small_vec[2] != 6){
+				evo::printlnRed("SmallVector test 1 failed");
+				return false;
+			}
+
+			small_vec.clear();
+
+			for(size_t i = 0; i < 24; i+=1){
+				small_vec.emplace_back(i);
+
+				for(size_t j = 0; j < i; j+=1){
+					if(small_vec[j] != int(j)){
+						evo::printlnRed("SmallVector test 2 failed");
+
+						return false;
+					}
+				}
+			}
 		}
 
-		small_vec.clear();
 
-		for(size_t i = 0; i < 12; i+=1){
-			small_vec.emplace_back(i);
+		{
+			auto small_vec = evo::SmallVector<uint64_t>();
 
-			for(size_t j = 0; j < i; j+=1){
-				if(small_vec[j] != int(j)){
-					evo::printlnRed("SmallVector test 2 failed");
+			for(size_t i = 0; i < 100'000; i+=1){
+				small_vec.emplace_back(evo::byte(i));
+
+				if(small_vec.size() != i + 1){
+					evo::printlnRed("SmallVector test 3 failed");
+					return false;
+				}
+
+				if(small_vec[i] != evo::byte(i)){
+					evo::printlnRed("SmallVector test 3 failed");
 					return false;
 				}
 			}
 		}
+
+
+		{
+			auto small_vec = evo::SmallVector<int>();
+
+			if(small_vec.size() != 0){
+				evo::printlnRed("SmallVector test 4 failed");
+			}
+
+			for(auto iter = small_vec.rbegin(); iter != small_vec.rend(); ++iter){
+				evo::printlnRed("SmallVector test 4 failed");
+				return false;
+			}
+		}
+
+
 
 
 		evo::printlnGreen("SmallVector tests passed");

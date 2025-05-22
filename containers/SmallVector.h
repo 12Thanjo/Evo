@@ -15,9 +15,9 @@ namespace evo{
 	template<typename T>
 	EVO_NODISCARD constexpr auto optimal_small_vector_size() noexcept -> size_t {
 		struct BigData{
+			T* data;
 			size_t size;
 			size_t capacity;
-			T* data;
 		};
 
 		const size_t max_optimal_small_buffer_size = sizeof(BigData) - 1;
@@ -58,7 +58,7 @@ namespace evo{
 				if constexpr(USES_SMALL_BUFFER){
 					this->set_small_size(0);
 				}else{
-					std::memset(&this->contents.big, 0, sizeof(BigData));
+					std::memset(this, 0, sizeof(SmallData));
 				}
 			}
 
@@ -102,12 +102,12 @@ namespace evo{
 
 					}else{
 						std::memcpy(this, &rhs, sizeof(SmallVector<T, SMALL_CAPACITY>));
-						std::memset(&rhs, 0, sizeof(SmallVector<T, SMALL_CAPACITY>));
+						std::memset(&rhs.contents.big, 0, sizeof(BigData));
 					}
 
 				}else{
 					std::memcpy(this, &rhs, sizeof(SmallVector<T, SMALL_CAPACITY>));
-					std::memset(&rhs, 0, sizeof(SmallVector<T, SMALL_CAPACITY>));
+					std::memset(&rhs.contents.big, 0, sizeof(BigData));
 				}
 			};
 
@@ -249,9 +249,9 @@ namespace evo{
 			EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator { return const_iterator{&this->data()[this->size()]}; };
 
 
-			EVO_NODISCARD constexpr auto rbegin()        noexcept -> reverse_iterator       { return reverse_iterator{&this->data()[this->size()-1]};      };
-			EVO_NODISCARD constexpr auto rbegin()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{&this->data()[this->size()-1]};};
-			EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_reverse_iterator { return const_reverse_iterator{&this->data()[this->size()-1]};};
+			EVO_NODISCARD constexpr auto rbegin()        noexcept -> reverse_iterator       { return reverse_iterator{&this->data()[ptrdiff_t(this->size())-1]};      };
+			EVO_NODISCARD constexpr auto rbegin()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{&this->data()[ptrdiff_t(this->size())-1]};};
+			EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_reverse_iterator { return const_reverse_iterator{&this->data()[ptrdiff_t(this->size())-1]};};
 
 			EVO_NODISCARD constexpr auto rend()        noexcept -> reverse_iterator       { return reverse_iterator{this->data()-1};       };
 			EVO_NODISCARD constexpr auto rend()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data()-1}; };
@@ -565,6 +565,7 @@ namespace evo{
 				for(size_t i = 0; i < current_size; i+=1){
 					std::construct_at(&new_buffer[i], std::move(this->get_small_data()[i]));
 				}
+				this->contents.small.data[SMALL_BUFFER_SIZE + sizeof(SmallSizeType) - 1] = 0;
 				this->contents.big.size = current_size;
 				this->contents.big.capacity = new_capacity;
 				this->contents.big.data = new_buffer;
@@ -575,9 +576,10 @@ namespace evo{
 
 		private:	
 			using SmallSizeType = CapacityType<SMALL_CAPACITY << 1>::type;
+			static constexpr SmallSizeType SMALL_SIZE_MASK = 1 << (sizeof(SmallSizeType) * 8 - 1);
 
 			// This being this complex is needed if the type is not complete
- 			static constexpr size_t SMALL_BUFFER_SIZE = [](){
+ 			static constexpr size_t SMALL_BUFFER_SIZE = []() -> size_t {
 				if constexpr(USES_SMALL_BUFFER){
 					return SMALL_CAPACITY * sizeof(T);
 				}else{
@@ -585,34 +587,53 @@ namespace evo{
 				}
 			}();
 
-			// data contains the size and buffer to get around C++ not having packed structs
-			struct SmallData{
-				byte data[SMALL_BUFFER_SIZE + sizeof(SmallSizeType)];
-			};
 
 			struct BigData{
+				T* data;
 				size_t size;
 				size_t capacity;
-				T* data;
+			};
+
+			// Padding is necessary to make sure the is_small bit is in the right place
+			static constexpr size_t SMALL_BUFFER_PADDING = []() -> size_t {
+				if constexpr(SMALL_BUFFER_SIZE + sizeof(SmallSizeType) < sizeof(BigData)){
+					return sizeof(BigData) - (SMALL_BUFFER_SIZE + sizeof(SmallSizeType));
+				}else{
+					return 0;
+				}
+			}();
+
+			// data contains the size and buffer to get around C++ not having packed structs
+			struct SmallData{
+				byte data[SMALL_BUFFER_SIZE + SMALL_BUFFER_PADDING + sizeof(SmallSizeType)];
 			};
 
 
 			// TODO: is having the set bit on small fastest? Maybe it's better on big because data is on the heap
-			EVO_NODISCARD constexpr auto get_small_size() const noexcept -> size_t { return size_t(*(SmallSizeType*)this->contents.small.data & ((1 << 7) - 1)); };
+			EVO_NODISCARD constexpr auto get_small_size() const noexcept -> size_t {
+				const SmallSizeType* size_ptr = (SmallSizeType*)&this->contents.small.data[SMALL_BUFFER_SIZE + SMALL_BUFFER_PADDING];
+				return size_t(*size_ptr & (SMALL_SIZE_MASK - 1));
+			};
 
-			EVO_NODISCARD constexpr auto get_small_data() const noexcept -> const T* { return (T*)(this->contents.small.data + sizeof(SmallSizeType)); };
-			EVO_NODISCARD constexpr auto get_small_data()       noexcept ->       T* { return (T*)(this->contents.small.data + sizeof(SmallSizeType)); };
+			EVO_NODISCARD constexpr auto get_small_data() const noexcept -> const T* { return (T*)this->contents.small.data; };
+			EVO_NODISCARD constexpr auto get_small_data()       noexcept ->       T* { return (T*)this->contents.small.data; };
 
 
 
-			EVO_NODISCARD constexpr auto set_small_size(SmallSizeType new_size) noexcept -> void {
-				*(SmallSizeType*)this->contents.small.data = new_size;
-				*(byte*)&this->contents |= 1 << 7;
+			constexpr auto set_small_size(SmallSizeType new_size) noexcept -> void {
+				SmallSizeType* size_ptr = (SmallSizeType*)&this->contents.small.data[SMALL_BUFFER_SIZE + SMALL_BUFFER_PADDING];
+
+				*size_ptr = new_size;
+				*size_ptr |= SMALL_SIZE_MASK;
 			};
 
 
 
-			EVO_NODISCARD constexpr auto is_small() const noexcept -> bool { return bool((*(byte*)&this->contents) >> 7); };
+			EVO_NODISCARD constexpr auto is_small() const noexcept -> bool {
+				const SmallSizeType* size_ptr = (SmallSizeType*)&this->contents.small.data[SMALL_BUFFER_SIZE + SMALL_BUFFER_PADDING];
+				return *size_ptr >= SMALL_SIZE_MASK;
+			};
+
 			EVO_NODISCARD constexpr auto is_big() const noexcept -> bool { return !this->is_small(); };
 
 
