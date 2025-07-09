@@ -62,6 +62,15 @@ namespace evo{
 				}
 			}
 
+			EVO_NODISCARD explicit constexpr SmallVector(size_type count, const T& value = T()) noexcept {
+				std::construct_at(this);
+
+				this->reserve(count);
+				for(size_t i = 0; i < count; i+=1){
+					this->emplace_back(value);
+				}
+			}
+
 			constexpr ~SmallVector() noexcept {
 				std::destroy_n(this->data(), this->size());
 
@@ -665,6 +674,4 @@ namespace std{
 	};
 	
 }
-
-
 

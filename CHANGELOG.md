@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.31.0"></a>
+### v1.31.0
+- Added `SmallVector::SmallVector(count, value)`
+
+
+<!---------------------------------->
 <a name="v1.30.1"></a>
 ### v1.30.1
 - Fixed incorrect behavior for `SmallVector` for certain sizes 

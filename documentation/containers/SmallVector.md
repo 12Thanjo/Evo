@@ -33,6 +33,7 @@ A vector that has small size optimization. SMALL_CAPACITY can be defaulted, and 
 | reverse_iterator       | `ReverseIterator<T>`           |
 | const_reverse_iterator | `ConstReverseIterator<T>`      |
 
+
 ## Member Functions
 
 ### Constructors
@@ -40,6 +41,9 @@ A vector that has small size optimization. SMALL_CAPACITY can be defaulted, and 
 EVO_NODISCARD constexpr SmallVector() noexcept;
 EVO_NODISCARD SmallVector(const SmallVector<T, SMALL_CAPACITY>& rhs) noexcept;
 EVO_NODISCARD SmallVector(SmallVector<T, SMALL_CAPACITY>&& rhs) noexcept;
+
+EVO_NODISCARD explicit constexpr SmallVector(size_type count, const T& value = T()) noexcept;
+
 EVO_NODISCARD SmallVector(std::initializer_list<T> init_list) noexcept;
 
 template<class InputIt>
