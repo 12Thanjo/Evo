@@ -28,9 +28,7 @@ namespace evo{
 
 
 	auto random01() noexcept -> f64 {
-		f64 max_f64 = std::numeric_limits<f64>::max();
-		uint64_t rand_uint = random(0, ui64(max_f64));
-		return f64(rand_uint) / max_f64;
+		return f64(random()) / f64(std::numeric_limits<uint64_t>::max());
 	};
 	
 

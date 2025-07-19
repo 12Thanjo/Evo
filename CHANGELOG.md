@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.31.1"></a>
+### v1.31.1
+- Fixed `random01()` giving a non-uniform distribution
+
+
+<!---------------------------------->
 <a name="v1.31.0"></a>
 ### v1.31.0
 - Added `SmallVector::SmallVector(count, value)`
