@@ -1,9 +1,14 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.32.0"></a>
+### v1.32.0
+- Added `Result::operator=(ResultError_t)`
+
+<!---------------------------------->
 <a name="v1.31.1"></a>
 ### v1.31.1
-- Fixed `random01()` giving a non-uniform distribution
+- Fixed `random01()` giving a non-uniform
 
 
 <!---------------------------------->

@@ -28,6 +28,10 @@ namespace evo{
 
 			EVO_NODISCARD constexpr Result(Result<T>&& rhs) noexcept : val(std::move(rhs.val)) {};
 
+			EVO_NODISCARD constexpr auto operator=(ResultError_t) noexcept {
+				this->val.reset();
+			};
+
 
 
 
