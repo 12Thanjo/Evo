@@ -22,14 +22,21 @@ namespace evo{
 			~Result() = default;
 
 			EVO_NODISCARD constexpr Result(const Result<T>& rhs) noexcept : val(rhs.val) {};
-			EVO_NODISCARD constexpr auto operator=(const Result<T>& rhs) noexcept {
+			constexpr auto operator=(const Result<T>& rhs) noexcept -> Result<T> {
 				this->val = rhs.val;
+				return *this;
 			};
 
 			EVO_NODISCARD constexpr Result(Result<T>&& rhs) noexcept : val(std::move(rhs.val)) {};
+			constexpr auto operator=(Result<T>&& rhs) noexcept -> Result<T> {
+				this->val = std::move(rhs.val);
+				return *this;
+			};
 
-			EVO_NODISCARD constexpr auto operator=(ResultError_t) noexcept {
+
+			EVO_NODISCARD constexpr auto operator=(ResultError_t) noexcept -> Result<T>& {
 				this->val.reset();
+				return *this;
 			};
 
 

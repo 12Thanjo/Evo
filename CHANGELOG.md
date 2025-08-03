@@ -1,9 +1,18 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.33.0"></a>
+### v1.33.0
+- Added missing `Result::operator=(Result&&)`
+- Fixed `Result::operator=(ResultError_t)` not returning this
+- Fixed `Result::operator=(const Result&)` not returning this
+
+
+<!---------------------------------->
 <a name="v1.32.0"></a>
 ### v1.32.0
 - Added `Result::operator=(ResultError_t)`
+
 
 <!---------------------------------->
 <a name="v1.31.1"></a>
@@ -63,8 +72,8 @@
 - Added specialization of `Expected<void, E>`
 
 	
-	<!---------------------------------->
-	<a name="v1.26.0"></a>
+<!---------------------------------->
+<a name="v1.26.0"></a>
 ### v1.26.0
 - Added conversion operators to `std::span` of `SmallVector`, `StaticVector`, and `UnmovableVector`
 
