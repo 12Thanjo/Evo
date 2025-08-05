@@ -43,7 +43,7 @@ workspace "testing"
 		}
 
 		flags{
-			"LinkTimeOptimization",
+			"linktimeoptimization",
 		}
 	filter {}
 
@@ -79,9 +79,6 @@ project "init"
 
 	cleancommands{
 		( "rm -rf ./build/" ),
-
-		("@echo \"\\\"Clean testing\\\" may have an error - don't worry, its fine (it seems to be a bug in the genation from premake5)\""),
-		("@echo"),
 	}
 
 project "*"

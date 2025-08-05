@@ -27,6 +27,7 @@ Requires at least C++20.
 - [SmallVector](documentation/containers/SmallVector.md)
 - [StaticString](documentation/containers/StaticString.md)
 - [StaticVector](documentation/containers/StaticVector.md)
+- [StepVector](documentation/containers/StepVector.md)
 - [UnmoveableVector](documentation/containers/UnmoveableVector.md)
 - [Variant](documentation/containers/Variant.md)
 

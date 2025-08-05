@@ -36,6 +36,7 @@
 #include "./containers/Flags.h"
 #include "./containers/StaticVector.h"
 #include "./containers/SmallVector.h"
+#include "./containers/StepVector.h"
 #include "./containers/UnmovableVector.h"
 #include "./containers/ArrayProxy.h"
 #include "./containers/StaticString.h"

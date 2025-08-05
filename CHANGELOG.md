@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.34.0"></a>
+### v1.34.0
+- Added `StepVector`
+
+
+<!---------------------------------->
 <a name="v1.33.0"></a>
 ### v1.33.0
 - Added missing `Result::operator=(Result&&)`
@@ -17,7 +23,7 @@
 <!---------------------------------->
 <a name="v1.31.1"></a>
 ### v1.31.1
-- Fixed `random01()` giving a non-uniform
+- Fixed `random01()` giving a non-uniform value
 
 
 <!---------------------------------->
