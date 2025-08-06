@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.34.1"></a>
+### v1.34.1
+- Fixed `SmallVector::SmallVector(SmallVector&&)` when currently using small buffer
+
+
+<!---------------------------------->
 <a name="v1.34.0"></a>
 ### v1.34.0
 - Added `StepVector`

@@ -106,7 +106,16 @@ namespace evo{
 				if constexpr(USES_SMALL_BUFFER){
 					if(rhs.is_small()){
 						this->set_small_size(static_cast<SmallSizeType>(rhs.size()));
-						std::move(rhs.begin(), rhs.end(), this->get_small_data());
+
+						auto src_iter = rhs.begin();
+						auto dst_iter = this->begin();
+
+						while(src_iter != rhs.end()){
+							std::construct_at(&*dst_iter, std::move(*src_iter));
+							++src_iter;
+							++dst_iter;
+						}
+
 						rhs.clear();
 
 					}else{
