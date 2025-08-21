@@ -33,6 +33,7 @@
 #include "./containers/Result.h"
 #include "./containers/Expected.h"
 #include "./containers/iterators.h"
+#include "./containers/IterRange.h"
 #include "./containers/Flags.h"
 #include "./containers/StaticVector.h"
 #include "./containers/SmallVector.h"

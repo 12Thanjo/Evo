@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.35.0"></a>
+### v1.35.0
+- Added `IterRange`
+
+
+<!---------------------------------->
 <a name="v1.34.1"></a>
 ### v1.34.1
 - Fixed `SmallVector::SmallVector(SmallVector&&)` when currently using small buffer
