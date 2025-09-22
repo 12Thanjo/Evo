@@ -85,7 +85,7 @@ namespace evo{
 
 
 			constexpr auto pop_back() noexcept -> void {
-				std::destroy_at(this->back());
+				std::destroy_at(&this->back());
 
 				this->current_end_of_buffer -= 1;
 

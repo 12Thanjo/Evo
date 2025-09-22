@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.35.1"></a>
+### v1.35.1
+- Fixed compilation issues with `StepVector::pop_back()`
+
+
+<!---------------------------------->
 <a name="v1.35.0"></a>
 ### v1.35.0
 - Added `IterRange`
