@@ -24,6 +24,7 @@
 #include "./utils/misc.h"
 #include "./utils/numeric_types.h"
 #include "./utils/select_size_type.h"
+#include "./utils/SpinLock.h"
 #include "./utils/strings.h"
 
 

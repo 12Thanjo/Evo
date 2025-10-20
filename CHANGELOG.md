@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.36.0"></a>
+### v1.36.0
+- Added `SpinLock`
+
+
+<!---------------------------------->
 <a name="v1.35.1"></a>
 ### v1.35.1
 - Fixed compilation issues with `StepVector::pop_back()`

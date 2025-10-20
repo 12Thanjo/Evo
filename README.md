@@ -13,6 +13,7 @@ Requires at least C++20.
 - [numeric_types.h](documentation/utils/numeric_types.md)
 - [platform_detection.h](documentation/utils/platform_detection.md)
 - [select_size_type.h](documentation/utils/select_size_type.md)
+- [SpinLock.h](documentation/utils/SpinLock.md)
 - [strings.h](documentation/utils/strings.md)
 
 ## Containers
