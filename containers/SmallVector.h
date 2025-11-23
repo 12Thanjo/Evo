@@ -492,7 +492,13 @@ namespace evo{
 			};
 
 
-			// not implemented yet: append_range
+			template<class R>
+			constexpr auto append_range(R&& range) noexcept -> void {
+				this->reserve(std::bit_ceil(this->size() + std::size(range)));
+				for(auto& range_item : range){
+					this->emplace_back(std::move(range_item));
+				}
+			};
 
 			///////////////////////////////////
 			// pop_back

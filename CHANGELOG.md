@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.37.0"></a>
+### v1.37.0
+- Added `SmallVector::append_range`
+
+
+<!---------------------------------->
 <a name="v1.36.0"></a>
 ### v1.36.0
 - Added `SpinLock`
