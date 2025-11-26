@@ -69,6 +69,25 @@ namespace evo{
 				: count(unmovable_vector.size()), data_ptr(unmovable_vector.data()) {};
 
 
+			//////////////////
+			// copy and move
+
+			EVO_NODISCARD constexpr ArrayProxy(const ArrayProxy<T>&) = default;
+
+			constexpr auto operator=(const ArrayProxy<T>& rhs) -> ArrayProxy<T>& {
+				std::construct_at(this, rhs);
+				return *this;
+			}
+
+
+			EVO_NODISCARD constexpr ArrayProxy(ArrayProxy<T>&&) = default;
+
+			constexpr auto operator=(ArrayProxy<T>&& rhs) -> ArrayProxy<T>& {
+				std::construct_at(this, std::move(rhs));
+				return *this;
+			}
+
+
 			//////////////////////////////////////////////////////////////////////
 			// iterators
 

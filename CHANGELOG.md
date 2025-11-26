@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.39.0"></a>
+### v1.39.0
+- Added explicit copy and move constructors to ArrayProxy to fix issues with concepts
+
+
+<!---------------------------------->
 <a name="v1.38.0"></a>
 ### v1.38.0
 - Improved performance of `SmallVector::append_range`
