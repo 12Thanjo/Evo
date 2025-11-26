@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.38.0"></a>
+### v1.38.0
+- Improved performance of `SmallVector::append_range`
+
+
+<!---------------------------------->
 <a name="v1.37.0"></a>
 ### v1.37.0
 - Added `SmallVector::append_range`

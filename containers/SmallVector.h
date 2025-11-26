@@ -494,7 +494,10 @@ namespace evo{
 
 			template<class R>
 			constexpr auto append_range(R&& range) noexcept -> void {
-				this->reserve(std::bit_ceil(this->size() + std::size(range)));
+				const size_t range_size = std::size(range);
+				if(range_size == 0){ return; }
+
+				this->reserve(std::bit_ceil(this->size() + range_size));
 				for(auto& range_item : range){
 					this->emplace_back(std::move(range_item));
 				}
