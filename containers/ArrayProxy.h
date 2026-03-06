@@ -162,7 +162,7 @@ namespace evo{
 
 			EVO_NODISCARD constexpr auto subarr(size_t start, size_t num_elems) const noexcept -> ArrayProxy<T> {
 				EVO_DEBUG_ASSERT(start <= this->count); // sub-arr is not in-bounds
-				EVO_DEBUG_ASSERT(start + count <= this->count); // sub-arr is not in-bounds
+				EVO_DEBUG_ASSERT(start + num_elems <= this->count); // sub-arr is not in-bounds
 				EVO_DEBUG_ASSERT(num_elems != 0);
 
 				return ArrayProxy<T>{&this->data_ptr[start], num_elems};
