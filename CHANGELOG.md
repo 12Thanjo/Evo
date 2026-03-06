@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.39.1"></a>
+### v1.39.1
+- Fixed `ArrayProxy::subarr()`
+
+
+<!---------------------------------->
 <a name="v1.39.0"></a>
 ### v1.39.0
 - Added explicit copy and move constructors to ArrayProxy to fix issues with concepts

@@ -175,9 +175,9 @@ Get a sub-ArrayProxy containing the last `num` elements
 
 #### subarr
 ```C++
-EVO_NODISCARD constexpr auto subarr(size_t start, size_t end) const noexcept -> ArrayProxy<T>;
+EVO_NODISCARD constexpr auto subarr(size_t start, size_t num_elems) const noexcept -> ArrayProxy<T>;
 ```
-Get a sub-ArrayProxy containing the elements from `start` to `end`
+Get a sub-ArrayProxy containing the elements from `start` index for `num_elems` elements
 
 
 ### Operators
