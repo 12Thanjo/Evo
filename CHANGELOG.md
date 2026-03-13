@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.39.2"></a>
+### v1.39.2
+- Fixed `Expected` copy and move constructors
+
+
+<!---------------------------------->
 <a name="v1.39.1"></a>
 ### v1.39.1
 - Fixed `ArrayProxy::subarr()`
