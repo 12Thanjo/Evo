@@ -1,6 +1,12 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.39.3"></a>
+### v1.39.3
+- Fixed `printStdout` and `printStderr` on Windows having the output not being captured by some applications
+
+
+<!---------------------------------->
 <a name="v1.39.2"></a>
 ### v1.39.2
 - Fixed `Expected` copy and move constructors
