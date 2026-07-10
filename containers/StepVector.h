@@ -8,7 +8,7 @@ namespace evo{
 
 	// picks either the size of a cache-line or 4 elements (whichever makes more sense for the size of the type)
 	template<class T>
-	EVO_NODISCARD consteval auto get_optimal_start_pow_of_2_for_step_vector() noexcept -> size_t {
+	[[nodiscard]] consteval auto get_optimal_start_pow_of_2_for_step_vector() noexcept -> size_t {
 		const size_t num_bits = std::bit_ceil(std::hardware_destructive_interference_size / sizeof(T));
 		return std::max(size_t(2), size_t(std::countr_zero(num_bits)));
 	}
@@ -113,32 +113,32 @@ namespace evo{
 
 
 			
-			EVO_NODISCARD constexpr auto operator[](size_t index) const noexcept -> const T& {
+			[[nodiscard]] constexpr auto operator[](size_t index) const noexcept -> const T& {
 				const BufferAndElemIndex indices = this->get_buffer_and_elem_index(index);
 				return this->buffers[indices.buffer_index][indices.elem_index];
 			}
 
-			EVO_NODISCARD constexpr auto operator[](size_t index) noexcept -> T& {
+			[[nodiscard]] constexpr auto operator[](size_t index) noexcept -> T& {
 				const BufferAndElemIndex indices = this->get_buffer_and_elem_index(index);
 				return this->buffers[indices.buffer_index][indices.elem_index];
 			}
 
 
-			EVO_NODISCARD constexpr auto at(size_t index) const noexcept -> const T& {
+			[[nodiscard]] constexpr auto at(size_t index) const noexcept -> const T& {
 				return this->operator[](index);
 			}
 
-			EVO_NODISCARD constexpr auto at(size_t index) noexcept -> T& {
+			[[nodiscard]] constexpr auto at(size_t index) noexcept -> T& {
 				return this->operator[](index);
 			}
 
 
-			EVO_NODISCARD constexpr auto size() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto size() const noexcept -> size_t {
 				if(this->buffers.empty()){ return 0; }
 				return this->size_when_not_fully_deallocated();
 			}
 
-			EVO_NODISCARD constexpr auto empty() const noexcept -> bool { return this->size() == 0; }
+			[[nodiscard]] constexpr auto empty() const noexcept -> bool { return this->size() == 0; }
 
 
 
@@ -149,11 +149,11 @@ namespace evo{
 
 
 
-			EVO_NODISCARD constexpr auto front() const noexcept -> const T& { return this->buffers[0][0]; }
-			EVO_NODISCARD constexpr auto front()       noexcept ->       T& { return this->buffers[0][0]; }
+			[[nodiscard]] constexpr auto front() const noexcept -> const T& { return this->buffers[0][0]; }
+			[[nodiscard]] constexpr auto front()       noexcept ->       T& { return this->buffers[0][0]; }
 
-			EVO_NODISCARD constexpr auto back() const noexcept -> const T& { return this->buffers.back()[this->current_end_of_buffer-1]; }
-			EVO_NODISCARD constexpr auto back()       noexcept ->       T& { return this->buffers.back()[this->current_end_of_buffer-1]; }
+			[[nodiscard]] constexpr auto back() const noexcept -> const T& { return this->buffers.back()[this->current_end_of_buffer-1]; }
+			[[nodiscard]] constexpr auto back()       noexcept ->       T& { return this->buffers.back()[this->current_end_of_buffer-1]; }
 
 
 
@@ -206,13 +206,13 @@ namespace evo{
 			        }
 
 
-			        EVO_NODISCARD constexpr auto operator*() const noexcept -> T& { return this->parent->operator[](this->index); }
-			        EVO_NODISCARD constexpr auto operator->() const noexcept -> T* { return &this->parent->operator[](this->index); }
+			        [[nodiscard]] constexpr auto operator*() const noexcept -> T& { return this->parent->operator[](this->index); }
+			        [[nodiscard]] constexpr auto operator->() const noexcept -> T* { return &this->parent->operator[](this->index); }
 
-			        EVO_NODISCARD constexpr auto operator==(const Iter& rhs) const noexcept -> bool {
+			        [[nodiscard]] constexpr auto operator==(const Iter& rhs) const noexcept -> bool {
 			        	return this->index == rhs.index;
 			        }
-			        EVO_NODISCARD constexpr auto operator!=(const Iter& rhs) const noexcept -> bool {
+			        [[nodiscard]] constexpr auto operator!=(const Iter& rhs) const noexcept -> bool {
 			        	return this->index != rhs.index;
 			        }
 
@@ -268,13 +268,13 @@ namespace evo{
 			        }
 
 
-			        EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return this->parent->operator[](this->index); }
-			        EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return &this->parent->operator[](this->index); }
+			        [[nodiscard]] constexpr auto operator*() const noexcept -> const T& { return this->parent->operator[](this->index); }
+			        [[nodiscard]] constexpr auto operator->() const noexcept -> const T* { return &this->parent->operator[](this->index); }
 
-			        EVO_NODISCARD constexpr auto operator==(const ConstIter& rhs) const noexcept -> bool {
+			        [[nodiscard]] constexpr auto operator==(const ConstIter& rhs) const noexcept -> bool {
 			        	return this->index == rhs.index;
 			        }
-			        EVO_NODISCARD constexpr auto operator!=(const ConstIter& rhs) const noexcept -> bool {
+			        [[nodiscard]] constexpr auto operator!=(const ConstIter& rhs) const noexcept -> bool {
 			        	return this->index != rhs.index;
 			        }
 
@@ -297,31 +297,31 @@ namespace evo{
 			// using const_reverse_iterator = ConstReverseIter;
 
 
-			EVO_NODISCARD constexpr auto begin()        noexcept ->      Iter { return Iter(0, *this);      }
-			EVO_NODISCARD constexpr auto begin()  const noexcept -> ConstIter { return ConstIter(0, *this); }
-			EVO_NODISCARD constexpr auto cbegin() const noexcept -> ConstIter { return ConstIter(0, *this); }
+			[[nodiscard]] constexpr auto begin()        noexcept ->      Iter { return Iter(0, *this);      }
+			[[nodiscard]] constexpr auto begin()  const noexcept -> ConstIter { return ConstIter(0, *this); }
+			[[nodiscard]] constexpr auto cbegin() const noexcept -> ConstIter { return ConstIter(0, *this); }
 
-			EVO_NODISCARD constexpr auto end()        noexcept ->      Iter { return Iter(this->size(), *this);      }
-			EVO_NODISCARD constexpr auto end()  const noexcept -> ConstIter { return ConstIter(this->size(), *this); }
-			EVO_NODISCARD constexpr auto cend() const noexcept -> ConstIter { return ConstIter(this->size(), *this); }
+			[[nodiscard]] constexpr auto end()        noexcept ->      Iter { return Iter(this->size(), *this);      }
+			[[nodiscard]] constexpr auto end()  const noexcept -> ConstIter { return ConstIter(this->size(), *this); }
+			[[nodiscard]] constexpr auto cend() const noexcept -> ConstIter { return ConstIter(this->size(), *this); }
 
 
 			// TODO(FUTURE): reverse iterators?
 
 
 		private:
-			EVO_NODISCARD constexpr auto size_when_not_fully_deallocated() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto size_when_not_fully_deallocated() const noexcept -> size_t {
 				return (size_t(1) << (this->buffers.size() - 1 + STARTING_POW_OF_2)) - (1 << STARTING_POW_OF_2)
 					+ this->current_end_of_buffer;
 			}
 
 
-			EVO_NODISCARD constexpr auto current_buffer_max_size() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto current_buffer_max_size() const noexcept -> size_t {
 				evo::debugAssert(this->buffers.empty() == false, "no buffer to get max size of");
 				return 1ull << (this->buffers.size() - 1 + STARTING_POW_OF_2);
 			}
 
-			EVO_NODISCARD constexpr auto need_to_create_new_buffer() const noexcept -> bool {
+			[[nodiscard]] constexpr auto need_to_create_new_buffer() const noexcept -> bool {
 				if(this->buffers.empty()){ return true; }
 				return this->current_end_of_buffer >= this->current_buffer_max_size();
 			}
@@ -337,7 +337,7 @@ namespace evo{
 				size_t buffer_index;
 				size_t elem_index;
 			};
-			EVO_NODISCARD constexpr auto get_buffer_and_elem_index(size_t index) const noexcept -> BufferAndElemIndex {
+			[[nodiscard]] constexpr auto get_buffer_and_elem_index(size_t index) const noexcept -> BufferAndElemIndex {
 				const uint64_t converted_index = uint64_t(index) + (1 << STARTING_POW_OF_2);
 				
 				const uint64_t buffer_index = std::bit_width(converted_index) - 1;

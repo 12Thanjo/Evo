@@ -10,13 +10,13 @@ namespace evo{
 
 
 	template<typename T>
-	EVO_NODISCARD constexpr auto bitFlag(T flag) noexcept -> T {
+	[[nodiscard]] constexpr auto bitFlag(T flag) noexcept -> T {
 		return static_cast<T>(1) << flag;
 	};
 
 
 	template<typename T, typename UnderlyingT>
-	EVO_NODISCARD constexpr auto flagMask(std::initializer_list<T> list) noexcept -> UnderlyingT {
+	[[nodiscard]] constexpr auto flagMask(std::initializer_list<T> list) noexcept -> UnderlyingT {
 		UnderlyingT flags = 0;
 		for(auto flag : list){
 			flags |= bitFlag( static_cast<UnderlyingT>(flag) );
@@ -53,13 +53,13 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
-			EVO_NODISCARD constexpr Flags() noexcept
+			[[nodiscard]] constexpr Flags() noexcept
 				: internal_data(0) {};
 			
-			EVO_NODISCARD constexpr Flags(Enum flag) noexcept
+			[[nodiscard]] constexpr Flags(Enum flag) noexcept
 				: internal_data( bitFlag(static_cast<UnderlyingT>(flag)) ) {};
 
-			EVO_NODISCARD constexpr Flags(std::initializer_list<Enum> flags) noexcept
+			[[nodiscard]] constexpr Flags(std::initializer_list<Enum> flags) noexcept
 				: internal_data( flagMask<Enum, UnderlyingT>(flags) ) {};
 				
 
@@ -120,21 +120,21 @@ namespace evo{
 
 
 			
-			EVO_NODISCARD constexpr auto has(Enum flag_value) const noexcept -> bool {
+			[[nodiscard]] constexpr auto has(Enum flag_value) const noexcept -> bool {
 				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				return (this->internal_data & bitFlag(static_cast<UnderlyingT>(flag_value))) != 0;
 			};
 
 			
-			EVO_NODISCARD constexpr auto has(std::initializer_list<Enum> flag_values) const noexcept -> bool {
+			[[nodiscard]] constexpr auto has(std::initializer_list<Enum> flag_values) const noexcept -> bool {
 
 				auto mask = flagMask<Enum, UnderlyingT>(flag_values);
 				return this->has(static_cast<Enum>(mask));
 			};
 
 			
-			EVO_NODISCARD constexpr auto hasNone() const noexcept -> bool {
+			[[nodiscard]] constexpr auto hasNone() const noexcept -> bool {
 				return this->internal_data == 0;
 			};
 
@@ -144,7 +144,7 @@ namespace evo{
 			// operators
 
 			
-			EVO_NODISCARD constexpr auto operator | (Enum flag_value) const noexcept -> Flags<Enum> {
+			[[nodiscard]] constexpr auto operator | (Enum flag_value) const noexcept -> Flags<Enum> {
 				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				auto output = Flags<Enum>{};
@@ -153,7 +153,7 @@ namespace evo{
 			}
 
 			
-			EVO_NODISCARD constexpr auto operator & (Enum flag_value) const noexcept -> Flags<Enum> {
+			[[nodiscard]] constexpr auto operator & (Enum flag_value) const noexcept -> Flags<Enum> {
 				EVO_DEBUG_ASSERT( static_cast<UnderlyingT>(Enum::_max) > static_cast<UnderlyingT>(flag_value) );
 
 				auto output = Flags<Enum>{};
@@ -178,11 +178,11 @@ namespace evo{
 			}
 
 
-			EVO_NODISCARD constexpr auto operator==(const Flags& rhs) const noexcept -> bool {
+			[[nodiscard]] constexpr auto operator==(const Flags& rhs) const noexcept -> bool {
 				return this->internal_data == rhs.internal_data;
 			}
 
-			EVO_NODISCARD constexpr auto operator!=(const Flags& rhs) const noexcept -> bool {
+			[[nodiscard]] constexpr auto operator!=(const Flags& rhs) const noexcept -> bool {
 				return this->internal_data != rhs.internal_data;
 			}
 
@@ -194,7 +194,7 @@ namespace evo{
 			using underlying_t = UnderlyingT;
 
 			
-			EVO_NODISCARD constexpr auto value() const noexcept -> UnderlyingT {
+			[[nodiscard]] constexpr auto value() const noexcept -> UnderlyingT {
 				return this->internal_data;
 			};
 

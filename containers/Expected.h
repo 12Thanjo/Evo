@@ -13,15 +13,15 @@ namespace evo{
 	template<class E>
 	class Unexpected{
 		public:
-			EVO_NODISCARD constexpr Unexpected(const Unexpected&) = default;
-			EVO_NODISCARD constexpr Unexpected(Unexpected&&) = default;
+			[[nodiscard]] constexpr Unexpected(const Unexpected&) = default;
+			[[nodiscard]] constexpr Unexpected(Unexpected&&) = default;
 
-			EVO_NODISCARD constexpr explicit Unexpected(const E& val) : value(val) {};
-			EVO_NODISCARD constexpr explicit Unexpected(E&& val) : value(std::move(val)) {};
+			[[nodiscard]] constexpr explicit Unexpected(const E& val) : value(val) {};
+			[[nodiscard]] constexpr explicit Unexpected(E&& val) : value(std::move(val)) {};
 
 
-			EVO_NODISCARD constexpr auto error() const noexcept -> const E& { return this->value; };
-			EVO_NODISCARD constexpr auto error() noexcept -> E& { return this->value; };
+			[[nodiscard]] constexpr auto error() const noexcept -> const E& { return this->value; };
+			[[nodiscard]] constexpr auto error() noexcept -> E& { return this->value; };
 
 
 		private:
@@ -42,7 +42,7 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
-			EVO_NODISCARD constexpr Expected() noexcept : expected_val(), has_expected_value(true) {};
+			[[nodiscard]] constexpr Expected() noexcept : expected_val(), has_expected_value(true) {};
 
 			constexpr ~Expected() noexcept {
 				if(this->has_value()){
@@ -56,7 +56,7 @@ namespace evo{
 			///////////////////////////////////
 			// copy
 
-			EVO_NODISCARD constexpr Expected(const Expected& rhs) noexcept {
+			[[nodiscard]] constexpr Expected(const Expected& rhs) noexcept {
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = rhs.expected_val;
@@ -81,7 +81,7 @@ namespace evo{
 			///////////////////////////////////
 			// move
 
-			EVO_NODISCARD constexpr Expected(Expected&& rhs) noexcept {
+			[[nodiscard]] constexpr Expected(Expected&& rhs) noexcept {
 				this->has_expected_value = rhs.has_expected_value;
 				if(rhs.has_expected_value){
 					this->expected_val = std::move(rhs.expected_val);
@@ -106,20 +106,20 @@ namespace evo{
 			///////////////////////////////////
 			// expected
 
-			EVO_NODISCARD constexpr Expected(const T& val) noexcept
+			[[nodiscard]] constexpr Expected(const T& val) noexcept
 				: has_expected_value(true), expected_val(val) {};
 
-			EVO_NODISCARD constexpr Expected(T&& val) noexcept
+			[[nodiscard]] constexpr Expected(T&& val) noexcept
 				: has_expected_value(true), expected_val(std::move(val)) {};
 
 
 			///////////////////////////////////
 			// unexpected
 
-			EVO_NODISCARD constexpr Expected(const Unexpected<E>& val) noexcept
+			[[nodiscard]] constexpr Expected(const Unexpected<E>& val) noexcept
 				: has_expected_value(false), error_val(val.error()) {};
 
-			EVO_NODISCARD constexpr Expected(Unexpected<E>&& val) noexcept
+			[[nodiscard]] constexpr Expected(Unexpected<E>&& val) noexcept
 				: has_expected_value(false), error_val(std::move(val.error())) {};
 
 
@@ -140,25 +140,25 @@ namespace evo{
 			///////////////////////////////////
 			// dereference
 
-			EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* {
+			[[nodiscard]] constexpr auto operator->() const noexcept -> const T* {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
 				return &this->expected_val;
 			};
 			
-			EVO_NODISCARD constexpr auto operator->() noexcept -> T* {
+			[[nodiscard]] constexpr auto operator->() noexcept -> T* {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
 				return &this->expected_val;
 			};
 
-			EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& {
+			[[nodiscard]] constexpr auto operator*() const noexcept -> const T& {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
 				return this->expected_val;
 			};
 
-			EVO_NODISCARD constexpr auto operator*() noexcept -> T& {
+			[[nodiscard]] constexpr auto operator*() noexcept -> T& {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
 				return this->expected_val;
@@ -169,18 +169,18 @@ namespace evo{
 			///////////////////////////////////
 			// has value
 
-			EVO_NODISCARD constexpr auto has_value() const noexcept -> bool { return this->has_expected_value; };
+			[[nodiscard]] constexpr auto has_value() const noexcept -> bool { return this->has_expected_value; };
 
 
 			///////////////////////////////////
 			// value
 
-			EVO_NODISCARD constexpr auto value() const noexcept -> const T& {
+			[[nodiscard]] constexpr auto value() const noexcept -> const T& {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
 				return this->expected_val;
 			};
-			EVO_NODISCARD constexpr auto value() noexcept -> T& {
+			[[nodiscard]] constexpr auto value() noexcept -> T& {
 				EVO_DEBUG_ASSERT(this->has_value()); // attempted to get value of evo::Expected that currently has error value
 
 				return this->expected_val;
@@ -190,12 +190,12 @@ namespace evo{
 			///////////////////////////////////
 			// error
 
-			EVO_NODISCARD constexpr auto error() const noexcept -> const E& {
+			[[nodiscard]] constexpr auto error() const noexcept -> const E& {
 				EVO_DEBUG_ASSERT(this->has_value() == false); // attempted to get error value of evo::Expected that currently has expected value
 
 				return this->error_val;
 			};
-			EVO_NODISCARD constexpr auto error() noexcept -> E& {
+			[[nodiscard]] constexpr auto error() noexcept -> E& {
 				EVO_DEBUG_ASSERT(this->has_value() == false); // attempted to get error value of evo::Expected that currently has expected value
 
 				return this->error_val;
@@ -225,7 +225,7 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
-			EVO_NODISCARD constexpr Expected() noexcept = default;
+			[[nodiscard]] constexpr Expected() noexcept = default;
 
 			constexpr ~Expected() noexcept = default;
 
@@ -233,7 +233,7 @@ namespace evo{
 			///////////////////////////////////
 			// copy
 
-			EVO_NODISCARD constexpr Expected(const Expected& rhs) noexcept {
+			[[nodiscard]] constexpr Expected(const Expected& rhs) noexcept {
 				this->error_val = rhs.error_val;
 			};
 
@@ -246,7 +246,7 @@ namespace evo{
 			///////////////////////////////////
 			// move
 
-			EVO_NODISCARD constexpr Expected(Expected&& rhs) noexcept {
+			[[nodiscard]] constexpr Expected(Expected&& rhs) noexcept {
 				this->error_val = std::move(rhs.error_val);
 			};
 
@@ -260,8 +260,8 @@ namespace evo{
 			///////////////////////////////////
 			// unexpected
 
-			EVO_NODISCARD constexpr Expected(const Unexpected<E>& val) noexcept : error_val(val.error()) {};
-			EVO_NODISCARD constexpr Expected(Unexpected<E>&& val) noexcept : error_val(std::move(val.error())) {};
+			[[nodiscard]] constexpr Expected(const Unexpected<E>& val) noexcept : error_val(val.error()) {};
+			[[nodiscard]] constexpr Expected(Unexpected<E>&& val) noexcept : error_val(std::move(val.error())) {};
 
 
 
@@ -280,18 +280,18 @@ namespace evo{
 			///////////////////////////////////
 			// has value
 
-			EVO_NODISCARD constexpr auto has_value() const noexcept -> bool { return !this->error_val.has_value(); };
+			[[nodiscard]] constexpr auto has_value() const noexcept -> bool { return !this->error_val.has_value(); };
 
 
 			///////////////////////////////////
 			// error
 
-			EVO_NODISCARD constexpr auto error() const noexcept -> const E& {
+			[[nodiscard]] constexpr auto error() const noexcept -> const E& {
 				EVO_DEBUG_ASSERT(this->has_value() == false); // attempted to get error value of evo::Expected that currently has expected value
 
 				return *this->error_val;
 			};
-			EVO_NODISCARD constexpr auto error() noexcept -> E& {
+			[[nodiscard]] constexpr auto error() noexcept -> E& {
 				EVO_DEBUG_ASSERT(this->has_value() == false); // attempted to get error value of evo::Expected that currently has expected value
 
 				return *this->error_val;

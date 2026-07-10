@@ -40,56 +40,56 @@ All the iterators have identical interfaces to the respective iterators in [defa
 
 ### Constructors
 ```C++
-EVO_NODISCARD constexpr ArrayProxy()                 noexcept; // no elements
-EVO_NODISCARD constexpr ArrayProxy( std::nullptr_t ) noexcept; // no elements
-EVO_NODISCARD constexpr ArrayProxy(const T& value)   noexcept; // one elements
+[[nodiscard]] constexpr ArrayProxy()                 noexcept; // no elements
+[[nodiscard]] constexpr ArrayProxy( std::nullptr_t ) noexcept; // no elements
+[[nodiscard]] constexpr ArrayProxy(const T& value)   noexcept; // one elements
 
 
-EVO_NODISCARD constexpr ArrayProxy(const T* array_ptr, size_t array_count)   noexcept;
-EVO_NODISCARD constexpr ArrayProxy(const std::initializer_list<T> init_list) noexcept;
-EVO_NODISCARD constexpr ArrayProxy(const std::vector<T>& vector)             noexcept;
+[[nodiscard]] constexpr ArrayProxy(const T* array_ptr, size_t array_count)   noexcept;
+[[nodiscard]] constexpr ArrayProxy(const std::initializer_list<T> init_list) noexcept;
+[[nodiscard]] constexpr ArrayProxy(const std::vector<T>& vector)             noexcept;
 
 
 template<size_t COUNT>
-EVO_NODISCARD constexpr ArrayProxy(const std::array<T, COUNT>& array) noexcept;
+[[nodiscard]] constexpr ArrayProxy(const std::array<T, COUNT>& array) noexcept;
 
 template<size_t COUNT>
-EVO_NODISCARD constexpr ArrayProxy(const std::span<T, COUNT>& span) noexcept;
+[[nodiscard]] constexpr ArrayProxy(const std::span<T, COUNT>& span) noexcept;
 
 template<size_t COUNT>
-EVO_NODISCARD constexpr ArrayProxy(const evo::StaticVector<T, COUNT>& static_vector) noexcept;
+[[nodiscard]] constexpr ArrayProxy(const evo::StaticVector<T, COUNT>& static_vector) noexcept;
 ```
 
 ### Iterators
 
 #### begin / cbegin
 ```C++
-EVO_NODISCARD constexpr auto  begin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  begin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cbegin() const noexcept -> const_iterator;
 ```
 Returns an iterator to the beginning
 
 
 #### end / cend
 ```C++
-EVO_NODISCARD constexpr auto  end() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  end() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cend() const noexcept -> const_iterator;
 ```
 Returns an iterator to the end
 
 
 #### rbegin / crbegin
 ```C++
-EVO_NODISCARD constexpr auto  rbegin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crbegin() const noexcept -> const_iterator;
 ```
 Returns a reverse iterator to the beginning
 
 
 #### rend / crend
 ```C++
-EVO_NODISCARD constexpr auto  rend() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crend() const noexcept -> const_iterator;
 ```
 Returns a reverse iterator to the end
 
@@ -99,35 +99,35 @@ Returns a reverse iterator to the end
 
 #### at 
 ```C++
-EVO_NODISCARD constexpr auto at(size_t index) const noexcept -> const T&;
+[[nodiscard]] constexpr auto at(size_t index) const noexcept -> const T&;
 ```
 Returns a const reference to the element at the given index
 
 
 #### front
 ```C++
-EVO_NODISCARD constexpr auto front() const noexcept -> const T&;
+[[nodiscard]] constexpr auto front() const noexcept -> const T&;
 ```
 Returns the first element
 
 
 #### back
 ```C++
-EVO_NODISCARD constexpr auto back() const noexcept -> const T&;
+[[nodiscard]] constexpr auto back() const noexcept -> const T&;
 ```
 Returns a the last element
 
 
 #### operator[] 
 ```C++
-EVO_NODISCARD constexpr auto operator[](size_t index) const noexcept -> const T&;
+[[nodiscard]] constexpr auto operator[](size_t index) const noexcept -> const T&;
 ```
 Returns a const reference to the element at the given index
 
 
 #### data
 ```C++
-EVO_NODISCARD constexpr auto data() const noexcept -> const T*;
+[[nodiscard]] constexpr auto data() const noexcept -> const T*;
 ```
 Returns a pointer to the underlying data of the array
 
@@ -138,21 +138,21 @@ Returns a pointer to the underlying data of the array
 
 #### size
 ```C++
-EVO_NODISCARD constexpr auto size() const noexcept -> size_t;
+[[nodiscard]] constexpr auto size() const noexcept -> size_t;
 ```
 Get the number of elements in the array
 
 
 #### size_bytes
 ```C++
-EVO_NODISCARD constexpr auto size_bytes() const noexcept -> size_t;
+[[nodiscard]] constexpr auto size_bytes() const noexcept -> size_t;
 ```
 Get the size in bytes of the array
 
 
 #### empty
 ```C++
-EVO_NODISCARD constexpr auto empty() const noexcept -> bool;
+[[nodiscard]] constexpr auto empty() const noexcept -> bool;
 ```
 Get if the array is empty
 
@@ -161,28 +161,28 @@ Get if the array is empty
 
 #### first
 ```C++
-EVO_NODISCARD constexpr auto first(size_t num) const noexcept -> ArrayProxy<T>;
+[[nodiscard]] constexpr auto first(size_t num) const noexcept -> ArrayProxy<T>;
 ```
 Get a sub-ArrayProxy containing the first `num` elements
 
 
 #### last
 ```C++
-EVO_NODISCARD constexpr auto last(size_t num) const noexcept -> ArrayProxy<T>;
+[[nodiscard]] constexpr auto last(size_t num) const noexcept -> ArrayProxy<T>;
 ```
 Get a sub-ArrayProxy containing the last `num` elements
 
 
 #### subarr
 ```C++
-EVO_NODISCARD constexpr auto subarr(size_t start, size_t num_elems) const noexcept -> ArrayProxy<T>;
+[[nodiscard]] constexpr auto subarr(size_t start, size_t num_elems) const noexcept -> ArrayProxy<T>;
 ```
 Get a sub-ArrayProxy containing the elements from `start` index for `num_elems` elements
 
 
 ### Operators
 ```C++
-EVO_NODISCARD constexpr auto operator==(const ArrayProxy<T>& rhs) const -> bool;
+[[nodiscard]] constexpr auto operator==(const ArrayProxy<T>& rhs) const -> bool;
 ```
 
 

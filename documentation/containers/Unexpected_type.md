@@ -24,18 +24,18 @@ This is a simplified version of C++23's `std::unexpected`.
 
 ### Constructors
 ```C++
-EVO_NODISCARD constexpr Unexpected(const Unexpected&);
-EVO_NODISCARD constexpr Unexpected(Unexpected&&);
+[[nodiscard]] constexpr Unexpected(const Unexpected&);
+[[nodiscard]] constexpr Unexpected(Unexpected&&);
 
-EVO_NODISCARD constexpr explicit Unexpected(const E& val);
-EVO_NODISCARD constexpr explicit Unexpected(E&& val);
+[[nodiscard]] constexpr explicit Unexpected(const E& val);
+[[nodiscard]] constexpr explicit Unexpected(E&& val);
 ```
 
 
 ### error
 ```C++
-EVO_NODISCARD constexpr auto error()       noexcept ->       E&;
-EVO_NODISCARD constexpr auto error() const noexcept -> const E&;
+[[nodiscard]] constexpr auto error()       noexcept ->       E&;
+[[nodiscard]] constexpr auto error() const noexcept -> const E&;
 ```
 Get the error value
 

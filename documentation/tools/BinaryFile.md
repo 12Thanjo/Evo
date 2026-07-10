@@ -14,7 +14,7 @@ A type to help manage reading from and writing to binary files.
 
 ### Constructors
 ```C++
-EVO_NODISCARD BinaryFile() noexcept;
+[[nodiscard]] BinaryFile() noexcept;
 ```
 
 
@@ -23,7 +23,7 @@ EVO_NODISCARD BinaryFile() noexcept;
 
 #### open
 ```C++
-EVO_NODISCARD auto open(const std::string& path, Flags<FileMode> mode) noexcept -> bool;
+[[nodiscard]] auto open(const std::string& path, Flags<FileMode> mode) noexcept -> bool;
 ```
 Opens a file.
 
@@ -37,13 +37,13 @@ Closes the file.
 
 #### getHandle
 ```C++
-EVO_NODISCARD constexpr auto getHandle() const noexcept -> ::FILE*;
+[[nodiscard]] constexpr auto getHandle() const noexcept -> ::FILE*;
 ```
 Gets the underlying file handle.
 
 #### isValid
 ```C++
-EVO_NODISCARD constexpr auto isValid() const noexcept -> bool;
+[[nodiscard]] constexpr auto isValid() const noexcept -> bool;
 ```
 Gets if the file is handle is valid (essentially if the file is open).
 
@@ -53,8 +53,8 @@ Gets if the file is handle is valid (essentially if the file is open).
 
 #### read
 ```C++
-EVO_NODISCARD auto read() const noexcept -> std::optional<std::vector<byte>>; // 1
-EVO_NODISCARD auto read(size_t data_size) const noexcept -> std::optional<std::vector<byte>>; // 2
+[[nodiscard]] auto read() const noexcept -> std::optional<std::vector<byte>>; // 1
+[[nodiscard]] auto read(size_t data_size) const noexcept -> std::optional<std::vector<byte>>; // 2
 ```
 Reads the file. Returns `std::nullopt` if an error occured.
 - Function 1 will read the entire file
@@ -67,7 +67,7 @@ Reads the file. Returns `std::nullopt` if an error occured.
 
 #### write
 ```C++
-EVO_NODISCARD auto write(const std::vector<byte>& data) noexcept -> bool;
+[[nodiscard]] auto write(const std::vector<byte>& data) noexcept -> bool;
 ```
 Writes data to the file. Returns if the write was successful.
 
@@ -76,7 +76,7 @@ Writes data to the file. Returns if the write was successful.
 
 #### size
 ```C++
-EVO_NODISCARD auto size() const noexcept -> size_t;
+[[nodiscard]] auto size() const noexcept -> size_t;
 ```
 Gets the size of the file
 

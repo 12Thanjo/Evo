@@ -67,7 +67,7 @@ A bi-direction hash map.
 
 ### Constructors
 ```C++
-EVO_NODISCARD constexpr Bimap(
+[[nodiscard]] constexpr Bimap(
 	size_t bucket_count = 16,
 	const LHash& left_hasher = LHash(), const RHash& right_hasher = RHash(),
 	const LEqual& left_equal_to = LEqual(), const REqual& right_equal_to = REqual(),
@@ -80,36 +80,36 @@ EVO_NODISCARD constexpr Bimap(
 
 #### begin / cbegin
 ```C++
-EVO_NODISCARD constexpr auto  begin()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  begin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  begin()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  begin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cbegin() const noexcept -> const_iterator;
 ```
 Returns an iterator to the beginning
 
 
 #### end / cend
 ```C++
-EVO_NODISCARD constexpr auto  end()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  end() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  end()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  end() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cend() const noexcept -> const_iterator;
 ```
 Returns an iterator to the end
 
 
 #### rbegin / crbegin
 ```C++
-EVO_NODISCARD constexpr auto  rbegin()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  rbegin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rbegin()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  rbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crbegin() const noexcept -> const_iterator;
 ```
 Returns a reverse iterator to the beginning
 
 
 #### rend / crend
 ```C++
-EVO_NODISCARD constexpr auto  rend()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  rend() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rend()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  rend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crend() const noexcept -> const_iterator;
 ```
 Returns a reverse iterator to the end
 
@@ -121,28 +121,28 @@ Returns a reverse iterator to the end
 
 #### empty
 ```C++
-EVO_NODISCARD constexpr auto empty() const noexcept -> bool;
+[[nodiscard]] constexpr auto empty() const noexcept -> bool;
 ```
 Get if the bimap is empty
 
 
 #### size
 ```C++
-EVO_NODISCARD constexpr auto size() const noexcept -> size_t;
+[[nodiscard]] constexpr auto size() const noexcept -> size_t;
 ```
 Get the number of elements in the bimap
 
 
 #### max_size
 ```C++
-EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t;
+[[nodiscard]] constexpr auto max_size() const noexcept -> size_t;
 ```
 Get the maximum size of the bimap. The value returned is equivalent to `std::vector<value_type, DataAllocator>::max_size`
 
 
 #### capacity
 ```C++
-EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t;
+[[nodiscard]] constexpr auto capacity() const noexcept -> size_t;
 ```
 Get the current capacity of the bimap
 
@@ -190,41 +190,41 @@ Erase a value pair from the bimap. Uses the given value to lookup the value pair
 
 #### at 
 ```C++
-EVO_NODISCARD constexpr auto at_left(const LeftT& left)       noexcept ->       value_type&;
-EVO_NODISCARD constexpr auto at_left(const LeftT& left) const noexcept -> const value_type&;
+[[nodiscard]] constexpr auto at_left(const LeftT& left)       noexcept ->       value_type&;
+[[nodiscard]] constexpr auto at_left(const LeftT& left) const noexcept -> const value_type&;
 
-EVO_NODISCARD constexpr auto at_right(const RightT& right)       noexcept ->       value_type&;
-EVO_NODISCARD constexpr auto at_right(const RightT& right) const noexcept -> const value_type&;
+[[nodiscard]] constexpr auto at_right(const RightT& right)       noexcept ->       value_type&;
+[[nodiscard]] constexpr auto at_right(const RightT& right) const noexcept -> const value_type&;
 ```
 Get the value pair with the given value as the lookup
 
 
 #### get
 ```C++
-EVO_NODISCARD constexpr auto get_left(const RightT& right)       noexcept ->       LeftT&;
-EVO_NODISCARD constexpr auto get_left(const RightT& right) const noexcept -> const LeftT&;
+[[nodiscard]] constexpr auto get_left(const RightT& right)       noexcept ->       LeftT&;
+[[nodiscard]] constexpr auto get_left(const RightT& right) const noexcept -> const LeftT&;
 
-EVO_NODISCARD constexpr auto get_right(const LeftT& left)       noexcept ->       RightT&;
-EVO_NODISCARD constexpr auto get_right(const LeftT& left) const noexcept -> const RightT&;
+[[nodiscard]] constexpr auto get_right(const LeftT& left)       noexcept ->       RightT&;
+[[nodiscard]] constexpr auto get_right(const LeftT& left) const noexcept -> const RightT&;
 ```
 Given a lookup value, returns a reference to the oposite value in the respective value pair
 
 
 #### find
 ```C++
-EVO_NODISCARD constexpr auto find_left(const LeftT& left)       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto find_left(const LeftT& left) const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto find_left(const LeftT& left)       noexcept ->       iterator;
+[[nodiscard]] constexpr auto find_left(const LeftT& left) const noexcept -> const_iterator;
 
-EVO_NODISCARD constexpr auto find_right(const RightT& right)       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto find_right(const RightT& right) const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto find_right(const RightT& right)       noexcept ->       iterator;
+[[nodiscard]] constexpr auto find_right(const RightT& right) const noexcept -> const_iterator;
 ```
 Given a value, returns an iterator to the respective value pair. If the value pair does not exist, returns an iterator to the end (equivalent to a call to `end()`).
 
 
 #### contains
 ```C++
-EVO_NODISCARD constexpr auto contains_left(const LeftT& left) const noexcept -> bool;
-EVO_NODISCARD constexpr auto contains_right(const RightT& right) const noexcept -> bool;
+[[nodiscard]] constexpr auto contains_left(const LeftT& left) const noexcept -> bool;
+[[nodiscard]] constexpr auto contains_right(const RightT& right) const noexcept -> bool;
 ```
 Returns if an value pair with the given value exists in the bimap.
 
@@ -234,56 +234,56 @@ Returns if an value pair with the given value exists in the bimap.
 
 #### begin
 ```C++
-EVO_NODISCARD constexpr auto  left_begin(size_t n)       noexcept ->       local_iterator;
-EVO_NODISCARD constexpr auto  left_begin(size_t n) const noexcept -> const_local_iterator;
-EVO_NODISCARD constexpr auto left_cbegin(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto  left_begin(size_t n)       noexcept ->       local_iterator;
+[[nodiscard]] constexpr auto  left_begin(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto left_cbegin(size_t n) const noexcept -> const_local_iterator;
 
-EVO_NODISCARD constexpr auto  right_begin(size_t n)       noexcept ->       local_iterator;
-EVO_NODISCARD constexpr auto  right_begin(size_t n) const noexcept -> const_local_iterator;
-EVO_NODISCARD constexpr auto right_cbegin(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto  right_begin(size_t n)       noexcept ->       local_iterator;
+[[nodiscard]] constexpr auto  right_begin(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto right_cbegin(size_t n) const noexcept -> const_local_iterator;
 ```
 Get an local iterator to the beginning of the bucket at index `n`
 
 
 #### end
 ```C++
-EVO_NODISCARD constexpr auto  left_end(size_t n)       noexcept ->       local_iterator;
-EVO_NODISCARD constexpr auto  left_end(size_t n) const noexcept -> const_local_iterator;
-EVO_NODISCARD constexpr auto left_cend(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto  left_end(size_t n)       noexcept ->       local_iterator;
+[[nodiscard]] constexpr auto  left_end(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto left_cend(size_t n) const noexcept -> const_local_iterator;
 
-EVO_NODISCARD constexpr auto  right_end(size_t n)       noexcept ->       local_iterator;
-EVO_NODISCARD constexpr auto  right_end(size_t n) const noexcept -> const_local_iterator;
-EVO_NODISCARD constexpr auto right_cend(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto  right_end(size_t n)       noexcept ->       local_iterator;
+[[nodiscard]] constexpr auto  right_end(size_t n) const noexcept -> const_local_iterator;
+[[nodiscard]] constexpr auto right_cend(size_t n) const noexcept -> const_local_iterator;
 ```
 Get an local iterator to the end of the bucket at index `n`. The functions beginning with "left_" will get the buckets for the left values, and visa versa.
 
 
 #### bucket_count
 ```C++
-EVO_NODISCARD constexpr auto bucket_count() const noexcept -> size_t;
+[[nodiscard]] constexpr auto bucket_count() const noexcept -> size_t;
 ```
 Get the current number of buckets
 
 
 ### max_bucket_count
 ```C++
-EVO_NODISCARD constexpr auto max_bucket_count() const noexcept -> size_t;
+[[nodiscard]] constexpr auto max_bucket_count() const noexcept -> size_t;
 ```
 Get the maximum number of buckets. Equivalent to calling `std::vector<std::vector<StaticVector<size_t, evo::_BimapMaxBucketSize>, BucketAllocator>::max_size()`
 
 
 ### bucket_size
 ```C++
-EVO_NODISCARD constexpr auto left_bucket_size(size_t n) const noexcept -> size_t;
-EVO_NODISCARD constexpr auto right_bucket_size(size_t n) const noexcept -> size_t;
+[[nodiscard]] constexpr auto left_bucket_size(size_t n) const noexcept -> size_t;
+[[nodiscard]] constexpr auto right_bucket_size(size_t n) const noexcept -> size_t;
 ```
 Get the size of a bucket at index `n`.
 
 
 ### bucket
 ```C++
-EVO_NODISCARD constexpr auto left_bucket(const LeftT& left) const noexcept -> size_t;
-EVO_NODISCARD constexpr auto right_bucket(const RightT& right) const noexcept -> size_t;
+[[nodiscard]] constexpr auto left_bucket(const LeftT& left) const noexcept -> size_t;
+[[nodiscard]] constexpr auto right_bucket(const RightT& right) const noexcept -> size_t;
 ```
 Get the bucket index for a specific value.
 
@@ -293,7 +293,7 @@ Get the bucket index for a specific value.
 
 #### max_bucket_size
 ```C++
-EVO_NODISCARD constexpr static auto max_bucket_size() noexcept -> size_t;
+[[nodiscard]] constexpr static auto max_bucket_size() noexcept -> size_t;
 ```
 Get the maximum size of a bucket.
 

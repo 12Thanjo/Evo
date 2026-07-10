@@ -48,15 +48,15 @@ evo::print( std::format("'{}' (size {})", large_string.c_str(), sizeof(large_str
 
 ### Constructors
 ```C++
-EVO_NODISCARD constexpr StaticString() noexcept;
+[[nodiscard]] constexpr StaticString() noexcept;
 
-EVO_NODISCARD constexpr StaticString(const char* chars) noexcept;
+[[nodiscard]] constexpr StaticString(const char* chars) noexcept;
 
-EVO_NODISCARD constexpr StaticString(const std::string& str) noexcept;
-EVO_NODISCARD constexpr StaticString(std::string&& str) noexcept;
+[[nodiscard]] constexpr StaticString(const std::string& str) noexcept;
+[[nodiscard]] constexpr StaticString(std::string&& str) noexcept;
 
 template<size_t StrSize>
-EVO_NODISCARD constexpr StaticString(const StaticString<StrSize>& str) noexcept;
+[[nodiscard]] constexpr StaticString(const StaticString<StrSize>& str) noexcept;
 ```
 
 
@@ -73,7 +73,7 @@ constexpr auto operator =(const StaticString<StrSize>& str) noexcept -> StaticSt
 
 ### Type conversion
 ```C++
-EVO_NODISCARD constexpr operator std::string_view() const noexcept;
+[[nodiscard]] constexpr operator std::string_view() const noexcept;
 ```
 
 
@@ -82,47 +82,47 @@ EVO_NODISCARD constexpr operator std::string_view() const noexcept;
 
 #### at
 ```C++
-EVO_NODISCARD constexpr auto at(size_type index) noexcept -> char&;
-EVO_NODISCARD constexpr auto at(size_type index) const noexcept -> const char&;
+[[nodiscard]] constexpr auto at(size_type index) noexcept -> char&;
+[[nodiscard]] constexpr auto at(size_type index) const noexcept -> const char&;
 ```
 Access a character at the given `index`
 
 
 #### operator[]
 ```C++
-EVO_NODISCARD constexpr auto operator[](size_type index) noexcept -> char&;
-EVO_NODISCARD constexpr auto operator[](size_type index) const noexcept -> const char&;
+[[nodiscard]] constexpr auto operator[](size_type index) noexcept -> char&;
+[[nodiscard]] constexpr auto operator[](size_type index) const noexcept -> const char&;
 ```
 Access a character at the given `index`
 
 
 #### front
 ```C++
-EVO_NODISCARD constexpr auto front() noexcept -> char&;
-EVO_NODISCARD constexpr auto front() const noexcept -> const char&;
+[[nodiscard]] constexpr auto front() noexcept -> char&;
+[[nodiscard]] constexpr auto front() const noexcept -> const char&;
 ```
 Access the first character of the string (eqivalent to running `at(0)`). Behavior is undefined if `empty() == false` 
 
 
 #### back
 ```C++
-EVO_NODISCARD constexpr auto back() noexcept -> char&;
-EVO_NODISCARD constexpr auto back() const noexcept -> const char&;
+[[nodiscard]] constexpr auto back() noexcept -> char&;
+[[nodiscard]] constexpr auto back() const noexcept -> const char&;
 ```
 Access the first character of the string (eqivalent to running `at(size() - 1)`). Behavior is undefined if `empty() == false` 
 
 
 #### data
 ```C++
-EVO_NODISCARD constexpr auto data() noexcept -> char*;
-EVO_NODISCARD constexpr auto data() const noexcept -> const char*;
+[[nodiscard]] constexpr auto data() noexcept -> char*;
+[[nodiscard]] constexpr auto data() const noexcept -> const char*;
 ```
 Returns a pointer to the underlying data of the string.
 
 
 #### c_str
 ```C++
-EVO_NODISCARD constexpr auto c_str() const noexcept -> const char*;
+[[nodiscard]] constexpr auto c_str() const noexcept -> const char*;
 ```
 Returns a c-string. Is almost equivalent to calling `data()` but makes sure the string is null-terminated.
 
@@ -132,36 +132,36 @@ Returns a c-string. Is almost equivalent to calling `data()` but makes sure the 
 
 #### begin
 ```C++
-EVO_NODISCARD constexpr auto  begin()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  begin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  begin()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  begin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cbegin() const noexcept -> const_iterator;
 ```
 Returns an iterator to the beginning of the string.
 
 
 #### end
 ```C++
-EVO_NODISCARD constexpr auto  end()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  end() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  end()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  end() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cend() const noexcept -> const_iterator;
 ```
 Returns an iterator to the end of the string.
 
 
 #### rbegin
 ```C++
-EVO_NODISCARD constexpr auto  rbegin()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  rbegin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rbegin()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  rbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crbegin() const noexcept -> const_iterator;
 ```
 Returns an reverse iterator to the beginning of the string.
 
 
 #### rend
 ```C++
-EVO_NODISCARD constexpr auto  rend()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  rend() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rend()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  rend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crend() const noexcept -> const_iterator;
 ```
 Returns an reverse iterator to the end of the string.
 
@@ -171,28 +171,28 @@ Returns an reverse iterator to the end of the string.
 
 #### empty
 ```C++
-EVO_NODISCARD constexpr auto empty() const noexcept -> bool;
+[[nodiscard]] constexpr auto empty() const noexcept -> bool;
 ```
 Returns if the string is empty.
 
 
 #### size
 ```C++
-EVO_NODISCARD constexpr auto size() const noexcept -> size_t;
+[[nodiscard]] constexpr auto size() const noexcept -> size_t;
 ```
 Returns the size of the currently held string.
 
 
 #### max_size
 ```C++
-EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t;
+[[nodiscard]] constexpr auto max_size() const noexcept -> size_t;
 ```
 Returns the maximum size of the string.
 
 
 #### capacity
 ```C++
-EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t;
+[[nodiscard]] constexpr auto capacity() const noexcept -> size_t;
 ```
 Returns the total capacity of the string.
 

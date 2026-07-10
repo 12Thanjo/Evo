@@ -38,34 +38,34 @@ auto some_func() noexcept -> evo::Result<int> {
 ### Constructors / creators
 ```C++
 // Success
-EVO_NODISCARD constexpr Result(const T& value) noexcept;
-EVO_NODISCARD constexpr Result(T&& value) noexcept;
-EVO_NODISCARD constexpr Result(ResultError_t) noexcept;
+[[nodiscard]] constexpr Result(const T& value) noexcept;
+[[nodiscard]] constexpr Result(T&& value) noexcept;
+[[nodiscard]] constexpr Result(ResultError_t) noexcept;
 
 // Error
-EVO_NODISCARD static constexpr auto error() noexcept -> Result;
+[[nodiscard]] static constexpr auto error() noexcept -> Result;
 ```
 
 ## Checking Result
 
 ### isSuccess
 ```C++
-EVO_NODISCARD constexpr auto isSuccess() const noexcept -> bool;
+[[nodiscard]] constexpr auto isSuccess() const noexcept -> bool;
 ```
 Get if there no error occured in the function
 
 
 ### isError
 ```C++
-EVO_NODISCARD constexpr auto isError() const noexcept -> bool;
+[[nodiscard]] constexpr auto isError() const noexcept -> bool;
 ```
 Get if there was an error that occured in the function
 
 
 ## value
 ```C++
-EVO_NODISCARD constexpr auto value() const&  noexcept -> const T&;
-EVO_NODISCARD constexpr auto value()      &  noexcept ->       T&;
-EVO_NODISCARD constexpr auto value()      && noexcept ->       T&&;
+[[nodiscard]] constexpr auto value() const&  noexcept -> const T&;
+[[nodiscard]] constexpr auto value()      &  noexcept ->       T&;
+[[nodiscard]] constexpr auto value()      && noexcept ->       T&&;
 ```
 Get the return value (only present if `isSuccess() == true`). If `T` is `void`, this function does not exist.

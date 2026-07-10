@@ -38,16 +38,16 @@ A vector that has small size optimization. SMALL_CAPACITY can be defaulted, and 
 
 ### Constructors
 ```C++
-EVO_NODISCARD constexpr SmallVector() noexcept;
-EVO_NODISCARD SmallVector(const SmallVector<T, SMALL_CAPACITY>& rhs) noexcept;
-EVO_NODISCARD SmallVector(SmallVector<T, SMALL_CAPACITY>&& rhs) noexcept;
+[[nodiscard]] constexpr SmallVector() noexcept;
+[[nodiscard]] SmallVector(const SmallVector<T, SMALL_CAPACITY>& rhs) noexcept;
+[[nodiscard]] SmallVector(SmallVector<T, SMALL_CAPACITY>&& rhs) noexcept;
 
-EVO_NODISCARD explicit constexpr SmallVector(size_type count, const T& value = T()) noexcept;
+[[nodiscard]] explicit constexpr SmallVector(size_type count, const T& value = T()) noexcept;
 
-EVO_NODISCARD SmallVector(std::initializer_list<T> init_list) noexcept;
+[[nodiscard]] SmallVector(std::initializer_list<T> init_list) noexcept;
 
 template<class InputIt>
-EVO_NODISCARD constexpr StaticVector(InputIt first, InputIt last) noexcept;
+[[nodiscard]] constexpr StaticVector(InputIt first, InputIt last) noexcept;
 ```
 
 
@@ -65,54 +65,54 @@ constexpr auto operator=(std::initializer_list<T> init_list) noexcept -> SmallVe
 
 #### at
 ```C++
-EVO_NODISCARD constexpr auto at(size_t index) noexcept -> T&;
-EVO_NODISCARD constexpr auto at(size_t index) const noexcept -> const T&;
+[[nodiscard]] constexpr auto at(size_t index) noexcept -> T&;
+[[nodiscard]] constexpr auto at(size_t index) const noexcept -> const T&;
 
 
 template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
-EVO_NODISCARD constexpr auto at(size_type index) noexcept -> T&; // for if size_type is equivalent to size_t
+[[nodiscard]] constexpr auto at(size_type index) noexcept -> T&; // for if size_type is equivalent to size_t
 
 template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
-EVO_NODISCARD constexpr auto at(size_type index) const noexcept -> const T&; // for if size_type is equivalent to size_t
+[[nodiscard]] constexpr auto at(size_type index) const noexcept -> const T&; // for if size_type is equivalent to size_t
 ```
 Access the element at the given `index`
 
 
 #### operator[]
 ```C++
-EVO_NODISCARD constexpr auto operator[](size_t index) noexcept -> T&;
-EVO_NODISCARD constexpr auto operator[](size_t index) const noexcept -> const T&;
+[[nodiscard]] constexpr auto operator[](size_t index) noexcept -> T&;
+[[nodiscard]] constexpr auto operator[](size_t index) const noexcept -> const T&;
 
 
 template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
-EVO_NODISCARD constexpr auto operator[](size_type index) noexcept -> T&; // for if size_type is equivalent to size_t
+[[nodiscard]] constexpr auto operator[](size_type index) noexcept -> T&; // for if size_type is equivalent to size_t
 
 template<std::enable_if<std::is_same_v<size_type, size_t>> = false>
-EVO_NODISCARD constexpr auto operator[](size_type index) const noexcept -> const T&; // for if size_type is equivalent to size_t
+[[nodiscard]] constexpr auto operator[](size_type index) const noexcept -> const T&; // for if size_type is equivalent to size_t
 ```
 Access the element at the given `index`
 
 
 #### front
 ```C++
-EVO_NODISCARD constexpr auto front() noexcept -> char&;
-EVO_NODISCARD constexpr auto front() const noexcept -> const char&;
+[[nodiscard]] constexpr auto front() noexcept -> char&;
+[[nodiscard]] constexpr auto front() const noexcept -> const char&;
 ```
 Access the first element (eqivalent to running `at(0)`). Behavior is undefined if `empty() == false` 
 
 
 #### back
 ```C++
-EVO_NODISCARD constexpr auto back() noexcept -> char&;
-EVO_NODISCARD constexpr auto back() const noexcept -> const char&;
+[[nodiscard]] constexpr auto back() noexcept -> char&;
+[[nodiscard]] constexpr auto back() const noexcept -> const char&;
 ```
 Access the first element (eqivalent to running `at(size() - 1)`). Behavior is undefined if `empty() == false` 
 
 
 #### data
 ```C++
-EVO_NODISCARD constexpr auto data() noexcept -> char*;
-EVO_NODISCARD constexpr auto data() const noexcept -> const char*;
+[[nodiscard]] constexpr auto data() noexcept -> char*;
+[[nodiscard]] constexpr auto data() const noexcept -> const char*;
 ```
 Returns a pointer to the underlying data of the vector.
 
@@ -122,36 +122,36 @@ Returns a pointer to the underlying data of the vector.
 
 #### begin
 ```C++
-EVO_NODISCARD constexpr auto  begin()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  begin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  begin()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  begin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cbegin() const noexcept -> const_iterator;
 ```
 Returns an iterator to the beginning of the vector.
 
 
 #### end
 ```C++
-EVO_NODISCARD constexpr auto  end()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  end() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  end()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  end() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto cend() const noexcept -> const_iterator;
 ```
 Returns an iterator to the end of the vector.
 
 
 #### rbegin
 ```C++
-EVO_NODISCARD constexpr auto  rbegin()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  rbegin() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rbegin()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  rbegin() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crbegin() const noexcept -> const_iterator;
 ```
 Returns an reverse iterator to the beginning of the vector.
 
 
 #### rend
 ```C++
-EVO_NODISCARD constexpr auto  rend()       noexcept ->       iterator;
-EVO_NODISCARD constexpr auto  rend() const noexcept -> const_iterator;
-EVO_NODISCARD constexpr auto crend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto  rend()       noexcept ->       iterator;
+[[nodiscard]] constexpr auto  rend() const noexcept -> const_iterator;
+[[nodiscard]] constexpr auto crend() const noexcept -> const_iterator;
 ```
 Returns an reverse iterator to the end of the vector.
 
@@ -161,35 +161,35 @@ Returns an reverse iterator to the end of the vector.
 
 #### empty
 ```C++
-EVO_NODISCARD constexpr auto empty() const noexcept -> bool;
+[[nodiscard]] constexpr auto empty() const noexcept -> bool;
 ```
 Returns if the vector is empty.
 
 
 #### size
 ```C++
-EVO_NODISCARD constexpr auto size() const noexcept -> size_t;
+[[nodiscard]] constexpr auto size() const noexcept -> size_t;
 ```
 Returns the size of the currently held vector.
 
 
 #### max_size
 ```C++
-EVO_NODISCARD constexpr static auto max_size() const noexcept -> size_t;
+[[nodiscard]] constexpr static auto max_size() const noexcept -> size_t;
 ```
 Returns the maximum size of the vector.
 
 
 #### capacity
 ```C++
-EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t;
+[[nodiscard]] constexpr auto capacity() const noexcept -> size_t;
 ```
 Returns the total capacity of the vector.
 
 
 #### small_capacity
 ```C++
-EVO_NODISCARD constexpr static auto small_capacity() const noexcept -> size_t;
+[[nodiscard]] constexpr static auto small_capacity() const noexcept -> size_t;
 ```
 Returns the total small capacity of the vector.
 
@@ -280,11 +280,11 @@ Resize the vector to given size `new_size`
 
 #### operator==
 ```C++
-EVO_NODISCARD constexpr auto operator==(const SmallVector& rhs) const noexcept -> bool;
+[[nodiscard]] constexpr auto operator==(const SmallVector& rhs) const noexcept -> bool;
 ```
 
 #### operator std::span<T>
 ```C++
-EVO_NODISCARD constexpr operator std::span<T>() noexcept;
+[[nodiscard]] constexpr operator std::span<T>() noexcept;
 ```
 

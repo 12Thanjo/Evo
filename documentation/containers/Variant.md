@@ -23,9 +23,9 @@ Container to add a nicer interface over `std::variant`. It inherits from `std::v
 
 ### getNative
 ```C++
-EVO_NODISCARD constexpr auto getNative() const&  noexcept -> const std::variant<Ts...>&;
-EVO_NODISCARD constexpr auto getNative()      &  noexcept ->       std::variant<Ts...>&;
-EVO_NODISCARD constexpr auto getNative()      && noexcept ->       std::variant<Ts...>&&;
+[[nodiscard]] constexpr auto getNative() const&  noexcept -> const std::variant<Ts...>&;
+[[nodiscard]] constexpr auto getNative()      &  noexcept ->       std::variant<Ts...>&;
+[[nodiscard]] constexpr auto getNative()      && noexcept ->       std::variant<Ts...>&&;
 ```
 Get the native C++ standard library version of the variant.
 
@@ -33,7 +33,7 @@ Get the native C++ standard library version of the variant.
 ### is
 ```C++
 template<class T>
-EVO_NODISCARD constexpr auto is() const noexcept -> bool;
+[[nodiscard]] constexpr auto is() const noexcept -> bool;
 ```
 Check if the variant is holding a given type.
 
@@ -41,13 +41,13 @@ Check if the variant is holding a given type.
 ### as
 ```C++
 template<class T>
-EVO_NODISCARD constexpr auto as() const& noexcept -> const T&;
+[[nodiscard]] constexpr auto as() const& noexcept -> const T&;
 
 template<class T>
-EVO_NODISCARD constexpr auto as() & noexcept -> T&;
+[[nodiscard]] constexpr auto as() & noexcept -> T&;
 
 template<class T>
-EVO_NODISCARD constexpr auto as() && noexcept -> T&&;
+[[nodiscard]] constexpr auto as() && noexcept -> T&&;
 ```
 Get the currently held value.
 
@@ -55,8 +55,8 @@ Get the currently held value.
 
 ### visit
 ```C++
-EVO_NODISCARD constexpr auto visit(auto callable) noexcept;
-EVO_NODISCARD constexpr auto visit(auto callable) const noexcept;
+[[nodiscard]] constexpr auto visit(auto callable) noexcept;
+[[nodiscard]] constexpr auto visit(auto callable) const noexcept;
 ```
 Make a call to `std::visit` on the native variant
 

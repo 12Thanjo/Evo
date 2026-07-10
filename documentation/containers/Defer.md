@@ -12,8 +12,8 @@ Run a function at the end of the scope.
 
 ### Constructors
 ```C++
-EVO_NODISCARD Defer(std::function<void()>&& defer_callback) noexcept;
-EVO_NODISCARD Defer(const std::function<void()>& defer_callback) noexcept;
+[[nodiscard]] Defer(std::function<void()>&& defer_callback) noexcept;
+[[nodiscard]] Defer(const std::function<void()>& defer_callback) noexcept;
 
 Defer(const Defer&) = delete;
 Defer(Defer&&) = delete;

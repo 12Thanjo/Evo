@@ -12,17 +12,17 @@ namespace evo{
 			// constexpr CStrProxy() noexcept = default;
 			// constexpr ~CStrProxy() noexcept = default;
 
-			EVO_NODISCARD constexpr CStrProxy(const std::string& str) noexcept : using_ptr(true) { this->str_data.ptr = str.c_str();         };
-			EVO_NODISCARD constexpr CStrProxy(const char* str) noexcept : using_ptr(true)        { this->str_data.ptr = str;                 };
-			EVO_NODISCARD constexpr CStrProxy(char character) noexcept : using_ptr(false)        { this->str_data.array = {character, '\0'}; };
+			[[nodiscard]] constexpr CStrProxy(const std::string& str) noexcept : using_ptr(true) { this->str_data.ptr = str.c_str();         };
+			[[nodiscard]] constexpr CStrProxy(const char* str) noexcept : using_ptr(true)        { this->str_data.ptr = str;                 };
+			[[nodiscard]] constexpr CStrProxy(char character) noexcept : using_ptr(false)        { this->str_data.array = {character, '\0'}; };
 
 			template<size_t CAPACITY>
-			EVO_NODISCARD constexpr CStrProxy(const StaticString<CAPACITY>& str) noexcept : using_ptr(true) { this->str_data.ptr = str.c_str(); };
+			[[nodiscard]] constexpr CStrProxy(const StaticString<CAPACITY>& str) noexcept : using_ptr(true) { this->str_data.ptr = str.c_str(); };
 
 
 
 
-			EVO_NODISCARD constexpr auto data() const noexcept -> const char* {
+			[[nodiscard]] constexpr auto data() const noexcept -> const char* {
 				if(this->using_ptr){
 					return str_data.ptr;
 				}else{
@@ -31,13 +31,13 @@ namespace evo{
 			};
 
 
-			EVO_NODISCARD constexpr auto c_str() const noexcept -> const char* {
+			[[nodiscard]] constexpr auto c_str() const noexcept -> const char* {
 				return this->data();
 			};
 
 
 
-			EVO_NODISCARD constexpr operator std::string_view() const noexcept {
+			[[nodiscard]] constexpr operator std::string_view() const noexcept {
 				return std::string_view(this->data());
 			};
 

@@ -23,15 +23,15 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// constructors / destructors
 
-			EVO_NODISCARD constexpr StaticString() noexcept = default;
+			[[nodiscard]] constexpr StaticString() noexcept = default;
 
-			EVO_NODISCARD constexpr StaticString(const char* chars) noexcept { this->operator=(chars); };
+			[[nodiscard]] constexpr StaticString(const char* chars) noexcept { this->operator=(chars); };
 
-			EVO_NODISCARD constexpr StaticString(const std::string& str) noexcept { this->operator=(str); };
-			EVO_NODISCARD constexpr StaticString(std::string&& str) noexcept { this->operator=(std::move(str)); };
+			[[nodiscard]] constexpr StaticString(const std::string& str) noexcept { this->operator=(str); };
+			[[nodiscard]] constexpr StaticString(std::string&& str) noexcept { this->operator=(std::move(str)); };
 
 			template<size_t StrSize>
-			EVO_NODISCARD constexpr StaticString(const StaticString<StrSize>& str) noexcept { this->operator=(str); };
+			[[nodiscard]] constexpr StaticString(const StaticString<StrSize>& str) noexcept { this->operator=(str); };
 
 			// constexpr ~StaticString() noexcept = default;
 
@@ -82,7 +82,7 @@ namespace evo{
 
 
 
-			EVO_NODISCARD constexpr operator std::string_view() const noexcept {
+			[[nodiscard]] constexpr operator std::string_view() const noexcept {
 				return std::string_view(this->data(), this->size());
 			};
 
@@ -93,12 +93,12 @@ namespace evo{
 			///////////////////////////////////
 			// at
 
-			EVO_NODISCARD constexpr auto at(size_type index) noexcept -> char& {
+			[[nodiscard]] constexpr auto at(size_type index) noexcept -> char& {
 				EVO_DEBUG_ASSERT(index < this->size()); // index is outsize bounds of string data
 				return this->data_block[index];
 			};
 
-			EVO_NODISCARD constexpr auto at(size_type index) const noexcept -> const char& {
+			[[nodiscard]] constexpr auto at(size_type index) const noexcept -> const char& {
 				EVO_DEBUG_ASSERT(index < this->size()); // index is outsize bounds of string data
 				return this->data_block[index];
 			};
@@ -107,11 +107,11 @@ namespace evo{
 			///////////////////////////////////
 			// operator[]
 
-			EVO_NODISCARD constexpr auto operator[](size_type index) noexcept -> char& {
+			[[nodiscard]] constexpr auto operator[](size_type index) noexcept -> char& {
 				return this->at(index);
 			};
 
-			EVO_NODISCARD constexpr auto operator[](size_type index) const noexcept -> const char& {
+			[[nodiscard]] constexpr auto operator[](size_type index) const noexcept -> const char& {
 				return this->at(index);
 			};
 
@@ -120,13 +120,13 @@ namespace evo{
 			///////////////////////////////////
 			// front
 
-			EVO_NODISCARD constexpr auto front() noexcept -> char& {
+			[[nodiscard]] constexpr auto front() noexcept -> char& {
 				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
 
 				return this->data_block.front();
 			};
 
-			EVO_NODISCARD constexpr auto front() const noexcept -> const char& {
+			[[nodiscard]] constexpr auto front() const noexcept -> const char& {
 				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
 
 				return this->data_block.front();
@@ -137,13 +137,13 @@ namespace evo{
 			///////////////////////////////////
 			// back
 
-			EVO_NODISCARD constexpr auto back() noexcept -> char& {
+			[[nodiscard]] constexpr auto back() noexcept -> char& {
 				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
 
 				return this->at( size_type(this->size() - 1) );
 			};
 
-			EVO_NODISCARD constexpr auto back() const noexcept -> const char& {
+			[[nodiscard]] constexpr auto back() const noexcept -> const char& {
 				EVO_DEBUG_ASSERT(this->empty() == false); // string is empty
 
 				return this->at( size_type(this->size() - 1) );
@@ -154,9 +154,9 @@ namespace evo{
 			///////////////////////////////////
 			// data
 
-			EVO_NODISCARD constexpr auto data() noexcept -> char* { return this->data_block.data(); };
+			[[nodiscard]] constexpr auto data() noexcept -> char* { return this->data_block.data(); };
 
-			EVO_NODISCARD constexpr auto data() const noexcept -> const char* { return this->data_block.data(); };
+			[[nodiscard]] constexpr auto data() const noexcept -> const char* { return this->data_block.data(); };
 
 
 
@@ -164,7 +164,7 @@ namespace evo{
 			///////////////////////////////////
 			// c_str
 
-			EVO_NODISCARD constexpr auto c_str() const noexcept -> const char* {
+			[[nodiscard]] constexpr auto c_str() const noexcept -> const char* {
 				if(this->_remaining_capacity != 0){
 					const_cast<char&>(this->data_block[CAPACITY - this->_remaining_capacity]) = '\0';
 				}
@@ -178,44 +178,44 @@ namespace evo{
 			// Iterators
 
 
-			EVO_NODISCARD constexpr auto begin()        noexcept -> iterator       { return iterator{this->data(), 0};       };
-			EVO_NODISCARD constexpr auto begin()  const noexcept -> const_iterator { return const_iterator{this->data(), 0}; };
-			EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator { return const_iterator{this->data(), 0}; };
+			[[nodiscard]] constexpr auto begin()        noexcept -> iterator       { return iterator{this->data(), 0};       };
+			[[nodiscard]] constexpr auto begin()  const noexcept -> const_iterator { return const_iterator{this->data(), 0}; };
+			[[nodiscard]] constexpr auto cbegin() const noexcept -> const_iterator { return const_iterator{this->data(), 0}; };
 
-			EVO_NODISCARD constexpr auto end()        noexcept -> iterator       { return iterator{this->data(), this->size()};       };
-			EVO_NODISCARD constexpr auto end()  const noexcept -> const_iterator { return const_iterator{this->data(), this->size()}; };
-			EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator { return const_iterator{this->data(), this->size()}; };
+			[[nodiscard]] constexpr auto end()        noexcept -> iterator       { return iterator{this->data(), this->size()};       };
+			[[nodiscard]] constexpr auto end()  const noexcept -> const_iterator { return const_iterator{this->data(), this->size()}; };
+			[[nodiscard]] constexpr auto cend() const noexcept -> const_iterator { return const_iterator{this->data(), this->size()}; };
 
 
-			EVO_NODISCARD constexpr auto rbegin()        noexcept -> reverse_iterator       { return reverse_iterator{this->data(), this->size()};       };
-			EVO_NODISCARD constexpr auto rbegin()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), this->size()}; };
-			EVO_NODISCARD constexpr auto crbegin() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), this->size()}; };
+			[[nodiscard]] constexpr auto rbegin()        noexcept -> reverse_iterator       { return reverse_iterator{this->data(), this->size()};       };
+			[[nodiscard]] constexpr auto rbegin()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), this->size()}; };
+			[[nodiscard]] constexpr auto crbegin() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), this->size()}; };
 
-			EVO_NODISCARD constexpr auto rend()        noexcept -> reverse_iterator       { return reverse_iterator{this->data(), 0};       };
-			EVO_NODISCARD constexpr auto rend()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), 0}; };
-			EVO_NODISCARD constexpr auto crend() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), 0}; };
+			[[nodiscard]] constexpr auto rend()        noexcept -> reverse_iterator       { return reverse_iterator{this->data(), 0};       };
+			[[nodiscard]] constexpr auto rend()  const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), 0}; };
+			[[nodiscard]] constexpr auto crend() const noexcept -> const_reverse_iterator { return const_reverse_iterator{this->data(), 0}; };
 
 
 
 			//////////////////////////////////////////////////////////////////////
 			// Capacity
 
-			EVO_NODISCARD constexpr auto empty() const noexcept -> bool {
+			[[nodiscard]] constexpr auto empty() const noexcept -> bool {
 				return this->_remaining_capacity == CAPACITY;
 			};
 
 
-			EVO_NODISCARD constexpr auto size() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto size() const noexcept -> size_t {
 				return size_t(CAPACITY - this->_remaining_capacity);
 			};
 
 
-			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto max_size() const noexcept -> size_t {
 				return size_t(CAPACITY);
 			};
 
 
-			EVO_NODISCARD constexpr auto capacity() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto capacity() const noexcept -> size_t {
 				return size_t(CAPACITY);
 			};	
 
@@ -294,7 +294,7 @@ namespace evo{
 			///////////////////////////////////
 			// operator ==
 
-			EVO_NODISCARD constexpr auto operator ==(const char* chars) const -> bool {
+			[[nodiscard]] constexpr auto operator ==(const char* chars) const -> bool {
 				for(size_t i = 0; i < this->size(); i+=1){
 					if(chars[i] == '\0'){
 						return false;
@@ -306,13 +306,13 @@ namespace evo{
 
 
 
-			EVO_NODISCARD constexpr auto operator ==(const std::string& str) const noexcept -> bool {
+			[[nodiscard]] constexpr auto operator ==(const std::string& str) const noexcept -> bool {
 				return this->operator==(std::string_view{str.data(), str.size()});
 			};
 
 
 			template<size_t StrSize>
-			EVO_NODISCARD constexpr auto operator ==(const StaticString<StrSize>& str) const noexcept -> bool {
+			[[nodiscard]] constexpr auto operator ==(const StaticString<StrSize>& str) const noexcept -> bool {
 				return this->operator==(std::string_view{str.data(), str.size()});
 			};
 
@@ -360,7 +360,7 @@ namespace evo{
 			// search
 
 		private:
-			 EVO_NODISCARD constexpr auto operator ==(const std::string_view str) const noexcept -> bool {
+			 [[nodiscard]] constexpr auto operator ==(const std::string_view str) const noexcept -> bool {
 				return str == std::string_view{this->data(), this->size()};
 			};
 	

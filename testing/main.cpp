@@ -57,9 +57,9 @@ namespace tests{
 			///////////////////////////////////
 			// general functions
 
-			EVO_NODISCARD constexpr auto isInitialized() const noexcept -> bool { return this->initialized; };
-			EVO_NODISCARD constexpr auto isMovedFrom() const noexcept -> bool { return this->moved_from; };
-			EVO_NODISCARD constexpr auto isCopy() const noexcept -> bool { return this->is_copy; };
+			[[nodiscard]] constexpr auto isInitialized() const noexcept -> bool { return this->initialized; };
+			[[nodiscard]] constexpr auto isMovedFrom() const noexcept -> bool { return this->moved_from; };
+			[[nodiscard]] constexpr auto isCopy() const noexcept -> bool { return this->is_copy; };
 
 
 		private:
@@ -81,12 +81,12 @@ namespace tests{
 			//////////////////////////////////////////////////////////////////////
 			// special member functions
 
-			EVO_NODISCARD Verbose() : generation(get_verbose_index()), life(0) {
+			[[nodiscard]] Verbose() : generation(get_verbose_index()), life(0) {
 				evo::println("Verbose() => {}", this->print());
 			}
 			~Verbose(){ evo::println("~Verbose() => {}", this->print()); }
 
-			EVO_NODISCARD Verbose(const Verbose& rhs) : generation(rhs.generation), life(rhs.life + 1) {
+			[[nodiscard]] Verbose(const Verbose& rhs) : generation(rhs.generation), life(rhs.life + 1) {
 				evo::println("Verbose(const Verbose& {}) => {}", rhs.print(), this->print());
 			}
 
@@ -97,15 +97,15 @@ namespace tests{
 				this->life = rhs.life + 1;
 			}
 
-			EVO_NODISCARD Verbose(Verbose&& rhs) : generation(rhs.generation), life(rhs.life + 1) {
+			[[nodiscard]] Verbose(Verbose&& rhs) : generation(rhs.generation), life(rhs.life + 1) {
 				evo::println("Verbose(Verbose&& {}) => {}", rhs.print(), this->print());
 			}
 
 
-			EVO_NODISCARD auto getGeneration() const -> size_t { return this->generation; }
-			EVO_NODISCARD auto getLife() const -> size_t { return this->life; }
+			[[nodiscard]] auto getGeneration() const -> size_t { return this->generation; }
+			[[nodiscard]] auto getLife() const -> size_t { return this->life; }
 
-			EVO_NODISCARD auto print() const -> std::string {
+			[[nodiscard]] auto print() const -> std::string {
 				return std::format("{{{}.{}}}", this->generation, this->life);
 			}
 
@@ -127,7 +127,7 @@ struct std::formatter<tests::Verbose> : std::formatter<std::string> {
 
 namespace tests{
 	
-	EVO_NODISCARD auto static_vector_test() noexcept -> bool {
+	[[nodiscard]] auto static_vector_test() noexcept -> bool {
 		auto static_vector = evo::StaticVector<int, 6>{};
 
 		static_vector.insert(static_vector.cbegin(), 2);
@@ -177,7 +177,7 @@ namespace tests{
 
 
 
-	EVO_NODISCARD auto c_str_proxy_test() noexcept -> bool {		
+	[[nodiscard]] auto c_str_proxy_test() noexcept -> bool {		
 		auto str = std::string{"hello"};
 
 		auto str_proxy = evo::CStrProxy(str);
@@ -194,7 +194,7 @@ namespace tests{
 
 
 
-	EVO_NODISCARD auto bimap_test() noexcept -> bool {
+	[[nodiscard]] auto bimap_test() noexcept -> bool {
 		auto bimap = evo::Bimap<std::string, int>();
 
 		auto data_vec = std::vector<std::pair<std::string, int>>();
@@ -290,7 +290,7 @@ namespace tests{
 
 
 
-	EVO_NODISCARD auto random_test() noexcept -> bool {
+	[[nodiscard]] auto random_test() noexcept -> bool {
 
 		for(uint64_t i = 0; i < 1000; i+=1){
 			const uint64_t random_num = evo::random(10, 15);
@@ -307,7 +307,7 @@ namespace tests{
 
 
 
-	EVO_NODISCARD auto small_vector_test() noexcept -> bool {
+	[[nodiscard]] auto small_vector_test() noexcept -> bool {
 		{
 			auto small_vec = evo::SmallVector<int, 8>{1, 2, 3};
 			auto small_vec2 = evo::SmallVector<int, 8>{4, 5, 6};
@@ -379,7 +379,7 @@ namespace tests{
 	};
 
 
-	EVO_NODISCARD auto variant_test() noexcept -> bool {
+	[[nodiscard]] auto variant_test() noexcept -> bool {
 		auto variant = evo::Variant<int, double, std::array<evo::byte, 11>>();
 
 		variant.emplace<double>(12.4);
@@ -398,7 +398,7 @@ namespace tests{
 		return true;
 	};
 
-	EVO_NODISCARD auto defer_test() noexcept -> bool {
+	[[nodiscard]] auto defer_test() noexcept -> bool {
 		int value = 1;
 
 		{
@@ -423,7 +423,7 @@ namespace tests{
 	};
 
 
-	EVO_NODISCARD auto unmovable_vector_test() noexcept -> bool {
+	[[nodiscard]] auto unmovable_vector_test() noexcept -> bool {
 		///////////////////////////////////
 		// small
 

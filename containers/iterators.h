@@ -57,19 +57,19 @@ namespace evo{
             };
 
 
-            EVO_NODISCARD constexpr auto inBounds(const ConstIterator& begin, const ConstIterator& end) const -> bool {
+            [[nodiscard]] constexpr auto inBounds(const ConstIterator& begin, const ConstIterator& end) const -> bool {
                 return this->iter >= begin.iter && this->iter <= end.iter;
             };
 
 
-            EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
-            EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
-            EVO_NODISCARD constexpr auto operator==(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
-            EVO_NODISCARD constexpr auto operator!=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<(const ConstIterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>(const ConstIterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
+            [[nodiscard]] constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
+            [[nodiscard]] constexpr auto operator->() const noexcept -> const T* { return this->iter; };
+            [[nodiscard]] constexpr auto operator==(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
+            [[nodiscard]] constexpr auto operator!=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+            [[nodiscard]] constexpr auto operator<(const ConstIterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
+            [[nodiscard]] constexpr auto operator<=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
+            [[nodiscard]] constexpr auto operator>(const ConstIterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
+            [[nodiscard]] constexpr auto operator>=(const ConstIterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
 
 
             constexpr auto operator+=(difference_type n) noexcept -> ConstIterator<T>& {
@@ -77,7 +77,7 @@ namespace evo{
                 return *this; 
             }
 
-            EVO_NODISCARD constexpr auto operator+(difference_type n) const noexcept -> ConstIterator<T> {
+            [[nodiscard]] constexpr auto operator+(difference_type n) const noexcept -> ConstIterator<T> {
                 ConstIterator<T> self_copy = *this;
                 self_copy += n;
                 return self_copy;
@@ -88,17 +88,17 @@ namespace evo{
                 return *this;
             }
 
-            EVO_NODISCARD constexpr auto operator-(difference_type n) const noexcept -> ConstIterator<T> {
+            [[nodiscard]] constexpr auto operator-(difference_type n) const noexcept -> ConstIterator<T> {
                 ConstIterator<T> self_copy = *this;
                 self_copy -= n;
                 return self_copy;
             }
 
-            EVO_NODISCARD constexpr auto operator-(const ConstIterator<T>& rhs) const noexcept -> difference_type {
+            [[nodiscard]] constexpr auto operator-(const ConstIterator<T>& rhs) const noexcept -> difference_type {
                 return this->iter - rhs.iter;
             }
 
-            EVO_NODISCARD constexpr auto operator[](difference_type n) const noexcept -> const T& { return *(this->iter + n); }
+            [[nodiscard]] constexpr auto operator[](difference_type n) const noexcept -> const T& { return *(this->iter + n); }
 
     
         private:
@@ -164,19 +164,19 @@ namespace evo{
             };
 
 
-            EVO_NODISCARD constexpr auto inBounds(const Iterator& begin, const Iterator& end) const -> bool {
+            [[nodiscard]] constexpr auto inBounds(const Iterator& begin, const Iterator& end) const -> bool {
                 return this->iter >= begin.iter && this->iter <= end.iter;
             };
 
 
-            EVO_NODISCARD constexpr auto operator*() const noexcept -> T& { return *this->iter; };
-            EVO_NODISCARD constexpr auto operator->() const noexcept -> T* { return this->iter; };
-            EVO_NODISCARD constexpr auto operator==(const Iterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
-            EVO_NODISCARD constexpr auto operator!=(const Iterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<(const Iterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<=(const Iterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>(const Iterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>=(const Iterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
+            [[nodiscard]] constexpr auto operator*() const noexcept -> T& { return *this->iter; };
+            [[nodiscard]] constexpr auto operator->() const noexcept -> T* { return this->iter; };
+            [[nodiscard]] constexpr auto operator==(const Iterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
+            [[nodiscard]] constexpr auto operator!=(const Iterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+            [[nodiscard]] constexpr auto operator<(const Iterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
+            [[nodiscard]] constexpr auto operator<=(const Iterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
+            [[nodiscard]] constexpr auto operator>(const Iterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
+            [[nodiscard]] constexpr auto operator>=(const Iterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
 
 
             constexpr auto operator+=(difference_type n) noexcept -> Iterator<T>& {
@@ -184,7 +184,7 @@ namespace evo{
                 return *this; 
             }
 
-            EVO_NODISCARD constexpr auto operator+(difference_type n) const noexcept -> Iterator<T> {
+            [[nodiscard]] constexpr auto operator+(difference_type n) const noexcept -> Iterator<T> {
                 Iterator<T> self_copy = *this;
                 self_copy += n;
                 return self_copy;
@@ -195,21 +195,21 @@ namespace evo{
                 return *this;
             }
 
-            EVO_NODISCARD constexpr auto operator-(difference_type n) const noexcept -> Iterator<T> {
+            [[nodiscard]] constexpr auto operator-(difference_type n) const noexcept -> Iterator<T> {
                 Iterator<T> self_copy = *this;
                 self_copy -= n;
                 return self_copy;
             }
 
-            EVO_NODISCARD constexpr auto operator-(const Iterator<T>& rhs) const noexcept -> difference_type {
+            [[nodiscard]] constexpr auto operator-(const Iterator<T>& rhs) const noexcept -> difference_type {
                 return this->iter - rhs.iter;
             }
 
-            EVO_NODISCARD constexpr auto operator[](difference_type n) const noexcept -> T& { return *(this->iter + n); }
+            [[nodiscard]] constexpr auto operator[](difference_type n) const noexcept -> T& { return *(this->iter + n); }
 
 
 
-            EVO_NODISCARD operator ConstIterator<T>() noexcept {
+            [[nodiscard]] operator ConstIterator<T>() noexcept {
                 return ConstIterator<T>(static_cast<const T*>(this->iter));
             };
 
@@ -279,19 +279,19 @@ namespace evo{
             };
 
 
-            EVO_NODISCARD constexpr auto inBounds(const ConstReverseIterator& begin, const ConstReverseIterator& end) const -> bool {
+            [[nodiscard]] constexpr auto inBounds(const ConstReverseIterator& begin, const ConstReverseIterator& end) const -> bool {
                 return this->iter >= begin.iter && this->iter <= end.iter;
             };
 
 
-            EVO_NODISCARD constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
-            EVO_NODISCARD constexpr auto operator->() const noexcept -> const T* { return this->iter; };
-            EVO_NODISCARD constexpr auto operator==(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
-            EVO_NODISCARD constexpr auto operator!=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<(const ConstReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>(const ConstReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
+            [[nodiscard]] constexpr auto operator*() const noexcept -> const T& { return *this->iter; };
+            [[nodiscard]] constexpr auto operator->() const noexcept -> const T* { return this->iter; };
+            [[nodiscard]] constexpr auto operator==(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
+            [[nodiscard]] constexpr auto operator!=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+            [[nodiscard]] constexpr auto operator<(const ConstReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
+            [[nodiscard]] constexpr auto operator<=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
+            [[nodiscard]] constexpr auto operator>(const ConstReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
+            [[nodiscard]] constexpr auto operator>=(const ConstReverseIterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
 
 
             constexpr auto operator+=(difference_type n) noexcept -> ConstReverseIterator<T>& {
@@ -299,7 +299,7 @@ namespace evo{
                 return *this; 
             }
 
-            EVO_NODISCARD constexpr auto operator+(difference_type n) const noexcept -> ConstReverseIterator<T> {
+            [[nodiscard]] constexpr auto operator+(difference_type n) const noexcept -> ConstReverseIterator<T> {
                 ConstReverseIterator<T> self_copy = *this;
                 self_copy -= n;
                 return self_copy;
@@ -310,17 +310,17 @@ namespace evo{
                 return *this;
             }
 
-            EVO_NODISCARD constexpr auto operator-(difference_type n) const noexcept -> ConstReverseIterator<T> {
+            [[nodiscard]] constexpr auto operator-(difference_type n) const noexcept -> ConstReverseIterator<T> {
                 ConstReverseIterator<T> self_copy = *this;
                 self_copy += n;
                 return self_copy;
             }
 
-            EVO_NODISCARD constexpr auto operator-(const ConstReverseIterator<T>& rhs) const noexcept -> difference_type {
+            [[nodiscard]] constexpr auto operator-(const ConstReverseIterator<T>& rhs) const noexcept -> difference_type {
                 return this->iter - rhs.iter;
             }
 
-            EVO_NODISCARD constexpr auto operator[](difference_type n) const noexcept -> const T& { return *(this->iter - n); }
+            [[nodiscard]] constexpr auto operator[](difference_type n) const noexcept -> const T& { return *(this->iter - n); }
     
         private:
             const T* iter;
@@ -385,19 +385,19 @@ namespace evo{
             };
 
 
-            EVO_NODISCARD constexpr auto inBounds(const ReverseIterator& begin, const ReverseIterator& end) const -> bool {
+            [[nodiscard]] constexpr auto inBounds(const ReverseIterator& begin, const ReverseIterator& end) const -> bool {
                 return this->iter >= begin.iter && this->iter <= end.iter;
             };
 
 
-            EVO_NODISCARD constexpr auto operator*() const noexcept -> T& { return *this->iter; };
-            EVO_NODISCARD constexpr auto operator->() const noexcept -> T* { return this->iter; };
-            EVO_NODISCARD constexpr auto operator==(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
-            EVO_NODISCARD constexpr auto operator!=(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<(const ReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
-            EVO_NODISCARD constexpr auto operator<=(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>(const ReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
-            EVO_NODISCARD constexpr auto operator>=(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
+            [[nodiscard]] constexpr auto operator*() const noexcept -> T& { return *this->iter; };
+            [[nodiscard]] constexpr auto operator->() const noexcept -> T* { return this->iter; };
+            [[nodiscard]] constexpr auto operator==(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter == rhs.iter; };
+            [[nodiscard]] constexpr auto operator!=(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter != rhs.iter; };
+            [[nodiscard]] constexpr auto operator<(const ReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter < rhs.iter; };
+            [[nodiscard]] constexpr auto operator<=(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter <= rhs.iter; };
+            [[nodiscard]] constexpr auto operator>(const ReverseIterator<T>& rhs)  const noexcept -> bool { return this->iter > rhs.iter; };
+            [[nodiscard]] constexpr auto operator>=(const ReverseIterator<T>& rhs) const noexcept -> bool { return this->iter >= rhs.iter; };
 
 
             constexpr auto operator+=(difference_type n) noexcept -> ReverseIterator<T>& {
@@ -405,7 +405,7 @@ namespace evo{
                 return *this; 
             }
 
-            EVO_NODISCARD constexpr auto operator+(difference_type n) const noexcept -> ReverseIterator<T> {
+            [[nodiscard]] constexpr auto operator+(difference_type n) const noexcept -> ReverseIterator<T> {
                 ReverseIterator<T> self_copy = *this;
                 self_copy -= n;
                 return self_copy;
@@ -416,20 +416,20 @@ namespace evo{
                 return *this;
             }
 
-            EVO_NODISCARD constexpr auto operator-(difference_type n) const noexcept -> ReverseIterator<T> {
+            [[nodiscard]] constexpr auto operator-(difference_type n) const noexcept -> ReverseIterator<T> {
                 ReverseIterator<T> self_copy = *this;
                 self_copy += n;
                 return self_copy;
             }
 
-            EVO_NODISCARD constexpr auto operator-(const ReverseIterator<T>& rhs) const noexcept -> difference_type {
+            [[nodiscard]] constexpr auto operator-(const ReverseIterator<T>& rhs) const noexcept -> difference_type {
                 return this->iter - rhs.iter;
             }
 
-            EVO_NODISCARD constexpr auto operator[](difference_type n) const noexcept -> T& { return *(this->iter - n); }
+            [[nodiscard]] constexpr auto operator[](difference_type n) const noexcept -> T& { return *(this->iter - n); }
 
 
-            EVO_NODISCARD operator ConstReverseIterator<T>() noexcept {
+            [[nodiscard]] operator ConstReverseIterator<T>() noexcept {
                 return ConstReverseIterator<T>(static_cast<const T*>(this->iter));
             };
     

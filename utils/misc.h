@@ -23,7 +23,7 @@ namespace evo{
 
 
 	
-	EVO_NORETURN constexpr auto unreachable() noexcept -> void {
+	[[noreturn]] constexpr auto unreachable() noexcept -> void {
 		#if defined(EVO_COMPILER_MSVC)
 			__assume(false);
 		#else
@@ -35,25 +35,25 @@ namespace evo{
 
 	// version of C++23's std::to_underlying
 	template<class Enum>
-	EVO_NODISCARD constexpr auto to_underlying(Enum e) noexcept -> std::underlying_type_t<Enum> {
+	[[nodiscard]] constexpr auto to_underlying(Enum e) noexcept -> std::underlying_type_t<Enum> {
 		return static_cast<std::underlying_type_t<Enum>>(e);
 	};
 
 
 
 	template<class T>
-	EVO_NODISCARD constexpr auto copy(const T& value) -> T {
+	[[nodiscard]] constexpr auto copy(const T& value) -> T {
 		return value;
 	}
 
 
 
 
-	EVO_NODISCARD constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t {
+	[[nodiscard]] constexpr auto hashCombine(size_t lhs, size_t rhs) noexcept -> size_t {
 		return lhs ^ (rhs << 1);
 	};
 
-	EVO_NODISCARD constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t {
+	[[nodiscard]] constexpr auto hashCombine(std::initializer_list<size_t> list) noexcept -> size_t {
 		size_t output = *list.begin();
 
 		bool left = true;
@@ -75,7 +75,7 @@ namespace evo{
 	// bitCast
 
 	template<class TO, class FROM>
-	EVO_NODISCARD constexpr auto bitCast(const FROM& from) -> const TO& {
+	[[nodiscard]] constexpr auto bitCast(const FROM& from) -> const TO& {
 		static_assert(sizeof(FROM) == sizeof(TO), "Cannot bitcast to type of different size");
 		static_assert(std::is_trivially_destructible<FROM>(), "Cannot bitcast from a non-trivially-destructible type");
 
@@ -84,7 +84,7 @@ namespace evo{
 
 
 	template<class TO, class FROM>
-	EVO_NODISCARD constexpr auto bitCast(FROM& from) -> TO& {
+	[[nodiscard]] constexpr auto bitCast(FROM& from) -> TO& {
 		static_assert(sizeof(FROM) == sizeof(TO), "Cannot bitcast to type of different size");
 		static_assert(std::is_trivially_destructible<FROM>(), "Cannot bitcast from a non-trivially-destructible type");
 
@@ -93,7 +93,7 @@ namespace evo{
 
 
 	template<class TO, class FROM>
-	EVO_NODISCARD constexpr auto unsafeBitCast(const FROM& from) -> const TO& {
+	[[nodiscard]] constexpr auto unsafeBitCast(const FROM& from) -> const TO& {
 		static_assert(sizeof(FROM) == sizeof(TO), "Cannot unsafe-bitcast to type of different size");
 
 		return *(const TO*)&from;
@@ -101,7 +101,7 @@ namespace evo{
 
 
 	template<class TO, class FROM>
-	EVO_NODISCARD constexpr auto unsafeBitCast(FROM& from) -> TO& {
+	[[nodiscard]] constexpr auto unsafeBitCast(FROM& from) -> TO& {
 		static_assert(sizeof(FROM) == sizeof(TO), "Cannot unsafe-bitcast to type of different size");
 
 		return *(TO*)&from;

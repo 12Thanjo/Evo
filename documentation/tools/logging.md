@@ -263,19 +263,19 @@ Calls `Assert(conditional, message)` in debug mode, otherwise is a no-op.
 
 ### fatalBreak
 ```C++
-EVO_NORETURN inline auto fatalBreak(CStrProxy msg) noexcept -> void;
+[[noreturn]] inline auto fatalBreak(CStrProxy msg) noexcept -> void;
 
 template<class... Args>
-EVO_NORETURN inline auto fatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
+[[noreturn]] inline auto fatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
 ```
 Prints the message to the console in the fatal style. Calls a breakpoint and marks unreachable in debug mode, otherwise calls `std::exit(1)`.
 
 ### debugFatalBreak
 ```C++
-EVO_NORETURN inline auto debugFatalBreak(CStrProxy msg) noexcept -> void;
+[[noreturn]] inline auto debugFatalBreak(CStrProxy msg) noexcept -> void;
 
 template<class... Args>
-EVO_NORETURN inline auto debugFatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
+[[noreturn]] inline auto debugFatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void;
 ```
 In debug mode, will print a message to the console in the fatal style, and calls a breakpoint. Both debug mode and release mode call unreachable.
 
@@ -283,8 +283,8 @@ In debug mode, will print a message to the console in the fatal style, and calls
 
 ### unimplemented
 ```C++
-EVO_NORETURN inline auto unimplemented(const std::source_location location = std::source_location::current()) noexcept -> void;
-EVO_NORETURN inline auto unimplemented(std::string_view message, const std::source_location location = std::source_location::current()) noexcept -> void;
+[[noreturn]] inline auto unimplemented(const std::source_location location = std::source_location::current()) noexcept -> void;
+[[noreturn]] inline auto unimplemented(std::string_view message, const std::source_location location = std::source_location::current()) noexcept -> void;
 ```
 Formats an unimplemented message and passes it to `debugAssert()`
 
@@ -373,7 +373,7 @@ Data for a log message.
 
 ### hasCallback
 ```C++
-EVO_NODISCARD auto hasCallback() noexcept -> bool;
+[[nodiscard]] auto hasCallback() noexcept -> bool;
 ```
 Gets if a log callback is set.
 

@@ -44,11 +44,11 @@ Note how the last value (and greatest) is `_max`.
 
 ### Constructors
 ```C++
-EVO_NODISCARD constexpr Flags() noexcept; // defaults to all flags 0
+[[nodiscard]] constexpr Flags() noexcept; // defaults to all flags 0
 
-EVO_NODISCARD constexpr Flags(Enum flag) noexcept; // sets a single flag
+[[nodiscard]] constexpr Flags(Enum flag) noexcept; // sets a single flag
 
-EVO_NODISCARD constexpr Flags(std::initializer_list<Enum> flags) noexcept; // sets each flag from list
+[[nodiscard]] constexpr Flags(std::initializer_list<Enum> flags) noexcept; // sets each flag from list
 ```
 
 
@@ -90,15 +90,15 @@ Toggle given flag values.
 
 #### has
 ```C++
-EVO_NODISCARD constexpr auto has(Enum flag_value) noexcept -> bool;
-EVO_NODISCARD constexpr auto has(std::initializer_list<Enum> flag_values) noexcept -> bool;
+[[nodiscard]] constexpr auto has(Enum flag_value) noexcept -> bool;
+[[nodiscard]] constexpr auto has(std::initializer_list<Enum> flag_values) noexcept -> bool;
 ```
 Checks if given flag values are set.
 
 
 #### hasNone
 ```C++
-EVO_NODISCARD constexpr auto hasNone() const noexcept -> bool;
+[[nodiscard]] constexpr auto hasNone() const noexcept -> bool;
 ```
 Checks if all flag values are unset.
 
@@ -108,6 +108,6 @@ Checks if all flag values are unset.
 
 #### value
 ```C++
-EVO_NODISCARD constexpr auto value() const noexcept -> UnderlyingT;
+[[nodiscard]] constexpr auto value() const noexcept -> UnderlyingT;
 ```
 Returns the underlying integer value.

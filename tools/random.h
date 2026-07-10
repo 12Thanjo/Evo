@@ -8,13 +8,13 @@
 namespace evo{
 
 
-	EVO_NODISCARD auto random() noexcept -> ui64;
-	EVO_NODISCARD auto random(ui64 max) noexcept -> ui64;
-	EVO_NODISCARD auto random(ui64 min, ui64 max) noexcept -> ui64;
+	[[nodiscard]] auto random() noexcept -> ui64;
+	[[nodiscard]] auto random(ui64 max) noexcept -> ui64;
+	[[nodiscard]] auto random(ui64 min, ui64 max) noexcept -> ui64;
 
-	EVO_NODISCARD auto random01() noexcept -> f64;
+	[[nodiscard]] auto random01() noexcept -> f64;
 	
-	EVO_NODISCARD auto randomBool() noexcept -> bool;
+	[[nodiscard]] auto randomBool() noexcept -> bool;
 
 
 };

@@ -42,7 +42,7 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// constructors and destructors
 
-			EVO_NODISCARD constexpr Bimap(
+			[[nodiscard]] constexpr Bimap(
 				size_t bucket_count = 16,
 				const LHash& left_hasher = LHash(), const RHash& right_hasher = RHash(),
 				const LEqual& left_equal_to = LEqual(), const REqual& right_equal_to = REqual(),
@@ -59,22 +59,22 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// iterators
 
-			EVO_NODISCARD constexpr auto begin()        noexcept ->       iterator { return       iterator(this->data_vec.data()); };
-			EVO_NODISCARD constexpr auto begin()  const noexcept -> const_iterator { return const_iterator(this->data_vec.data()); };
-			EVO_NODISCARD constexpr auto cbegin() const noexcept -> const_iterator { return const_iterator(this->data_vec.data()); };
+			[[nodiscard]] constexpr auto begin()        noexcept ->       iterator { return       iterator(this->data_vec.data()); };
+			[[nodiscard]] constexpr auto begin()  const noexcept -> const_iterator { return const_iterator(this->data_vec.data()); };
+			[[nodiscard]] constexpr auto cbegin() const noexcept -> const_iterator { return const_iterator(this->data_vec.data()); };
 
-			EVO_NODISCARD constexpr auto end()        noexcept ->       iterator { return       iterator(this->data_vec.data() + this->data_vec.size()); };
-			EVO_NODISCARD constexpr auto end()  const noexcept -> const_iterator { return const_iterator(this->data_vec.data() + this->data_vec.size()); };
-			EVO_NODISCARD constexpr auto cend() const noexcept -> const_iterator { return const_iterator(this->data_vec.data() + this->data_vec.size()); };
+			[[nodiscard]] constexpr auto end()        noexcept ->       iterator { return       iterator(this->data_vec.data() + this->data_vec.size()); };
+			[[nodiscard]] constexpr auto end()  const noexcept -> const_iterator { return const_iterator(this->data_vec.data() + this->data_vec.size()); };
+			[[nodiscard]] constexpr auto cend() const noexcept -> const_iterator { return const_iterator(this->data_vec.data() + this->data_vec.size()); };
 
 
 			//////////////////////////////////////////////////////////////////////
 			// capacity
 
-			EVO_NODISCARD constexpr auto empty() const noexcept -> bool { return this->data_vec.empty(); };
-			EVO_NODISCARD constexpr auto size() const noexcept -> size_t { return this->data_vec.size(); };
-			EVO_NODISCARD constexpr auto max_size() const noexcept -> size_t { return this->data_vec.max_size(); };
-			EVO_NODISCARD constexpr auto capactity() const noexcept -> size_t { return this->data_vec.capactity(); };
+			[[nodiscard]] constexpr auto empty() const noexcept -> bool { return this->data_vec.empty(); };
+			[[nodiscard]] constexpr auto size() const noexcept -> size_t { return this->data_vec.size(); };
+			[[nodiscard]] constexpr auto max_size() const noexcept -> size_t { return this->data_vec.max_size(); };
+			[[nodiscard]] constexpr auto capactity() const noexcept -> size_t { return this->data_vec.capactity(); };
 
 
 			//////////////////////////////////////////////////////////////////////
@@ -274,7 +274,7 @@ namespace evo{
 			///////////////////////////////////
 			// at
 
-			EVO_NODISCARD constexpr auto at_left(const LeftT& left) noexcept -> value_type& {
+			[[nodiscard]] constexpr auto at_left(const LeftT& left) noexcept -> value_type& {
 				const size_t bucket_index = this->left_bucket(left);
 
 				for(auto i = this->left_begin(bucket_index); i != this->left_end(bucket_index); ++i){
@@ -290,7 +290,7 @@ namespace evo{
 				unreachable();
 			};
 
-			EVO_NODISCARD constexpr auto at_left(const LeftT& left) const noexcept -> const value_type& {
+			[[nodiscard]] constexpr auto at_left(const LeftT& left) const noexcept -> const value_type& {
 				const size_t bucket_index = this->left_bucket(left);
 
 				for(auto i = this->left_begin(bucket_index); i != this->left_end(bucket_index); ++i){
@@ -308,7 +308,7 @@ namespace evo{
 
 
 
-			EVO_NODISCARD constexpr auto at_right(const RightT& right) noexcept -> value_type& {
+			[[nodiscard]] constexpr auto at_right(const RightT& right) noexcept -> value_type& {
 				const size_t bucket_index = this->right_bucket(right);
 
 				for(auto i = this->right_begin(bucket_index); i != this->right_end(bucket_index); ++i){
@@ -324,7 +324,7 @@ namespace evo{
 				unreachable();
 			};
 
-			EVO_NODISCARD constexpr auto at_right(const RightT& right) const noexcept -> const value_type& {
+			[[nodiscard]] constexpr auto at_right(const RightT& right) const noexcept -> const value_type& {
 				const size_t bucket_index = this->right_bucket(right);
 
 				for(auto i = this->right_begin(bucket_index); i != this->right_end(bucket_index); ++i){
@@ -344,11 +344,11 @@ namespace evo{
 			///////////////////////////////////
 			// get
 
-			EVO_NODISCARD constexpr auto get_left(const RightT& right) const noexcept -> const LeftT& { return this->at_right(right).first; };
-			EVO_NODISCARD constexpr auto get_left(const RightT& right) noexcept -> LeftT& { return this->at_right(right).first; };
+			[[nodiscard]] constexpr auto get_left(const RightT& right) const noexcept -> const LeftT& { return this->at_right(right).first; };
+			[[nodiscard]] constexpr auto get_left(const RightT& right) noexcept -> LeftT& { return this->at_right(right).first; };
 
-			EVO_NODISCARD constexpr auto get_right(const LeftT& left) const noexcept -> const RightT& { return this->at_left(left).second; };
-			EVO_NODISCARD constexpr auto get_right(const LeftT& left) noexcept -> RightT& { return this->at_left(left).second; };
+			[[nodiscard]] constexpr auto get_right(const LeftT& left) const noexcept -> const RightT& { return this->at_left(left).second; };
+			[[nodiscard]] constexpr auto get_right(const LeftT& left) noexcept -> RightT& { return this->at_left(left).second; };
 
 
 
@@ -359,7 +359,7 @@ namespace evo{
 			///////////////////////////////////
 			// find
 
-			EVO_NODISCARD constexpr auto find_left(const LeftT& left) noexcept -> iterator {
+			[[nodiscard]] constexpr auto find_left(const LeftT& left) noexcept -> iterator {
 				const size_t bucket_index = this->left_bucket(left);
 
 				for(auto i = this->left_begin(bucket_index); i != this->left_end(bucket_index); ++i){
@@ -373,7 +373,7 @@ namespace evo{
 				return this->end();
 			};
 
-			EVO_NODISCARD constexpr auto find_left(const LeftT& left) const noexcept -> const_iterator {
+			[[nodiscard]] constexpr auto find_left(const LeftT& left) const noexcept -> const_iterator {
 				const size_t bucket_index = this->left_bucket(left);
 
 				for(auto i = this->left_begin(bucket_index); i != this->left_end(bucket_index); ++i){
@@ -389,7 +389,7 @@ namespace evo{
 
 
 
-			EVO_NODISCARD constexpr auto find_right(const RightT& right) noexcept -> iterator {
+			[[nodiscard]] constexpr auto find_right(const RightT& right) noexcept -> iterator {
 				const size_t bucket_index = this->right_bucket(right);
 
 				for(auto i = this->right_begin(bucket_index); i != this->right_end(bucket_index); ++i){
@@ -403,7 +403,7 @@ namespace evo{
 				return this->end();
 			};
 
-			EVO_NODISCARD constexpr auto find_right(const RightT& right) const noexcept -> const_iterator {
+			[[nodiscard]] constexpr auto find_right(const RightT& right) const noexcept -> const_iterator {
 				const size_t bucket_index = this->right_bucket(right);
 
 				for(auto i = this->right_begin(bucket_index); i != this->right_end(bucket_index); ++i){
@@ -422,7 +422,7 @@ namespace evo{
 			///////////////////////////////////
 			// contains
 
-			EVO_NODISCARD constexpr auto contains_left(const LeftT& left) const noexcept -> bool {
+			[[nodiscard]] constexpr auto contains_left(const LeftT& left) const noexcept -> bool {
 				const size_t bucket_index = this->left_bucket(left);
 
 				for(auto i = this->left_begin(bucket_index); i != this->left_end(bucket_index); ++i){
@@ -437,7 +437,7 @@ namespace evo{
 			};
 
 
-			EVO_NODISCARD constexpr auto contains_right(const RightT& right) const noexcept -> bool {
+			[[nodiscard]] constexpr auto contains_right(const RightT& right) const noexcept -> bool {
 				const size_t bucket_index = this->right_bucket(right);
 
 				for(auto i = this->right_begin(bucket_index); i != this->right_end(bucket_index); ++i){
@@ -461,38 +461,38 @@ namespace evo{
 			///////////////////////////////////
 			// bucket begin
 
-			EVO_NODISCARD constexpr auto  left_begin(size_t n)       noexcept ->       local_iterator { return this->left_map[n].begin();  };
-			EVO_NODISCARD constexpr auto  left_begin(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].begin();  };
-			EVO_NODISCARD constexpr auto left_cbegin(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].cbegin(); };
+			[[nodiscard]] constexpr auto  left_begin(size_t n)       noexcept ->       local_iterator { return this->left_map[n].begin();  };
+			[[nodiscard]] constexpr auto  left_begin(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].begin();  };
+			[[nodiscard]] constexpr auto left_cbegin(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].cbegin(); };
 
-			EVO_NODISCARD constexpr auto  right_begin(size_t n)       noexcept ->       local_iterator { return this->right_map[n].begin();  };
-			EVO_NODISCARD constexpr auto  right_begin(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].begin();  };
-			EVO_NODISCARD constexpr auto right_cbegin(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].cbegin(); };
+			[[nodiscard]] constexpr auto  right_begin(size_t n)       noexcept ->       local_iterator { return this->right_map[n].begin();  };
+			[[nodiscard]] constexpr auto  right_begin(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].begin();  };
+			[[nodiscard]] constexpr auto right_cbegin(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].cbegin(); };
 
 
 			///////////////////////////////////
 			// bucket end
 
-			EVO_NODISCARD constexpr auto  left_end(size_t n)       noexcept ->       local_iterator { return this->left_map[n].end();  };
-			EVO_NODISCARD constexpr auto  left_end(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].end();  };
-			EVO_NODISCARD constexpr auto left_cend(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].cend(); };
+			[[nodiscard]] constexpr auto  left_end(size_t n)       noexcept ->       local_iterator { return this->left_map[n].end();  };
+			[[nodiscard]] constexpr auto  left_end(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].end();  };
+			[[nodiscard]] constexpr auto left_cend(size_t n) const noexcept -> const_local_iterator { return this->left_map[n].cend(); };
 
-			EVO_NODISCARD constexpr auto  right_end(size_t n)       noexcept ->       local_iterator { return this->right_map[n].end();  };
-			EVO_NODISCARD constexpr auto  right_end(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].end();  };
-			EVO_NODISCARD constexpr auto right_cend(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].cend(); };
+			[[nodiscard]] constexpr auto  right_end(size_t n)       noexcept ->       local_iterator { return this->right_map[n].end();  };
+			[[nodiscard]] constexpr auto  right_end(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].end();  };
+			[[nodiscard]] constexpr auto right_cend(size_t n) const noexcept -> const_local_iterator { return this->right_map[n].cend(); };
 
 
 			///////////////////////////////////
 			// bucket_count
 
-			EVO_NODISCARD constexpr auto bucket_count() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto bucket_count() const noexcept -> size_t {
 				return this->left_map.size();
 			};
 
 			///////////////////////////////////
 			// max_bucket_count
 
-			EVO_NODISCARD constexpr auto max_bucket_count() const noexcept -> size_t {
+			[[nodiscard]] constexpr auto max_bucket_count() const noexcept -> size_t {
 				return this->left_map.max_size();
 			};
 
@@ -500,22 +500,22 @@ namespace evo{
 			///////////////////////////////////
 			// bucket_size
 
-			EVO_NODISCARD constexpr auto left_bucket_size(size_t n) const noexcept -> size_t {
+			[[nodiscard]] constexpr auto left_bucket_size(size_t n) const noexcept -> size_t {
 				return this->left_map[n].size();
 			};
 
-			EVO_NODISCARD constexpr auto right_bucket_size(size_t n) const noexcept -> size_t {
+			[[nodiscard]] constexpr auto right_bucket_size(size_t n) const noexcept -> size_t {
 				return this->right_map[n].size();
 			};
 
 			///////////////////////////////////
 			// bucket
 
-			EVO_NODISCARD constexpr auto left_bucket(const LeftT& left) const noexcept -> size_t {
+			[[nodiscard]] constexpr auto left_bucket(const LeftT& left) const noexcept -> size_t {
 				return this->left_hash(left) % this->bucket_count();
 			};
 
-			EVO_NODISCARD constexpr auto right_bucket(const RightT& right) const noexcept -> size_t {
+			[[nodiscard]] constexpr auto right_bucket(const RightT& right) const noexcept -> size_t {
 				return this->right_hash(right) % this->bucket_count();
 			};
 
@@ -525,7 +525,7 @@ namespace evo{
 			//////////////////////////////////////////////////////////////////////
 			// hash policy
 
-			EVO_NODISCARD constexpr static auto max_bucket_size() noexcept -> size_t {
+			[[nodiscard]] constexpr static auto max_bucket_size() noexcept -> size_t {
 				return _BimapMaxBucketSize;
 			};
 

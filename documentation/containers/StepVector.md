@@ -38,9 +38,9 @@ By default, `STARTING_POW_OF_2` is 4 elements or a single cache-line (whichever 
 
 ### Constructors
 ```C++
-EVO_NODISCARD constexpr StepVector() noexcept;
-EVO_NODISCARD constexpr StepVector(const StepVector&) noexcept;
-EVO_NODISCARD constexpr StepVector(StepVector&&) noexcept;
+[[nodiscard]] constexpr StepVector() noexcept;
+[[nodiscard]] constexpr StepVector(const StepVector&) noexcept;
+[[nodiscard]] constexpr StepVector(StepVector&&) noexcept;
 ```
 
 ### operator=
@@ -55,32 +55,32 @@ auto operator=(StepVector<T, SMALL_CAPACITY>&& rhs) noexcept -> StepVector<T, SM
 
 #### at
 ```C++
-EVO_NODISCARD auto at(size_t index) noexcept -> T&;
-EVO_NODISCARD auto at(size_t index) const noexcept -> const T&;
+[[nodiscard]] auto at(size_t index) noexcept -> T&;
+[[nodiscard]] auto at(size_t index) const noexcept -> const T&;
 ```
 Access the element at the given `index`
 
 
 #### operator[]
 ```C++
-EVO_NODISCARD auto operator[](size_t index) noexcept -> T&;
-EVO_NODISCARD auto operator[](size_t index) const noexcept -> const T&;
+[[nodiscard]] auto operator[](size_t index) noexcept -> T&;
+[[nodiscard]] auto operator[](size_t index) const noexcept -> const T&;
 ```
 Access the element at the given `index`
 
 
 #### front
 ```C++
-EVO_NODISCARD auto front() noexcept -> char&;
-EVO_NODISCARD auto front() const noexcept -> const char&;
+[[nodiscard]] auto front() noexcept -> char&;
+[[nodiscard]] auto front() const noexcept -> const char&;
 ```
 Access the first element (eqivalent to running `at(0)`). Behavior is undefined if `empty() == false` 
 
 
 #### back
 ```C++
-EVO_NODISCARD auto back() noexcept -> char&;
-EVO_NODISCARD auto back() const noexcept -> const char&;
+[[nodiscard]] auto back() noexcept -> char&;
+[[nodiscard]] auto back() const noexcept -> const char&;
 ```
 Access the first element (eqivalent to running `at(size() - 1)`). Behavior is undefined if `empty() == false` 
 
@@ -91,18 +91,18 @@ Access the first element (eqivalent to running `at(size() - 1)`). Behavior is un
 
 #### begin
 ```C++
-EVO_NODISCARD auto  begin()       noexcept ->       iterator;
-EVO_NODISCARD auto  begin() const noexcept -> const_iterator;
-EVO_NODISCARD auto cbegin() const noexcept -> const_iterator;
+[[nodiscard]] auto  begin()       noexcept ->       iterator;
+[[nodiscard]] auto  begin() const noexcept -> const_iterator;
+[[nodiscard]] auto cbegin() const noexcept -> const_iterator;
 ```
 Returns an iterator to the beginning of the vector.
 
 
 #### end
 ```C++
-EVO_NODISCARD auto  end()       noexcept ->       iterator;
-EVO_NODISCARD auto  end() const noexcept -> const_iterator;
-EVO_NODISCARD auto cend() const noexcept -> const_iterator;
+[[nodiscard]] auto  end()       noexcept ->       iterator;
+[[nodiscard]] auto  end() const noexcept -> const_iterator;
+[[nodiscard]] auto cend() const noexcept -> const_iterator;
 ```
 Returns an iterator to the end of the vector.
 
@@ -114,14 +114,14 @@ Returns an iterator to the end of the vector.
 
 #### empty
 ```C++
-EVO_NODISCARD auto empty() const noexcept -> bool;
+[[nodiscard]] auto empty() const noexcept -> bool;
 ```
 Returns if the vector is empty.
 
 
 #### size
 ```C++
-EVO_NODISCARD auto size() const noexcept -> size_t;
+[[nodiscard]] auto size() const noexcept -> size_t;
 ```
 Returns the size of the currently held vector.
 

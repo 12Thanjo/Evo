@@ -8,8 +8,8 @@ namespace evo{
 
 	class Defer{
 		public:
-			EVO_NODISCARD Defer(const std::function<void()>& defer_callback) noexcept : callback(defer_callback) {};
-			EVO_NODISCARD Defer(std::function<void()>&& defer_callback) noexcept : callback(std::move(defer_callback)) {};
+			[[nodiscard]] Defer(const std::function<void()>& defer_callback) noexcept : callback(defer_callback) {};
+			[[nodiscard]] Defer(std::function<void()>&& defer_callback) noexcept : callback(std::move(defer_callback)) {};
 
 			~Defer() noexcept {
 				callback();

@@ -31,7 +31,7 @@ namespace evo{
 				}
 			}
 
-			EVO_NODISCARD auto try_lock() noexcept -> bool {
+			[[nodiscard]] auto try_lock() noexcept -> bool {
 				return this->flag.load(std::memory_order_relaxed) == 0
 					&& this->flag.exchange(1, std::memory_order_acquire) == 0;
 			}

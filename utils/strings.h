@@ -6,7 +6,7 @@
 
 namespace evo{
 
-	EVO_NODISCARD constexpr auto stringSize(const char* str, size_t max_length = 100) noexcept -> size_t {
+	[[nodiscard]] constexpr auto stringSize(const char* str, size_t max_length = 100) noexcept -> size_t {
 		for(size_t i = 0; i < max_length + 1; i+=1){
 			if(str[i] == '\0'){
 				return i;
@@ -18,7 +18,7 @@ namespace evo{
 
 
 
-	EVO_NODISCARD constexpr auto stringsEqual(const char* str1, const char* str2, size_t max_length = 100) noexcept -> evo::Result<bool> {
+	[[nodiscard]] constexpr auto stringsEqual(const char* str1, const char* str2, size_t max_length = 100) noexcept -> evo::Result<bool> {
 		for(size_t i = 0; i < max_length + 1; i+=1){
 			if(str1[i] == str2[i]){
 				if(str1[i] == '\0'){
@@ -38,7 +38,7 @@ namespace evo{
 
 
 
-	EVO_NODISCARD constexpr auto isLowerLetter(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isLowerLetter(char character) noexcept -> bool {
 		switch(character){
 			case 'a': case 'b':
 			case 'c': case 'd':
@@ -60,7 +60,7 @@ namespace evo{
 	};
 
 
-	EVO_NODISCARD constexpr auto isUpperLetter(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isUpperLetter(char character) noexcept -> bool {
 		switch(character){
 			case 'A': case 'B':
 			case 'C': case 'D':
@@ -81,7 +81,7 @@ namespace evo{
 		return false;
 	};
 
-	EVO_NODISCARD constexpr auto isLetter(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isLetter(char character) noexcept -> bool {
 		switch(character){
 			case 'A': case 'B':
 			case 'C': case 'D':
@@ -116,7 +116,7 @@ namespace evo{
 	};
 
 
-	EVO_NODISCARD constexpr auto isNumber(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isNumber(char character) noexcept -> bool {
 		switch(character){
 			case '0':
 			case '1':
@@ -135,7 +135,7 @@ namespace evo{
 	};
 
 
-	EVO_NODISCARD constexpr auto isHexNumber(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isHexNumber(char character) noexcept -> bool {
 		switch(character){
 			case '0':
 			case '1':
@@ -159,7 +159,7 @@ namespace evo{
 		return false;
 	};
 
-	EVO_NODISCARD constexpr auto isOctalNumber(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isOctalNumber(char character) noexcept -> bool {
 		switch(character){
 			case '0':
 			case '1':
@@ -176,7 +176,7 @@ namespace evo{
 	};
 
 
-	EVO_NODISCARD constexpr auto isAlphaNumeric(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isAlphaNumeric(char character) noexcept -> bool {
 		switch(character){
 			case 'A': case 'B':
 			case 'C': case 'D':
@@ -221,7 +221,7 @@ namespace evo{
 	};
 
 
-	EVO_NODISCARD constexpr auto isWhitespace(char character) noexcept -> bool {
+	[[nodiscard]] constexpr auto isWhitespace(char character) noexcept -> bool {
 		switch(character){
 			case ' ':
 			case '\n':
@@ -237,7 +237,7 @@ namespace evo{
 	
 	// based on data from: https://theasciicode.com.ar/ 
 	//               also: https://en.cppreference.com/w/c/language/escape
-	EVO_NODISCARD constexpr auto printCharName(char character) noexcept -> const char* {
+	[[nodiscard]] constexpr auto printCharName(char character) noexcept -> const char* {
 		switch(character){
 			// ASCII control characters non printable 
 			break; case '\0': return "\\0";
@@ -379,7 +379,7 @@ namespace evo{
 
 
 
-	EVO_NODISCARD constexpr auto boolStr(bool boolean) noexcept -> const char* {
+	[[nodiscard]] constexpr auto boolStr(bool boolean) noexcept -> const char* {
 		if(boolean){
 			return "true";
 		}else{

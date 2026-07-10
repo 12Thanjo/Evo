@@ -651,7 +651,7 @@ namespace evo{
 	#define EVO_FATAL_BREAK(msg) ::evo::fatalBreak(msg)
 
 
-	EVO_NORETURN inline auto fatalBreak(std::string_view msg) noexcept -> void {
+	[[noreturn]] inline auto fatalBreak(std::string_view msg) noexcept -> void {
 		styleConsole::fatal();
 		println(msg);
 		styleConsole::reset();
@@ -665,13 +665,13 @@ namespace evo{
 	};
 
 	template<class... Args>
-	EVO_NORETURN inline auto fatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+	[[noreturn]] inline auto fatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		fatalBreak(std::format(fmt, std::forward<decltype(args)>(args)...));
 	};
 
 
 
-	EVO_NORETURN inline auto debugFatalBreak([[maybe_unused]] std::string_view msg) noexcept -> void {
+	[[noreturn]] inline auto debugFatalBreak([[maybe_unused]] std::string_view msg) noexcept -> void {
 		#if defined(EVO_CONFIG_DEBUG)
 			styleConsole::fatal();
 			println(msg);
@@ -684,7 +684,7 @@ namespace evo{
 	};
 
 	template<class... Args>
-	EVO_NORETURN inline auto debugFatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
+	[[noreturn]] inline auto debugFatalBreak(std::format_string<Args...> fmt, Args&&... args) noexcept -> void {
 		debugFatalBreak(std::format(fmt, std::forward<decltype(args)>(args)...));
 	};
 
@@ -692,7 +692,7 @@ namespace evo{
 	
 
 
-	EVO_NORETURN inline auto unimplemented(
+	[[noreturn]] inline auto unimplemented(
 		const std::source_location location = std::source_location::current()
 	) noexcept -> void {
 		fatalBreak(
@@ -704,7 +704,7 @@ namespace evo{
 		);
 	};
 
-	EVO_NORETURN inline auto unimplemented(
+	[[noreturn]] inline auto unimplemented(
 		std::string_view message, const std::source_location location = std::source_location::current()
 	) noexcept -> void {
 		fatalBreak(

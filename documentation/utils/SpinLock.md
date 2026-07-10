@@ -14,7 +14,7 @@ Lock the spin lock
 
 ### try_lock
 ```C++
-EVO_NODISCARD auto try_lock() noexcept -> bool;
+[[nodiscard]] auto try_lock() noexcept -> bool;
 ```
 Attempt to lock the spin lock - returns false if it failed
 

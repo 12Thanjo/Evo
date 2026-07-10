@@ -191,7 +191,7 @@ namespace evo{
 		//////////////////////////////////////////////////////////////////////
 		// general functions
 
-		EVO_NODISCARD auto now() noexcept -> Nanoseconds;
+		[[nodiscard]] auto now() noexcept -> Nanoseconds;
 
 
 		struct CurrentTime{
@@ -204,7 +204,7 @@ namespace evo{
 			ui8 seconds;
 		};
 
-		EVO_NODISCARD auto getCurrentTime() noexcept -> CurrentTime;
+		[[nodiscard]] auto getCurrentTime() noexcept -> CurrentTime;
 
 
 	};

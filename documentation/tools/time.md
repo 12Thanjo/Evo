@@ -18,7 +18,7 @@
 
 ### now
 ```C++
-EVO_NODISCARD auto now() noexcept -> Nanoseconds;
+[[nodiscard]] auto now() noexcept -> Nanoseconds;
 ```
 Get the current clock time.
 
@@ -26,7 +26,7 @@ Get the current clock time.
 
 ### getCurrentTime
 ```C++
-EVO_NODISCARD auto getCurrentTime() noexcept -> CurrentTime;
+[[nodiscard]] auto getCurrentTime() noexcept -> CurrentTime;
 ```
 Returns the current time. The current time is a struct:
 

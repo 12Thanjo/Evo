@@ -1,6 +1,13 @@
 # Evo Changelog
 
 <!---------------------------------->
+<a name="v1.40.0"></a>
+### v1.40.0
+- Fixed memory leak in `UnmovableVector::~UnmovableVector`
+- Removed EVO_NODISCARD and EVO_NORETURN as they're [no longer needed](https://github.com/sublimehq/Packages/pull/4523)
+
+
+<!---------------------------------->
 <a name="v1.39.3"></a>
 ### v1.39.3
 - Fixed `printStdout` and `printStderr` on Windows having the output not being captured by some applications
@@ -716,20 +723,20 @@
 	- Fixed compile error in `StaticVector::clear()`
 	- Fixed compile error in `StaticVector::erase(const_iterator)`
 	- Fixed the constructor that takes a `std::initializer_list`
-	- Fixed `operator=` to no longer be `EVO_NODISCARD`
+	- Fixed `operator=` to no longer be nodiscard
 	- Fixed `back()` returning the element after it should
 - Changed `Flags`
 	- Changed default underlying type to `BitsSize<to_underlying(Enum::_max) - 1>::type`
-	- Made `Flags` Constructors `EVO_NODISCARD`
+	- Made `Flags` Constructors nodiscard
 	- Added `enum_t` member type
 - Fixed `operator++(int)` of all iterators
 - Changed `StaticString`
-	- constructors are now `EVO_NODISCARD`
+	- constructors are now nodiscard
 	- `operator=` now return `*this`
 	- Fixed `back()` assuming the string is always at max capacity
 - Changed FS 
 	- Changed all use of `ui64` to `size_t`
-	- Made `File::File()` `EVO_NODISCARD`
+	- Made `File::File()` nodiscard
 	- Added `File::getHandle()`
 
 	
